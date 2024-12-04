@@ -433,6 +433,8 @@ bool Odyssey::isCustomIcon(int id, IconType type)
         return true;
     if (id > 43 && type == IconType::Swing)
         return true;
+     if (static_cast<int>(type) >= 900)
+        return true;
 
     return false;
 }
@@ -459,6 +461,26 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
         break;
     }
 
+    int typeNumber = static_cast<int>(type);
+
+    switch (typeNumber)
+    {
+    case 900:
+        iconName = "boat";    
+        break;
+    case 901:
+        iconName = "drone";    
+        break;
+    case 902:
+        iconName = "slider";    
+        break;
+    case 903:
+        iconName = "minecart";    
+        break;
+    }
+
+    if (typeNumber >= 900) iconID = 1;
+
     std::string frame1 = fmt::format("{}_{:02}_001.png"_spr, iconName, iconID);
     std::string frame2 = fmt::format("{}_{:02}_2_001.png"_spr, iconName, iconID);
     std::string frameExtra = fmt::format("{}_{:02}_extra_001.png"_spr, iconName, iconID);
@@ -469,6 +491,9 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
 
 void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlayerObject)
 {
+    
+
+
     if (!isCustomIcon(iconID, type)) return;
 
     auto frameCache = CCSpriteFrameCache::get();
@@ -540,50 +565,14 @@ void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlaye
 
 void Odyssey::addCreditsToIcon(std::pair<int, UnlockType> pair, int accountID)
 {
-    //  GameStatsManager::sharedState()->m_accountIDForIcon.emplace(pair, accountID);
     GameStatsManager::sharedState()->m_accountIDForIcon.insert(std::make_pair(pair, accountID));
 }
 
-std::vector<std::string> Odyssey::keysForAchievementDict(CCDictionary *dict)
-    {
-        auto identifierString = (CCString *)dict->objectForKey("identifier");
-        auto titleString = (CCString *)dict->objectForKey("title");
-        auto descString = (CCString *)dict->objectForKey("achievedDescription");
-        auto undescString = (CCString *)dict->objectForKey("unachievedDescription");
-        auto iconString = (CCString *)dict->objectForKey("icon");
-
-        return {identifierString->getCString(), titleString->getCString(), descString->getCString(), undescString->getCString(), iconString->getCString()};
-    }
-
-void Odyssey::logObjectsFromDictionary(CCDictionary *dict, bool values)
+int Odyssey::islandPageForLevelID(int levelID)
 {
-        {
-        auto keys = dict->allKeys();
+    if (levelID < 5) return 0;
 
-        for (int i = 0; i < keys->count(); ++i)
-        {
-            CCString *key = (CCString *)keys->objectAtIndex(i);
-            CCString *value = (CCString *)dict->objectForKey(key->getCString());
+    if (levelID > 200) return 2;
 
-            if (values)
-                log::info("Key: {} Value: {} \n", key->getCString(), value->getCString());
-            else
-                log::info("Key: {} \n", key->getCString());
-        };
-    }
+    return 1;
 }
-
-void Odyssey::logDictionariesFromArray(CCArray *arr, bool values)
-    {
-        for (int i = 0; i < arr->count(); i++)
-        {
-            auto dict = static_cast<CCDictionary*>(arr->objectAtIndex(i));
-            auto keys = dict->allKeys();
-            CCString *key = static_cast<CCString*>(keys->objectAtIndex(0));
-            CCString *value = static_cast<CCString*>(dict->objectForKey(key->getCString()));
-            if (values)
-                log::info("Key: {} Value: {} \n", key->getCString(), value->getCString());
-            else
-                log::info("Key: {} \n", key->getCString());
-        };
-    }

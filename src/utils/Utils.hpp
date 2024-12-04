@@ -20,10 +20,5 @@ namespace Odyssey {
 
     void addCreditsToIcon(std::pair<int, UnlockType>, int);
 
-    
-    std::vector<std::string> keysForAchievementDict(CCDictionary *);
-
-    void logObjectsFromDictionary(CCDictionary *dict, bool values = false);
-
-    void logDictionariesFromArray(CCArray *, bool);
+    int islandPageForLevelID(int);
 };

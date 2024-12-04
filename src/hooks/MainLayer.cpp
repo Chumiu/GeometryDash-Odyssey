@@ -47,10 +47,11 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             moreGamesButton->setNormalImage(creditsSprite);
         }
 
+        /*
         for (int i = 0; i < GameManager::sharedState()->countForType(IconType::Cube); i++)
         {
             log::info("Unlock: {}, ID: {}", GameStatsManager::sharedState()->getItemUnlockState(i + 1, UnlockType::Cube), i + 1);
-        }
+        }*/
         
         return true;
     }

@@ -183,13 +183,14 @@ bool OdysseySelectLayer::init(int page)
     //  auto watchedComic01 = GM->getUGV("52");
     auto meetWizard = Mod::get()->getSettingValue<bool>("meet-wizard");
     log::debug("FIRST COMIC {}", meetWizard);
+    /*
     if(!meetWizard){
         this->runAction(CCSequence::create(
             CCDelayTime::create(0.5f),
             CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getWizardDialog01)),
             0
         ));
-    };
+    };*/
 
     return true;
 };

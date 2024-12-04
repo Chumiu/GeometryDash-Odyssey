@@ -37,8 +37,11 @@ class $modify(OdysseyGameManager, GameManager)
 
     void returnToLastScene(GJGameLevel* level) {
         if(level->m_levelType == GJLevelType::Local) {
-            CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(0)));
+            int page = Odyssey::islandPageForLevelID(level->m_levelID);
+
+            CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(page)));
             GameManager::sharedState()->fadeInMusic("TheMap.mp3"_spr);
+
             return;
         }
 
