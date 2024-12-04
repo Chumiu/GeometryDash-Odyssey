@@ -9,7 +9,6 @@ public:
     CCSprite *m_cornerBL = nullptr;
     CCSprite *m_cornerBR = nullptr;
     CCSize m_winSize;
-    
 
     const char * m_backgroundMusic = "menuLoop.mp3";
     int m_comicNumber = 1;
@@ -29,6 +28,8 @@ public:
     void scrollLayerMoved(CCPoint);
     void onSecret(CCObject *);
     void onBack(CCObject *);
+    void onComic(CCObject *);
+    void onHollow(CCObject *);
 
 public:
     static OdysseyComicLayer *create(int);

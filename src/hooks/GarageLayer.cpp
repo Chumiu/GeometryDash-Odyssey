@@ -25,40 +25,39 @@ class $modify(GDOGarageLayer, GJGarageLayer)
 
         if (auto shopButton = getChildByID("top-left-menu")->getChildByID("shop-button"))
             shopButton->setVisible(false);
-
+        
+        //  Agregar los botones de gamemodes nuevos al menu de categorias
         if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))
         {
-            auto arr = categoryMenu->getChildren();
-            for (int i = 0; i < 4; i++)
+            //  Quita temporalmente los botones de efecto y trail
+            auto trailButton = categoryMenu->getChildByID("trail-button");
+            auto effectButton = categoryMenu->getChildByID("death-effect-button");
+            effectButton->removeFromParentAndCleanup(true);
+            trailButton->removeFromParentAndCleanup(true);
+
+            //  Agrega los botones de los gamemodes custom
+            for (int ii = 0; ii < 4; ii++)
             {
-                const char* buttonName = "boat";
+                const char * buttonName[4] = {"boat", "drone", "slider", "minecart"};
+                //  log::debug("gamemode: {}", buttonName[ii]);
 
-                switch (i)
-                {
-                case 1:
-                    buttonName = "drone";
-                    break;
-                case 2:
-                    buttonName = "slider";
-                    break;
-                case 3:
-                    buttonName = "minecart";
-                    break;
-                }
-
-                auto sprOff = CCSprite::createWithSpriteFrameName(fmt::format("gdo_{}Btn_off_001.png"_spr, buttonName).c_str());
+                auto sprOff = CCSprite::createWithSpriteFrameName(fmt::format("gdo_{}Btn_off_001.png"_spr, buttonName[ii]).c_str());
                 sprOff->setScale(.9f);
-                
-                auto sprOn = CCSprite::createWithSpriteFrameName(fmt::format("gdo_{}Btn_on_001.png"_spr, buttonName).c_str());
+
+                auto sprOn = CCSprite::createWithSpriteFrameName(fmt::format("gdo_{}Btn_on_001.png"_spr, buttonName[ii]).c_str());
                 sprOn->setScale(.9f);
 
                 auto toggler = CCMenuItemToggler::create(sprOff, sprOn, this, menu_selector(GJGarageLayer::onSelectTab));
-
-                toggler->setTag(900 + i);
+                toggler->setID(fmt::format("{}-button"_spr, buttonName[ii]));
+                toggler->setTag(900 + ii);
                 toggler->setEnabled(true);
 
-                arr->insertObject(toggler, 9 + i);
+                //  arr->insertObject(toggler, 9 + i);  //  Usa el menu, no el array :V
+                categoryMenu->addChild(toggler);
             }
+
+            categoryMenu->addChild(trailButton);
+            categoryMenu->addChild(effectButton);
             categoryMenu->updateLayout();
         }
         return true;

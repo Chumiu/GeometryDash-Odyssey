@@ -1,6 +1,7 @@
 #include "OdysseyDevLayer.hpp"
 #include "OdysseyComicLayer.hpp"
 #include "OdysseyLevelPopup.hpp"
+#include "SecretVaultLayer2.hpp"
 #include "../utils/Utils.hpp"
 
 bool OdysseyDevLayer::init()
@@ -106,14 +107,14 @@ bool OdysseyDevLayer::init()
 
     auto comicsMenu = CCMenu::create();
     comicsMenu->setID("comics-menu"_spr);
-    comicsMenu->setContentSize({350.0f, 40.0f});
+    comicsMenu->setContentSize({360.0f, 40.0f});
     comicsMenu->setLayout(RowLayout::create()
                               ->setGap(14.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-   comicsMenu->setPositionY(90);
+    comicsMenu->setPositionY(90);
 
     auto comicsLabel = CCLabelBMFont::create("Comics", "goldFont.fnt");
     comicsLabel->setPosition({winSize.width / 2, comicsMenu->getPositionY() + comicsMenu->getContentHeight() / 2 + 10.0f});
@@ -123,50 +124,43 @@ bool OdysseyDevLayer::init()
     auto comic01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("1", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic01->setTag(1);
 
     auto comic02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("2", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic02->setTag(2);
 
     auto comic03 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("3", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic03->setTag(3);
 
     auto comic04 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("4", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic04->setTag(4);
 
     auto comic05 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("5", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic05->setTag(5);
 
     auto comic06 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("6", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic06->setTag(6);
 
     auto comic07 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("?", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onComic)
-    );
+        menu_selector(OdysseyDevLayer::onComic));
     comic07->setTag(0);
 
     comicsMenu->addChild(comic01);
@@ -196,18 +190,53 @@ bool OdysseyDevLayer::init()
     auto level01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Hellfire", 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onLevel)
-    );
+        menu_selector(OdysseyDevLayer::onLevel));
     level01->setTag(5);
     levelsMenu->addChild(level01);
     levelsMenu->updateLayout();
     addChild(levelsMenu);
 
+    auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
+    hollowSprite->setColor({50, 50, 50});
+    hollowSprite->setOpacity(50);
+
+    auto hollowBtn = CCMenuItemSpriteExtra::create(
+        hollowSprite,
+        this,
+        menu_selector(OdysseyDevLayer::onOgre));
+
+    hollowBtn->setPosition({winSize.width - 20, winSize.height - 20});
+    hollowBtn->setTag(0);
+
+    auto secretMenu = CCMenu::create();
+    secretMenu->addChild(hollowBtn);
+    secretMenu->setPosition({0, 0});
+    addChild(secretMenu);
+
     setKeypadEnabled(true);
     return true;
 };
 
-void OdysseyDevLayer::onLevel(CCObject * sender)
+void OdysseyDevLayer::onOgre(CCObject *)
+{
+
+    if (!Mod::get()->getSettingValue<bool>("meet-hollow"))
+    {
+        auto dialog = Odyssey::createDialog("hollowMeeting");
+        Mod::get()->setSettingValue("meet-hollow", true);
+        //  GM->setUGV("52", true);
+        this->addChild(dialog, 3);
+    }
+    else
+    {
+        auto scene = CCScene::create();
+        scene->addChild(SecretVaultLayer2::create());
+
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
+    }
+};
+
+void OdysseyDevLayer::onLevel(CCObject *sender)
 {
     auto scene = CCScene::create();
     auto tag = sender->getTag();
@@ -215,8 +244,7 @@ void OdysseyDevLayer::onLevel(CCObject * sender)
     popup->show();
 };
 
-
-void OdysseyDevLayer::onComic(CCObject * sender)
+void OdysseyDevLayer::onComic(CCObject *sender)
 {
     auto scene = CCScene::create();
     auto tag = sender->getTag();

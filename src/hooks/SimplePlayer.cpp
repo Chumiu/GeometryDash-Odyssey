@@ -10,6 +10,10 @@ class $modify(CustomSimplePlayer, SimplePlayer)
     {
         SimplePlayer::updatePlayerFrame(iconID, type);
 
-        Odyssey::updateIcon(this, iconID, type, false);
+        if(type == IconType::Ufo){
+            Odyssey::updateBird(this, iconID, type, false);
+        }else{
+            Odyssey::updateIcon(this, iconID, type, false);
+        }
     }
 };

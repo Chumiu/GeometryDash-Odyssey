@@ -429,11 +429,17 @@ bool Odyssey::isCustomIcon(int id, IconType type)
         return true;
     if (id > 118 && type == IconType::Ball)
         return true;
+    if (id > 149 && type == IconType::Ufo)
+        return true;
     if (id > 96 && type == IconType::Wave)
+        return true;
+    if (id > 68 && type == IconType::Robot)
+        return true;
+    if (id > 69 && type == IconType::Spider)
         return true;
     if (id > 43 && type == IconType::Swing)
         return true;
-     if (static_cast<int>(type) >= 900)
+    if (static_cast<int>(type) >= 900)
         return true;
 
     return false;
@@ -447,8 +453,11 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
     case IconType::Ship:
         iconName = "ship";
         break;
-    case IconType::Ball: 
-        iconName = "player_ball"; 
+    case IconType::Ball:
+        iconName = "player_ball";
+        break;
+    case IconType::Ufo:
+        iconName = "bird";
         break;
     case IconType::Wave:
         iconName = "dart";
@@ -466,20 +475,32 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
     switch (typeNumber)
     {
     case 900:
-        iconName = "boat";    
+        iconName = "boat";
         break;
     case 901:
-        iconName = "drone";    
+        iconName = "drone";
         break;
     case 902:
-        iconName = "slider";    
+        iconName = "slider";
         break;
     case 903:
-        iconName = "minecart";    
+        iconName = "minecart";
         break;
     }
 
-    if (typeNumber >= 900) iconID = 1;
+    if (typeNumber >= 900)
+        iconID = 1;
+
+    if (iconName == "bird")
+    {
+        std::string frame1 = fmt::format("{}_{:02}_001.png"_spr, iconName, iconID);
+        std::string frame2 = fmt::format("{}_{:02}_2_001.png"_spr, iconName, iconID);
+        std::string frameDome = fmt::format("{}_{:02}_3_001.png"_spr, iconName, iconID);
+        std::string frameExtra = fmt::format("{}_{:02}_extra_001.png"_spr, iconName, iconID);
+        std::string frameGlow = fmt::format("{}_{:02}_glow_001.png"_spr, iconName, iconID);
+
+        return {frame1, frame2, frameExtra, frameGlow, frameDome};
+    }
 
     std::string frame1 = fmt::format("{}_{:02}_001.png"_spr, iconName, iconID);
     std::string frame2 = fmt::format("{}_{:02}_2_001.png"_spr, iconName, iconID);
@@ -489,12 +510,10 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
     return {frame1, frame2, frameExtra, frameGlow};
 }
 
-void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlayerObject)
+void Odyssey::updateIcon(CCNode *player, int iconID, IconType type, bool isPlayerObject)
 {
-    
-
-
-    if (!isCustomIcon(iconID, type)) return;
+    if (!isCustomIcon(iconID, type))
+        return;
 
     auto frameCache = CCSpriteFrameCache::get();
 
@@ -504,19 +523,19 @@ void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlaye
     auto extraTexture = frames[2];
     auto glowTexture = frames[3];
 
-    CCSprite* firstLayer;
-    CCSprite* secondLayer;
-    CCSprite* extraLayer;
-    CCSprite* glowLayer;
+    CCSprite *firstLayer;
+    CCSprite *secondLayer;
+    CCSprite *extraLayer;
+    CCSprite *glowLayer;
 
     if (isPlayerObject)
     {
-        auto obj = static_cast<PlayerObject*>(player);
+        auto obj = static_cast<PlayerObject *>(player);
 
         firstLayer = obj->m_iconSprite;
         secondLayer = obj->m_iconSpriteSecondary;
         extraLayer = obj->m_iconSpriteWhitener;
-        glowLayer =  obj->m_iconGlow;
+        glowLayer = obj->m_iconGlow;
 
         if (type == IconType::Ship)
         {
@@ -528,14 +547,12 @@ void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlaye
     }
     else
     {
-        auto obj = static_cast<SimplePlayer*>(player);
-        
+        auto obj = static_cast<SimplePlayer *>(player);
+
         firstLayer = obj->m_firstLayer;
         secondLayer = obj->m_secondLayer;
         extraLayer = obj->m_detailSprite;
         glowLayer = obj->m_outlineSprite;
-
-
     }
 
     if (auto frame1 = frameCache->spriteFrameByName(frame1Texture.c_str()))
@@ -559,7 +576,89 @@ void Odyssey::updateIcon(CCNode* player, int iconID, IconType type, bool isPlaye
     if (auto glowFrame = frameCache->spriteFrameByName(glowTexture.c_str()))
     {
         glowLayer->setDisplayFrame(glowFrame);
-        if (!isPlayerObject) glowLayer->setPosition(firstLayer->getContentSize() / 2);
+        if (!isPlayerObject)
+            glowLayer->setPosition(firstLayer->getContentSize() / 2);
+    }
+}
+
+void Odyssey::updateBird(CCNode *player, int iconID, IconType type, bool isPlayerObject)
+{
+    if (!isCustomIcon(iconID, type))
+        return;
+
+    auto frameCache = CCSpriteFrameCache::get();
+
+    auto frames = getPlayerFrames(iconID, type);
+    auto frame1Texture = frames[0];
+    auto frame2Texture = frames[1];
+    auto extraTexture = frames[2];
+    auto glowTexture = frames[3];
+    auto domeTexture = frames[4];
+
+    CCSprite *firstLayer;
+    CCSprite *secondLayer;
+    CCSprite *extraLayer;
+    CCSprite *glowLayer;
+    CCSprite *domeLayer;
+
+    if (isPlayerObject)
+    {
+        auto obj = static_cast<PlayerObject *>(player);
+
+        firstLayer = obj->m_iconSprite;
+        secondLayer = obj->m_iconSpriteSecondary;
+        extraLayer = obj->m_iconSpriteWhitener;
+        glowLayer = obj->m_iconGlow;
+
+        if (type == IconType::Ufo)
+        {
+            firstLayer = obj->m_vehicleSprite;
+            secondLayer = obj->m_vehicleSpriteSecondary;
+            extraLayer = obj->m_vehicleSpriteWhitener;
+            glowLayer = obj->m_vehicleGlow;
+            domeLayer = obj->m_birdVehicle;
+        }
+    }
+    else
+    {
+        auto obj = static_cast<SimplePlayer *>(player);
+
+        firstLayer = obj->m_firstLayer;
+        secondLayer = obj->m_secondLayer;
+        extraLayer = obj->m_detailSprite;
+        glowLayer = obj->m_outlineSprite;
+        domeLayer = obj->m_birdDome;
+    }
+
+    if (auto frame1 = frameCache->spriteFrameByName(frame1Texture.c_str()))
+    {
+        firstLayer->setDisplayFrame(frame1);
+    }
+
+    if (auto frame2 = frameCache->spriteFrameByName(frame2Texture.c_str()))
+    {
+        secondLayer->setDisplayFrame(frame2);
+        secondLayer->setPosition(firstLayer->getContentSize() / 2);
+    }
+
+    if (auto domeFrame = frameCache->spriteFrameByName(domeTexture.c_str()))
+    {
+        domeLayer->setDisplayFrame(domeFrame);
+        domeLayer->setPosition(firstLayer->getContentSize() / 2);
+    }
+
+    if (auto extraFrame = frameCache->spriteFrameByName(extraTexture.c_str()))
+    {
+        extraLayer->setVisible(true);
+        extraLayer->setDisplayFrame(extraFrame);
+        extraLayer->setPosition(firstLayer->getContentSize() / 2);
+    }
+
+    if (auto glowFrame = frameCache->spriteFrameByName(glowTexture.c_str()))
+    {
+        glowLayer->setDisplayFrame(glowFrame);
+        if (!isPlayerObject)
+            glowLayer->setPosition(firstLayer->getContentSize() / 2);
     }
 }
 
@@ -570,9 +669,11 @@ void Odyssey::addCreditsToIcon(std::pair<int, UnlockType> pair, int accountID)
 
 int Odyssey::islandPageForLevelID(int levelID)
 {
-    if (levelID < 5) return 0;
+    if (levelID < 5)
+        return 0;
 
-    if (levelID > 200) return 2;
+    if (levelID > 200)
+        return 2;
 
     return 1;
 }

@@ -20,6 +20,7 @@ class OdysseyDevLayer : public cocos2d::CCLayer {
 
         void onComic(CCObject *);
         void onLevel(CCObject *);
+        void onOgre(CCObject *);
     public:
         static OdysseyDevLayer * create();
         CCScene * scene();

@@ -17,8 +17,8 @@ namespace Odyssey {
     bool isCustomIcon(int, IconType);
     std::vector<std::string> getPlayerFrames(int, IconType);
     void updateIcon(CCNode*, int, IconType, bool);
+    void updateBird(CCNode*, int, IconType, bool);
 
     void addCreditsToIcon(std::pair<int, UnlockType>, int);
-
     int islandPageForLevelID(int);
 };

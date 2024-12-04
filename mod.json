@@ -1,6 +1,6 @@
 {
 	"geode": "4.0.1",
-	"version": "v1.0.0-alpha.5",
+	"version": "v1.0.0-alpha.7",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074"
@@ -22,6 +22,19 @@
 			"id": "geode.node-ids",
 			"version": ">=v1.16.0",
 			"importance": "required"
+		}
+	],
+	"incompatibilities": [
+		{
+			"id": "hiimjustin000.more_icons",
+			"importance": "conflicting",
+			"version": "*",
+			"platforms": ["android"]
+		},
+		{
+			"id": "capeling.geometry-dash-lunar",
+			"importance": "breaking",
+			"version": "*"
 		}
 	],
 	"early-load": true,
@@ -66,6 +79,17 @@
 			"type": "bool",
 			"name": "Meet Dumbledalf",
 			"default": false
+		},
+
+		"meet-hollow": {
+			"type": "bool",
+			"name": "Meet Hollow",
+			"default": false
+		},
+
+		"comics-title":{
+			"type": "title",
+			"name": "Comic Events"
 		},
 
 		"watched-comic-01": {
@@ -117,6 +141,9 @@
 			],
 			"GJO_IconSheet": [
 				"resources/IconSheet/*.png"
+			],
+			"GJO_SecretSheet": [
+				"resources/VaultSheet/*.png"
 			]
 		},
 		"files": [

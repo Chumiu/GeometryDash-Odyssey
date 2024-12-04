@@ -15,25 +15,12 @@ class $modify(OdysseyPlayerObject, PlayerObject)
     
         return true;
     }
+
     void updatePlayerFrame(int id)
     {
         PlayerObject::updatePlayerFrame(id);
 
         Odyssey::updateIcon(this, GameManager::sharedState()->m_playerFrame.value(), IconType::Cube, true);
-    }
-
-    void updatePlayerRollFrame(int id)
-    {
-        PlayerObject::updatePlayerRollFrame(id);
-
-        Odyssey::updateIcon(this, id, IconType::Ball, true);
-    }
-
-    void updatePlayerSwingFrame(int id)
-    {
-        PlayerObject::updatePlayerSwingFrame(id);
-
-        Odyssey::updateIcon(this, id, IconType::Swing, true);
     }
 
     void updatePlayerShipFrame(int id)
@@ -44,11 +31,38 @@ class $modify(OdysseyPlayerObject, PlayerObject)
         Odyssey::updateIcon(this, id, IconType::Ship, true);
     }
 
+    void updatePlayerRollFrame(int id)
+    {
+        PlayerObject::updatePlayerRollFrame(id);
+
+        Odyssey::updateIcon(this, id, IconType::Ball, true);
+    }
+
+    void updatePlayerBirdFrame(int id){
+        PlayerObject::updatePlayerBirdFrame(id);
+
+        Odyssey::updateBird(this, id, IconType::Ufo, true);
+    }
+
     void updatePlayerDartFrame(int id)
     {
         PlayerObject::updatePlayerDartFrame(id);
         
         Odyssey::updateIcon(this, id, IconType::Wave, true);
+    }
+
+    /*
+    void updatePlayerRobotFrame(int id){
+        PlayerObject::updatePlayerRobotFrame(id);
+
+        Odyssey::updateRobot(this, id, IconType::Robot, true);
+    } */
+
+    void updatePlayerSwingFrame(int id)
+    {
+        PlayerObject::updatePlayerSwingFrame(id);
+
+        Odyssey::updateIcon(this, id, IconType::Swing, true);
     }
 
     void resetPlayerIcon()
@@ -57,6 +71,7 @@ class $modify(OdysseyPlayerObject, PlayerObject)
 
         Odyssey::updateIcon(this, GameManager::sharedState()->m_playerFrame.value(), IconType::Cube, true);
         Odyssey::updateIcon(this, GameManager::sharedState()->m_playerShip.value(), IconType::Ship, true);
-
+        Odyssey::updateBird(this, GameManager::sharedState()->m_playerBird.value(), IconType::Ufo, true);
+        Odyssey::updateRobot(this, GameManager::sharedState()->m_playerRobot.value(), IconType::Robot, true);
     }
 };

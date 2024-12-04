@@ -1,5 +1,6 @@
 #include "OdysseyComicLayer.hpp"
 #include "OdysseySelectLayer.hpp"
+#include "SecretVaultLayer.hpp"
 #include "../utils/Utils.hpp"
 
 bool OdysseyComicLayer::init(int issueNumber)
@@ -10,7 +11,7 @@ bool OdysseyComicLayer::init(int issueNumber)
     m_background = CCSprite::create("GJ_gradientBG.png");
     m_winSize = CCDirector::sharedDirector()->getWinSize();
     m_comicNumber = issueNumber;
-    
+
     auto size = m_background->getContentSize();
 
     m_background->setScaleX((m_winSize.width) / size.width);
@@ -48,6 +49,26 @@ bool OdysseyComicLayer::init(int issueNumber)
     menuBack->setPosition({24, m_winSize.height - 24});
     menuBack->setID("back-menu"_spr);
     addChild(menuBack);
+
+    if (issueNumber == 4)
+    {
+        auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
+        hollowSprite->setColor({50, 50, 50});
+        hollowSprite->setOpacity(50);
+
+        auto hollowBtn = CCMenuItemSpriteExtra::create(
+            hollowSprite,
+            this,
+            menu_selector(OdysseyComicLayer::onHollow));
+
+        hollowBtn->setPosition({m_winSize.width - 20, m_winSize.height - 20});
+        hollowBtn->setTag(0);
+
+        auto secretMenu = CCMenu::create();
+        secretMenu->addChild(hollowBtn);
+        secretMenu->setPosition({0, 0});
+        addChild(secretMenu);
+    };
 
     m_cornerBL = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
     m_cornerBL->setPosition({-1, -1});
@@ -123,6 +144,25 @@ void OdysseyComicLayer::createComic(CCArray *arr, int issueNumber)
     };
 
     GameManager::sharedState()->fadeInMusic(m_backgroundMusic);
+};
+
+void OdysseyComicLayer::onHollow(CCObject *)
+{
+
+    if (!Mod::get()->getSettingValue<bool>("meet-hollow"))
+    {
+        auto dialog = Odyssey::createDialog("hollowMeeting");
+        Mod::get()->setSettingValue("meet-hollow", true);
+        //  GM->setUGV("52", true);
+        this->addChild(dialog, 3);
+    }
+    else
+    {
+        auto scene = CCScene::create();
+        scene->addChild(SecretVaultLayer::create());
+
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
+    }
 };
 
 std::pair<const char *, const char *> OdysseyComicLayer::getPage(int issueNumber, int page)
@@ -376,7 +416,7 @@ void OdysseyComicLayer::keyBackClicked()
     {
         CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
     }
-    
+
     GameManager::sharedState()->fadeInMusic("TheMap.mp3"_spr);
 };
 
