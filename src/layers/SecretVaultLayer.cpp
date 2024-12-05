@@ -44,7 +44,7 @@ bool SecretVaultLayer::init()
     addChildAtPosition(m_textInput, Anchor::Center, ccp(0, 65), false);
 
     //  Response message
-    m_response = CCLabelBMFont::create("", "bigFont.fnt");
+    m_response = CCLabelBMFont::create("", "gjFont41.fnt");
     addChildAtPosition(m_response, Anchor::Center, ccp(0, 105), false);
     updateMessage("Welcome...", MessageType::Basic);
 
@@ -63,6 +63,16 @@ bool SecretVaultLayer::init()
 
     keeperButton->setPosition({winSize.width / 2, winSize.height / 2 - 20.f});
     keeperMenu->addChild(keeperButton);
+
+    //auto * test = new GameToolBox();
+
+    auto particles_01 = GameToolbox::particleFromString("50a-1a2a0.5a15a90a0a50a25a400a0a0a0a0a0a0a0a15a7a0a0a0a0a0a0a0a0a1a0a0a0a0a0a0a0a0a0a0a0a1a0a0.5a0.2a0.5a0.2a0a0a0a0a0a0a0a2a0a0a0a0a25a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
+    particles_01->setPositionX(winSize.width / 2);
+    addChild(particles_01);
+
+    auto particles_02 = GameToolbox::particleFromString("10a-1a4a2a1a90a0a15a10a400a100a0a0a0a0a0a0a100a50a0a0a0a0a0a0a0a0a0.5a0.25a0a0a0a0a0a0a0a0a0a0a0.5a0.25a1a0a1a0a0a0a0a0a0a0a0a2a0a0a0a0a40a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
+    particles_02->setPosition(winSize / 2);
+    addChild(particles_02);
 
     GameManager::sharedState()->fadeInMusic("SecretLoop01.mp3"_spr);
     setKeyboardEnabled(true);
@@ -492,6 +502,7 @@ void SecretVaultLayer::updateMessage(std::string message, MessageType type)
 void SecretVaultLayer::keyBackClicked()
 {
     CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
+    GameManager::sharedState()->fadeInMenuMusic();
 };
 
 void SecretVaultLayer::onBack(CCObject *)

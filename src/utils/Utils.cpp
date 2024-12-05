@@ -109,6 +109,7 @@ DialogLayer *Odyssey::createDialog(const char *event)
     //  SOLAMENTE REEMPLAZA ESTA LINEA CUANDO YA TENGAMOS EL SETTING MEJORADO
     auto spanishText = Mod::get()->getSettingValue<bool>("spanish-language");
 
+    auto dialogColor = 2;
     if (event == "shopIntroduction")
     {
         if (!spanishText)
@@ -261,7 +262,32 @@ DialogLayer *Odyssey::createDialog(const char *event)
         }
     }
 
-    auto dialogLayer = DialogLayer::createDialogLayer(nullptr, arr, 2);
+    if (event == "hollowMeeting")
+    {
+        dialogColor = 5;
+
+        auto dialog_01 = DialogObject::create("????", "<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_02 = DialogObject::create("????", "Who are you?<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_03 = DialogObject::create("????", "I see<d020>.<d020>.<d020>. <d020>you're a new person<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_04 = DialogObject::create("????", "Interesting<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_05 = DialogObject::create("????", "But I don't see anything worthy of you<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_06 = DialogObject::create("????", "I require something<d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_07 = DialogObject::create("????", "Something <cy>shiny</c><d020>.<d020>.<d020>.", 28, 1, false, {255, 255, 255});
+        auto dialog_08 = DialogObject::create("????", "Bring me some of those <cy>secret golds</c><d010>.<d010>.<d010>. <d020>And I might welcome you...", 28, 1, false, {255, 255, 255});
+        auto dialog_09 = DialogObject::create("????", "Now <cr>go</c>.", 28, 1, false, {255, 255, 255});
+
+        arr->addObject(dialog_01);
+        arr->addObject(dialog_02);
+        arr->addObject(dialog_03);
+        arr->addObject(dialog_04);
+        arr->addObject(dialog_05);
+        arr->addObject(dialog_06);
+        arr->addObject(dialog_07);
+        arr->addObject(dialog_08);
+        arr->addObject(dialog_09);
+    }
+
+    auto dialogLayer = DialogLayer::createDialogLayer(nullptr, arr, dialogColor);
     dialogLayer->animateInRandomSide();
     dialogLayer->setZOrder(2);
 

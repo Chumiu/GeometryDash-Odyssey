@@ -24,7 +24,7 @@ class $modify(GDOGarageLayer, GJGarageLayer)
             paint->setPositionY(paint->getPositionY() + 25);
 
         if (auto shopButton = getChildByID("top-left-menu")->getChildByID("shop-button"))
-            shopButton->setVisible(false);
+            //  shopButton->setVisible(false);
         
         //  Agregar los botones de gamemodes nuevos al menu de categorias
         if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))

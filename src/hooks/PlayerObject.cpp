@@ -72,6 +72,6 @@ class $modify(OdysseyPlayerObject, PlayerObject)
         Odyssey::updateIcon(this, GameManager::sharedState()->m_playerFrame.value(), IconType::Cube, true);
         Odyssey::updateIcon(this, GameManager::sharedState()->m_playerShip.value(), IconType::Ship, true);
         Odyssey::updateBird(this, GameManager::sharedState()->m_playerBird.value(), IconType::Ufo, true);
-        Odyssey::updateRobot(this, GameManager::sharedState()->m_playerRobot.value(), IconType::Robot, true);
+        //  Odyssey::updateRobot(this, GameManager::sharedState()->m_playerRobot.value(), IconType::Robot, true);
     }
 };

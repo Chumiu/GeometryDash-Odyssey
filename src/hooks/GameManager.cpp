@@ -10,15 +10,15 @@ class $modify(OdysseyGameManager, GameManager)
     int countForType(IconType icon)
     {
         if (icon == IconType::Cube)
-            return 502;
+            return 508;
         if (icon == IconType::Ship)
-            return 170;
+            return 172;
         if (icon == IconType::Ball)
-            return 121;
+            return 122;
         if (icon == IconType::Ufo)
             return 151;
         if (icon == IconType::Wave)
-            return 97;
+            return 98;
         if (icon == IconType::Robot)
             return 68;
         if (icon == IconType::Spider)
@@ -31,7 +31,8 @@ class $modify(OdysseyGameManager, GameManager)
 
     bool isIconUnlocked(int id, IconType type)
     {
-        //  if (Odyssey::isCustomIcon(id, type)) return GameManager::isIconUnlocked(id, type);
+        if (Odyssey::isCustomIcon(id, type))
+            return GameManager::isIconUnlocked(id, type);
         return true;
     }
 
@@ -54,4 +55,36 @@ class $modify(OdysseyGameManager, GameManager)
 
         GameManager::returnToLastScene(level);
     }
+
+    void reportAchievementWithId(const char *ach, int perc, bool flag)
+    {
+        GameManager::reportAchievementWithID(ach, perc, flag);
+
+        log::debug("ACH: {}, Percent: {}, Flag: {}", ach, perc, flag);
+    };
+
+    void reportPercentageForLevel(int levelID, int percentage, bool isPlatformer)
+    {
+        GameManager::reportPercentageForLevel(levelID, percentage, isPlatformer);
+
+        if (levelID == 201 && !isPlatformer)
+        {
+            GameManager::reportAchievementWithID("geometry.ach.level201a", percentage, false);
+        };
+
+        if (levelID == 201 && isPlatformer)
+        {
+            GameManager::reportAchievementWithID("geometry.ach.level201b", percentage, false);
+        };
+
+        if (levelID == 202 && !isPlatformer)
+        {
+            GameManager::reportAchievementWithID("geometry.ach.level202a", percentage, false);
+        };
+
+        if (levelID == 202 && isPlatformer)
+        {
+            GameManager::reportAchievementWithID("geometry.ach.level202b", percentage, false);
+        };
+    };
 };
