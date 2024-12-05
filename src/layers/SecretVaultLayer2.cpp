@@ -41,11 +41,11 @@ bool SecretVaultLayer2::init()
     m_textInput = TextInput::create(180, "...");
     m_textInput->setFilter("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ");
     m_textInput->setMaxCharCount(20);
-    addChildAtPosition(m_textInput, Anchor::Center, ccp(0, 65), false);
+    addChildAtPosition(m_textInput, Anchor::Center, ccp(0, 60), false);
 
     //  Response message
     m_response = CCLabelBMFont::create("", "gjFont42.fnt");
-    addChildAtPosition(m_response, Anchor::Center, ccp(0, 105), false);
+    addChildAtPosition(m_response, Anchor::Center, ccp(0, 100), false);
     updateMessage("Welcome...", MessageType::Basic);
 
     //  Creating the Vault keeper
@@ -87,7 +87,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     //  List of codes
     if (lower == "odyssey" && !AM->isAchievementEarned("geometry.ach.odyssey.secret01"))
     {
-        response = "So you know how to adventure...",
+        response = "So you know how to adventure...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret01", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -95,7 +95,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "invaders" && !AM->isAchievementEarned("geometry.ach.odyssey.secret02"))
     {
-        response = "Not so unknown now...",
+        response = "Not so unknown now...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret02", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -103,7 +103,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "astral" && !AM->isAchievementEarned("geometry.ach.odyssey.secret03"))
     {
-        response = "It strikes fear into my heart...",
+        response = "It strikes fear into my heart...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret03", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -111,7 +111,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "dumbledalf" && !AM->isAchievementEarned("geometry.ach.odyssey.secret04"))
     {
-        response = "What a humble man...",
+        response = "What a humble man...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret04", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -119,7 +119,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "carp" && !AM->isAchievementEarned("geometry.ach.odyssey.secret05"))
     {
-        response = "Useless piece of scrap metal...",
+        response = "Useless piece of scrap metal...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret05", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -127,14 +127,14 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "uncertain")
     {
-        response = "Good luck...",
+        response = "Good luck...";
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
     if (lower == "colon" && !AM->isAchievementEarned("geometry.ach.odyssey.secret06"))
     {
-        response = "Even the lord listens to his prayers...",
+        response = "Even the lord listens to his prayers...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret06", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -142,7 +142,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "rubrub" && !AM->isAchievementEarned("geometry.ach.odyssey.secret07"))
     {
-        response = "My hatred grows with each breath he takes...",
+        response = "My hatred grows with each breath he takes...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret07", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -150,7 +150,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "elemental" && !AM->isAchievementEarned("geometry.ach.odyssey.secret08"))
     {
-        response = "All of them together... What will happen?...",
+        response = "All of them together... What will happen?...";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret08", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -158,7 +158,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
     if (lower == "demon gauntlet" && !AM->isAchievementEarned("geometry.ach.odyssey.secret09"))
     {
-        response = "You see? I wasn't lying!",
+        response = "You see? I wasn't lying!";
         GM->reportAchievementWithID("geometry.ach.odyssey.secret09", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
@@ -167,112 +167,119 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     //  Random easter eggs
     if (lower == "switch")
     {
-        response = "The skeleton appears",
+        response = "The skeleton appears";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "master")
     {
-        response = "Cubical genius",
+        response = "Cubical genius";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "mathi")
     {
-        response = "Mathi approved",
+        response = "Mathi approved";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "cyanflower")
     {
-        response = "what even is a slimeboy?",
+        response = "what even is a slimeboy?";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "ghostpower")
     {
-        response = "XD",
+        response = "XD";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "nando")
     {
-        response = "Donde he oido antes ese nombre?",
+        response = "Donde he oido antes ese nombre?";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "monstercat")
     {
-        response = "One day... surely",
+        response = "One day... surely";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "spooky")
     {
-        response = "We don't talk about Spooky",
+        response = "We don't talk about Spooky";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "sparky")
     {
-        response = "No coins here, bud",
+        response = "No coins here, bud";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "glubfub")
     {
-        response = "Never liked him",
+        response = "Never liked him";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "gatekeeper")
     {
-        response = "We used to be together...",
+        response = "We used to be together...";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "wraith")
     {
-        response = "One-liners make me mad...",
+        response = "One-liners make me mad...";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "the hollow")
     {
-        response = "no...",
+        response = "no...";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "lunar")
     {
-        response = "Who?",
+        response = "Who?";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "nukebound")
     {
-        response = "Nukebound to what?",
+        response = "Nukebound to what?";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 
     if (lower == "wanderer")
     {
-        response = "I'm pretty sure he isn't dead",
+        response = "I'm pretty sure he isn't dead";
+        updateMessage(response, MessageType::WrongAnswer);
+        return;
+    };
+
+    if (lower == "mono")
+    {
+        response = "Wrong vault, lad...";
         updateMessage(response, MessageType::WrongAnswer);
         return;
     };
@@ -322,7 +329,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
 std::string SecretVaultLayer2::getMessage()
 {
-    int rand = std::rand() % 25 + 1;
+    int rand = std::rand() % 30 + 1;
 
     if (m_messageID == 0)
     {
@@ -366,14 +373,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "Uh..."
             "What was the word again?"};
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Invaders
@@ -388,14 +398,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "They are the space... uh...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Astral
@@ -412,14 +425,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "I wish I knew what it was again...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Dumbledalf
@@ -437,14 +453,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "I wish I could remember his name...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Carp
@@ -460,14 +479,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "Thankfully, I forgot his name.",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Uncertain
@@ -481,14 +503,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "It's name is uncertain...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Colon
@@ -504,14 +529,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "Who am I?",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Rubrub
@@ -527,14 +555,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "To give us the legendary creation tools",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     //  Elemental
@@ -550,17 +581,20 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "I'm just reciting from this book I have",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
-    //  Elemental
+    //  Demon Gauntlet
     if (ID == 20 && !AM->isAchievementEarned("geometry.ach.odyssey.secret09"))
     {
         std::vector<std::string> messages = {
@@ -575,14 +609,67 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "If you were to challenge it",
             "Be ready to face hell"};
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
+    }
+
+    //  Mono
+    if (ID == 21 && !AM->isAchievementEarned("geometry.ach.odyssey.secret13"))
+    {
+        std::vector<std::string> messages = {
+            "I sometimes believe...",
+            "My brother was kind of a wacko",
+            "Kept talking about some gal...",
+            "With a weirdly shaped ribbon...",
+            "Other details I don't care",
+            "All I know is that her name...",
+            "Was Mono?",
+            "Who the hell names themselves Mono?",
+            "If you find my brother, Player...",
+            "Mention her name",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
+    }
+
+    //  Comic fan
+    if (ID == 22 && !AM->isAchievementEarned("geometry.ach.odyssey.secret20"))
+    {
+        std::vector<std::string> messages = {
+            "Wanna know something?",
+            "I hid a secret in the game",
+            "How do you get it?",
+            "Maybe stay up to date with the story...",
+            "Someone will appreciate it...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
     }
 
     //  Dialog with no purpose
@@ -601,14 +688,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     if (ID == 2)
@@ -621,14 +711,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "But I like their attitude",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     if (ID == 3)
@@ -642,14 +735,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "Do you seek to rebel against our leader too?",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     if (ID == 4)
@@ -663,14 +759,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "Is my club possessed by a ghost?",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     if (ID == 5)
@@ -684,14 +783,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "He took them away from me",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     if (ID == 6)
@@ -709,14 +811,17 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
             "It is beyond me...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        log::debug("Text: {}", messages[index]);
+        log::debug("IDX: {} - SIZE: {}", index, messages.size());
+
+        return messages[index];
     }
 
     m_messageID = 0;
@@ -754,7 +859,7 @@ void SecretVaultLayer2::updateMessage(std::string message, MessageType type)
 {
     m_response->setString(message.c_str());
     m_response->limitLabelWidth(320, 0.6f, 0.6f);
-    log::debug("TYPE {}", (int)type);
+    //  log::debug("TYPE {}", (int)type);
 
     switch (type)
     {
@@ -768,13 +873,13 @@ void SecretVaultLayer2::updateMessage(std::string message, MessageType type)
 
     case MessageType::WrongAnswer:
         m_response->setColor({255, 102, 102});
-        m_messageID = 0;
+        m_messageID = 99;
         m_messageIDX = 0;
         break;
 
     case MessageType::CorrectAnswer:
         m_response->setColor({102, 255, 255});
-        m_messageID = 0;
+        m_messageID = 99;
         m_messageIDX = 0;
         break;
     }

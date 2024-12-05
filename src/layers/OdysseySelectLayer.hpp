@@ -6,16 +6,17 @@ class OdysseySelectLayer : public CCLayer
 public:
     BoomScrollLayer* m_scrollLayer;
     CCSprite* m_background;
-    int m_pageAmount = 3;
-    int m_currentPage = 0;
-    CCSize m_winSize;
-    int m_levelAmount = 0;
     CCNode* m_islandNode;
     CCMenu* m_levelMenu;
+    CCSize m_winSize;
+
+    int m_pageAmount = 3;
+    int m_currentPage = 0;
+    int m_levelAmount = 0;
+    int m_extraTimes = 0;
 
     virtual bool init(int);
     virtual void keyBackClicked();
-    void onBack(CCObject*);
 
     std::vector<CCPoint> getPositionForButtons();
 
@@ -25,7 +26,9 @@ public:
     void onNextPage(CCObject*);
     void onBackPage(CCObject*);
 
+    void onBack(CCObject*);
     void onLevel(CCObject*);
+    void onExtraLevel(CCObject *);
 
     void getWizardDialog01();
 

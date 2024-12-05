@@ -83,6 +83,7 @@ class $modify(CCSprite)
 	}
 };
 
+/*
 class $modify(GDOMoreOptionsLayer, MoreOptionsLayer)
 {
 	bool init()
@@ -109,6 +110,7 @@ class $modify(GDOMoreOptionsLayer, MoreOptionsLayer)
 		}
 	}
 };
+*/
 
 class $modify(OdysseyGManager, GManager)
 {

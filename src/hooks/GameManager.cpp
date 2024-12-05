@@ -49,20 +49,22 @@ class $modify(OdysseyGameManager, GameManager)
 
             CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(page)));
             GameManager::sharedState()->fadeInMusic("TheMap.mp3"_spr);
-
             return;
         }
 
         GameManager::returnToLastScene(level);
     }
 
+    /*
     void reportAchievementWithId(const char *ach, int perc, bool flag)
     {
         GameManager::reportAchievementWithID(ach, perc, flag);
 
         log::debug("ACH: {}, Percent: {}, Flag: {}", ach, perc, flag);
     };
+    */
 
+    /*
     void reportPercentageForLevel(int levelID, int percentage, bool isPlatformer)
     {
         GameManager::reportPercentageForLevel(levelID, percentage, isPlatformer);
@@ -87,4 +89,5 @@ class $modify(OdysseyGameManager, GameManager)
             GameManager::reportAchievementWithID("geometry.ach.level202b", percentage, false);
         };
     };
+    */
 };

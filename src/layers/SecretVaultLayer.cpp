@@ -45,7 +45,7 @@ bool SecretVaultLayer::init()
 
     //  Response message
     m_response = CCLabelBMFont::create("", "gjFont41.fnt");
-    addChildAtPosition(m_response, Anchor::Center, ccp(0, 105), false);
+    addChildAtPosition(m_response, Anchor::Center, ccp(0, 100), false);
     updateMessage("Welcome...", MessageType::Basic);
 
     //  Creating the Vault keeper
@@ -64,7 +64,7 @@ bool SecretVaultLayer::init()
     keeperButton->setPosition({winSize.width / 2, winSize.height / 2 - 20.f});
     keeperMenu->addChild(keeperButton);
 
-    //auto * test = new GameToolBox();
+    // auto * test = new GameToolBox();
 
     auto particles_01 = GameToolbox::particleFromString("50a-1a2a0.5a15a90a0a50a25a400a0a0a0a0a0a0a0a15a7a0a0a0a0a0a0a0a0a1a0a0a0a0a0a0a0a0a0a0a0a1a0a0.5a0.2a0.5a0.2a0a0a0a0a0a0a0a2a0a0a0a0a25a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
     particles_01->setPositionX(winSize.width / 2);
@@ -95,65 +95,88 @@ void SecretVaultLayer::onSubmit(CCObject *)
     m_textInput->setString("");
 
     //  List of codes
-    if (lower == "odyssey")
+    if (lower == "color" && !AM->isAchievementEarned("geometry.ach.odyssey.secret10"))
     {
-        response = "So you're part of the Explorers...",
+        response = "This is monochromatic, is it?",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret10", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "invaders")
+    if (lower == "fracture")
     {
-        response = "Not so unknown now...",
+        response = "Embrace the chaos",
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "astral")
+    if (lower == "explorers" && !AM->isAchievementEarned("geometry.ach.odyssey.secret11"))
     {
-        response = "It strikes fear into my heart...",
+        response = "Maybe in the next update...",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret11", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "dumbledalf")
+    if (lower == "player" && !AM->isAchievementEarned("geometry.ach.odyssey.secret12"))
     {
-        response = "What a humble man...",
+        response = "...Was it you?",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret12", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "carp")
+    if (lower == "mono" && !AM->isAchievementEarned("geometry.ach.odyssey.secret13"))
     {
-        response = "Useless piece of scrap metal...",
+        response = "Something about her feels off...",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret13", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "comfort food")
+    if (lower == "nock em" && !AM->isAchievementEarned("geometry.ach.odyssey.secret14"))
     {
-        response = "Good luck...",
+        response = "Enemy defeated... not",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret14", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "colon")
+    if (lower == "machina" && !AM->isAchievementEarned("geometry.ach.odyssey.secret15"))
     {
-        response = "Even the lord listens to his prayers...",
+        response = "How sudden...",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret15", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "rubrub")
+    if (lower == "the seven seas" && !AM->isAchievementEarned("geometry.ach.odyssey.secret16"))
     {
-        response = "My hatred grows with each breath he takes...",
+        response = "Guide us, captain...",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret16", 100, false);
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (lower == "elemental")
+    if (lower == "smooth jazz" && !AM->isAchievementEarned("geometry.ach.odyssey.secret17"))
     {
-        response = "All of them together... What will happen?...",
+        response = "Blergh",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret17", 100, false);
+        updateMessage(response, MessageType::CorrectAnswer);
+        return;
+    };
+
+    if (lower == "angel" && !AM->isAchievementEarned("geometry.ach.odyssey.secret18"))
+    {
+        response = "The holy...",
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret18", 100, false);
+        updateMessage(response, MessageType::CorrectAnswer);
+        return;
+    };
+
+    if (lower == "gargan")
+    {
+        response = "What do you mean?...",
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
@@ -164,17 +187,13 @@ void SecretVaultLayer::onSubmit(CCObject *)
             "Well then...",
             "You really are a fool...",
             "Enough is enough",
-            "Come back when you're a little... smarter...",
+            "Come back when you're a little... smarter",
             "Arrgh... you pest...",
-            "Cough, cough, cough...",
+            "Cough, cough cough...",
             "Don't waste my time",
-            "Your request means nothing",
+            "Your requests mean nothing",
             "Feel ashamed of yourself...",
             "A lasting impression...",
-            "Is that all...?",
-            "I have no idea what you're talking about...",
-            "Next time say something coherent...",
-            "What...?",
             "..."};
 
         int rand = (std::rand() % messages.size());
@@ -191,7 +210,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
 
 std::string SecretVaultLayer::getMessage()
 {
-    int rand = std::rand() % 25 + 1;
+    int rand = std::rand() % 30 + 1;
 
     if (m_messageID == 0)
     {
@@ -219,232 +238,195 @@ std::string SecretVaultLayer::getThreadMessage(int ID, int index)
 {
     log::debug("ID: {} - IDX: {}", ID, index);
 
-    if (ID == 11)
+    //  auto GM = GameManager::sharedState();
+    auto AM = AchievementManager::sharedState();
+
+    //  Color
+    if (ID == 11 && !AM->isAchievementEarned("geometry.ach.odyssey.secret10"))
     {
         std::vector<std::string> messages = {
-            "So...",
-            "Look how far you've come...",
-            "Went through molten lands...",
-            "Explored the floating worlds...",
-            "Powered through the coldest of blizzards...",
-            "Now you set forth to an... uh...",
+            "I am the language of light",
+            "I give life to all you see",
+            "Without me, the world would be gray...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        return messages[index];
     }
 
+    //  Fracture
     if (ID == 12)
     {
         std::vector<std::string> messages = {
-            "From the stars above they came forth",
-            "From up there to below here",
-            "From a far away place",
-            "They possess many colors and forms",
-            "But one thing is for sure...",
-            "They are the Space... hmm...",
-            "What was that word again?"};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 13)
-    {
-        std::vector<std::string> messages = {
-            "That wretched beast...",
-            "The killer of the cosmos...",
-            "The galactic eradicator...",
-            "Its hunger never satisfied",
-            "For only one thing it truthfully desires",
-            "The phoenix from the castle of jello",
-            "I've forgotten that foul shellfish's name",
-            "Wish I knew what it was again..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 14)
-    {
-        std::vector<std::string> messages = {
-            "It's been a long time...",
-            "since anyone visited me...",
-            "This place has been empty for quite long...",
-            "Feels like a prison",
-            "He has forgotten us",
-            "But sometimes, an old man comes around...",
-            "White beard, funny clothes...",
-            "Has a colorful stone...",
-            "I forgot his name..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 15)
-    {
-        std::vector<std::string> messages = {
-            "Oh, the old man...?",
-            "He wasn't the only one that comes here",
-            "There's a pink guy that comes too",
-            "Oh, I despise him",
-            "Getting in the middle of things",
-            "Wanting to sell his garbage",
-            "Thankfully, I forgot his name.",
+            "Sometimes, breaking isn't the end, but the start...",
+            "Dive into the glitchy abyss I have for you",
+            "It's called fracture",
+            "Hold on tight",
+            "The beats here might just split reality",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        return messages[index];
     }
 
-    if (ID == 16)
+    //  Explorers
+    if (ID == 13 && !AM->isAchievementEarned("geometry.ach.odyssey.secret11"))
     {
         std::vector<std::string> messages = {
-            "Ever feel hungry?",
-            "Check out this level I have here...",
-            "It's called Comfort Food",
-            "Just make sure to be careful...",
-            "Wubstep is extremely addictive",
+            "That failed promise",
+            "That guardian of the forest temple",
+            "Delayed until the end of time...",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        return messages[index];
     }
 
-    if (ID == 17)
+    //  Player
+    if (ID == 14 && !AM->isAchievementEarned("geometry.ach.odyssey.secret12"))
     {
         std::vector<std::string> messages = {
-            "Riddle me this, riddle me that…",
-            "I am a fox with many tails",
-            "Afraid of arachnids and their many turns",
-            "They say I smell great, they love me even",
-            "You better be hiding your stash well",
-            "Else I will be ashamed of its ease",
-            "Who am I?..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 18)
-    {
-        std::vector<std::string> messages = {
-            "This evil, foolish ruler",
-            "Taking eons to give to his land",
-            "Locking us all here",
-            "Betraying us for the sake of secrets",
-            "And don't get me started",
-            "How long it's been taking for him",
-            "To give us the legendary monstrous feline..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 19)
-    {
-        std::vector<std::string> messages = {
-            "Without this, our world would be gone",
-            "It's influence spreads around it",
-            "It is the key to everything",
-            "It even gave it's name to this whole odyssey...",
-            "Whatever that means, really",
-            "I'm just reciting from this book I have..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 1)
-    {
-        std::vector<std::string> messages = {
-            "You might wonder...",
-            "Where I got the skull from",
-            "It's a long story...",
-            "I found it from a corpse laying around...",
-            "Ok, maybe that wasn't long..."};
-
-        if (m_messageIDX == messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        return messages[m_messageIDX];
-    }
-
-    if (ID == 2)
-    {
-        std::vector<std::string> messages = {
-            "It has been so long...",
-            "Since I've last seen the light...",
-            "And yet he lets me live...",
+            "They have doomed this world...",
+            "They who let the Darkness out...",
+            "Who could it be? Perhaps, is it in front of me?",
         };
 
-        if (m_messageIDX == messages.size())
+        if (index >= messages.size())
         {
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
         }
 
-        return messages[m_messageIDX];
+        return messages[index];
+    }
+
+    //  Mono
+    if (ID == 15 && !AM->isAchievementEarned("geometry.ach.odyssey.secret13"))
+    {
+        std::vector<std::string> messages = {
+            "Her cross-shaped ribbon and blank eyes...",
+            "A traveler with pale, greyscale skin...",
+            "Her pure black hair flows like a waterfall...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Nock em
+    if (ID == 16 && !AM->isAchievementEarned("geometry.ach.odyssey.secret14"))
+    {
+        std::vector<std::string> messages = {
+            "A bossfight approaches...",
+            "Predator or prey...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Machina
+    if (ID == 17 && !AM->isAchievementEarned("geometry.ach.odyssey.secret15"))
+    {
+        std::vector<std::string> messages = {
+            "Silhouette harmony...",
+            "Deus ex...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  The seven seas
+    if (ID == 18 && !AM->isAchievementEarned("geometry.ach.odyssey.secret16"))
+    {
+        std::vector<std::string> messages = {
+            "Sail forth if you dare...",
+            "They used to be seven...",
+            "And now they are dangerous...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Smooth Jazz
+    if (ID == 19 && !AM->isAchievementEarned("geometry.ach.odyssey.secret17"))
+    {
+        std::vector<std::string> messages = {
+            "The warrior of Wubstep's worst enemy...",
+            "I am tired of hearing that saxophone...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Angel
+    if (ID == 20 && !AM->isAchievementEarned("geometry.ach.odyssey.secret18"))
+    {
+        std::vector<std::string> messages = {
+            "Those against the demons...",
+            "Their voice echoes across heaven...",
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
     }
 
     m_messageID = 0;
@@ -486,15 +468,19 @@ void SecretVaultLayer::updateMessage(std::string message, MessageType type)
         break;
 
     case MessageType::Special:
-        m_response->setColor({102, 255, 255});
-        break;
-
-    case MessageType::WrongAnswer:
         m_response->setColor({255, 102, 102});
         break;
 
+    case MessageType::WrongAnswer:
+        m_response->setColor({102, 102, 102});
+        m_messageID = 99;
+        m_messageIDX = 0;
+        break;
+
     case MessageType::CorrectAnswer:
-        m_response->setColor({102, 255, 102});
+        m_response->setColor({150, 102, 255});
+        m_messageID = 99;
+        m_messageIDX = 0;
         break;
     }
 };

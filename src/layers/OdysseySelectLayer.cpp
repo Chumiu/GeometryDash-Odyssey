@@ -85,6 +85,9 @@ bool OdysseySelectLayer::init(int page)
 
     if (page == 2)
     {
+        auto extra01_unlocked = Mod::get()->getSettingValue<bool>("level-extra-01-unlocked");
+        auto extra02_unlocked = Mod::get()->getSettingValue<bool>("level-extra-02-unlocked");
+
         auto menu = CCMenu::create();
         menu->setPosition({0, 0});
 
@@ -94,7 +97,7 @@ bool OdysseySelectLayer::init(int page)
         auto firstIsland = CCMenuItemSpriteExtra::create(
             firstSprite,
             this,
-            menu_selector(OdysseySelectLayer::onLevel));
+            menu_selector(OdysseySelectLayer::onExtraLevel));
 
         firstIsland->setColor(islandColor);
         firstIsland->setPosition(islandPosition);
@@ -106,11 +109,29 @@ bool OdysseySelectLayer::init(int page)
         auto secondIsland = CCMenuItemSpriteExtra::create(
             secondSprite,
             this,
-            menu_selector(OdysseySelectLayer::onLevel));
+            menu_selector(OdysseySelectLayer::onExtraLevel));
 
         secondIsland->setTag(202);
         secondIsland->setPosition({m_winSize.width / 2 + 100, m_winSize.height / 2});
-    
+
+        if (!extra01_unlocked)
+        {
+            auto lock = CCSprite::createWithSpriteFrameName("GJLargeLock_001.png");
+            firstSprite->setColor({25, 25, 25});
+            firstIsland->addChild(lock, 10);
+
+            lock->setPosition(firstIsland->getContentSize() / 2);
+        }
+
+        if (!extra02_unlocked)
+        {
+            auto lock = CCSprite::createWithSpriteFrameName("GJLargeLock_001.png");
+            secondSprite->setColor({25, 25, 25});
+            secondIsland->addChild(lock, 10);
+
+            lock->setPosition(secondIsland->getContentSize() / 2);
+        }
+
         menu->addChild(firstIsland);
         menu->addChild(secondIsland);
 
@@ -124,7 +145,9 @@ bool OdysseySelectLayer::init(int page)
     island->setAnchorPoint({.5f, .5f});
     island->setPosition(islandPosition);
 
-    if(page == 2) island->setVisible(false);
+    if (page == 2)
+        island->setVisible(false);
+
     m_islandNode->addChild(island);
     addChild(m_islandNode);
 
@@ -178,24 +201,25 @@ bool OdysseySelectLayer::init(int page)
     m_cornerBR->setID("corner-br"_spr);
     addChild(m_cornerBR, 2);
 
-     //  Se reemplazara esto con el Game Manager, pero lo tengo para Desarrollo
+    //  Se reemplazara esto con el Game Manager, pero lo tengo para Desarrollo
     //  auto GM = GameManager::sharedState();
     //  auto watchedComic01 = GM->getUGV("52");
     auto meetWizard = Mod::get()->getSettingValue<bool>("meet-wizard");
     log::debug("FIRST COMIC {}", meetWizard);
-    /*
-    if(!meetWizard){
+
+    if (!meetWizard)
+    {
         this->runAction(CCSequence::create(
             CCDelayTime::create(0.5f),
             CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getWizardDialog01)),
-            0
-        ));
-    };*/
+            0));
+    };
 
     return true;
 };
 
-void OdysseySelectLayer::getWizardDialog01(){
+void OdysseySelectLayer::getWizardDialog01()
+{
     auto dialog = Odyssey::createDialog("wizardIntroduction");
     Mod::get()->setSettingValue("meet-wizard", true);
     //  GM->setUGV("52", true);
@@ -273,6 +297,29 @@ void OdysseySelectLayer::onLevel(CCObject *sender)
 {
     auto popup = OdysseyLevelPopup::create(sender->getTag());
     popup->show();
+}
+
+void OdysseySelectLayer::onExtraLevel(CCObject *sender)
+{
+    auto extra01_unlocked = Mod::get()->getSettingValue<bool>("level-extra-01-unlocked");
+    auto extra02_unlocked = Mod::get()->getSettingValue<bool>("level-extra-02-unlocked");
+
+    if ((extra01_unlocked && sender->getTag() == 201) || (extra02_unlocked && sender->getTag() == 202))
+    {
+        auto popup = OdysseyLevelPopup::create(sender->getTag());
+        popup->show();
+    }
+    else
+    {
+        auto dialog = Odyssey::createDialogResponse("extraIslandLocked", m_extraTimes);
+        //  GM->setUGV("52", true);
+        this->addChild(dialog, 3);
+
+        int tag = (m_extraTimes == 0)   ? 1
+                  : (m_extraTimes == 1) ? 2
+                                        : 0;
+        m_extraTimes = tag;
+    }
 }
 
 OdysseySelectLayer *OdysseySelectLayer::create(int page)

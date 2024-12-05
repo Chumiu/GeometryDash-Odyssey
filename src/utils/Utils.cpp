@@ -695,11 +695,9 @@ void Odyssey::addCreditsToIcon(std::pair<int, UnlockType> pair, int accountID)
 
 int Odyssey::islandPageForLevelID(int levelID)
 {
-    if (levelID < 5)
-        return 0;
+    if (levelID < 5) return 0;
 
-    if (levelID > 200)
-        return 2;
+    if (levelID > 200) return 2;
 
     return 1;
-}
+};

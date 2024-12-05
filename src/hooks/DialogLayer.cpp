@@ -13,7 +13,7 @@ class $modify(OdysseyDialogLayer, DialogLayer)
         //  auto watchedComic01 = GM->getUGV("52");
 
         auto seenComic = Mod::get()->getSettingValue<bool>("watched-comic-01");
-        log::debug("FIRST COMIC {}", seenComic);
+        //  log::debug("FIRST COMIC {}", seenComic);
 
         if(!seenComic)
         {
