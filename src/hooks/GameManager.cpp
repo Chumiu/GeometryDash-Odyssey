@@ -10,21 +10,23 @@ class $modify(OdysseyGameManager, GameManager)
     int countForType(IconType icon)
     {
         if (icon == IconType::Cube)
-            return 508;
+            return 515;
         if (icon == IconType::Ship)
-            return 172;
+            return 175;
         if (icon == IconType::Ball)
-            return 122;
+            return 124;
         if (icon == IconType::Ufo)
-            return 151;
+            return 153;
         if (icon == IconType::Wave)
-            return 98;
+            return 100;
         if (icon == IconType::Robot)
             return 68;
         if (icon == IconType::Spider)
             return 69;
         if (icon == IconType::Swing)
-            return 44;
+            return 46;
+        if (icon == IconType::Jetpack)
+            return 9;
 
         return GameManager::countForType(icon);
     }
@@ -55,39 +57,32 @@ class $modify(OdysseyGameManager, GameManager)
         GameManager::returnToLastScene(level);
     }
 
-    /*
+    void reportPercentageForLevel(int levelID, int percent, bool isPractice)
+    {
+        GameManager::reportPercentageForLevel(levelID, percent, isPractice);
+        log::info("Level: {}, {}, {}", levelID, percent, isPractice);
+
+        if(levelID == 201){
+            if(isPractice){
+                GameManager::sharedState()->reportAchievementWithID("geometry.ach.level201a", percent, false);
+            } else {
+                GameManager::sharedState()->reportAchievementWithID("geometry.ach.level201b", percent, false);
+            }
+        };
+
+        if(levelID == 202){
+            if(isPractice){
+                GameManager::sharedState()->reportAchievementWithID("geometry.ach.level202a", percent, false);
+            } else {
+                GameManager::sharedState()->reportAchievementWithID("geometry.ach.level202b", percent, false);
+            }
+        };
+    };
+
     void reportAchievementWithId(const char *ach, int perc, bool flag)
     {
         GameManager::reportAchievementWithID(ach, perc, flag);
 
         log::debug("ACH: {}, Percent: {}, Flag: {}", ach, perc, flag);
     };
-    */
-
-    /*
-    void reportPercentageForLevel(int levelID, int percentage, bool isPlatformer)
-    {
-        GameManager::reportPercentageForLevel(levelID, percentage, isPlatformer);
-
-        if (levelID == 201 && !isPlatformer)
-        {
-            GameManager::reportAchievementWithID("geometry.ach.level201a", percentage, false);
-        };
-
-        if (levelID == 201 && isPlatformer)
-        {
-            GameManager::reportAchievementWithID("geometry.ach.level201b", percentage, false);
-        };
-
-        if (levelID == 202 && !isPlatformer)
-        {
-            GameManager::reportAchievementWithID("geometry.ach.level202a", percentage, false);
-        };
-
-        if (levelID == 202 && isPlatformer)
-        {
-            GameManager::reportAchievementWithID("geometry.ach.level202b", percentage, false);
-        };
-    };
-    */
 };

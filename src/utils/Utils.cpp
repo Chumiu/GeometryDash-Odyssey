@@ -491,6 +491,9 @@ std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
     case IconType::Swing:
         iconName = "swing";
         break;
+    case IconType::Jetpack:
+        iconName = "jetpack";
+        break;
     default:
         iconName = "player";
         break;

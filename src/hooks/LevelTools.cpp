@@ -10,7 +10,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 		switch (levelID)
 		{
 		case 101:
-			return "The Dangerous Seas";
+			return "The Seven Seas";
 		case 102:
 			return "Ghost House";
 		case 103:
@@ -20,7 +20,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 201:
 			return "Burning Sands";
 		case 202:
-			return "Conclusive Journey";
+			return "Conclusion";
 		default:
 			return LevelTools::getAudioTitle(levelID);
 		}
@@ -57,7 +57,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 		{
 		case 1:
 			setLevelInfo(level, 6, GJDifficulty::Harder, 0, 0); // The Dangerous Seas
-			level->m_levelName = getAudioTitle(101);
+			level->m_levelName = "The Dangerous Seas";
 			level->m_audioTrack = 100;
 			level->m_coins = 3;
 			break;
@@ -112,7 +112,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 			break;
 		case 202:
 			setLevelInfo(level, 8, GJDifficulty::Insane, 0, 0); // Conclusive Journey
-			level->m_levelName = getAudioTitle(202);
+			level->m_levelName = "Conclusive Journey";
 			level->m_audioTrack = 202;
 			level->m_coins = 3;
 			break;
