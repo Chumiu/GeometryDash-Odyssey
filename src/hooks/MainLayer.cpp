@@ -90,6 +90,11 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (auto levelEditorHint = static_cast<CCSprite *>(this->getChildByID("level-editor-hint")))
             levelEditorHint->setVisible(false);
 
+        auto rightMenu = static_cast<CCMenu *>(this->getChildByID("right-side-menu"));
+
+        auto dailyCButton = static_cast<CCMenuItemSpriteExtra *>(rightMenu->getChildByID("daily-chest-button"));
+        if (dailyCButton) dailyCButton->setVisible(false);
+
         return true;
     }
 

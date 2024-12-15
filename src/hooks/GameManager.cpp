@@ -55,9 +55,9 @@ class $modify(OdysseyGameManager, GameManager)
         {
             int page = Odyssey::islandPageForLevelID(level->m_levelID);
 
-            //  CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(page)));
-            CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
-            GameManager::sharedState()->fadeInMusic("TheMap.mp3"_spr);
+            CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(page)));
+            //CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
+            //GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page));
             return;
         }
 

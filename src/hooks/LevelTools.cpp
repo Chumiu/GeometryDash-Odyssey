@@ -99,9 +99,9 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return 7;
 
 		case 501:
-			return 9;
-		case 502:
 			return 1;
+		case 502:
+			return 9;
 		case 503:
 			return 7;
 

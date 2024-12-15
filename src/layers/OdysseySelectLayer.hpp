@@ -9,19 +9,33 @@ public:
     CCNode *m_islandNode;
     CCMenu *m_levelMenu;
     CCSize m_winSize;
+    CCNode *m_dotNode;
+    CCMenuItemSpriteExtra *m_shopButton;
 
     int m_pageAmount = 3;
     int m_currentPage = 0;
     int m_levelAmount = 0;
     int m_extraTimes = 0;
 
+    bool m_animating = false;
+
     virtual bool init(int);
     virtual void keyBackClicked();
 
     std::vector<CCPoint> getPositionForButtons();
+    std::vector<CCPoint> getPositionForDots();
 
     void addLevelButtons();
-    void addLevelDots();
+    void addIslandDots();
+
+    bool isLevelComplete(int);
+    void setLevelComplete(int);
+
+    void enableButtonTouch();
+
+    void animateLevelCompletation();
+    void animateShopUnlock();
+    void enableLevelAnimation(CCObject *);
 
     void switchToPage(int);
     void onNextPage(CCObject *);
@@ -30,6 +44,10 @@ public:
     void onBack(CCObject *);
     void onLevel(CCObject *);
     void onExtraLevel(CCObject *);
+
+    void onRope(CCObject *);
+    void onSongs(CCObject *);
+    void onShop(CCObject *);
 
     void getWizardDialog01();
 

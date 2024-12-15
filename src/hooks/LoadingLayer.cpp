@@ -53,6 +53,8 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         //  La bandera de primer dialogo del Shopkeeper (500 Orbes)
         if (!GM->getUGV("17"))
             GM->setUGV("17", true);
+            
+        GameManager::sharedState()->setIntGameVariable("1001", 0);
 
         return true;
     }

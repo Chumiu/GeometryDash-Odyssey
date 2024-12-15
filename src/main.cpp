@@ -11,6 +11,7 @@
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/GJItemIcon.hpp>
 #include <Geode/modify/CurrencySprite.hpp>
+#include "utils/Utils.hpp"
 
 using namespace geode::prelude;
 
@@ -46,7 +47,10 @@ class $modify(PauseLayer)
 	void onQuit(CCObject *sender)
 	{
 		PauseLayer::onQuit(sender);
-		GameManager::sharedState()->fadeInMusic("TheMap.mp3"_spr);
+
+		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
+
+        GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page));
 	}
 };
 
