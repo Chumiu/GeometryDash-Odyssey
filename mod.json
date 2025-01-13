@@ -1,6 +1,6 @@
 {
-	"geode": "4.1.1",
-	"version": "v1.0.1",
+	"geode": "4.1.2",
+	"version": "v1.1.0-alpha.1",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074"
@@ -62,6 +62,50 @@
 			"name": "Spanish",
 			"description": "<cy>ENG</c>: Translates most of the mod's dialogue in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en Espanol. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)",
 			"default": false
+		},
+		"dev-title": {
+			"type": "title",
+			"name": "Development Options"
+		},
+		"dev-mode": {
+			"type": "bool",
+			"name": "Developer Mode",
+			"description": "Enabling developer modes allows you to bypass most restrictions (like access to Online Menu)",
+			"default": false,
+			"enable-if": "saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"bypass-levels": {
+			"type": "bool",
+			"name": "Level Bypass",
+			"description": "Unlocks all levels, disabling the progression system",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"bypass-vaults": {
+			"type": "bool",
+			"name": "Vault Bypass",
+			"description": "Unlocks the vaults (You skip the requirements to open them)",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"empty-levels": {
+			"type": "bool",
+			"name": "Empty all levels",
+			"description": "Turns all levels of the mod as empty templates (Just to test achievements and progression system)",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"restart-mod": {
+			"type": "bool",
+			"name": "Restart the mod",
+			"description": "Resets everything from the mod the moment you enter the Menu layer. <cr>Only enable this</c> if you want to experience everything from the beginning.",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
 		}
 	},
 	"resources": {

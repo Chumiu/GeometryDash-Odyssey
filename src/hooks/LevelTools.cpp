@@ -40,6 +40,15 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 503:
 			return "Super Wubtendo";
 
+		case 601:
+			return "Eclipse";
+		case 602:
+			return "Jelly Castle";
+		case 603:
+			return "Phone Me First";
+		case 604:
+			return "Wubsplosion";
+
 		default:
 			return LevelTools::getAudioTitle(levelID);
 		}
@@ -74,6 +83,15 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "BurningSands.mp3"_spr;
 		case 503:
 			return "SuperWubtendo.mp3"_spr;
+
+		case 601:
+			return "10007208.ogg"_spr;
+		case 602:
+			return "10007227.ogg"_spr;
+		case 603:
+			return "PhoneMeFirst.mp3"_spr;
+		case 604:
+			return "10007269.ogg"_spr;
 
 		default:
 			return LevelTools::getAudioFileName(levelID);
@@ -110,6 +128,15 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 503:
 			return 7;
 
+		case 601:
+			return 7;
+		case 602:
+			return 7;
+		case 603:
+			return 13;
+		case 604:
+			return 7;
+
 		default:
 			return LevelTools::artistForAudio(p0);
 		}
@@ -121,6 +148,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 		{
 		case 12:
 			return "Schtiffles";
+		case 13:
+			return "cYsmix";
 		default:
 			return LevelTools::nameForArtist(p0);
 		}
@@ -132,6 +161,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 		{
 		case 12:
 			return "https://schtiffles.newgrounds.com";
+		case 13:
+			return "https://cysmix.newgrounds.com/";
 		default:
 			return LevelTools::ngURLForArtist(p0);
 		}
@@ -263,6 +294,46 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_timestamp = 0;
 			level->m_coins = 3;
 			break;
+
+		case 7601: // Eclipse
+			level->m_levelName = getAudioTitle(601);
+			level->m_audioTrack = 601;
+			level->m_stars = 6;
+			level->m_difficulty = GJDifficulty::Hard;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7602: // Jelly Castle
+			level->m_levelName = getAudioTitle(602);
+			level->m_audioTrack = 602;
+			level->m_stars = 8;
+			level->m_difficulty = GJDifficulty::Harder;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7603: // Phone Me First
+			level->m_levelName = getAudioTitle(603);
+			level->m_audioTrack = 603;
+			level->m_stars = 10;
+			level->m_difficulty = GJDifficulty::Insane;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7604: // Wubsplosion
+			level->m_levelName = getAudioTitle(604);
+			level->m_audioTrack = 604;
+			level->m_stars = 12;
+			level->m_difficulty = GJDifficulty::Insane;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
 		}
 
 		if (!loaded)
@@ -307,12 +378,23 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 110:
 			return "https://www.newgrounds.com/audio/listen/678590"; // Harmony Of The Heart
 
+			//	Extra Levels
 		case 501:
 			return "https://youtu.be/BcoURwJr9PI?si=Mb3Zi1azTN2bbrYE"; // Conclusive
 		case 502:
 			return "https://youtu.be/gyxh9R59oj4?si=IhxSU7XQvwJX32z3"; // Burning Sands
 		case 503:
 			return "https://youtu.be/EnmAuu92RKo?si=Ywq4DfaiC0f2jr2d"; // Super Wubtendo
+
+			//	Contest Levels
+		case 601:
+			return "https://www.youtube.com/watch?v=Y1OQkWm_sw4"; // Eclipse
+		case 602:
+			return "https://www.youtube.com/watch?v=oMoYbINoShc"; // Jelly Castle
+		case 603:
+			return "https://www.youtube.com/watch?v=uDYdecWY85w"; // Phone Me First
+		case 604:
+			return "https://www.youtube.com/watch?v=lBXlBuuents"; // Wubsplosion
 
 		default:
 			return LevelTools::urlForAudio(songID);

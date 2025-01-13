@@ -46,13 +46,12 @@ bool OdysseyDevLayer::init()
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    dialogMenu->setPositionY(winSize.height / 2 + 30.0f);
+    dialogMenu->setPositionY(winSize.height / 2 + 60.0f);
 
     auto dialogLabel = CCLabelBMFont::create("Events", "goldFont.fnt");
     dialogLabel->setPosition({winSize.width / 2, dialogMenu->getPositionY() + dialogMenu->getContentHeight() / 2 + 15.0f});
     dialogLabel->setScale(0.75f);
     addChild(dialogLabel);
-
 
     auto carp01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (Shop)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
@@ -143,7 +142,7 @@ bool OdysseyDevLayer::init()
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    comicsMenu->setPositionY(60);
+    comicsMenu->setPositionY(90);
 
     auto comicsLabel = CCLabelBMFont::create("Comics", "goldFont.fnt");
     comicsLabel->setPosition({winSize.width / 2, comicsMenu->getPositionY() + comicsMenu->getContentHeight() / 2 + 10.0f});
@@ -159,7 +158,7 @@ bool OdysseyDevLayer::init()
             ButtonSprite::create(fmt::format("#{:02}", ii + 1).c_str(), 40, true, "goldFont.fnt", texture, 22.5f, 0.4f),
             this,
             menu_selector(OdysseyDevLayer::onComic));
-        
+
         comic->setTag(ii + 1);
         comicsMenu->addChild(comic);
     };
@@ -170,19 +169,31 @@ bool OdysseyDevLayer::init()
     //  Menu de Niveles
     auto levelsMenu = CCMenu::create();
     levelsMenu->setID("levels-menu"_spr);
-    levelsMenu->setContentSize({350.0f, 40.0f});
+    levelsMenu->setContentSize({500.0f, 40.0f});
     levelsMenu->setLayout(RowLayout::create()
                               ->setGap(14.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    levelsMenu->setPositionY(30);
-    auto levelsLabel = CCLabelBMFont::create("levels", "goldFont.fnt");
+    levelsMenu->setPositionY(20);
+    auto levelsLabel = CCLabelBMFont::create("contest levels (WIP)", "goldFont.fnt");
     levelsLabel->setPosition({winSize.width / 2, levelsMenu->getPositionY() + levelsMenu->getContentHeight() / 2 + 10.0f});
     levelsLabel->setScale(0.75f);
-    //  addChild(levelsLabel);
-    //  addChild(levelsMenu);
+    addChild(levelsLabel);
+
+    for (auto ii = 1; ii <= 4; ii++)
+    {
+        auto level = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii + 600)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
+            this,
+            menu_selector(OdysseyDevLayer::onLevel));
+
+        level->setTag(ii + 7600);
+        levelsMenu->addChild(level);
+    };
+    levelsMenu->updateLayout();
+    addChild(levelsMenu);
 
     setKeypadEnabled(true);
     return true;

@@ -132,7 +132,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         // Odyssey::insertAssetsToMap(true, {676349}); - no es necesario
 
         // Super Ultra
-        Odyssey::insertAssetsToMap(false, {491, 492, 493, 562, 755, 1025, 1049, 1567, 1571, 1572, 1586, 1587, 1619, 1740, 1751, 1897, 2393, 2711, 2716, 2717, 2718, 2847, 2910, 2913, 2914, 2915, 2916, 2974, 3016, 3210, 3383, 3384, 4260, 4261, 4262, 4273, 4289, 4290, 4397, 4404, 6242, 6310, 7231, 7646, 7647, 19796});
+        Odyssey::insertAssetsToMap(false, {491, 492, 493, 562, 755, 1025, 1049, 1567, 1571, 1572, 1586, 1587, 1619, 1740, 1751, 1897, 2393, 2711, 2716, 2717, 2718, 2847, 2910, 2913, 2914, 2915, 2916, 2974, 3016, 3210, 3383, 3384, 4260, 4261, 4262, 4289, 4290, 4397, 4404, 6242, 6310, 7231, 7646, 7647, 19796});
         Odyssey::insertAssetsToMap(true, {10000718, 10007255});
 
         // Cryptofunk
@@ -163,6 +163,20 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         // Burning Sands
         Odyssey::insertAssetsToMap(false, {993, 1185, 1372, 1377, 1378, 1601, 1741, 1744, 1745, 2075, 2612, 2824, 2981, 2982, 4072, 4073, 4074, 7625, 7735, 7943, 8181, 8191, 9873, 15907, 18771, 1374, 1375, 1376, 1751, 2390, 2392, 2716, 2717, 2718, 3081, 4290, 6242});
         Odyssey::insertAssetsToMap(true, {10006666});
+
+        //  Eclipse
+        Odyssey::insertAssetsToMap(false, {566, 3114, 4470, 4846, 4847, 6620, 6621});
+        Odyssey::insertAssetsToMap(true, {10004233, 10007207, 10007208});
+
+        //  Jelly Castle
+        Odyssey::insertAssetsToMap(false, {2390, 4060, 4397, 4404, 7625});
+        Odyssey::insertAssetsToMap(true, {10007227});
+
+        //  Phone me First
+        Odyssey::insertAssetsToMap(false, {1330, 1554, 2136, 4024, 4025, 4394, 6269, 13171, 20698});
+
+        //  Wubsplosion
+        Odyssey::insertAssetsToMap(true, {10007269});
     }
 
     void addOdysseyAssets()

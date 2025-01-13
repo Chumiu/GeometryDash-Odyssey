@@ -90,6 +90,20 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         //  Boton para acceder a los comics mas facil
         auto bottomMenu = static_cast<CCMenu *>(this->getChildByID("bottom-menu"));
 
+        //  Remplaza el boton de Newgrounds por el boton de MDK
+        if (auto newgroundsButton = static_cast<CCMenuItemSpriteExtra *>(bottomMenu->getChildByID("newgrounds-button")))
+        {
+            newgroundsButton->removeFromParentAndCleanup(true);
+
+            auto MDKButton = CCMenuItemSpriteExtra::create(
+                CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
+                this,
+                menu_selector(OdysseyMenuLayer::onMDK));
+
+            bottomMenu->addChild(MDKButton);
+            bottomMenu->updateLayout();
+        }
+
         if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
         {
             auto comicButton = CCMenuItemSpriteExtra::create(
@@ -144,6 +158,22 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
     }
+
+    void onMDK(CCObject *)
+    {
+        auto popup = createQuickPopup(
+            "MDK Music",
+            "Wanna visit <cy>MDK</c>'s website for awesome music and know more about the <cg>World of Wubstep</c>?",
+            "Cancel",
+            "Open",
+            [](auto, bool btn2)
+            {
+                if (btn2)
+                {
+                    CCApplication::sharedApplication()->openURL("https://morgandavidking.com/");
+                }
+            });
+    };
 
     void onPlay(CCObject *)
     {

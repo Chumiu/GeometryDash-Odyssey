@@ -39,6 +39,26 @@ public:
             level->m_accountID = 10075800;
             break;
 
+        case 7601:
+            level->m_creatorName = "ElDanideYT";
+            level->m_accountID = 236725152;
+            break;
+
+        case 7602:
+            level->m_creatorName = "Lojickal";
+            level->m_accountID = 201256736;
+            break;
+
+        case 7603:
+            level->m_creatorName = "Emilixito";
+            level->m_accountID = 99431668;
+            break;
+
+        case 7604:
+            level->m_creatorName = "Zaxvort";
+            level->m_accountID = 236473480;
+            break;
+
         default:
             level->m_creatorName = "SwitchstepGDYT";
             level->m_accountID = 10158911;

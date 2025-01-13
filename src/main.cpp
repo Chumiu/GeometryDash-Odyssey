@@ -147,6 +147,10 @@ class $modify(SongsLayer)
 		songObjectArray->addObject(SongObject::create(109));
 		songObjectArray->addObject(SongObject::create(501));
 		songObjectArray->addObject(SongObject::create(502));
+		songObjectArray->addObject(SongObject::create(601));
+		songObjectArray->addObject(SongObject::create(602));
+		songObjectArray->addObject(SongObject::create(603));
+		songObjectArray->addObject(SongObject::create(604));
 		songObjectArray->addObject(SongObject::create(-1));
 
 		m_listLayer->m_listView = CustomListView::create(songObjectArray, nullptr, 220.0, 356.0, 0, BoomListType::Song, 0.0);
