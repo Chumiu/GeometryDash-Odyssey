@@ -1,11 +1,11 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
-#include "../layers/OdysseyCreditsLayer.hpp"
+#include "../layers/CreditsLayer.hpp"
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../layers/OdysseyDevLayer.hpp"
+#include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
-#include "../nodes/OdysseyCreditNode.hpp"
-#include "../nodes/OdysseyComicPopup.hpp"
+#include "../nodes/CreditsNode.hpp"
+#include "../nodes/ComicPopup.hpp"
 #include "../nodes/OdysseyPopup.hpp"
 #include "../utils/Utils.hpp"
 
@@ -154,7 +154,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
     void onDev(CCObject *)
     {
         auto scene = CCScene::create();
-        scene->addChild(OdysseyDevLayer::create());
+        scene->addChild(DeveloperLayer::create());
 
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
     }
@@ -221,13 +221,13 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onMoreGames(CCObject *)
     {
-        auto credits = OdysseyCreditsLayer::create();
+        auto credits = CreditsLayer::create();
         credits->show();
     }
 
     void onComics(CCObject *)
     {
-        auto comicPopup = OdysseyComicPopup::create();
+        auto comicPopup = ComicPopup::create();
         comicPopup->show();
     }
 

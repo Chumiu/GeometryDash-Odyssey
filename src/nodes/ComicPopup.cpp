@@ -1,7 +1,7 @@
-#include "OdysseyComicPopup.hpp"
-#include "../layers/OdysseyComicLayer.hpp"
+#include "ComicPopup.hpp"
+#include "../layers/ComicLayer.hpp"
 
-bool OdysseyComicPopup::setup()
+bool ComicPopup::setup()
 {
     auto contentSize = m_mainLayer->getContentSize();
 
@@ -33,7 +33,7 @@ bool OdysseyComicPopup::setup()
         auto comicButton = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(fmt::format("#{:02}", ii + 1).c_str(), 50, true, "goldFont.fnt", texture, 25.f, 0.6f),
             this,
-            menu_selector(OdysseyComicPopup::onComic));
+            menu_selector(ComicPopup::onComic));
 
         buttonMenu->addChild(comicButton);
         comicButton->setTag(ii + 1);
@@ -54,8 +54,8 @@ bool OdysseyComicPopup::setup()
     return true;
 };
 
-void OdysseyComicPopup::onComic(CCObject * sender){
-    auto comic = OdysseyComicLayer::create(sender->getTag(), false);
+void ComicPopup::onComic(CCObject * sender){
+    auto comic = ComicLayer::create(sender->getTag(), false);
     comic->m_fromPopup = true;
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
@@ -68,9 +68,9 @@ void OdysseyComicPopup::onComic(CCObject * sender){
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 };
 
-OdysseyComicPopup *OdysseyComicPopup::create()
+ComicPopup *ComicPopup::create()
 {
-    auto ret = new OdysseyComicPopup();
+    auto ret = new ComicPopup();
 
     if (ret && ret->initAnchored(400.f, 200.f))
     {

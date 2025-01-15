@@ -1,11 +1,11 @@
-#include "OdysseyDevLayer.hpp"
-#include "OdysseyComicLayer.hpp"
+#include "DeveloperLayer.hpp"
+#include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
 #include "../nodes/OdysseyPopup.hpp"
 #include "../utils/Utils.hpp"
 
-bool OdysseyDevLayer::init()
+bool DeveloperLayer::init()
 {
     if (!CCLayer::init())
         return false;
@@ -25,7 +25,7 @@ bool OdysseyDevLayer::init()
     auto backBtn = CCMenuItemSpriteExtra::create(
         CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
         this,
-        menu_selector(OdysseyDevLayer::onBack));
+        menu_selector(DeveloperLayer::onBack));
 
     backBtn->setID("back-button"_spr);
     backBtn->setSizeMult(1.2f);
@@ -56,67 +56,67 @@ bool OdysseyDevLayer::init()
     auto carp01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (Shop)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     carp01->setTag(0);
 
     auto wizard01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Dumbledalf (Introduction)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     wizard01->setTag(1);
 
     auto wizard02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Dumbledalf (Island)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     wizard02->setTag(2);
 
     auto wizard03 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Dumbledalf (Finale)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     wizard03->setTag(3);
 
     auto hollow01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Hollow (Introduction)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     hollow01->setTag(4);
 
     auto hollow02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Hollow (Coin quota)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onStoryDialog));
+        menu_selector(DeveloperLayer::onStoryDialog));
     hollow02->setTag(5);
 
     auto carp02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (Extras)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onCarp02));
+        menu_selector(DeveloperLayer::onCarp02));
     carp02->setTag(0);
 
     auto carp03 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (Comic)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onCarp03));
+        menu_selector(DeveloperLayer::onCarp03));
     carp03->setTag(0);
 
     auto carp04 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (No Coins)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onCarp04));
+        menu_selector(DeveloperLayer::onCarp04));
     carp04->setTag(0);
 
     auto popup01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Savefile Notice", 160, true, "goldFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onPopup));
+        menu_selector(DeveloperLayer::onPopup));
     popup01->setTag(1);
 
     auto popup02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Translation Notice", 160, true, "goldFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
         this,
-        menu_selector(OdysseyDevLayer::onPopup));
+        menu_selector(DeveloperLayer::onPopup));
     popup02->setTag(2);
 
     dialogMenu->addChild(carp01);
@@ -157,7 +157,7 @@ bool OdysseyDevLayer::init()
         auto comic = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(fmt::format("#{:02}", ii + 1).c_str(), 40, true, "goldFont.fnt", texture, 22.5f, 0.4f),
             this,
-            menu_selector(OdysseyDevLayer::onComic));
+            menu_selector(DeveloperLayer::onComic));
 
         comic->setTag(ii + 1);
         comicsMenu->addChild(comic);
@@ -187,7 +187,7 @@ bool OdysseyDevLayer::init()
         auto level = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii + 600)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
             this,
-            menu_selector(OdysseyDevLayer::onLevel));
+            menu_selector(DeveloperLayer::onLevel));
 
         level->setTag(ii + 7600);
         levelsMenu->addChild(level);
@@ -200,7 +200,7 @@ bool OdysseyDevLayer::init()
 };
 
 //  Boton del Ogro
-void OdysseyDevLayer::onOgre(CCObject *)
+void DeveloperLayer::onOgre(CCObject *)
 {
     auto scene = CCScene::create();
     scene->addChild(SecretVaultLayer2::create());
@@ -208,7 +208,7 @@ void OdysseyDevLayer::onOgre(CCObject *)
 };
 
 //  En Nivel
-void OdysseyDevLayer::onLevel(CCObject *sender)
+void DeveloperLayer::onLevel(CCObject *sender)
 {
     auto scene = CCScene::create();
     auto tag = sender->getTag();
@@ -217,9 +217,9 @@ void OdysseyDevLayer::onLevel(CCObject *sender)
 };
 
 //  En Comic
-void OdysseyDevLayer::onComic(CCObject *sender)
+void DeveloperLayer::onComic(CCObject *sender)
 {
-    auto comic = OdysseyComicLayer::create(sender->getTag(), false);
+    auto comic = ComicLayer::create(sender->getTag(), false);
     comic->m_fromPopup = true;
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
@@ -233,7 +233,7 @@ void OdysseyDevLayer::onComic(CCObject *sender)
 };
 
 //  En dialogo de historia
-void OdysseyDevLayer::onStoryDialog(CCObject *sender)
+void DeveloperLayer::onStoryDialog(CCObject *sender)
 {
     std::vector<const char *> events = {
         "meetingShopkeeper",
@@ -248,7 +248,7 @@ void OdysseyDevLayer::onStoryDialog(CCObject *sender)
     this->addChild(dialog, 10);
 }
 
-void OdysseyDevLayer::onPopup(CCObject *sender)
+void DeveloperLayer::onPopup(CCObject *sender)
 {
     auto tag = sender->getTag();
 
@@ -270,7 +270,7 @@ void OdysseyDevLayer::onPopup(CCObject *sender)
     }
 };
 
-void OdysseyDevLayer::onCarp02(CCObject *sender)
+void DeveloperLayer::onCarp02(CCObject *sender)
 {
     auto dialog = Odyssey::createDialogResponse("onExtraLevel", sender->getTag());
 
@@ -283,7 +283,7 @@ void OdysseyDevLayer::onCarp02(CCObject *sender)
     this->addChild(dialog, 3);
 };
 
-void OdysseyDevLayer::onCarp03(CCObject *sender)
+void DeveloperLayer::onCarp03(CCObject *sender)
 {
     auto dialog = Odyssey::createDialogResponse("onFinalComic", sender->getTag());
 
@@ -297,7 +297,7 @@ void OdysseyDevLayer::onCarp03(CCObject *sender)
     this->addChild(dialog, 3);
 };
 
-void OdysseyDevLayer::onCarp04(CCObject *sender)
+void DeveloperLayer::onCarp04(CCObject *sender)
 {
     auto dialog = Odyssey::createDialogResponse("onShopItem", sender->getTag());
 
@@ -309,19 +309,19 @@ void OdysseyDevLayer::onCarp04(CCObject *sender)
     this->addChild(dialog, 3);
 };
 
-void OdysseyDevLayer::keyBackClicked()
+void DeveloperLayer::keyBackClicked()
 {
     CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
 };
 
-void OdysseyDevLayer::onBack(CCObject *)
+void DeveloperLayer::onBack(CCObject *)
 {
     keyBackClicked();
 };
 
-OdysseyDevLayer *OdysseyDevLayer::create()
+DeveloperLayer *DeveloperLayer::create()
 {
-    auto ret = new OdysseyDevLayer();
+    auto ret = new DeveloperLayer();
 
     if (ret->init())
     {
@@ -333,9 +333,9 @@ OdysseyDevLayer *OdysseyDevLayer::create()
     return nullptr;
 };
 
-CCScene *OdysseyDevLayer::scene()
+CCScene *DeveloperLayer::scene()
 {
-    auto layer = OdysseyDevLayer::create();
+    auto layer = DeveloperLayer::create();
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;

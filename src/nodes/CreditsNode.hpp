@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyCreditNode : public cocos2d::CCNode
+class CreditsNode : public cocos2d::CCNode
 {
 protected:
     int m_accountID = 0;
@@ -38,7 +38,7 @@ protected:
         for (auto elem : std::string(name))
             lower += std::tolower(elem);
 
-        m_userButton = CCMenuItemSpriteExtra::create(m_userName, this, menu_selector(OdysseyCreditNode::onUser));
+        m_userButton = CCMenuItemSpriteExtra::create(m_userName, this, menu_selector(CreditsNode::onUser));
 
         m_userIcon = SimplePlayer::create(iconID);
 
@@ -68,9 +68,9 @@ protected:
     }
 
 public:
-    static OdysseyCreditNode *create(const char *name, int iconID, int color1, int color2, int color3, bool glow, int accountID)
+    static CreditsNode *create(const char *name, int iconID, int color1, int color2, int color3, bool glow, int accountID)
     {
-        auto ret = new OdysseyCreditNode();
+        auto ret = new CreditsNode();
         if (ret && ret->init(name, iconID, color1, color2, color3, glow, accountID))
         {
             ret->autorelease();

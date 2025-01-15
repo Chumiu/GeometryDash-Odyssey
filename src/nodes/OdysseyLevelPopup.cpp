@@ -1,5 +1,5 @@
 #include "OdysseyLevelPopup.hpp"
-#include "../layers/OdysseyComicLayer.hpp"
+#include "../layers/ComicLayer.hpp"
 #include "../utils/Utils.hpp"
 
 bool OdysseyLevelPopup::setup(std::string const &title)
@@ -168,7 +168,7 @@ void OdysseyLevelPopup::onSettings(CCObject *sender)
 void OdysseyLevelPopup::onComic(CCObject *sender)
 {
     auto scene = CCScene::create();
-    scene->addChild(OdysseyComicLayer::create(m_levelID + 1 + Odyssey::islandPageForLevelID(m_levelID) - 7000, false));
+    scene->addChild(ComicLayer::create(m_levelID + 1 + Odyssey::islandPageForLevelID(m_levelID) - 7000, false));
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
     button->setSprite(CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small));

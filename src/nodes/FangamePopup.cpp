@@ -1,6 +1,6 @@
-#include "OdysseyFangamePopup.hpp"
+#include "FangamePopup.hpp"
 
-bool OdysseyFangamePopup::setup(const char *fileName, const char *url)
+bool FangamePopup::setup(const char *fileName, const char *url)
 {
     auto contentSize = m_mainLayer->getContentSize();
     m_link = url;
@@ -8,7 +8,7 @@ bool OdysseyFangamePopup::setup(const char *fileName, const char *url)
     m_linkButton = CCMenuItemSpriteExtra::create(
         ButtonSprite::create(m_buttonText, "goldFont.fnt", "GJ_button_02.png", 0.75f),
         this,
-        menu_selector(OdysseyFangamePopup::onLink));
+        menu_selector(FangamePopup::onLink));
     m_linkButton->setPosition({contentSize.width / 2, -10});
     m_linkButton->setScale(0.95f);
 
@@ -28,19 +28,19 @@ bool OdysseyFangamePopup::setup(const char *fileName, const char *url)
     return true;
 }
 
-void OdysseyFangamePopup::onLink(CCObject *)
+void FangamePopup::onLink(CCObject *)
 {
     CCApplication::sharedApplication()->openURL(m_link);
 }
 
-void OdysseyFangamePopup::setButtonText(const char *newText)
+void FangamePopup::setButtonText(const char *newText)
 {
     m_linkButton->setNormalImage(ButtonSprite::create(newText, "goldFont.fnt", "GJ_button_05.png", 0.75f));
 }
 
-OdysseyFangamePopup *OdysseyFangamePopup::create(const char *fileName, const char *url)
+FangamePopup *FangamePopup::create(const char *fileName, const char *url)
 {
-    auto ret = new OdysseyFangamePopup();
+    auto ret = new FangamePopup();
 
     if (ret->initAnchored(386.f, 252.f, fileName, url))
     {

@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyDevLayer : public cocos2d::CCLayer
+class DeveloperLayer : public cocos2d::CCLayer
 {
 protected:
     CCSprite *m_background = nullptr;
@@ -21,6 +21,6 @@ protected:
     void onOgre(CCObject *);
 
 public:
-    static OdysseyDevLayer *create();
+    static DeveloperLayer *create();
     CCScene *scene();
 };

@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyComicLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
+class ComicLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
 {
 public:
     BoomScrollLayer *m_scrollLayer = nullptr;
@@ -37,6 +37,6 @@ public:
     void onBack(CCObject *);
 
 public:
-    static OdysseyComicLayer *create(int, bool);
+    static ComicLayer *create(int, bool);
     CCScene *scene(int, bool);
 };

@@ -1,7 +1,7 @@
-#include "OdysseyCreditsLayer.hpp"
-#include "../nodes/OdysseyCreditNode.hpp"
+#include "CreditsLayer.hpp"
+#include "../nodes/CreditsNode.hpp"
 
-bool OdysseyCreditsLayer::setup()
+bool CreditsLayer::setup()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
@@ -76,14 +76,14 @@ bool OdysseyCreditsLayer::setup()
 
     auto fowardTabSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
     fowardTabSpr->setFlipX(true);
-    m_fowardTabBtn = CCMenuItemSpriteExtra::create(fowardTabSpr, this, menu_selector(OdysseyCreditsLayer::onNext));
+    m_fowardTabBtn = CCMenuItemSpriteExtra::create(fowardTabSpr, this, menu_selector(CreditsLayer::onNext));
 
     m_fowardTabMenu = CCMenu::create();
     m_fowardTabMenu->addChild(m_fowardTabBtn);
     m_fowardTabMenu->setPosition({director->getScreenRight() - 35, winSize.height / 2});
 
     auto backTabSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
-    m_backTabBtn = CCMenuItemSpriteExtra::create(backTabSpr, this, menu_selector(OdysseyCreditsLayer::onPrev));
+    m_backTabBtn = CCMenuItemSpriteExtra::create(backTabSpr, this, menu_selector(CreditsLayer::onPrev));
 
     m_backTabMenu = CCMenu::create();
     m_backTabMenu->addChild(m_backTabBtn);
@@ -97,15 +97,15 @@ bool OdysseyCreditsLayer::setup()
     return true;
 }
 
-void OdysseyCreditsLayer::setupCreditsOrgTab()
+void CreditsLayer::setupCreditsOrgTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto SwitchStepUser = OdysseyCreditNode::create("SwitchStepGDYT", 106, 18, 12, 9, true, 10158911);
-    auto ZapManiacUser = OdysseyCreditNode::create("ZapManiac", 80, 6, 0, 8, true, 1605650);
-    auto MathisCreatorUser = OdysseyCreditNode::create("MathisCreator", 263, 8, 11, 3, true, 9250716);
-    auto SearUser = OdysseyCreditNode::create("Sear15", 371, 8, 12, 12, true, 28639090);
+    auto SwitchStepUser = CreditsNode::create("SwitchStepGDYT", 106, 18, 12, 9, true, 10158911);
+    auto ZapManiacUser = CreditsNode::create("ZapManiac", 80, 6, 0, 8, true, 1605650);
+    auto MathisCreatorUser = CreditsNode::create("MathisCreator", 263, 8, 11, 3, true, 9250716);
+    auto SearUser = CreditsNode::create("Sear15", 371, 8, 12, 12, true, 28639090);
 
     CCArray *row1CreditArray = CCArray::create();
 
@@ -131,54 +131,54 @@ void OdysseyCreditsLayer::setupCreditsOrgTab()
     GameToolbox::alignItemsHorisontally(row1CreditArray, 84.f, ccp(winSize.width / 2, winSize.height / 2), false);
 }
 
-void OdysseyCreditsLayer::setupCreditsCreatorsTab()
+void CreditsLayer::setupCreditsCreatorsTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto MathisCreatorUser = OdysseyCreditNode::create("MathisCreator", 263, 8, 11, 3, true, 9250716);
+    auto MathisCreatorUser = CreditsNode::create("MathisCreator", 263, 8, 11, 3, true, 9250716);
     MathisCreatorUser->setScale(0.85);
 
-    auto SwitchStepUser = OdysseyCreditNode::create("SwitchStepGDYT", 106, 18, 12, 9, true, 10158911);
+    auto SwitchStepUser = CreditsNode::create("SwitchStepGDYT", 106, 18, 12, 9, true, 10158911);
     SwitchStepUser->setScale(0.85);
 
-    auto ZapManiacUser = OdysseyCreditNode::create("ZapManiac", 80, 6, 0, 8, true, 1605650);
+    auto ZapManiacUser = CreditsNode::create("ZapManiac", 80, 6, 0, 8, true, 1605650);
     ZapManiacUser->setScale(0.85);
 
-    auto JintaUser = OdysseyCreditNode::create("Jinta22", 231, 18, 9, 3, true, 4257871);
+    auto JintaUser = CreditsNode::create("Jinta22", 231, 18, 9, 3, true, 4257871);
     JintaUser->setScale(0.85);
 
-    auto KoromiGDUser = OdysseyCreditNode::create("KoromiGD", 98, 17, 2, 44, true, 1683840);
+    auto KoromiGDUser = CreditsNode::create("KoromiGD", 98, 17, 2, 44, true, 1683840);
     KoromiGDUser->setScale(0.85);
 
-    auto DankyUser = OdysseyCreditNode::create("Danky99", 11, 9, 11, 3, true, 14178231);
+    auto DankyUser = CreditsNode::create("Danky99", 11, 9, 11, 3, true, 14178231);
     DankyUser->setScale(0.85);
 
-    auto MasterTheCubeUser = OdysseyCreditNode::create("MasterTheCube5", 107, 6, 10, 11, true, 13319860);
+    auto MasterTheCubeUser = CreditsNode::create("MasterTheCube5", 107, 6, 10, 11, true, 13319860);
     MasterTheCubeUser->setScale(0.85);
 
-    auto GenaUser = OdysseyCreditNode::create("GenaMorphosis", 467, 6, 83, 40, true, 10026833);
+    auto GenaUser = CreditsNode::create("GenaMorphosis", 467, 6, 83, 40, true, 10026833);
     GenaUser->setScale(0.85);
 
-    auto NKUser = OdysseyCreditNode::create("NotKaizer", 135, 41, 11, 12, true, 10075800);
+    auto NKUser = CreditsNode::create("NotKaizer", 135, 41, 11, 12, true, 10075800);
     NKUser->setScale(0.85);
 
-    auto DogneRUser = OdysseyCreditNode::create("DogneR", 12, 33, 2, 2, true, 22859812);
+    auto DogneRUser = CreditsNode::create("DogneR", 12, 33, 2, 2, true, 22859812);
     DogneRUser->setScale(0.85);
 
-    auto JoshuaUser = OdysseyCreditNode::create("JoshuaGD23", 459, 12, 12, 12, true, 14831460);
+    auto JoshuaUser = CreditsNode::create("JoshuaGD23", 459, 12, 12, 12, true, 14831460);
     JoshuaUser->setScale(0.85);
 
-    auto BonntuUser = OdysseyCreditNode::create("Bonntu", 35, 12, 17, 70, true, 23438222);
+    auto BonntuUser = CreditsNode::create("Bonntu", 35, 12, 17, 70, true, 23438222);
     BonntuUser->setScale(0.85);
 
-    auto SearUser = OdysseyCreditNode::create("Sear15", 371, 8, 12, 12, true, 28639090);
+    auto SearUser = CreditsNode::create("Sear15", 371, 8, 12, 12, true, 28639090);
     SearUser->setScale(0.85);
 
-    auto BreadUser = OdysseyCreditNode::create("TheBreadCat24", 371, 12, 3, 3, true, 14604196);
+    auto BreadUser = CreditsNode::create("TheBreadCat24", 371, 12, 3, 3, true, 14604196);
     BreadUser->setScale(0.85);
 
-    auto BenUser = OdysseyCreditNode::create("ReyBenGDYT", 1, 86, 0, 0, true, 13492478);
+    auto BenUser = CreditsNode::create("ReyBenGDYT", 1, 86, 0, 0, true, 13492478);
     BenUser->setScale(0.85);
 
     CCArray *row1CreditArray = CCArray::create();
@@ -237,39 +237,39 @@ void OdysseyCreditsLayer::setupCreditsCreatorsTab()
     GameToolbox::alignItemsHorisontally(row3CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
 }
 
-void OdysseyCreditsLayer::setupCreditsArtistsTab()
+void CreditsLayer::setupCreditsArtistsTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto DankyUser = OdysseyCreditNode::create("Danky99", 11, 9, 11, 3, true, 14178231);
+    auto DankyUser = CreditsNode::create("Danky99", 11, 9, 11, 3, true, 14178231);
     DankyUser->setScale(0.85);
 
-    auto BenUser = OdysseyCreditNode::create("ReyBenGDYT", 1, 86, 0, 0, true, 13492478);
+    auto BenUser = CreditsNode::create("ReyBenGDYT", 1, 86, 0, 0, true, 13492478);
     BenUser->setScale(0.85);
 
-    auto _3lipngUser = OdysseyCreditNode::create("3lipng", 465, 12, 17, 17, true, 29170137);
+    auto _3lipngUser = CreditsNode::create("3lipng", 465, 12, 17, 17, true, 29170137);
     _3lipngUser->setScale(0.85);
 
-    auto VaughnersUser = OdysseyCreditNode::create("Vaughners", 350, 87, 3, 40, true, 2180460);
+    auto VaughnersUser = CreditsNode::create("Vaughners", 350, 87, 3, 40, true, 2180460);
     VaughnersUser->setScale(0.85);
 
-    auto MinoX29User = OdysseyCreditNode::create("MinoX28", 283, 94, 12, 12, true, 13284787);
+    auto MinoX29User = CreditsNode::create("MinoX28", 283, 94, 12, 12, true, 13284787);
     MinoX29User->setScale(0.85);
 
-    auto ML5User = OdysseyCreditNode::create("ML500", 296, 22, 106, 106, true, 2102);
+    auto ML5User = CreditsNode::create("ML500", 296, 22, 106, 106, true, 2102);
     ML5User->setScale(0.85);
 
-    auto cyanflowerUser = OdysseyCreditNode::create("cyanflower", 2, 12, 3, 3, true, 21113321);
+    auto cyanflowerUser = CreditsNode::create("cyanflower", 2, 12, 3, 3, true, 21113321);
     cyanflowerUser->setScale(0.85);
 
-    auto AngelozDDUser = OdysseyCreditNode::create("AngelozDD", 431, 0, 3, 12, true, 18718615);
+    auto AngelozDDUser = CreditsNode::create("AngelozDD", 431, 0, 3, 12, true, 18718615);
     AngelozDDUser->setScale(0.85);
 
-    auto MasterTheCubeUser = OdysseyCreditNode::create("MasterTheCube5", 107, 6, 10, 11, true, 13319860);
+    auto MasterTheCubeUser = CreditsNode::create("MasterTheCube5", 107, 6, 10, 11, true, 13319860);
     MasterTheCubeUser->setScale(0.85);
 
-    auto SweeSwagUser = OdysseyCreditNode::create("SweeSwag", 102, 12, 8, 8, true, 21644186);
+    auto SweeSwagUser = CreditsNode::create("SweeSwag", 102, 12, 8, 8, true, 21644186);
     SweeSwagUser->setScale(0.85);
 
     CCArray *row1CreditArray = CCArray::create();
@@ -313,42 +313,42 @@ void OdysseyCreditsLayer::setupCreditsArtistsTab()
     GameToolbox::alignItemsHorisontally(row2CreditArray, 71.f, ccp(winSize.width / 2, winSize.height / 2 - 50), false);
 }
 
-void OdysseyCreditsLayer::setupCreditsTestersTab()
+void CreditsLayer::setupCreditsTestersTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto DAPixelheroUser = OdysseyCreditNode::create("DAPixelhero", 72, 5, 9, 12, true, 1826718);
+    auto DAPixelheroUser = CreditsNode::create("DAPixelhero", 72, 5, 9, 12, true, 1826718);
     DAPixelheroUser->setScale(0.85);
 
-    auto AndrexelUser = OdysseyCreditNode::create("Andrexel", 114, 8, 11, 11, true, 8327873);
+    auto AndrexelUser = CreditsNode::create("Andrexel", 114, 8, 11, 11, true, 8327873);
     AndrexelUser->setScale(0.85);
 
-    auto cyanflowerUser = OdysseyCreditNode::create("cyanflower", 2, 12, 3, 3, true, 21113321);
+    auto cyanflowerUser = CreditsNode::create("cyanflower", 2, 12, 3, 3, true, 21113321);
     cyanflowerUser->setScale(0.85);
 
-    auto ZerkGMDUser = OdysseyCreditNode::create("ZerkGMD", 37, 12, 15, 12, true, 27986840);
+    auto ZerkGMDUser = CreditsNode::create("ZerkGMD", 37, 12, 15, 12, true, 27986840);
     ZerkGMDUser->setScale(0.85);
 
-    auto ObsidianAJUser = OdysseyCreditNode::create("ObsidianAJ", 48, 6, 3, 44, true, 11368602);
+    auto ObsidianAJUser = CreditsNode::create("ObsidianAJ", 48, 6, 3, 44, true, 11368602);
     ObsidianAJUser->setScale(0.85);
 
-    auto Emmmanuel2014User = OdysseyCreditNode::create("Emmmanuel2014", 42, 15, 3, 3, true, 5911554);
+    auto Emmmanuel2014User = CreditsNode::create("Emmmanuel2014", 42, 15, 3, 3, true, 5911554);
     Emmmanuel2014User->setScale(0.85);
 
-    auto DolphinOFFICIALUser = OdysseyCreditNode::create("DolphinOFFICIAL", 371, 4, 14, 14, true, 16564836);
+    auto DolphinOFFICIALUser = CreditsNode::create("DolphinOFFICIAL", 371, 4, 14, 14, true, 16564836);
     DolphinOFFICIALUser->setScale(0.85);
 
-    auto TochyGMDUser = OdysseyCreditNode::create("TochyGMD", 98, 12, 12, 3, true, 26108122);
+    auto TochyGMDUser = CreditsNode::create("TochyGMD", 98, 12, 12, 3, true, 26108122);
     TochyGMDUser->setScale(0.85);
 
-    auto MichTopGDMTUser = OdysseyCreditNode::create("MichTopGDMT", 22, 3, 12, 3, true, 8983710);
+    auto MichTopGDMTUser = CreditsNode::create("MichTopGDMT", 22, 3, 12, 3, true, 8983710);
     MichTopGDMTUser->setScale(0.85);
 
-    auto dreenUser = OdysseyCreditNode::create("dreen", 1, 0, 3, 3, true, 15960627);
+    auto dreenUser = CreditsNode::create("dreen", 1, 0, 3, 3, true, 15960627);
     dreenUser->setScale(0.85);
 
-    auto vexUser = OdysseyCreditNode::create("hsibz", 456, 93, 83, 83, true, 6169431);
+    auto vexUser = CreditsNode::create("hsibz", 456, 93, 83, 83, true, 6169431);
     vexUser->setScale(0.85f);
 
     CCArray *row1CreditArray = CCArray::create();
@@ -397,14 +397,14 @@ void OdysseyCreditsLayer::setupCreditsTestersTab()
     GameToolbox::alignItemsHorisontally(row3CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
 }
 
-void OdysseyCreditsLayer::setupCreditsModDeveloperTab()
+void CreditsLayer::setupCreditsModDeveloperTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto ML5User = OdysseyCreditNode::create("ML500", 296, 22, 106, 106, true, 2102);
-    auto SumiUser = OdysseyCreditNode::create("Chumiu", 457, 94, 52, 12, true, 25521533);
-    auto CypherUser = OdysseyCreditNode::create("Cypher", 31, 9, 1, 1, true, 6332919);
+    auto ML5User = CreditsNode::create("ML500", 296, 22, 106, 106, true, 2102);
+    auto SumiUser = CreditsNode::create("Chumiu", 457, 94, 52, 12, true, 25521533);
+    auto CypherUser = CreditsNode::create("Cypher", 31, 9, 1, 1, true, 6332919);
 
     CCArray *row1CreditArray = CCArray::create();
 
@@ -428,36 +428,36 @@ void OdysseyCreditsLayer::setupCreditsModDeveloperTab()
     GameToolbox::alignItemsHorisontally(row1CreditArray, 100.f, ccp(winSize.width / 2, winSize.height / 2), false);
 }
 
-void OdysseyCreditsLayer::setupCreditsSpecialThanksTab()
+void CreditsLayer::setupCreditsSpecialThanksTab()
 {
     auto director = CCDirector::sharedDirector();
     auto winSize = director->getWinSize();
 
-    auto RobTopUser = OdysseyCreditNode::create("RobTop", 275, 6, 3, 1, true, 71);
+    auto RobTopUser = CreditsNode::create("RobTop", 275, 6, 3, 1, true, 71);
     RobTopUser->setScale(0.85);
 
-    auto EVWUser = OdysseyCreditNode::create("EVW", 28, 12, 9, 9, true, 710192);
+    auto EVWUser = CreditsNode::create("EVW", 28, 12, 9, 9, true, 710192);
     EVWUser->setScale(0.85);
 
-    auto ImFernandoUser = OdysseyCreditNode::create("im fernando", 56, 35, 3, 3, true, 5398449);
+    auto ImFernandoUser = CreditsNode::create("im fernando", 56, 35, 3, 3, true, 5398449);
     ImFernandoUser->setScale(0.85);
 
-    auto StivenelXDUser = OdysseyCreditNode::create("StivenelXD", 50, 12, 3, 3, true, 167848);
+    auto StivenelXDUser = CreditsNode::create("StivenelXD", 50, 12, 3, 3, true, 167848);
     StivenelXDUser->setScale(0.85);
 
-    auto CapelingUser = OdysseyCreditNode::create("Capeling", 70, 41, 12, 12, true, 18226543);
+    auto CapelingUser = CreditsNode::create("Capeling", 70, 41, 12, 12, true, 18226543);
     CapelingUser->setScale(0.85);
 
-    auto LimeGradientUser = OdysseyCreditNode::create("LimeGradient", 46, 98, 12, 43, true, 7214334);
+    auto LimeGradientUser = CreditsNode::create("LimeGradient", 46, 98, 12, 43, true, 7214334);
     LimeGradientUser->setScale(0.85);
 
-    auto MXSTOUser = OdysseyCreditNode::create("Mxst0", 296, 89, 2, 44, true, 24326682);
+    auto MXSTOUser = CreditsNode::create("Mxst0", 296, 89, 2, 44, true, 24326682);
     MXSTOUser->setScale(0.85);
 
-    auto BlueSpaceUser = OdysseyCreditNode::create("Bluespace", 37, 3, 6, 6, true, 10206148);
+    auto BlueSpaceUser = CreditsNode::create("Bluespace", 37, 3, 6, 6, true, 10206148);
     BlueSpaceUser->setScale(0.85);
 
-    auto PixelHeroUser = OdysseyCreditNode::create("DaPixelHero", 72, 5, 9, 9, true, 1826718);
+    auto PixelHeroUser = CreditsNode::create("DaPixelHero", 72, 5, 9, 9, true, 1826718);
     PixelHeroUser->setScale(0.85);
 
     CCArray *row1CreditArray = CCArray::create();
@@ -501,19 +501,19 @@ void OdysseyCreditsLayer::setupCreditsSpecialThanksTab()
     GameToolbox::alignItemsHorisontally(row3CreditArray, 90.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
 }
 
-void OdysseyCreditsLayer::onNext(CCObject *)
+void CreditsLayer::onNext(CCObject *)
 {
     m_tab++;
     changeTab();
 }
 
-void OdysseyCreditsLayer::onPrev(CCObject *)
+void CreditsLayer::onPrev(CCObject *)
 {
     m_tab--;
     changeTab();
 };
 
-void OdysseyCreditsLayer::changeTab()
+void CreditsLayer::changeTab()
 {
     m_creditsmoddevLayer->setVisible(false);
     m_creditsrobLayer->setVisible(false);
@@ -570,9 +570,9 @@ void OdysseyCreditsLayer::changeTab()
         break;
     }
 }
-OdysseyCreditsLayer *OdysseyCreditsLayer::create()
+CreditsLayer *CreditsLayer::create()
 {
-    auto ref = new OdysseyCreditsLayer();
+    auto ref = new CreditsLayer();
     if (ref && ref->initAnchored(430.0f, 270.0f, "GJ_square07.png"))
     {
         ref->autorelease();

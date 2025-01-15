@@ -1,5 +1,5 @@
 #include "OdysseySelectLayer.hpp"
-#include "OdysseyComicLayer.hpp"
+#include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
 #include "../utils/Utils.hpp"

@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyEndCreditNode : public cocos2d::CCNode
+class EndCreditsNode : public cocos2d::CCNode
 {
 protected:
     SimplePlayer *m_userIcon = nullptr;
@@ -62,9 +62,9 @@ protected:
     }
 
 public:
-    static OdysseyEndCreditNode *create(const char *name, int iconID, int color1, int color2, int color3, bool glow)
+    static EndCreditsNode *create(const char *name, int iconID, int color1, int color2, int color3, bool glow)
     {
-        auto ret = new OdysseyEndCreditNode();
+        auto ret = new EndCreditsNode();
         if (ret && ret->init(name, iconID, color1, color2, color3, glow))
         {
             ret->autorelease();

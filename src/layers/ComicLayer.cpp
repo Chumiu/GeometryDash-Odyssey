@@ -1,13 +1,13 @@
-#include "OdysseyComicLayer.hpp"
+#include "ComicLayer.hpp"
 #include "OdysseySelectLayer.hpp"
-#include "OdysseyEndCreditsLayer.hpp"
+#include "EndCreditsLayer.hpp"
 #include "SecretVaultLayer.hpp"
 #include "../utils/Utils.hpp"
 
 const int HOLLOW_COIN_QUOTA = 12;
 const int COMICS_AMOUNT = 12;
 
-bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
+bool ComicLayer::init(int issueNumber, bool redirectToMap)
 {
     if (!CCLayer::init())
         return false;
@@ -53,7 +53,7 @@ bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
     auto backBtn = CCMenuItemSpriteExtra::create(
         CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
         this,
-        menu_selector(OdysseyComicLayer::onBack));
+        menu_selector(ComicLayer::onBack));
 
     backBtn->setID("back-button");
     backBtn->setSizeMult(1.2f);
@@ -81,7 +81,7 @@ bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
         auto hollowBtn = CCMenuItemSpriteExtra::create(
             hollowSprite,
             this,
-            menu_selector(OdysseyComicLayer::onHollow));
+            menu_selector(ComicLayer::onHollow));
 
         hollowBtn->setPosition({m_winSize.width - 20, m_winSize.height - 20});
         hollowBtn->setTag(0);
@@ -117,8 +117,8 @@ bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
     auto rightArrow = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
     leftArrow->setFlipX(true);
 
-    m_leftBtn = CCMenuItemSpriteExtra::create(leftArrow, this, menu_selector(OdysseyComicLayer::onPrev));
-    m_rightBtn = CCMenuItemSpriteExtra::create(rightArrow, this, menu_selector(OdysseyComicLayer::onNext));
+    m_leftBtn = CCMenuItemSpriteExtra::create(leftArrow, this, menu_selector(ComicLayer::onPrev));
+    m_rightBtn = CCMenuItemSpriteExtra::create(rightArrow, this, menu_selector(ComicLayer::onNext));
 
     m_leftBtn->setPosition({20.f, m_winSize.height / 2});
     m_leftBtn->setVisible(false);
@@ -137,7 +137,7 @@ bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
     {
         this->runAction(CCSequence::create(
             CCDelayTime::create(1.f),
-            CCCallFunc::create(this, callfunc_selector(OdysseyComicLayer::verifySecretAchievement)),
+            CCCallFunc::create(this, callfunc_selector(ComicLayer::verifySecretAchievement)),
             0));
     }
 
@@ -148,7 +148,7 @@ bool OdysseyComicLayer::init(int issueNumber, bool redirectToMap)
     return true;
 };
 
-void OdysseyComicLayer::createComic(CCArray *arr, int issueNumber)
+void ComicLayer::createComic(CCArray *arr, int issueNumber)
 {
     auto spanishText = GameManager::sharedState()->getGameVariable("0201");
 
@@ -210,7 +210,7 @@ void OdysseyComicLayer::createComic(CCArray *arr, int issueNumber)
         auto button = CCMenuItemSpriteExtra::create(
             sprite,
             this,
-            menu_selector(OdysseyComicLayer::onCredits));
+            menu_selector(ComicLayer::onCredits));
 
         menu->addChild(button);
         node->addChild(menu);
@@ -218,14 +218,14 @@ void OdysseyComicLayer::createComic(CCArray *arr, int issueNumber)
     }
 };
 
-void OdysseyComicLayer::onCredits(CCObject *)
+void ComicLayer::onCredits(CCObject *)
 {
     auto scene = CCScene::create();
-    scene->addChild(OdysseyEndCreditsLayer::create());
+    scene->addChild(EndCreditsLayer::create());
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
 };
 
-void OdysseyComicLayer::onHollow(CCObject *)
+void ComicLayer::onHollow(CCObject *)
 {
     auto GM = GameManager::sharedState();
     auto GSM = GameStatsManager::sharedState();
@@ -272,7 +272,7 @@ void OdysseyComicLayer::onHollow(CCObject *)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
 };
 
-CCNode *OdysseyComicLayer::createComicPage(const char *spriteName)
+CCNode *ComicLayer::createComicPage(const char *spriteName)
 {
     auto node = CCNode::create();
     auto comicSprite = CCSprite::createWithSpriteFrameName(spriteName);
@@ -284,7 +284,7 @@ CCNode *OdysseyComicLayer::createComicPage(const char *spriteName)
     return node;
 };
 
-void OdysseyComicLayer::verifySecretAchievement()
+void ComicLayer::verifySecretAchievement()
 {
     int comicProgress = 0;
     for (auto ii = 1; ii <= COMICS_AMOUNT; ii++)
@@ -299,7 +299,7 @@ void OdysseyComicLayer::verifySecretAchievement()
     GameManager::sharedState()->reportAchievementWithID("geometry.ach.odyssey.secret19", percent, false);
 };
 
-void OdysseyComicLayer::scrollLayerMoved(CCPoint point)
+void ComicLayer::scrollLayerMoved(CCPoint point)
 {
     float transitionPoint = -point.x / CCDirector::sharedDirector()->getWinSize().width;
     int offset = std::floor(transitionPoint);
@@ -314,7 +314,7 @@ void OdysseyComicLayer::scrollLayerMoved(CCPoint point)
         m_leftBtn->setVisible(m_currentPage > 0);
 };
 
-void OdysseyComicLayer::keyBackClicked()
+void ComicLayer::keyBackClicked()
 {
     if (m_RedirectToMap)
     {
@@ -339,7 +339,7 @@ void OdysseyComicLayer::keyBackClicked()
     CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
 };
 
-void OdysseyComicLayer::onNext(CCObject *)
+void ComicLayer::onNext(CCObject *)
 {
     m_scrollLayer->quickUpdate();
     m_scrollLayer->moveToPage(m_currentPage + 1);
@@ -351,7 +351,7 @@ void OdysseyComicLayer::onNext(CCObject *)
         m_leftBtn->setVisible(m_currentPage > 0);
 }
 
-void OdysseyComicLayer::onPrev(CCObject *)
+void ComicLayer::onPrev(CCObject *)
 {
     m_scrollLayer->quickUpdate();
     m_scrollLayer->moveToPage(m_currentPage - 1);
@@ -363,14 +363,14 @@ void OdysseyComicLayer::onPrev(CCObject *)
         m_leftBtn->setVisible(m_currentPage - 1 > 0);
 }
 
-void OdysseyComicLayer::onBack(CCObject *)
+void ComicLayer::onBack(CCObject *)
 {
     keyBackClicked();
 };
 
-OdysseyComicLayer *OdysseyComicLayer::create(int issueNumber, bool redirectToMap)
+ComicLayer *ComicLayer::create(int issueNumber, bool redirectToMap)
 {
-    auto ret = new OdysseyComicLayer();
+    auto ret = new ComicLayer();
 
     if (ret->init(issueNumber, redirectToMap))
     {
@@ -382,9 +382,9 @@ OdysseyComicLayer *OdysseyComicLayer::create(int issueNumber, bool redirectToMap
     return nullptr;
 };
 
-CCScene *OdysseyComicLayer::scene(int issueNumber, bool redirectToMap)
+CCScene *ComicLayer::scene(int issueNumber, bool redirectToMap)
 {
-    auto layer = OdysseyComicLayer::create(issueNumber, redirectToMap);
+    auto layer = ComicLayer::create(issueNumber, redirectToMap);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;

@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyEndCreditsLayer : public cocos2d::CCLayer
+class EndCreditsLayer : public cocos2d::CCLayer
 {
 protected:
     CCSprite *m_background;
@@ -31,6 +31,6 @@ public:
     void backMenuLayer();
     
 public:
-    static OdysseyEndCreditsLayer *create();
+    static EndCreditsLayer *create();
     static CCScene *scene();
 };

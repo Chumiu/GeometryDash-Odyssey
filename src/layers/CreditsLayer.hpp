@@ -1,7 +1,7 @@
 #pragma once
 using namespace geode::prelude;
 
-class OdysseyCreditsLayer : public geode::Popup<>
+class CreditsLayer : public geode::Popup<>
 {
 protected:
     CCMenuItemSpriteExtra *m_fowardTabBtn = nullptr;
@@ -36,5 +36,5 @@ protected:
     void changeTab();
 
 public:
-    static OdysseyCreditsLayer *create();
+    static CreditsLayer *create();
 };
