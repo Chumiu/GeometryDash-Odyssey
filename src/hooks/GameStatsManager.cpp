@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameStatsManager.hpp>
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
 
@@ -55,7 +55,7 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
     int getItemUnlockState(int p0, UnlockType p1)
     {
         //  El icono no es custom
-        if (!Odyssey::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+        if (!IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
             return 4;
 
         //  No tiene achievement
@@ -63,8 +63,8 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
             return 1;
 
         //  Icono aun no ha salido
-        if (Odyssey::isIconUpcoming(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
-            return 6;
+        //  if (IconUtils::isIconUpcoming(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+        //  return 6;
 
         //  Icono de tienda
         return 5;

@@ -34,11 +34,12 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 			return false;
 
 		GameManager::sharedState()->setGameVariable("0201", Mod::get()->getSettingValue<bool>("spanish-language"));
-		GameManager::sharedState()->setGameVariable("0202", Mod::get()->getSettingValue<bool>("hide-upcoming"));
+		GameManager::sharedState()->setGameVariable("0202", Mod::get()->getSettingValue<bool>("hide-custom"));
+		auto spanish = Mod::get()->getSettingValue<bool>("spanish-language");
 
 		//	Aun en fase de prueba
-		MoreOptionsLayer::addToggle("Spanish", "0201", "<cy>ENG</c>: Translates most of the mod's dialogue in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en Espanol. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)");
-		//	MoreOptionsLayer::addToggle("Hide upcoming", "0202", "<cy>ENG</c>: Hides icons that are tagged as upcoming (thus impossible to get for now).\n\n<cy>SPA</c>: Oculta los iconos etiquetados como proximos (por tanto, imposibles de conseguir por ahora).");
+		MoreOptionsLayer::addToggle("Spanish Translation", "0201", spanish ? "Traduce mayor parte del mod en lenguaje hispano. Por limitaciones de caracteres, habran errores ortograficos (Como la falta de acentos)" : "Translates most of the mod in spanish. Due to character limitations, there will be spelling errors");
+		MoreOptionsLayer::addToggle("Hide Custom Modes", "0202", spanish ? "Oculta los botones de los gamemodes personalizados en el Icon Kit (porque solo tienen un icono, por ahora...)" : "Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)");
 
 		return true;
 	}
@@ -62,6 +63,6 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 			Mod::get()->setSettingValue<bool>("spanish-language", GameManager::sharedState()->getGameVariable("0201"));
 
 		if (sender->getTag() == 202)
-			Mod::get()->setSettingValue<bool>("hide-upcoming", GameManager::sharedState()->getGameVariable("0202"));
+			Mod::get()->setSettingValue<bool>("hide-custom", GameManager::sharedState()->getGameVariable("0202"));
 	}
 };

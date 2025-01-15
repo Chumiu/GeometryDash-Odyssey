@@ -59,8 +59,14 @@
 		},
 		"spanish-language": {
 			"type": "bool",
-			"name": "Spanish",
-			"description": "<cy>ENG</c>: Translates most of the mod's dialogue in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en Espanol. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)",
+			"name": "Spanish Translation",
+			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)",
+			"default": false
+		},
+		"hide-custom": {
+			"type": "bool",
+			"name": "Hide Custom Gamemodes",
+			"description": "<cy>ENG</c>: Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)\n\n<cy>ESP</c>: Oculta los botones de los gamemodes personalizados en el Icon Kit (tienen solamente un icono, por ahora...)",
 			"default": false
 		},
 		"dev-title": {

@@ -44,10 +44,10 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level502c", "Ultimate Burning Sands", "Completed \"Burning Sands\" with all coins", "Complete \"Burning Sands\" with all coins", "icon_499", 1);
 
 		//  Contest Islands
-		AchievementManager::addAchievement("geometry.ach.level503b", "Eclipse!", "Completed \"Eclipse\" in normal mode", "Complete \"Eclipse\" in normal mode", "", 1);
-		AchievementManager::addAchievement("geometry.ach.level504b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "", 1);
-		AchievementManager::addAchievement("geometry.ach.level505b", "Phone me First!", "Completed \"Phone me First\" in normal mode", "Complete \"Phone me First\" in normal mode", "", 1);
-		AchievementManager::addAchievement("geometry.ach.level506b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "", 1);
+		AchievementManager::addAchievement("geometry.ach.level601b", "Eclipse!", "Completed \"Eclipse\" in normal mode", "Complete \"Eclipse\" in normal mode", "ball_128", 1);
+		AchievementManager::addAchievement("geometry.ach.level602b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "", 1);
+		AchievementManager::addAchievement("geometry.ach.level603b", "Phone me First!", "Completed \"Phone me First\" in normal mode", "Complete \"Phone me First\" in normal mode", "swing_48", 1);
+		AchievementManager::addAchievement("geometry.ach.level604b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "icon_516", 1);
 
 		//  Secret Coins
 		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "", 1);
@@ -87,7 +87,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.odyssey.secret21", "Must not be named", "Found the secret!", "It's a secret...", "icon_514", 1);
 
 		//  Update 1.1.0
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Found the secret!", "It's a secret...", "", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Found the secret!", "It's a secret...", "", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Found the secret!", "It's a secret...", "icon_515", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Found the secret!", "It's a secret...", "ball_127", 1);
 	}
 };

@@ -4,7 +4,9 @@
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PurchaseItemPopup.hpp>
+
 #include "utils/Utils.hpp"
+#include "utils/IconUtils.hpp"
 
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
@@ -174,6 +176,6 @@ class $modify(PurchaseItemPopup)
 				GameManager::sharedState()->setUGV("238", true);
 		}
 
-		Odyssey::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
+		IconUtils::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
 	}
 };

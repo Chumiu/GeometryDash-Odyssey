@@ -1,6 +1,23 @@
 # Changelog
 
-### <cg>v1.0.1 (Latest)</c>
+### <cg>v1.1.0-alpha.1 (WIP)</c>
+
+#### **Additions**
+
+* New level "<cg>Eclipse</c>"!
+* New level "<cg>Jelly Castle</c>"!
+* New level "<cg>Phone me First</c>"!
+* New level "<cg>Wubsplosion</c>"!
+* New Achievements and Icons!
+* New secrets to find!
+
+#### **Changes**
+
+* <co>Critical Hit</c>: Last segment nerfed, shader usage reduced
+* <cg>Added</c> reward if you watch a video from the Shop's TV
+* Lots of bugfixes and improvements
+
+### <cb>v1.0.1</c>
 
 <cr>*We aware on game crashing bugs on android and shop items still showing as not bought, developing a fix as we speak*</c>
 

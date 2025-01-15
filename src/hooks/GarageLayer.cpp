@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 class $modify(GDOGarageLayer, GJGarageLayer)
 {
@@ -12,7 +12,7 @@ class $modify(GDOGarageLayer, GJGarageLayer)
 
         auto gm = GameManager::get();
 
-        m_playerObject->updatePlayerFrame(Odyssey::currentVehicleID(), gm->m_playerIconType);
+        m_playerObject->updatePlayerFrame(IconUtils::currentVehicleID(), gm->m_playerIconType);
 
         auto menu = getChildByID("shards-menu");
 
@@ -25,42 +25,43 @@ class $modify(GDOGarageLayer, GJGarageLayer)
         if (auto shopButton = getChildByID("top-left-menu")->getChildByID("shop-button"))
             shopButton->setVisible(false);
 
-        
-        //  Agregar los botones de gamemodes nuevos al menu de categorias
-        if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))
+        //  Si la opcion de "Esconder gamemodes custom" esta deshabilitado, agrega los botones de los gamemodes personalizados
+        if (!GameManager::sharedState()->getGameVariable("0202"))
         {
-            //  Quita temporalmente los botones de efecto y trail
-            auto trailButton = categoryMenu->getChildByID("trail-button");
-            auto effectButton = categoryMenu->getChildByID("death-effect-button");
-            effectButton->removeFromParentAndCleanup(false);
-            trailButton->removeFromParentAndCleanup(false);
-
-            //  Agrega los botones de los gamemodes custom
-            for (int ii = 0; ii < 4; ii++)
+            //  Agregar los botones de gamemodes nuevos al menu de categorias
+            if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))
             {
-                const char *buttonName[4] = {"Boat", "Drone", "Slider", "Minecart"};
-                //  log::debug("gamemode: {}", buttonName[ii]);
+                //  Quita temporalmente los botones de efecto y trail
+                auto trailButton = categoryMenu->getChildByID("trail-button");
+                auto effectButton = categoryMenu->getChildByID("death-effect-button");
+                effectButton->removeFromParentAndCleanup(false);
+                trailButton->removeFromParentAndCleanup(false);
 
-                auto sprOff = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Unselected);
-                sprOff->setScale(.9f);
+                //  Agrega los botones de los gamemodes custom
+                for (int ii = 0; ii < 4; ii++)
+                {
+                    const char *buttonName[4] = {"Boat", "Drone", "Slider", "Minecart"};
+                    //  log::debug("gamemode: {}", buttonName[ii]);
 
-                auto sprOn = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Selected);
-                sprOn->setScale(.9f);
+                    auto sprOff = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Unselected);
+                    sprOff->setScale(.9f);
 
-                auto toggler = CCMenuItemToggler::create(sprOff, sprOn, this, menu_selector(GJGarageLayer::onSelectTab));
-                toggler->setID(fmt::format("{}-button"_spr, buttonName[ii]));
-                toggler->setTag(900 + ii);
-                toggler->setEnabled(true);
+                    auto sprOn = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Selected);
+                    sprOn->setScale(.9f);
 
-                categoryMenu->addChild(toggler);
+                    auto toggler = CCMenuItemToggler::create(sprOff, sprOn, this, menu_selector(GJGarageLayer::onSelectTab));
+                    toggler->setID(fmt::format("{}-button"_spr, buttonName[ii]));
+                    toggler->setTag(900 + ii);
+                    toggler->setEnabled(true);
+
+                    categoryMenu->addChild(toggler);
+                }
+
+                categoryMenu->addChild(trailButton);
+                categoryMenu->addChild(effectButton);
+                categoryMenu->updateLayout();
             }
-
-            categoryMenu->addChild(trailButton);
-            categoryMenu->addChild(effectButton);
-            categoryMenu->updateLayout();
         }
-    
-        
 
         return true;
     }
