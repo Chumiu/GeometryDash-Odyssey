@@ -1,6 +1,8 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelTools.hpp>
 
+#include "../utils/Utils.hpp"
+
 using namespace geode::prelude;
 
 class $modify(OdysseyLevelTools, LevelTools)
@@ -37,8 +39,6 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "Conclusion";
 		case 502:
 			return "Burning Sands";
-		case 503:
-			return "Super Wubtendo";
 
 		case 601:
 			return "Eclipse";
@@ -59,39 +59,37 @@ class $modify(OdysseyLevelTools, LevelTools)
 		switch (levelID)
 		{
 		case 101:
-			return "10009443.ogg"_spr;
+			return "10009443.ogg";
 		case 102:
-			return "GhostHouse.mp3"_spr;
+			return "676349.mp3";
 		case 103:
-			return "10007255.ogg"_spr;
+			return "10007255.ogg";
 		case 104:
-			return "10007201.ogg"_spr;
+			return "10007201.ogg";
 		case 105:
-			return "10007222.mp3"_spr;
+			return "10007222.mp3";
 		case 106:
-			return "10007196.ogg"_spr;
+			return "10007196.ogg";
 		case 107:
-			return "10007188.ogg"_spr;
+			return "10007188.ogg";
 		case 108:
-			return "10012389.ogg"_spr;
+			return "10012389.ogg";
 		case 109:
-			return "10007200.ogg"_spr;
+			return "10007200.ogg";
 
 		case 501:
-			return "ConclusiveJourney.mp3"_spr;
+			return "1139782.mp3";
 		case 502:
-			return "BurningSands.mp3"_spr;
-		case 503:
-			return "SuperWubtendo.mp3"_spr;
+			return "880262.mp3";
 
 		case 601:
-			return "10007208.ogg"_spr;
+			return "10007208.ogg";
 		case 602:
-			return "10007227.ogg"_spr;
+			return "10007227.ogg";
 		case 603:
-			return "PhoneMeFirst.mp3"_spr;
+			return "1139782.mp3";
 		case 604:
-			return "10007269.ogg"_spr;
+			return "10007269.ogg";
 
 		default:
 			return LevelTools::getAudioFileName(levelID);
@@ -125,8 +123,6 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return 1;
 		case 502:
 			return 9;
-		case 503:
-			return 7;
 
 		case 601:
 			return 7;
@@ -285,16 +281,6 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_coins = 3;
 			break;
 
-		case 7503: // Super Wubtendo
-			level->m_levelName = getAudioTitle(503);
-			level->m_audioTrack = 503;
-			level->m_stars = 12;
-			level->m_difficulty = GJDifficulty::Insane;
-			level->m_requiredCoins = 0;
-			level->m_timestamp = 0;
-			level->m_coins = 3;
-			break;
-
 		case 7601: // Eclipse
 			level->m_levelName = getAudioTitle(601);
 			level->m_audioTrack = 601;
@@ -383,8 +369,6 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "https://youtu.be/BcoURwJr9PI?si=Mb3Zi1azTN2bbrYE"; // Conclusive
 		case 502:
 			return "https://youtu.be/gyxh9R59oj4?si=IhxSU7XQvwJX32z3"; // Burning Sands
-		case 503:
-			return "https://youtu.be/EnmAuu92RKo?si=Ywq4DfaiC0f2jr2d"; // Super Wubtendo
 
 			//	Contest Levels
 		case 601:

@@ -13,7 +13,7 @@
 	],
 	"id": "teamtcm.geometry-dash-odyssey",
 	"name": "Geometry Dash: Odyssey",
-	"description": "",
+	"description": "A fanmade spin-off!",
 	"early-load": true,
 	"dependencies": [
 		{
@@ -130,7 +130,6 @@
 			"resources/HollowVoicelines/*.mp3",
 			"resources/Soundtrack/*.mp3",
 			"resources/Levels/*.txt",
-			"resources/SFX/*.ogg",
 			"resources/*.zip"
 		],
 		"sprites": [

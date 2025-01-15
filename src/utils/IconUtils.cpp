@@ -346,11 +346,11 @@ bool IconUtils::isIconSecret(int id, IconType type)
 {
     if ((id >= 511 && id <= 515) && type == IconType::Cube)
         return true;
-    if ((id >= 176) && type == IconType::Ship)
+    if ((id >= 176 && id <= 177) && type == IconType::Ship)
         return true;
     if ((id >= 123 && id <= 127) && type == IconType::Ball)
         return true;
-    if ((id >= 150) && type == IconType::Ufo)
+    if ((id >= 150 && id <= 154) && type == IconType::Ufo)
         return true;
     if ((id >= 99) && type == IconType::Wave)
         return true;

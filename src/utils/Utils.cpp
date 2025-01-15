@@ -79,7 +79,7 @@ CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
     return node;
 };
 
-CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars)
+CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars, bool isCompleted)
 {
     auto node = CCNode::create();
     node->setContentSize({22.f, 32.5f});
@@ -92,6 +92,9 @@ CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars)
     auto starLabel = CCLabelBMFont::create(std::to_string(stars).c_str(), "bigFont.fnt");
     starLabel->limitLabelWidth(25, 0.6f, 0.1f);
     starLabel->setPosition({0, 0});
+
+    if (isCompleted)
+        starLabel->setColor({255, 255, 0});
 
     auto starSprite = CCSprite::createWithSpriteFrameName("GJ_bigStar_noShadow_001.png");
     starSprite->setPosition({node->getContentWidth(), 0});
@@ -203,8 +206,6 @@ DialogLayer *Odyssey::createDialogResponse(const char *event, int times)
     return dialogLayer;
 }
 
-
-
 void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
 {
     auto map = MusicDownloadManager::sharedState()->m_resourceSfxUnorderedSet;
@@ -223,10 +224,13 @@ int Odyssey::islandPageForLevelID(int levelID)
     if (levelID < 7005)
         return 0;
 
+    if (levelID >= 7005 && levelID < 7500)
+        return 1;
+
     if (levelID > 7500)
         return 2;
 
-    return 1;
+    return 0;
 };
 
 void Odyssey::hasAllVaultRewards()
@@ -361,3 +365,101 @@ std::vector<unsigned char> Odyssey::intToBytes(int value)
     result.push_back((value & 0xff000000) >> 24);
     return result;
 }
+
+int Odyssey::getLevelSongID(int levelID)
+{
+    switch (levelID)
+    {
+    case 7001: // The Dangerous Seas
+        return 10009443;
+    case 7002: // Ghost House
+        return 676349;
+    case 7003: // Super Ultra
+        return 10007255;
+    case 7004: // Cryptofunk
+        return 10007201;
+    case 7005: // Hellfire
+        return 10007222;
+    case 7006: // Boss Rush
+        return 10007196;
+    case 7007: // Absolute Zero
+        return 10007188;
+    case 7008: // Comfort Food
+        return 10012389;
+    case 7009: // Critical Hit
+        return 10007200;
+
+    case 7501: // Conclusive Journey
+        return 500335;
+    case 7502: // Burning Sands
+        return 880262;
+
+    case 7601: // Eclipse
+        return 10007207;
+    case 7602: // Jelly Castle
+        return 10007227;
+    case 7603: // Phone Me First
+        return 1139782;
+    case 7604: // Wubsplosion
+        return 10007269;
+
+    default:
+        return -1;
+    }
+}
+
+std::pair<gd::string, gd::string> Odyssey::getLevelAudioAssets(int levelID)
+{
+    switch (levelID)
+    {
+    case 7001: // The Dangerous Seas
+        return {"10005070, 10006468, 10009443", "288, 537, 757, 758, 759, 1005, 1373, 1374, 1375, 1376, 1548, 1992, 1993, 1994, 1995, 2037, 2038, 2039, 2040, 2779, 3081, 3383, 3384, 3556, 4273, 4274, 4293, 4294, 4395, 4397, 4404, 7501, 7874, 8180, 13536, 14554, 14563, 14575, 22875"};
+        break;
+    case 7002: // Ghost House
+        return {"676349", "539, 554, 1076, 1740, 2389, 2390, 2392, 2590, 2591, 2844, 2847, 3082, 3083, 3084, 3085, 3114, 3120, 3533, 4395, 4397, 4404, 7274, 7501, 7791, 7795, 7799, 12087, 12089, 12121, 12132, 12174, 12175, 12178, 12184, 12188, 12198, 12920, 15950, 15955, 18929, 22875"};
+        break;
+    case 7003: // Super Ultra
+        return {"10000718, 10007255", "491, 492, 493, 562, 755, 1025, 1049, 1567, 1571, 1572, 1586, 1587, 1619, 1740, 1751, 1897, 2393, 2711, 2716, 2717, 2718, 2847, 2910, 2913, 2914, 2915, 2916, 2974, 3016, 3210, 3383, 3384, 4260, 4261, 4262, 4273, 4289, 4290, 4397, 4404, 6242, 6310, 7231, 7646, 7647, 19796, 22875"};
+        break;
+    case 7004: // Cryptofunk
+        return {"10007201", "328, 493,583, 539, 1739, 2297, 3082, 3208, 4395, 4397, 4404, 4869, 6256, 7501, 7791, 12875, 13228, 13231, 17649, 17650, 17651, 17652, 22875"};
+        break;
+    case 7005: // Hellfire
+        return {"10007222", "537, 1368, 1372, 1374, 1375, 1376, 1740, 1741, 2612, 3001, 3002, 3003, 4274, 4395, 4397, 4404, 6242, 6243, 6244, 6245, 7224, 7225, 7231,  7243, 7245, 7246, 7260, 7262, 7271, 7274, 7501, 7643, 7646, 7652, 7945, 10104, 12184, 13237, 13238, 13239, 17604, 17619, 17621, 18164, 19729, 22875"};
+        break;
+    case 7006: // Boss Rush
+        return {"10007196", "554, 998, 1014, 1024, 1740, 1745, 1950, 1993, 1994, 1995, 3082, 3083, 3383, 3384, 3556, 4395, 4397, 4404, 6245, 6808, 6833, 6838, 6840, 6863, 6870, 6897, 6900, 7245, 7501, 7667, 13057, 22875"};
+        break;
+    case 7007: // Absolute Zero
+        return {"10007188, 10011788", "4395, 4397, 4404, 7501, 7659, 7943, 22875"};
+        break;
+    case 7008: // Comfort Food
+        return {"10012389", "4395, 4397, 4404, 7501, 7687, 22875"};
+        break;
+    case 7009: // Critical Hit
+        return {"10000721, 10007200, 10004463", "473, 476, 709, 717, 1950, 1993, 1994, 1995, 2032, 2074, 2856, 3112, 3548, 4395, 4563, 4566, 4841, 4883, 5222, 6256, 6881, 6882, 7501, 7653, 7659, 7687, 7799, 7945, 13237, 13980, 17604, 18267, 22879"};
+        break;
+
+    case 7501: // Conclusive Journey
+        return {"500335, 880262", "566, 4395, 4397, 4404, 7501, 21458"};
+        break;
+    case 7502: // Burning Sands
+        return {"880262, 10006666", "993, 1185, 1372, 1374, 1375, 1376, 1377, 1378, 1601, 1741, 1744, 1745, 1751, 2075, 2390, 2392, 2612, 2716, 2717, 2718, 2824, 2981, 2982, 3081, 4072, 4073, 4074, 4290, 6242, 7625, 7735, 7943, 8181, 8191, 9873, 15907, 18771"};
+        break;
+
+    case 7601: // Eclipse
+        return {"10007207, 10004233, 10007208", "566, 3114, 4470, 4846, 6620, 6621, 22875"};
+        break;
+    case 7602: // Jelly Castle
+        return {"10007227", "2390, 4060, 4397, 4404, 7625"};
+        break;
+    case 7603: // Phone Me First
+        return {"1139782", "1330, 1554, 2136, 4024, 4025, 4394, 6269, 13171, 20698"};
+        break;
+    case 7604: // Wubsplosion
+        return {"10007269", ""};
+        break;
+    }
+
+    return {"", ""};
+};

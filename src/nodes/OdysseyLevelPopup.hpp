@@ -5,6 +5,7 @@ class OdysseyLevelPopup : public geode::Popup<std::string const &>
 {
 private:
     GJGameLevel *m_level;
+    CustomSongWidget *m_audioWidget = nullptr;
     int m_levelID = 0;
 
 protected:
@@ -13,6 +14,9 @@ protected:
     void onSettings(CCObject *);
     void onComic(CCObject *);
     void onLore(CCObject *);
+
+    void onAudio(CCObject *);
+    void onHideAudio(CCObject *);
 
 public:
     static OdysseyLevelPopup *create(int);

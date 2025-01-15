@@ -50,10 +50,10 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level604b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "icon_516", 1);
 
 		//  Secret Coins
-		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "", 1);
-		AchievementManager::addAchievement("geometry.ach.coins02", "Did I miss a key?", "Collected 10 Secret Coins", "Collect 10 Secret Coins", "", 1);
-		AchievementManager::addAchievement("geometry.ach.coins03", "Hollow's Payday", "Collected 15 Secret Coins", "Collect 15 Secret Coins", "", 1);
-		AchievementManager::addAchievement("geometry.ach.coins04", "Will Colon review these?", "Collected 20 Secret Coins", "Collect 20 Secret Coins", "", 1);
+		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "icon_517", 1);
+		AchievementManager::addAchievement("geometry.ach.coins02", "Did I miss a key?", "Collected 10 Secret Coins", "Collect 10 Secret Coins", "ball_129", 1);
+		AchievementManager::addAchievement("geometry.ach.coins03", "Hollow's Payday", "Collected 15 Secret Coins", "Collect 15 Secret Coins", "ship_178", 1);
+		AchievementManager::addAchievement("geometry.ach.coins04", "Will Colon review these?", "Collected 20 Secret Coins", "Collect 20 Secret Coins", "bird_155", 1);
 		AchievementManager::addAchievement("geometry.ach.coins05", "That one drone coin...", "Collected 25 Secret Coins", "Collect 25 Secret Coins", "", 1);
 		AchievementManager::addAchievement("geometry.ach.coins06", "Pocket Change", "Collected 30 Secret Coins", "Collect 30 Secret Coins", "", 1);
 		AchievementManager::addAchievement("geometry.ach.coins07", "Piggy Bank", "Collected 35 Secret Coins", "Collect 35 Secret Coins", "", 1);

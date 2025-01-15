@@ -10,16 +10,15 @@ bool DeveloperLayer::init()
     if (!CCLayer::init())
         return false;
 
-    m_background = CCSprite::create("game_bg_07_001.png");
+    m_background = CCSprite::create("game_bg_08_001.png");
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto size = m_background->getContentSize();
 
     m_background->setScale(winSize.width / size.width);
     m_background->setAnchorPoint({0, 0});
     m_background->setPosition({0, -75});
-    m_background->setColor({0, 0, 60});
+    m_background->setColor({0, 0, 90});
     m_background->setID("background"_spr);
-
     addChild(m_background, -2);
 
     auto backBtn = CCMenuItemSpriteExtra::create(
@@ -182,14 +181,14 @@ bool DeveloperLayer::init()
     levelsLabel->setScale(0.75f);
     addChild(levelsLabel);
 
-    for (auto ii = 1; ii <= 4; ii++)
+    for (auto ii = 601; ii <= 604; ii++)
     {
         auto level = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii + 600)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
+            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
             this,
             menu_selector(DeveloperLayer::onLevel));
 
-        level->setTag(ii + 7600);
+        level->setTag(ii + 7000);
         levelsMenu->addChild(level);
     };
     levelsMenu->updateLayout();
