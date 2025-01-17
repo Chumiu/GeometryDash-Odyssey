@@ -280,6 +280,15 @@ CCNode *ComicLayer::createComicPage(const char *spriteName)
 
     comicSprite->setPosition(winSize / 2);
     comicSprite->setScale(1.9f);
+
+    //  log::error("LOADED QUALITY = {}", (int)CCDirector::sharedDirector()->getLoadedTextureQuality());
+
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
+        comicSprite->setScale(0.95f);
+
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
+        comicSprite->setScale(0.475f);
+
     node->addChild(comicSprite);
     return node;
 };

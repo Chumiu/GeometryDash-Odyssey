@@ -35,11 +35,13 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 
 		GameManager::sharedState()->setGameVariable("0201", Mod::get()->getSettingValue<bool>("spanish-language"));
 		GameManager::sharedState()->setGameVariable("0202", Mod::get()->getSettingValue<bool>("hide-custom"));
+		GameManager::sharedState()->setGameVariable("0203", Mod::get()->getSettingValue<bool>("updated-levels"));
 		auto spanish = Mod::get()->getSettingValue<bool>("spanish-language");
 
 		//	Aun en fase de prueba
 		MoreOptionsLayer::addToggle("Spanish Translation", "0201", spanish ? "Traduce mayor parte del mod en lenguaje hispano. Por limitaciones de caracteres, habran errores ortograficos (Como la falta de acentos)" : "Translates most of the mod in spanish. Due to character limitations, there will be spelling errors");
 		MoreOptionsLayer::addToggle("Hide Custom Modes", "0202", spanish ? "Oculta los botones de los gamemodes personalizados en el Icon Kit (porque solo tienen un icono, por ahora...)" : "Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)");
+		MoreOptionsLayer::addToggle("Updated levels", "0203", spanish ? "Sustituye los niveles por una copia de su version online, para experimentar con las nuevas funciones de descargar assets de audio, que se agregaran en <cy>Actualizacion 1.1</c>." : "Replaces the levels with a copy of their online version, to experiment with the new audio asset features that will be added in <cy>Update 1.1</c>.");
 
 		return true;
 	}
@@ -64,5 +66,8 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 
 		if (sender->getTag() == 202)
 			Mod::get()->setSettingValue<bool>("hide-custom", GameManager::sharedState()->getGameVariable("0202"));
+
+		if (sender->getTag() == 203)
+			Mod::get()->setSettingValue<bool>("updated-levels", GameManager::sharedState()->getGameVariable("0203"));
 	}
 };

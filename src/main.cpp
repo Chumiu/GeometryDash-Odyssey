@@ -43,7 +43,8 @@ class $modify(PauseLayer)
 		PauseLayer::onQuit(sender);
 		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
 
-		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page + 1));
+		auto pageID = (page + 1 < 3) ? page + 1 : 3;
+		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, pageID));
 	}
 };
 
@@ -96,7 +97,8 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 	$override gd::string getMainLevelString(int id)
 	{
 		// auto file = CCString::createWithFormat("level-%i.txt"_spr, id);
-		auto file = Mod::get()->getSettingValue<bool>("empty-levels") ? CCString::create("base.txt"_spr) : CCString::createWithFormat("level-%i.txt"_spr, id);
+		auto file = Mod::get()->getSettingValue<bool>("empty-levels") ? CCString::create("base.txt"_spr) : (Mod::get()->getSettingValue<bool>("updated-levels") && id < 7600) ? CCString::createWithFormat("level-%iB.txt"_spr, id)
+																																							   : CCString::createWithFormat("level-%i.txt"_spr, id);
 
 		if (file == nullptr)
 			return "";
