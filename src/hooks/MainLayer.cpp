@@ -23,6 +23,8 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("restart-mod"))
             OdysseyMenuLayer::Restart();
 
+        //  Incompatibilities fixed in 4.2.0
+        /*
         auto breakingMods = Odyssey::getBreakingMods();
         if (!breakingMods.empty())
         {
@@ -49,6 +51,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             if (!Odyssey::getEarlyLoadBreakingMods().empty() || Loader::get()->isModLoaded("ninxout.redash"))
                 return true;
         }
+        */
 
         if (!GameManager::sharedState()->getUGV("201"))
         {

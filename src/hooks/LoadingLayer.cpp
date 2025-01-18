@@ -69,10 +69,11 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
         //  Loads the assets first
         OdysseyLoadingLayer::addCustomIconCredits();
-        OdysseyLoadingLayer::addOdysseyAudioAssets();
         OdysseyLoadingLayer::addOdysseyAssets();
         OdysseyLoadingLayer::loadStats();
-        //  OdysseyLoadingLayer::applyPatches();
+
+        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
+        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
 
         //  La bandera de "Aceptar los ToS" del juego
         if (!GM->getUGV("30"))
@@ -120,6 +121,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         return messages.at(rand() % (messages.size() - 1)).c_str();
     };
 
+    /*
     void addOdysseyAudioAssets()
     {
         // Deberia estar arreglado ahora
@@ -182,6 +184,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         //  Wubsplosion
         //  Odyssey::insertAssetsToMap(true, {10007269});
     }
+        */
 
     void addOdysseyAssets()
     {

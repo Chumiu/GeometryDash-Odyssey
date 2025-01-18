@@ -1,5 +1,5 @@
 {
-	"geode": "4.1.2",
+	"geode": "4.2.0",
 	"version": "v1.1.0-alpha.1",
 	"gd": {
 		"win": "2.2074",
@@ -22,33 +22,28 @@
 			"importance": "required"
 		}
 	],
-	"incompatibilities": [
-		{
-			"id": "capeling.geometry-dash-lunar",
+	"incompatibilities": {
+		"capeling.geometry-dash-lunar": {
 			"version": "*",
-			"importance": "conflicting"
+			"importance": "breaking"
 		},
-		{
-			"id": "dankmeme.globed2",
+		"dankmeme.globed2": {
 			"version": "*",
-			"importance": "conflicting"
+			"importance": "breaking"
 		},
-		{
-			"id": "gdutilsdevs.gdutils",
+		"gdutilsdevs.gdutils": {
 			"version": "*",
-			"importance": "conflicting"
+			"importance": "breaking"
 		},
-		{
-			"id": "itzkiba.better_progression",
+		"itzkiba.better_progression": {
 			"version": "*",
-			"importance": "conflicting"
+			"importance": "breaking"
 		},
-		{
-			"id": "ninxout.redash",
+		"ninxout.redash": {
 			"version": "*",
-			"importance": "conflicting"
+			"importance": "breaking"
 		}
-	],
+	},
 	"links": {
 		"community": "https://discord.gg/PNPrR4DEbw"
 	},
