@@ -55,11 +55,11 @@ std::vector<std::string> IconUtils::getPlayerFrames(int iconID, IconType type)
     if (typeNumber >= 900)
         iconID = 1;
 
-    std::string frame1 = fmt::format("{}_{:02}_001.png"_spr, iconName, iconID);
-    std::string frame2 = fmt::format("{}_{:02}_2_001.png"_spr, iconName, iconID);
-    std::string frameExtra = fmt::format("{}_{:02}_extra_001.png"_spr, iconName, iconID);
-    std::string frameGlow = fmt::format("{}_{:02}_glow_001.png"_spr, iconName, iconID);
-    std::string frameDome = fmt::format("{}_{:02}_3_001.png"_spr, iconName, iconID);
+    std::string frame1 = fmt::format("{}_{:02}_001.png", iconName, iconID);
+    std::string frame2 = fmt::format("{}_{:02}_2_001.png", iconName, iconID);
+    std::string frameExtra = fmt::format("{}_{:02}_extra_001.png", iconName, iconID);
+    std::string frameGlow = fmt::format("{}_{:02}_glow_001.png", iconName, iconID);
+    std::string frameDome = fmt::format("{}_{:02}_3_001.png", iconName, iconID);
 
     return {frame1, frame2, frameExtra, frameGlow, frameDome};
 }

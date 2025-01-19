@@ -116,9 +116,6 @@
 			"GJO_GameSheet01": [
 				"resources/OdysseySheet/*.png"
 			],
-			"GJO_IconSheet": [
-				"resources/IconSheet/*.png"
-			],
 			"GJO_SecretSheet": [
 				"resources/VaultSheet/*.png"
 			]
@@ -126,6 +123,8 @@
 		"files": [
 			"resources/HollowVoicelines/*.mp3",
 			"resources/Soundtrack/*.mp3",
+			"resources/Icons/*.plist",
+			"resources/Icons/*.png",
 			"resources/Levels/*.txt",
 			"resources/*.zip"
 		],

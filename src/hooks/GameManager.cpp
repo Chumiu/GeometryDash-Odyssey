@@ -115,4 +115,16 @@ class $modify(OdysseyGameManager, GameManager)
     {
         GameManager::dataLoaded(dict);
     }
+
+    gd::string sheetNameForIcon(int iconID, int iconType)
+    {
+        if(iconType >= 900){
+            const char* gamemode[4] = {"boat", "drone", "slider", "minecart"};
+
+            return fmt::format("{}_{:02}", iconType - 900, iconID);
+        }
+
+        auto ret = GameManager::sheetNameForIcon(iconID, iconType);
+        return ret;
+    };
 };

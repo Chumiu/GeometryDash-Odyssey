@@ -2,6 +2,8 @@
 #include <Geode/modify/OptionsLayer.hpp>
 #include <Geode/modify/MoreOptionsLayer.hpp>
 
+#include "../nodes/OdysseyPopup.hpp"
+
 using namespace geode::prelude;
 
 class $modify(GDO_OptionsLayer, OptionsLayer)
@@ -62,7 +64,18 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 		log::debug("TAG: {}", tag);
 
 		if (sender->getTag() == 201)
+		{
 			Mod::get()->setSettingValue<bool>("spanish-language", GameManager::sharedState()->getGameVariable("0201"));
+
+			if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
+			{
+				auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+				popup->setWarning(false, true);
+				popup->setZOrder(104);
+				popup->m_scene = this;
+				popup->show();
+			};
+		}
 
 		if (sender->getTag() == 202)
 			Mod::get()->setSettingValue<bool>("hide-custom", GameManager::sharedState()->getGameVariable("0202"));

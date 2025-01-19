@@ -4,6 +4,7 @@ using namespace geode::prelude;
 namespace IconUtils
 {
     std::vector<std::string> getPlayerFrames(int, IconType);
+    gd::string getSheetName(int, IconType);
 
     void updateIcon(CCNode *, int, IconType, bool);
     void updateRobotSprite(GJRobotSprite *, int, IconType);

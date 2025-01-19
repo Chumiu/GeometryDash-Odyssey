@@ -24,7 +24,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             OdysseyMenuLayer::Restart();
 
         //  Incompatibilities fixed in 4.2.0
-        /*
         auto breakingMods = Odyssey::getBreakingMods();
         if (!breakingMods.empty())
         {
@@ -51,9 +50,9 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             if (!Odyssey::getEarlyLoadBreakingMods().empty() || Loader::get()->isModLoaded("ninxout.redash"))
                 return true;
         }
-        */
 
-        if (!GameManager::sharedState()->getUGV("201"))
+        //  Displays a popup for savefile info
+        if (!Mod::get()->setSavedValue("shown-safevile-warning", true))
         {
             auto popup = OdysseyPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
             popup->setWarning(true, false);
@@ -61,7 +60,8 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             popup->show();
         };
 
-        if (!GameManager::sharedState()->getUGV("202") && GameManager::sharedState()->getGameVariable("0201"))
+        //  Displays a popup when the player has Spanish enabled for the first time
+        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
         {
             auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
             popup->setWarning(false, true);
@@ -93,19 +93,14 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         //  Boton para acceder a los comics mas facil
         auto bottomMenu = static_cast<CCMenu *>(this->getChildByID("bottom-menu"));
 
-        //  Remplaza el boton de Newgrounds por el boton de MDK
-        if (auto newgroundsButton = static_cast<CCMenuItemSpriteExtra *>(bottomMenu->getChildByID("newgrounds-button")))
-        {
-            newgroundsButton->removeFromParentAndCleanup(true);
+        //  Agregua el boton de MDK
+        auto MDKButton = CCMenuItemSpriteExtra::create(
+            CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
+            this,
+            menu_selector(OdysseyMenuLayer::onMDK));
 
-            auto MDKButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
-                this,
-                menu_selector(OdysseyMenuLayer::onMDK));
-
-            bottomMenu->addChild(MDKButton);
-            bottomMenu->updateLayout();
-        }
+        bottomMenu->addChild(MDKButton);
+        bottomMenu->updateLayout();
 
         if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
         {

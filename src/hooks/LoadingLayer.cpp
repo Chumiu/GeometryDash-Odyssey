@@ -67,7 +67,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
             robtopLogo->setDisplayFrame(teamLogo->displayFrame());
         };
 
-        //  Loads the assets first
+        //  Loads the assets
         OdysseyLoadingLayer::addCustomIconCredits();
         OdysseyLoadingLayer::addOdysseyAssets();
         OdysseyLoadingLayer::loadStats();
@@ -98,8 +98,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         return true;
     }
 
-    const char *
-    getLoadingString()
+    const char *getLoadingString()
     {
         if (m_fromRefresh)
             return LoadingLayer::getLoadingString();
@@ -202,14 +201,40 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
             .m_id = Mod::get()->getID(),
             .m_paths = {geode::Mod::get()->getResourcesDir().string()}});
 
-        //  Ahora los comics
-        log::debug("Loading comic assets...");
+        log::debug("Loading Assets...");
         auto SFC = CCSpriteFrameCache::get();
-        //  auto searchPathRoot = dirs::getModRuntimeDir() / Mod::get()->getID() / "resources/ComicAssets";
 
-        //  CCFileUtils::sharedFileUtils()->addSearchPath(searchPathRoot.string().c_str());
+        //  Icons
+        for (int ii = 486; ii <= 517; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("player_{}.plist", ii).c_str());
+
+        for (int ii = 170; ii <= 178; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("ship_{}.plist", ii).c_str());
+
+        for (int ii = 119; ii <= 129; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("player_ball_{}.plist", ii).c_str());
+
+        for (int ii = 150; ii <= 155; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("bird_{}.plist", ii).c_str());
+
+        for (int ii = 97; ii <= 100; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("dart_{}.plist", ii).c_str());
+
+        for (int ii = 44; ii <= 48; ii++)
+            SFC->addSpriteFramesWithFile(fmt::format("swing_{}.plist", ii).c_str());
+
+        SFC->addSpriteFramesWithFile("jetpack_09.plist");
+
+        //  Custom Modes
+        SFC->addSpriteFramesWithFile("boat_01.plist");
+        SFC->addSpriteFramesWithFile("drone_01.plist");
+        SFC->addSpriteFramesWithFile("slider_01.plist");
+        SFC->addSpriteFramesWithFile("minecart_01.plist");
+
+        //  Comics
         SFC->addSpriteFramesWithFile("ComicSheetSPA.plist");
         SFC->addSpriteFramesWithFile("ComicSheetENG.plist");
+
         log::debug("Comic files succesfully loaded");
     }
 
