@@ -235,6 +235,33 @@ void CreditsLayer::setupCreditsCreatorsTab()
     GameToolbox::alignItemsHorisontally(row1CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 + 35), false);
     GameToolbox::alignItemsHorisontally(row2CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 17), false);
     GameToolbox::alignItemsHorisontally(row3CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
+
+    if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.odyssey.secret24") && GameManager::sharedState()->getUGV("239"))
+    {
+        //  Wanted! Secret
+        DankyUser->setIconVisible(false);
+        auto menu = CCMenu::create();
+        menu->setPosition({0, 0});
+        menu->setZOrder(10);
+
+        auto danky = CreditsNode::create("Danky99", 11, 9, 11, 3, true, 14178231);
+        danky->setUserButtonVisible(false);
+        danky->setScale(0.85);
+
+        auto button = CCMenuItemSpriteExtra::create(
+            danky,
+            this,
+            menu_selector(CreditsLayer::onDanky));
+
+        button->setContentSize({40, 40});
+        button->m_scaleMultiplier = 1.0;
+
+        danky->setPosition({20, 20});
+        button->setPosition(DankyUser->getPosition());
+
+        menu->addChild(button);
+        m_creditsCreatorsLayer->addChild(menu);
+    }
 }
 
 void CreditsLayer::setupCreditsArtistsTab()
@@ -512,6 +539,26 @@ void CreditsLayer::onPrev(CCObject *)
     m_tab--;
     changeTab();
 };
+
+void CreditsLayer::onDanky(CCObject *sender)
+{
+    GameManager::sharedState()->reportAchievementWithID("geometry.ach.odyssey.secret24", 100, false);
+    auto btn = static_cast<CCMenuItemSpriteExtra *>(sender);
+    btn->setVisible(false);
+
+    FMODAudioEngine::sharedEngine()->playEffect("explode_11.ogg");
+    auto particle1 = GameToolbox::particleFromString("1a0a0.5a0a-1a0a0a29a0a11a0a0a0a0a0a0a0a30a1a0a0a1a0a1a0a0a0a1a0a100a1a0a0a1a0a1a0a0a0a1a0a0a0a0.5a0a0a0a0a0a0a0a1a2a1a0a0a0a2a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
+    auto particle2 = GameToolbox::particleFromString("50a0a0.5a0.25a-1a0a180a29a0a11a0a0a0a0a0a0a0a7a5a0a0a1a0a1a0a0a0a1a0a0a3a0a0a1a0a1a0a0a0a1a0a0a0a0.5a0.25a0a0a150a50a0a0a1a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
+
+    particle1->setPosition(btn->getPosition());
+    particle1->setZOrder(100);
+
+    particle2->setPosition(btn->getPosition());
+    particle2->setZOrder(100);
+
+    m_creditsCreatorsLayer->addChild(particle1);
+    m_creditsCreatorsLayer->addChild(particle2);
+}
 
 void CreditsLayer::changeTab()
 {

@@ -16,6 +16,8 @@ namespace Odyssey
     //  Funciones
     void addCorners(CCLayer *, const char *, float);
     void insertAssetsToMap(bool, std::vector<int>);
+
+    void verifyVaultHints();
     void hasAllVaultRewards();
 
     //  Enteros

@@ -80,6 +80,16 @@ public:
         return nullptr;
     };
 
+    void setUserButtonVisible(bool value)
+    {
+        m_userButton->setVisible(value);
+    }
+
+    void setIconVisible(bool value)
+    {
+        m_userIcon->setVisible(value);
+    }
+
     void onUser(CCObject *sender)
     {
         ProfilePage::create(m_accountID, false)->show();

@@ -233,6 +233,23 @@ int Odyssey::islandPageForLevelID(int levelID)
     return 0;
 };
 
+void Odyssey::verifyVaultHints()
+{
+    auto AM = AchievementManager::sharedState();
+
+    //  This only is called upon game loading, to disable the Vault Riddles if they already have the achievement:
+    //  * Comic Book Fan can be collected without the vault hint
+    //  * The other three secret rewards need the hint to be enabled
+
+    for (auto ii = 1; ii <= 24; ii++)
+    {
+        auto achievementName = fmt::format("geometry.ach.odyssey.secret{:02}", ii);
+        auto savedValueName = fmt::format("secret-hint-{:02}", ii);
+
+        Mod::get()->setSavedValue<bool>(savedValueName, AM->isAchievementEarned(achievementName.c_str()));
+    }
+};
+
 void Odyssey::hasAllVaultRewards()
 {
     auto AM = AchievementManager::sharedState();
@@ -250,7 +267,7 @@ void Odyssey::hasAllVaultRewards()
         //  if(AM->isAchievementEarned(fmt::format("geometry.ach.odyssey.secret{:02}")))
     }
 
-    for (auto ii = 10; ii <= 18; ii++)
+    for (auto ii = 10; ii <= 12; ii++)
     {
         auto achievementName = fmt::format("geometry.ach.odyssey.secret{:02}", ii);
 
@@ -268,12 +285,22 @@ void Odyssey::hasAllVaultRewards()
     if (!AM->isAchievementEarned("geometry.ach.odyssey.secret20"))
         allOgre = false;
 
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret22"))
+        allOgre = false;
+
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret23"))
+        allOgre = false;
+
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret24"))
+        allOgre = false;
+
     if (!GameManager::sharedState()->getUGV("234"))
         allOgre = false;
 
     /*
     if (!GameManager::sharedState()->getUGV("235"))
         allOgre = false;
+
     if (!GameManager::sharedState()->getUGV("236"))
         allHollow = false;
     */
@@ -284,6 +311,8 @@ void Odyssey::hasAllVaultRewards()
 
         if (!GameManager::sharedState()->getUGV("231"))
             GameManager::sharedState()->setUGV("231", true);
+
+        //  log::debug("El jugador ya tiene todos los rewards del Ogro")
     }
     else
     {
@@ -295,10 +324,9 @@ void Odyssey::hasAllVaultRewards()
         log::debug("Tiene todos los rewards del Hollow");
 
         if (!GameManager::sharedState()->getUGV("232"))
-        {
             GameManager::sharedState()->setUGV("232", true);
-            log::debug("Habilitado el Hint de Gargan (Ogro)");
-        }
+
+        //  log::debug("Habilitado el Hint de Gargan (Ogro)");
     }
     else
     {

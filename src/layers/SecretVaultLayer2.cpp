@@ -199,7 +199,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     m_textInput->setString("");
 
     //  List of codes
-    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01"))
+    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01") && Mod::get()->getSavedValue<bool>("secret-hint-01"))
     {
         reply = {
             "So you know how to adventure...",
@@ -211,7 +211,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02"))
+    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02") && Mod::get()->getSavedValue<bool>("secret-hint-02"))
     {
         reply = {
             "Not so unknown now...",
@@ -223,7 +223,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03"))
+    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03") && Mod::get()->getSavedValue<bool>("secret-hint-03"))
     {
         reply = {
             "It strikes fear into my heart...",
@@ -235,7 +235,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04"))
+    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04") && Mod::get()->getSavedValue<bool>("secret-hint-04"))
     {
         reply = {
             "What a humble man",
@@ -247,7 +247,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05"))
+    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05") && Mod::get()->getSavedValue<bool>("secret-hint-05"))
     {
         reply = {
             "Useless piece of scrap metal",
@@ -260,7 +260,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     };
 
     /*
-    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235"))
+    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235") && Mod::get()->getSavedValue<bool>("secret-hint-02"))
     {
         reply = {
             "Good luck",
@@ -275,7 +275,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     };
     */
 
-    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06"))
+    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06") && Mod::get()->getSavedValue<bool>("secret-hint-06"))
     {
         reply = {
             "Even the lord listens to his guidance...",
@@ -287,7 +287,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07"))
+    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07") && Mod::get()->getSavedValue<bool>("secret-hint-07"))
     {
         reply = {
             "My hatred towards him grows every day...",
@@ -299,7 +299,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08"))
+    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08") && Mod::get()->getSavedValue<bool>("secret-hint-08"))
     {
         reply = {
             "All of them together... what will happen?",
@@ -311,7 +311,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09"))
+    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09") && Mod::get()->getSavedValue<bool>("secret-hint-09"))
     {
         reply = {
             "SEE? I wasn't lying!",
@@ -323,6 +323,26 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
+    if (std::string_view(lower) == std::string_view("sigma") && !AM->isAchievementEarned("geometry.ach.odyssey.secret22") && Mod::get()->getSavedValue<bool>("secret-hint-22"))
+    {
+        reply = {
+            "What? I thought it was Delta", "Huh? Crei que era Delta"};
+        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret22", 100, false);
+        return;
+    };
+
+    if (std::string_view(lower) == std::string_view("editor") && !AM->isAchievementEarned("geometry.ach.odyssey.secret23") && Mod::get()->getSavedValue<bool>("secret-hint-23"))
+    {
+        reply = {
+            "Have you made a level yet?", "Ya hicistes un nivel?"};
+        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret23", 100, false);
+        return;
+    };
+
     //  Random easter eggs
     if (std::string_view(lower) == std::string_view("switch"))
     {
@@ -330,7 +350,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "The skeleton appears",
             "El esqueleto aparece!",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -340,7 +360,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Cubical genius",
             "Genio cubico",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -357,7 +377,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "What's a slimeboy?",
             "Que es un slimeboy?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -381,7 +401,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "One day, surely...",
             "Un dia, seguramente...",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -391,7 +411,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "We don't talk about spooky",
             "Aqui no se habla de spooky",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -401,7 +421,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "No coins here, bud",
             "Aqui no vas a encontrar una moneda",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -411,7 +431,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Never liked him",
             "Nunca me agrado",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -421,7 +441,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "We used to be togeher... but then I got locked here",
             "Estabamos juntos. Pero me encerraron aqui",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -431,7 +451,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Always being a one-liner. Makes me mad",
             "Solo escuchar su nombre me enfurece",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -448,7 +468,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Who?",
             "Quien?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -458,7 +478,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Nukebound to what?",
             "Que es eso? Se puede comer?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -468,7 +488,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "I'm pretty sure he isn't dead",
             "Te aseguro que ese no esta muerto",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -478,7 +498,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Maybe say her name to my brother...",
             "Tal vez deberias decir su nombre a mi hermano",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -488,7 +508,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "That name sounds familiar...",
             "Ese nombre suena familiar...",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -536,7 +556,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
 std::string SecretVaultLayer2::getMessage()
 {
-    int rand = std::rand() % 50 + 1;
+    int rand = std::rand() % 40 + 1;
 
     if (m_messageID == 0)
     {
@@ -594,6 +614,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-01", true))
+                log::info("Hint for Secret 01 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -630,6 +653,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-02", true))
+                log::info("Hint for Secret 02 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -670,6 +696,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-03", true))
+                log::info("Hint for Secret 03 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -711,6 +740,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-04", true))
+                log::info("Hint for Secret 04 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -748,6 +780,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-05", true))
+                log::info("Hint for Secret 05 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -819,6 +854,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-06", true))
+                log::info("Hint for Secret 06 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -856,6 +894,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-07", true))
+                log::info("Hint for Secret 07 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -892,6 +933,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-08", true))
+                log::info("Hint for Secret 08 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -935,6 +979,9 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 
         if (index >= messages.size())
         {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-09", true))
+                log::info("Hint for Secret 09 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1036,6 +1083,7 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
         {
             if (!GameManager::sharedState()->getUGV("209"))
                 GameManager::sharedState()->setUGV("209", true);
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1072,6 +1120,122 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
         {
             if (!GameManager::sharedState()->getUGV("233"))
                 GameManager::sharedState()->setUGV("233", true);
+
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-23", true))
+                log::info("Hint for Secret 23 enabled");
+
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Sigma
+    if (ID == 25 && !AM->isAchievementEarned("geometry.ach.odyssey.secret22"))
+    {
+        messages = {
+            "I keep hearing these words...",
+            "From the cubes that come by",
+            "Rizz... Edge... Aura...",
+            "What is as Ski Bee Dee?",
+            "They also use Greek letters",
+            "Alpha, Beta, Gamma...",
+            "There's a specific one",
+            "Said by a cube with X eyes...",
+            "Perhaps you might know?"};
+
+        if (m_spanish)
+            messages = {
+                "He escuchado estas palabras...",
+                "De los cubos que visitan por aca",
+                "Peak... Curi... Momos...",
+                "Que es una papeada?",
+                "Tambien usan letras Griegas",
+                "Alfa, Beta, Gamma...",
+                "Hay una en especifico",
+                "Lo dice un cubo con ojos equis...",
+                "Tal vez tu sabes cual es?"};
+
+        if (index >= messages.size())
+        {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-22", true))
+                log::info("Hint for Secret 22 enabled");
+
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Editor
+    if (ID == 26 && !AM->isAchievementEarned("geometry.ach.odyssey.secret23"))
+    {
+        messages = {
+            "From the simplest of looks...",
+            "To full blown games",
+            "Hundreds of tools and styles",
+            "Thousands of ways...",
+            "To plaster your ideas in this canvas...",
+            "Make sure you read it's guide first"};
+
+        if (m_spanish)
+            messages = {
+                "Desde aspectos muy sencillos...",
+                "Hasta juegos completos",
+                "Cientos de instrumentos y estilos",
+                "Miles de maneras...",
+                "Para plasmar tus ideas en este lienzo...",
+                "Asegurate de leer la guia primero"};
+
+        if (index >= messages.size())
+        {
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-23", true))
+                log::info("Hint for Secret 23 enabled");
+
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Wanted!
+    if (ID == 27 && !AM->isAchievementEarned("geometry.ach.odyssey.secret24"))
+    {
+        messages = {
+            "I sadly remember another thing",
+            "The pink guy boasts about...",
+            "The decoration he puts in his shop",
+            "Changing it every time when a client comes",
+            "Waste of time",
+            "Also something about...",
+            "The good reward",
+            "If you catch a cube of a peculiar shape"};
+
+        if (m_spanish)
+            messages = {
+                "Por desgracia recuerdo otra cosa",
+                "De la que presume el tipo rosa...",
+                "La decoracion que pone en su tienda",
+                "La cambia cada vez que viene un cliente",
+                "Una perdida de tiempo",
+                "Tambien algo sobre...",
+                "Una buena recompensa",
+                "Si atrapas un cubo de forma familiar"};
+
+        if (index >= messages.size())
+        {
+            if (!GameManager::sharedState()->getUGV("239"))
+                GameManager::sharedState()->setUGV("239", true);
+
+            if (!Mod::get()->setSavedValue<bool>("secret-hint-24", true))
+                log::info("Hint for Secret 24 enabled");
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";

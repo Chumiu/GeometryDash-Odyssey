@@ -52,7 +52,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         }
 
         //  Displays a popup for savefile info
-        if (!Mod::get()->setSavedValue("shown-safevile-warning", true))
+        if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
         {
             auto popup = OdysseyPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
             popup->setWarning(true, false);
@@ -61,7 +61,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         };
 
         //  Displays a popup when the player has Spanish enabled for the first time
-        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
+        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0202"))
         {
             auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
             popup->setWarning(false, true);

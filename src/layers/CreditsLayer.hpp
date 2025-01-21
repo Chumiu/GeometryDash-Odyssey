@@ -31,9 +31,11 @@ protected:
     void setupCreditsTestersTab();
     void setupCreditsModDeveloperTab();
     void setupCreditsSpecialThanksTab();
+    void onDanky(CCObject *);
     void onNext(CCObject *);
     void onPrev(CCObject *);
     void changeTab();
+
 
 public:
     static CreditsLayer *create();

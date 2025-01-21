@@ -89,5 +89,6 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		//  Update 1.1.0
 		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Found the secret!", "It's a secret...", "icon_515", 1);
 		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Found the secret!", "It's a secret...", "ball_127", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret24", "Wanted!", "Found the secret!", "It's a secret...", "", 1);
 	}
 };

@@ -327,6 +327,8 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
         if (auto orbs = Mod::get()->getSavedValue<int>("Orbs"))
             GSM->setStat("14", orbs);
+
+        Odyssey::verifyVaultHints();
     }
 
     /*
