@@ -34,6 +34,9 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
     int getBaseCurrencyForLevel(GJGameLevel *level)
     {
+        if (level->m_levelID.value() == 7004)
+            return 500;
+
         if (level->m_levelID.value() == 7009)
             return 500;
 

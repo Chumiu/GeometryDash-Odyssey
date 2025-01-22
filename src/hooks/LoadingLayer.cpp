@@ -205,19 +205,19 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto SFC = CCSpriteFrameCache::get();
 
         //  Icons
-        for (int ii = 486; ii <= 517; ii++)
+        for (int ii = 486; ii <= 522; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_{}.plist", ii).c_str());
 
         for (int ii = 170; ii <= 178; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("ship_{}.plist", ii).c_str());
 
-        for (int ii = 119; ii <= 129; ii++)
+        for (int ii = 119; ii <= 130; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_ball_{}.plist", ii).c_str());
 
-        for (int ii = 150; ii <= 155; ii++)
+        for (int ii = 150; ii <= 156; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("bird_{}.plist", ii).c_str());
 
-        for (int ii = 97; ii <= 100; ii++)
+        for (int ii = 97; ii <= 102; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("dart_{}.plist", ii).c_str());
 
         for (int ii = 44; ii <= 48; ii++)
@@ -301,7 +301,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(152, UnlockType::Bird), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(153, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(154, UnlockType::Bird), (int)Artist::Danky);  // Danky
-        IconUtils::addCredits(std::make_pair(155, UnlockType::Bird), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(156, UnlockType::Bird), (int)Artist::Angelo); // Angelo
 
         //  Waves
         IconUtils::addCredits(std::make_pair(97, UnlockType::Dart), (int)Artist::Angelo); // Angelo

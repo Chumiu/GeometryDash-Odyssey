@@ -4,48 +4,48 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>player_517_001.png</key>
+            <key>dart_101_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{121,120}</string>
+                <string>{102,82}</string>
                 <key>spriteSourceSize</key>
-                <string>{121,120}</string>
+                <string>{102,82}</string>
                 <key>textureRect</key>
-                <string>{{30,2},{121,120}}</string>
+                <string>{{114,2},{102,82}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>player_517_2_001.png</key>
+            <key>dart_101_2_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-32,0}</string>
                 <key>spriteSize</key>
-                <string>{26,26}</string>
+                <string>{20,40}</string>
                 <key>spriteSourceSize</key>
-                <string>{26,26}</string>
+                <string>{84,40}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{26,26}}</string>
+                <string>{{218,2},{20,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>player_517_glow_001.png</key>
+            <key>dart_101_glow_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{129,128}</string>
+                <string>{110,90}</string>
                 <key>spriteSourceSize</key>
-                <string>{129,128}</string>
+                <string>{110,90}</string>
                 <key>textureRect</key>
-                <string>{{2,124},{129,128}}</string>
+                <string>{{2,2},{110,90}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -59,13 +59,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/dart_101-uhd.png</string>
             <key>size</key>
-            <string>{153,254}</string>
+            <string>{240,94}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0f36f6ced31c84a678c7d2507f4e9272:ad62402d7d4d3f4ddfd1b6f03215c99d:c313bd3d4a68642e30fe296757eaba8f$</string>
+            <string>$TexturePacker:SmartUpdate:038619eb29e27aa37e8f3c51f7b034e0:eb70feec35028dcf4e6bab40730dee96:5f0c3c811c672100a73fbfb766864238$</string>
             <key>textureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/dart_101-uhd.png</string>
         </dict>
     </dict>
 </plist>

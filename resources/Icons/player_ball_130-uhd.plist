@@ -4,48 +4,48 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>player_517_001.png</key>
+            <key>player_ball_130_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{121,120}</string>
+                <string>{141,140}</string>
                 <key>spriteSourceSize</key>
-                <string>{121,120}</string>
+                <string>{141,140}</string>
                 <key>textureRect</key>
-                <string>{{30,2},{121,120}}</string>
+                <string>{{153,2},{141,140}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>player_ball_130_2_001.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{72,72}</string>
+                <key>spriteSourceSize</key>
+                <string>{72,72}</string>
+                <key>textureRect</key>
+                <string>{{295,2},{72,72}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>player_517_2_001.png</key>
+            <key>player_ball_130_glow_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{26,26}</string>
+                <string>{149,148}</string>
                 <key>spriteSourceSize</key>
-                <string>{26,26}</string>
+                <string>{149,148}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{26,26}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>player_517_glow_001.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{129,128}</string>
-                <key>spriteSourceSize</key>
-                <string>{129,128}</string>
-                <key>textureRect</key>
-                <string>{{2,124},{129,128}}</string>
+                <string>{{2,2},{149,148}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -59,13 +59,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/player_ball_130-uhd.png</string>
             <key>size</key>
-            <string>{153,254}</string>
+            <string>{369,152}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0f36f6ced31c84a678c7d2507f4e9272:ad62402d7d4d3f4ddfd1b6f03215c99d:c313bd3d4a68642e30fe296757eaba8f$</string>
+            <string>$TexturePacker:SmartUpdate:eaa4177ecd50144e63772d5b60017519:f888bcdb3008343cd5b59431b171e4fe:b6994924244ebc7b58ab02cf415276a3$</string>
             <key>textureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/player_ball_130-uhd.png</string>
         </dict>
     </dict>
 </plist>

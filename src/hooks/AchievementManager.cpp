@@ -17,6 +17,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 
 		AchievementManager::addAchievement("geometry.ach.level04a", "Digital Disco", "Completed \"Cryptofunk\" in practice mode", "Complete \"Cryptofunk\" in practice mode", "icon_491", 1);
 		AchievementManager::addAchievement("geometry.ach.level04b", "Cryptofunk!", "Completed \"Cryptofunk\" in normal mode", "Complete \"Cryptofunk\" in normal mode", "icon_492", 1);
+		AchievementManager::addAchievement("geometry.ach.level04c", "Ultimate Cryptofunk!", "Completed \"Cryptofunk\" with all coins", "Complete \"Cryptofunk\" with all coins", "ship_178", 1);
 
 		//	Second island
 		AchievementManager::addAchievement("geometry.ach.level05a", "Jungle Japes", "Completed \"Hellfire\" in practice mode", "Complete \"Hellfire\" in practice mode", "icon_493", 1);
@@ -45,7 +46,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 
 		//  Contest Islands
 		AchievementManager::addAchievement("geometry.ach.level601b", "Eclipse!", "Completed \"Eclipse\" in normal mode", "Complete \"Eclipse\" in normal mode", "ball_128", 1);
-		AchievementManager::addAchievement("geometry.ach.level602b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "", 1);
+		AchievementManager::addAchievement("geometry.ach.level602b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "bird_155", 1);
 		AchievementManager::addAchievement("geometry.ach.level603b", "Phone me First!", "Completed \"Phone me First\" in normal mode", "Complete \"Phone me First\" in normal mode", "swing_48", 1);
 		AchievementManager::addAchievement("geometry.ach.level604b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "icon_516", 1);
 
@@ -53,8 +54,8 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "icon_517", 1);
 		AchievementManager::addAchievement("geometry.ach.coins02", "Did I miss a key?", "Collected 10 Secret Coins", "Collect 10 Secret Coins", "ball_129", 1);
 		AchievementManager::addAchievement("geometry.ach.coins03", "Hollow's Payday", "Collected 15 Secret Coins", "Collect 15 Secret Coins", "ship_178", 1);
-		AchievementManager::addAchievement("geometry.ach.coins04", "Will Colon review these?", "Collected 20 Secret Coins", "Collect 20 Secret Coins", "bird_155", 1);
-		AchievementManager::addAchievement("geometry.ach.coins05", "That one drone coin...", "Collected 25 Secret Coins", "Collect 25 Secret Coins", "", 1);
+		AchievementManager::addAchievement("geometry.ach.coins04", "Will Colon review these?", "Collected 20 Secret Coins", "Collect 20 Secret Coins", "bird_156", 1);
+		AchievementManager::addAchievement("geometry.ach.coins05", "That one drone coin...", "Collected 25 Secret Coins", "Collect 25 Secret Coins", "icon_518", 1);
 		AchievementManager::addAchievement("geometry.ach.coins06", "Pocket Change", "Collected 30 Secret Coins", "Collect 30 Secret Coins", "", 1);
 		AchievementManager::addAchievement("geometry.ach.coins07", "Piggy Bank", "Collected 35 Secret Coins", "Collect 35 Secret Coins", "", 1);
 		AchievementManager::addAchievement("geometry.ach.coins08", "Rent's Due", "Collected 40 Secret Coins", "Collect 40 Secret Coins", "", 1);
@@ -89,6 +90,6 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		//  Update 1.1.0
 		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Found the secret!", "It's a secret...", "icon_515", 1);
 		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Found the secret!", "It's a secret...", "ball_127", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret24", "Wanted!", "Found the secret!", "It's a secret...", "", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret24", "Wanted!", "Found the secret!", "It's a secret...", "ball_130", 1);
 	}
 };

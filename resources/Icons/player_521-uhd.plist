@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>player_517_001.png</key>
+            <key>player_521_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>player_517_2_001.png</key>
+            <key>player_521_2_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>player_517_glow_001.png</key>
+            <key>player_521_glow_001.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -59,13 +59,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/player_521-uhd.png</string>
             <key>size</key>
             <string>{153,254}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:0f36f6ced31c84a678c7d2507f4e9272:ad62402d7d4d3f4ddfd1b6f03215c99d:c313bd3d4a68642e30fe296757eaba8f$</string>
             <key>textureFileName</key>
-            <string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
+            <string>teamtcm.geometry-dash-odyssey/player_521-uhd.png</string>
         </dict>
     </dict>
 </plist>
