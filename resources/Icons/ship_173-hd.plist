@@ -11,11 +11,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{78,46}</string>
+				<string>{96,44}</string>
 				<key>spriteSourceSize</key>
-				<string>{78,46}</string>
+				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,51},{78,46}}</string>
+				<string>{{0,49},{96,44}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,13 +24,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-1,-3.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{70,37}</string>
+				<string>{94,42}</string>
 				<key>spriteSourceSize</key>
-				<string>{78,46}</string>
+				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,98},{70,37}}</string>
+				<string>{{0,94},{94,42}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -39,13 +39,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-1.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{72,41}</string>
+				<string>{88,40}</string>
 				<key>spriteSourceSize</key>
-				<string>{78,46}</string>
+				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{83,0},{72,41}}</string>
+				<string>{{101,0},{88,40}}</string>
 				<key>textureRotated</key>
 				<true/>
 			</dict>
@@ -56,11 +56,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{82,50}</string>
+				<string>{100,48}</string>
 				<key>spriteSourceSize</key>
-				<string>{82,50}</string>
+				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{82,50}}</string>
+				<string>{{0,0},{100,48}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_173-hd.png</string>
 			<key>size</key>
-			<string>{124,135}</string>
+			<string>{141,136}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_173-hd.png</string>
 		</dict>

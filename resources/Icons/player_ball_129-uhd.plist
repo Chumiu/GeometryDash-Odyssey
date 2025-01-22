@@ -11,11 +11,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{124,140}</string>
+				<string>{140,140}</string>
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{133,0},{124,140}}</string>
+				<string>{{151,0},{140,140}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,43 +24,43 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-13}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{114,104}</string>
+				<string>{130,130}</string>
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{133,141},{114,104}}</string>
+				<string>{{0,151},{130,130}}</string>
 				<key>textureRotated</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>player_ball_129_extra_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-0.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{112,129}</string>
+				<string>{129,129}</string>
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{0,149},{112,129}}</string>
+				<string>{{131,151},{129,129}}</string>
 				<key>textureRotated</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>player_ball_129_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-0.5,0}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{132,148}</string>
+				<string>{150,150}</string>
 				<key>spriteSourceSize</key>
-				<string>{149,148}</string>
+				<string>{150,150}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{132,148}}</string>
+				<string>{{0,0},{150,150}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_ball_129-uhd.png</string>
 			<key>size</key>
-			<string>{257,261}</string>
+			<string>{291,281}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_ball_129-uhd.png</string>
 		</dict>

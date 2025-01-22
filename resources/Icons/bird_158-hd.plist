@@ -4,63 +4,78 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>ship_173_001.png</key>
+			<key>bird_158_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{184,80}</string>
+				<string>{84,44}</string>
 				<key>spriteSourceSize</key>
-				<string>{240,240}</string>
+				<string>{84,44}</string>
 				<key>textureRect</key>
-				<string>{{0,89},{184,80}}</string>
+				<string>{{0,0},{84,44}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
-			<key>ship_173_2_001.png</key>
+			<key>bird_158_2_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,0}</string>
+				<string>{0,1.5}</string>
 				<key>spriteSize</key>
-				<string>{178,74}</string>
+				<string>{82,37}</string>
 				<key>spriteSourceSize</key>
-				<string>{240,240}</string>
+				<string>{84,44}</string>
 				<key>textureRect</key>
-				<string>{{0,170},{178,74}}</string>
-				<key>textureRotated</key>
-				<false/>
-			</dict>
-			<key>ship_173_extra_001.png</key>
-			<dict>
-				<key>aliases</key>
-				<array/>
-				<key>spriteOffset</key>
-				<string>{0,0}</string>
-				<key>spriteSize</key>
-				<string>{176,72}</string>
-				<key>spriteSourceSize</key>
-				<string>{240,240}</string>
-				<key>textureRect</key>
-				<string>{{193,0},{176,72}}</string>
+				<string>{{85,0},{82,37}}</string>
 				<key>textureRotated</key>
 				<true/>
 			</dict>
-			<key>ship_173_glow_001.png</key>
+			<key>bird_158_3_001.png</key>
+			<dict>
+				<key>aliases</key>
+				<array/>
+				<key>spriteOffset</key>
+				<string>{0,28.5}</string>
+				<key>spriteSize</key>
+				<string>{62,41}</string>
+				<key>spriteSourceSize</key>
+				<string>{62,98}</string>
+				<key>textureRect</key>
+				<string>{{0,90},{62,41}}</string>
+				<key>textureRotated</key>
+				<false/>
+			</dict>
+			<key>bird_158_extra_001.png</key>
+			<dict>
+				<key>aliases</key>
+				<array/>
+				<key>spriteOffset</key>
+				<string>{0,2.5}</string>
+				<key>spriteSize</key>
+				<string>{48,33}</string>
+				<key>spriteSourceSize</key>
+				<string>{84,44}</string>
+				<key>textureRect</key>
+				<string>{{85,83},{48,33}}</string>
+				<key>textureRotated</key>
+				<true/>
+			</dict>
+			<key>bird_158_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{192,88}</string>
+				<string>{84,44}</string>
 				<key>spriteSourceSize</key>
-				<string>{240,240}</string>
+				<string>{84,44}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{192,88}}</string>
+				<string>{{0,45},{84,44}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -74,11 +89,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/ship_173-uhd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_158-hd.png</string>
 			<key>size</key>
-			<string>{265,244}</string>
+			<string>{122,131}</string>
 			<key>textureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/ship_173-uhd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_158-hd.png</string>
 		</dict>
 	</dict>
 </plist>

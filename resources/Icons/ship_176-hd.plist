@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{2.5,-2}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{91,40}</string>
+				<string>{88,49}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{88,49}</string>
 				<key>textureRect</key>
-				<string>{{0,44},{91,40}}</string>
+				<string>{{0,0},{88,49}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,13 +24,28 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-14,-1.5}</string>
+				<string>{2,0}</string>
 				<key>spriteSize</key>
-				<string>{54,35}</string>
+				<string>{70,47}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{88,49}</string>
 				<key>textureRect</key>
-				<string>{{0,85},{54,35}}</string>
+				<string>{{89,0},{70,47}}</string>
+				<key>textureRotated</key>
+				<true/>
+			</dict>
+			<key>ship_176_extra_001.png</key>
+			<dict>
+				<key>aliases</key>
+				<array/>
+				<key>spriteOffset</key>
+				<string>{8,-4}</string>
+				<key>spriteSize</key>
+				<string>{62,27}</string>
+				<key>spriteSourceSize</key>
+				<string>{88,49}</string>
+				<key>textureRect</key>
+				<string>{{0,100},{62,27}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -39,13 +54,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{2.5,-2.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{95,43}</string>
+				<string>{88,49}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{88,49}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{95,43}}</string>
+				<string>{{0,50},{88,49}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -61,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_176-hd.png</string>
 			<key>size</key>
-			<string>{95,120}</string>
+			<string>{136,127}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_176-hd.png</string>
 		</dict>

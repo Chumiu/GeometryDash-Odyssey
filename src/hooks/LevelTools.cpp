@@ -202,11 +202,12 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 7004: // Cryptofunk
 			level->m_levelName = getAudioTitle(104);
 			level->m_audioTrack = 104;
-			level->m_stars = 12;
-			level->m_difficulty = GJDifficulty::Insane;
+			level->m_stars = 14;
+			level->m_difficulty = GJDifficulty::DemonEasy;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
 			level->m_coins = 3;
+			level->m_demon = 1;
 			break;
 
 		case 7005: // Hellfire
@@ -253,11 +254,11 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_levelName = getAudioTitle(109);
 			level->m_audioTrack = 109;
 			level->m_stars = 15;
-			level->m_difficulty = GJDifficulty::Demon;
+			level->m_difficulty = GJDifficulty::DemonMedium;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
-			level->m_demon = 1;
 			level->m_coins = 3;
+			level->m_demon = 1;
 			break;
 
 		case 7501: // Conclusive Journey
@@ -277,8 +278,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_difficulty = GJDifficulty::Demon;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
-			level->m_demon = 1;
 			level->m_coins = 3;
+			level->m_demon = 1;
 			break;
 
 		case 7601: // Eclipse

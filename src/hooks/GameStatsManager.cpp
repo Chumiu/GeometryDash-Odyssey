@@ -101,8 +101,8 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
             addStoreItem(5, 1, 12, 500, newShop);  // LLAVE
             addStoreItem(6, 2, 12, 500, newShop);  // LLAVE
-            addStoreItem(7, 46, 13, 100, newShop); // SWING
-            addStoreItem(8, 47, 13, 100, newShop); // SWING
+            addStoreItem(7, 46, 13, 200, newShop); // SWING
+            addStoreItem(8, 47, 13, 200, newShop); // SWING
 
             addStoreItem(9, 504, 1, 100, newShop);  // CUBO
             addStoreItem(10, 505, 1, 100, newShop); // CUBO
@@ -111,12 +111,15 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
             addStoreItem(13, 121, 5, 100, newShop); // BOLA
             addStoreItem(14, 122, 5, 100, newShop); // BOLA
-            addStoreItem(15, 174, 4, 100, newShop); // NAVE
-            addStoreItem(16, 175, 4, 100, newShop); // NAVE
+            addStoreItem(15, 174, 4, 150, newShop); // NAVE
+            addStoreItem(16, 175, 4, 150, newShop); // NAVE
 
-            addStoreItem(17, 18, 12, 50, newShop); // ANIMACION
-            addStoreItem(18, 19, 12, 50, newShop); // ANIMACION
-            addStoreItem(19, 20, 12, 50, newShop); // ANIMACION
+            addStoreItem(17, 158, 6, 150, newShop); // UFO
+            addStoreItem(18, 159, 6, 150, newShop); // UFO
+
+            addStoreItem(21, 18, 12, 50, newShop); // ANIMACION
+            addStoreItem(22, 19, 12, 50, newShop); // ANIMACION
+            addStoreItem(23, 20, 12, 50, newShop); // ANIMACION
         }
     }
 };

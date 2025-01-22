@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{3,-4}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{182,89}</string>
+				<string>{156,91}</string>
 				<key>spriteSourceSize</key>
-				<string>{188,97}</string>
+				<string>{156,91}</string>
 				<key>textureRect</key>
-				<string>{{0,100},{182,89}}</string>
+				<string>{{0,100},{156,91}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,43 +24,43 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-4,-9}</string>
+				<string>{-0.5,-8}</string>
 				<key>spriteSize</key>
-				<string>{150,71}</string>
+				<string>{135,65}</string>
 				<key>spriteSourceSize</key>
-				<string>{158,89}</string>
+				<string>{156,91}</string>
 				<key>textureRect</key>
-				<string>{{192,0},{150,71}}</string>
+				<string>{{0,192},{135,65}}</string>
 				<key>textureRotated</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>ship_172_extra_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{10.5,3}</string>
+				<string>{0,-0.5}</string>
 				<key>spriteSize</key>
-				<string>{158,62}</string>
+				<string>{144,78}</string>
 				<key>spriteSourceSize</key>
-				<string>{179,68}</string>
+				<string>{156,91}</string>
 				<key>textureRect</key>
-				<string>{{0,190},{158,62}}</string>
+				<string>{{165,0},{144,78}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>ship_172_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{3,-4}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{191,99}</string>
+				<string>{164,99}</string>
 				<key>spriteSourceSize</key>
-				<string>{197,107}</string>
+				<string>{164,99}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{191,99}}</string>
+				<string>{{0,0},{164,99}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_172-uhd.png</string>
 			<key>size</key>
-			<string>{263,252}</string>
+			<string>{243,257}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_172-uhd.png</string>
 		</dict>

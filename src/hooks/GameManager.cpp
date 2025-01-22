@@ -9,10 +9,10 @@ using namespace geode::prelude;
 
 enum class CustomIcons
 {
-    Cube = 37,
-    Ship = 9,
+    Cube = 33,
+    Ship = 10,
     Ball = 12,
-    UFO = 7,
+    UFO = 10,
     Wave = 6,
     Swing = 5,
     Jetpack = 1

@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-4}</string>
+				<string>{2.5,-2}</string>
 				<key>spriteSize</key>
-				<string>{98,36}</string>
+				<string>{91,40}</string>
 				<key>spriteSourceSize</key>
 				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,41},{98,36}}</string>
+				<string>{{0,44},{91,40}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,13 +24,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-5.5,-3.5}</string>
+				<string>{-14,-1.5}</string>
 				<key>spriteSize</key>
-				<string>{85,33}</string>
+				<string>{54,35}</string>
 				<key>spriteSourceSize</key>
 				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,78},{85,33}}</string>
+				<string>{{0,85},{54,35}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -39,13 +39,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-4}</string>
+				<string>{2.5,-2.5}</string>
 				<key>spriteSize</key>
-				<string>{102,40}</string>
+				<string>{95,43}</string>
 				<key>spriteSourceSize</key>
 				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{102,40}}</string>
+				<string>{{0,0},{95,43}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -61,7 +61,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_177-hd.png</string>
 			<key>size</key>
-			<string>{102,111}</string>
+			<string>{95,120}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_177-hd.png</string>
 		</dict>

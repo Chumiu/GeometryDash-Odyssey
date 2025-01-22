@@ -15,7 +15,7 @@
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{151,0},{140,140}}</string>
+				<string>{{149,0},{140,140}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -26,13 +26,13 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{130,130}</string>
+				<string>{94,130}</string>
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{0,151},{130,130}}</string>
+				<string>{{0,149},{94,130}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>player_ball_128_extra_001.png</key>
 			<dict>
@@ -45,7 +45,7 @@
 				<key>spriteSourceSize</key>
 				<string>{140,140}</string>
 				<key>textureRect</key>
-				<string>{{131,151},{128,128}}</string>
+				<string>{{0,244},{128,128}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -56,11 +56,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{150,150}</string>
+				<string>{148,148}</string>
 				<key>spriteSourceSize</key>
-				<string>{150,150}</string>
+				<string>{148,148}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{150,150}}</string>
+				<string>{{0,0},{148,148}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_ball_128-uhd.png</string>
 			<key>size</key>
-			<string>{291,281}</string>
+			<string>{289,372}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_ball_128-uhd.png</string>
 		</dict>

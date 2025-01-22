@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-10}</string>
+				<string>{0.5,-1}</string>
 				<key>spriteSize</key>
-				<string>{90,36}</string>
+				<string>{92,46}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{93,48}</string>
 				<key>textureRect</key>
-				<string>{{0,39},{90,36}}</string>
+				<string>{{0,52},{92,46}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,13 +24,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{6,-10}</string>
+				<string>{-1,-3.5}</string>
 				<key>spriteSize</key>
-				<string>{74,32}</string>
+				<string>{76,37}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{78,44}</string>
 				<key>textureRect</key>
-				<string>{{0,83},{74,32}}</string>
+				<string>{{0,99},{76,37}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -39,28 +39,28 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-2,1}</string>
+				<string>{5,1.5}</string>
 				<key>spriteSize</key>
-				<string>{78,6}</string>
+				<string>{80,31}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{90,34}</string>
 				<key>textureRect</key>
-				<string>{{0,76},{78,6}}</string>
+				<string>{{98,0},{80,31}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>ship_174_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-10}</string>
+				<string>{0.5,-1}</string>
 				<key>spriteSize</key>
-				<string>{92,38}</string>
+				<string>{97,51}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{98,53}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{92,38}}</string>
+				<string>{{0,0},{97,51}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_174-hd.png</string>
 			<key>size</key>
-			<string>{92,115}</string>
+			<string>{129,136}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/ship_174-hd.png</string>
 		</dict>

@@ -205,16 +205,16 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto SFC = CCSpriteFrameCache::get();
 
         //  Icons
-        for (int ii = 486; ii <= 522; ii++)
+        for (int ii = 486; ii <= 518; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_{}.plist", ii).c_str());
 
-        for (int ii = 170; ii <= 178; ii++)
+        for (int ii = 170; ii <= 179; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("ship_{}.plist", ii).c_str());
 
         for (int ii = 119; ii <= 130; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_ball_{}.plist", ii).c_str());
 
-        for (int ii = 150; ii <= 156; ii++)
+        for (int ii = 150; ii <= 159; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("bird_{}.plist", ii).c_str());
 
         for (int ii = 97; ii <= 102; ii++)
@@ -267,18 +267,19 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(512, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
         IconUtils::addCredits(std::make_pair(513, UnlockType::Cube), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(514, UnlockType::Cube), (int)Artist::Danky);  // Danky
-        IconUtils::addCredits(std::make_pair(515, UnlockType::Cube), (int)Artist::Retro);
+        IconUtils::addCredits(std::make_pair(515, UnlockType::Cube), (int)Artist::Retro);  // Retro
         IconUtils::addCredits(std::make_pair(516, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
-        IconUtils::addCredits(std::make_pair(517, UnlockType::Cube), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(517, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
+        IconUtils::addCredits(std::make_pair(518, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
 
         //  Ships
         IconUtils::addCredits(std::make_pair(170, UnlockType::Ship), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(171, UnlockType::Ship), (int)Artist::Angelo); // Angelo
-        IconUtils::addCredits(std::make_pair(172, UnlockType::Ship), (int)Artist::Angelo); // Angelo
-        IconUtils::addCredits(std::make_pair(173, UnlockType::Ship), (int)Artist::Danky);  // Danky
-        IconUtils::addCredits(std::make_pair(174, UnlockType::Ship), (int)Artist::ML500);  // ML5
-        IconUtils::addCredits(std::make_pair(175, UnlockType::Ship), (int)Artist::Angelo); // Angelo
-        IconUtils::addCredits(std::make_pair(176, UnlockType::Ship), (int)Artist::ML500);  // ML5
+        IconUtils::addCredits(std::make_pair(172, UnlockType::Ship), (int)Artist::Danky);  // Danky
+        IconUtils::addCredits(std::make_pair(173, UnlockType::Ship), (int)Artist::ML500);  // ML5
+        IconUtils::addCredits(std::make_pair(174, UnlockType::Ship), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(175, UnlockType::Ship), (int)Artist::ML500);  // ML5
+        IconUtils::addCredits(std::make_pair(176, UnlockType::Ship), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(177, UnlockType::Ship), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(178, UnlockType::Ship), (int)Artist::ML500);  // ML5
 
@@ -292,8 +293,9 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(125, UnlockType::Ball), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(126, UnlockType::Ball), (int)Artist::Cyan);   // Angelo
         IconUtils::addCredits(std::make_pair(127, UnlockType::Ball), (int)Artist::ML500);  // ML5
-        IconUtils::addCredits(std::make_pair(128, UnlockType::Ball), (int)Artist::Retro);
-        IconUtils::addCredits(std::make_pair(129, UnlockType::Ball), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(128, UnlockType::Ball), (int)Artist::Danky);  // Danky
+        IconUtils::addCredits(std::make_pair(129, UnlockType::Ball), (int)Artist::Retro);  // Retro
+        IconUtils::addCredits(std::make_pair(130, UnlockType::Ball), (int)Artist::Angelo); // Angelo
 
         //  UFOs
         IconUtils::addCredits(std::make_pair(150, UnlockType::Bird), (int)Artist::Angelo); // Angelo
@@ -302,12 +304,17 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(153, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(154, UnlockType::Bird), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(156, UnlockType::Bird), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(157, UnlockType::Bird), (int)Artist::Cyan);   // Cyan
+        IconUtils::addCredits(std::make_pair(158, UnlockType::Bird), (int)Artist::Angelo); // Angelo
+        IconUtils::addCredits(std::make_pair(159, UnlockType::Bird), (int)Artist::ML500);  // ML5
 
         //  Waves
         IconUtils::addCredits(std::make_pair(97, UnlockType::Dart), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(98, UnlockType::Dart), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(99, UnlockType::Dart), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(100, UnlockType::Dart), (int)Artist::ML500); // ML5
+        IconUtils::addCredits(std::make_pair(101, UnlockType::Dart), (int)Artist::ML500); // ML5
+        IconUtils::addCredits(std::make_pair(102, UnlockType::Dart), (int)Artist::ML500); // ML5
 
         //  Swings
         IconUtils::addCredits(std::make_pair(44, UnlockType::Swing), (int)Artist::Danky); // Danky

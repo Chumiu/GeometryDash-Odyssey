@@ -4,48 +4,63 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>player_518_001.png</key>
+			<key>bird_157_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{120,120}</string>
+				<string>{148,60}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{148,60}</string>
 				<key>textureRect</key>
-				<string>{{129,0},{120,120}}</string>
+				<string>{{0,69},{148,60}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
-			<key>player_518_2_001.png</key>
+			<key>bird_157_2_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{106,106}</string>
+				<string>{142,54}</string>
 				<key>spriteSourceSize</key>
-				<string>{106,106}</string>
+				<string>{148,60}</string>
 				<key>textureRect</key>
-				<string>{{0,129},{106,106}}</string>
+				<string>{{0,130},{142,54}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
-			<key>player_518_glow_001.png</key>
+			<key>bird_157_3_001.png</key>
+			<dict>
+				<key>aliases</key>
+				<array/>
+				<key>spriteOffset</key>
+				<string>{0,61}</string>
+				<key>spriteSize</key>
+				<string>{122,78}</string>
+				<key>spriteSourceSize</key>
+				<string>{122,200}</string>
+				<key>textureRect</key>
+				<string>{{157,0},{122,78}}</string>
+				<key>textureRotated</key>
+				<true/>
+			</dict>
+			<key>bird_157_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{128,128}</string>
+				<string>{156,68}</string>
 				<key>spriteSourceSize</key>
-				<string>{128,128}</string>
+				<string>{156,68}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{128,128}}</string>
+				<string>{{0,0},{156,68}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -59,11 +74,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/player_518-uhd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_157-uhd.png</string>
 			<key>size</key>
-			<string>{249,235}</string>
+			<string>{235,184}</string>
 			<key>textureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/player_518-uhd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_157-uhd.png</string>
 		</dict>
 	</dict>
 </plist>
