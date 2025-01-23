@@ -15,8 +15,10 @@ protected:
     void onComic(CCObject *);
     void onLore(CCObject *);
 
+    /*
     void onAudio(CCObject *);
     void onHideAudio(CCObject *);
+    */
 
 public:
     static OdysseyLevelPopup *create(int);

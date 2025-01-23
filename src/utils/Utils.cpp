@@ -482,7 +482,7 @@ std::pair<gd::string, gd::string> Odyssey::getLevelAudioAssets(int levelID)
         return {"10007227", "2390, 4060, 4397, 4404, 7625"};
         break;
     case 7603: // Phone Me First
-        return {"1139782", "1330, 1554, 2136, 4024, 4025, 4394, 6269, 13171, 20698"};
+        return {"1139782", "1330, 1554, 2136, 2981, 4024, 4025, 4074, 4273, 4274, 4394, 6269, 13171, 20698, 22875"};
         break;
     case 7604: // Wubsplosion
         return {"10007269", ""};

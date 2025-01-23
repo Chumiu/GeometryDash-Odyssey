@@ -64,7 +64,7 @@ bool OdysseyLevelPopup::setup(std::string const &title)
     infoButton->setPosition({buttonsMenu->getContentWidth() - 20.f, buttonsMenu->getContentHeight() - 20.f});
 
     //  Options Button
-    auto optionsSprite = CCSprite::createWithSpriteFrameName("GJ_optionsBtn02_001.png");
+    auto optionsSprite = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.2, CircleBaseColor::Green, CircleBaseSize::Small);
     //  optionsSprite->setScale(.8f);
 
     auto optionsButton = CCMenuItemSpriteExtra::create(
@@ -132,10 +132,20 @@ bool OdysseyLevelPopup::setup(std::string const &title)
         coinMenu->addChild(node);
     };
 
-    coinMenu->setPosition(difficultyNode->getPositionX(), difficultyNode->getPositionY() - 40);
-    GameToolbox::alignItemsHorisontally(coinArray, 3.f, {0, 0}, false);
+    coinMenu->setPosition(m_mainLayer->getContentWidth() / 2, 20.f);
+    GameToolbox::alignItemsHorisontally(coinArray, 12.f, {0, 0}, false);
     m_mainLayer->addChild(coinMenu);
 
+    if (!MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID)))
+    {
+        auto hint = CCSprite::createWithSpriteFrameName("GDO_AudioHint_001.png"_spr);
+        hint->setPosition({-40, 30});
+        m_mainLayer->addChild(hint);
+
+        //  GDO_AudioHint_001.png
+    }
+
+    /*
     //  Para descargar los assets de Audio y SFX (Texto)
     auto label = CCLabelBMFont::create("Download Assets", "goldFont.fnt");
     label->setScale(0.8f);
@@ -199,6 +209,7 @@ bool OdysseyLevelPopup::setup(std::string const &title)
 
     m_audioWidget->setPosition(winSize.width / 2, -30);
     this->addChild(m_audioWidget);
+    */
 
     return true;
 };
@@ -206,27 +217,32 @@ bool OdysseyLevelPopup::setup(std::string const &title)
 void OdysseyLevelPopup::onPlay(CCObject *sender)
 {
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
+    auto spanish = GameManager::sharedState()->getGameVariable("0201");
+
     if (!MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID)))
     {
         auto popup = createQuickPopup(
             "No Audio",
-            "This level uses <cj>Audio Assets</c> that has not been <cg>downloaded</c> yet. Do you want to play without music?\n<cy>Download by using the text below</c>",
-            "Cancel",
-            "Play",
+            spanish ? "El nivel le falta <cj>Audio</c> que no ha sido <cg>Descargado</c>. Por favor descargalo primero antes de jugar.\n<cy>Se encuentra en la parte de opciones del nivel</c> (Boton inferior izquierdo)." : "This level uses <cj>Audio Assets</c> that has not been <cg>downloaded</c> yet. Please go to download them first before playing.\n<cy>They're located on the level options</c> (Bottom Left button).",
+            spanish ? "Volver" : "Go Back",
+            nullptr, [](auto, auto) {});
+
+        /*
             [button, this](auto, bool btn2)
             {
-                if (btn2)
-                {
-                    FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
-                    button->setEnabled(false);
+            if (btn2)
+            {
+                FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
+                button->setEnabled(false);
 
-                    auto level = GameLevelManager::get()->getMainLevel(m_levelID, true);
-                    level->m_levelString = LocalLevelManager::get()->getMainLevelString(m_levelID);
-                    log::info("ID: {}", level->m_songID);
+                auto level = GameLevelManager::get()->getMainLevel(m_levelID, true);
+                level->m_levelString = LocalLevelManager::get()->getMainLevelString(m_levelID);
+                log::info("ID: {}", level->m_songID);
 
-                    CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, PlayLayer::scene(level, false, false)));
-                }
+                CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, PlayLayer::scene(level, false, false)));
+            }
             });
+        */
     }
     else
     {
@@ -280,6 +296,7 @@ void OdysseyLevelPopup::onLore(CCObject *sender)
     }
 }
 
+/*
 void OdysseyLevelPopup::onAudio(CCObject *sender)
 {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -317,6 +334,7 @@ void OdysseyLevelPopup::onHideAudio(CCObject *sender)
         }
     }
 };
+*/
 
 OdysseyLevelPopup *OdysseyLevelPopup::create(int levelID)
 {
