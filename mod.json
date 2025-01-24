@@ -51,7 +51,7 @@
 		"spanish-language": {
 			"type": "bool",
 			"name": "Spanish Translation",
-			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)",
+			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos.",
 			"default": false
 		},
 		"hide-custom": {
@@ -63,7 +63,7 @@
 		"updated-levels": {
 			"type": "bool",
 			"name": "Updated levels",
-			"description": "<cy>ENG:</c> Replaces the levels with a copy of their online version, to test out the new audio asset features.\n\n<cy>SPA:</c> Remplaza los niveles por una copia de sus versiones online, para probar la nueva function de descargar assets de audio",
+			"description": "<cy>ENG:</c> Replaces the levels with a copy of their online version, to test out the new audio asset feature.\n\n<cy>SPA:</c> Remplaza los niveles por una copia de sus versiones online, para probar la nueva function de descargar assets de audio.",
 			"default": true
 		},
 		"dev-title": {

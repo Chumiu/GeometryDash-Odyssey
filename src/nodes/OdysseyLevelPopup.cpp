@@ -64,7 +64,10 @@ bool OdysseyLevelPopup::setup(std::string const &title)
     infoButton->setPosition({buttonsMenu->getContentWidth() - 20.f, buttonsMenu->getContentHeight() - 20.f});
 
     //  Options Button
-    auto optionsSprite = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.2, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto isSongDownloaded = MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID));
+    auto baseColor_1 = isSongDownloaded ? CircleBaseColor::Green : CircleBaseColor::Cyan;
+
+    auto optionsSprite = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.2, baseColor_1, CircleBaseSize::Small);
     //  optionsSprite->setScale(.8f);
 
     auto optionsButton = CCMenuItemSpriteExtra::create(
@@ -73,17 +76,28 @@ bool OdysseyLevelPopup::setup(std::string const &title)
         menu_selector(OdysseyLevelPopup::onSettings));
     optionsButton->setPosition({8, 8});
 
+    //  Hint para descargar la cancion
+    if (!MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID)))
+    {
+        auto hint = CCSprite::createWithSpriteFrameName("GDO_AudioHint_001.png"_spr);
+        hint->setPosition({-40, 30});
+        m_mainLayer->addChild(hint);
+
+        optionsButton->runAction(CCRepeatForever::create(CCSequence::createWithTwoActions(
+            CCEaseSineOut::create(CCScaleTo::create(0.5f, 1.5)),
+            CCEaseSineIn::create(CCScaleTo::create(0.5f, 1)))));
+    }
+
     //  Para indicar que el jugador revise el comic o no
     auto seenComic = GameManager::sharedState()->getUGV(fmt::format("2{}", m_levelID + 11 - 7000).c_str());
-    auto baseColor = seenComic ? CircleBaseColor::Green : CircleBaseColor::Cyan;
+    auto baseColor_2 = seenComic ? CircleBaseColor::Green : CircleBaseColor::Cyan;
 
     //  Comics Button
     auto comicButton = CCMenuItemSpriteExtra::create(
-        CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, baseColor, CircleBaseSize::Small),
+        CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, baseColor_2, CircleBaseSize::Small),
         this,
         menu_selector(OdysseyLevelPopup::onComic));
     comicButton->setPosition({buttonsMenu->getContentWidth() - 8, 8});
-    ;
 
     //  Si el jugador no ha visto el comic, anima el boton
     if (!seenComic)
@@ -135,15 +149,6 @@ bool OdysseyLevelPopup::setup(std::string const &title)
     coinMenu->setPosition(m_mainLayer->getContentWidth() / 2, 20.f);
     GameToolbox::alignItemsHorisontally(coinArray, 12.f, {0, 0}, false);
     m_mainLayer->addChild(coinMenu);
-
-    if (!MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID)))
-    {
-        auto hint = CCSprite::createWithSpriteFrameName("GDO_AudioHint_001.png"_spr);
-        hint->setPosition({-40, 30});
-        m_mainLayer->addChild(hint);
-
-        //  GDO_AudioHint_001.png
-    }
 
     /*
     //  Para descargar los assets de Audio y SFX (Texto)
@@ -223,7 +228,7 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
     {
         auto popup = createQuickPopup(
             "No Audio",
-            spanish ? "El nivel le falta <cj>Audio</c> que no ha sido <cg>Descargado</c>. Por favor descargalo primero antes de jugar.\n<cy>Se encuentra en la parte de opciones del nivel</c> (Boton inferior izquierdo)." : "This level uses <cj>Audio Assets</c> that has not been <cg>downloaded</c> yet. Please go to download them first before playing.\n<cy>They're located on the level options</c> (Bottom Left button).",
+            spanish ? "El nivel tiene <cj>Assets de audio</c> que no ha sido <cg>descargado</c> aun. Descargalos primero antes de jugar. <cy>Se encuentran en las opciones del nivel</c> (Abajo a la Izquierda)." : "The level has <cj>Audio Assets</c> that has not been <cg>downloaded</c> yet. Please download them first before playing. <cy>They're located on the level options</c> (Bottom Left).",
             spanish ? "Volver" : "Go Back",
             nullptr, [](auto, auto) {});
 

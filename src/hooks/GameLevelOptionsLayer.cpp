@@ -33,11 +33,12 @@ class $modify(GDO_GameLevelOptionsLayer, GameLevelOptionsLayer)
 
             auto songObject = SongInfoObject::create(songID);
             auto audioWidget = CustomSongWidget::create(songObject, 0, 0, 0, 1, 0, 0, 0, 0);
-            audioWidget->setPosition({winSize.width / 2, winSize.height / 2 - 80.f});
+            audioWidget->setPosition({winSize.width / 2, winSize.height / 2 - 85.f});
             audioWidget->setID("song-widget");
 
             audioWidget->updateSongInfo();
             audioWidget->updateWithMultiAssets(assets.first, assets.second, 0);
+            audioWidget->getSongInfoIfUnloaded();
             
             //  Info Button
             auto infoButton = InfoAlertButton::create(
