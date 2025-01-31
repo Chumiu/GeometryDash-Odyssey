@@ -1,6 +1,6 @@
 {
 	"geode": "4.2.0",
-	"version": "v1.1.0-alpha.2",
+	"version": "v1.1.0-alpha.3",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074"
@@ -98,14 +98,6 @@
 			"type": "bool",
 			"name": "Empty all levels",
 			"description": "Turns all levels of the mod as empty templates (Just to test achievements and progression system)",
-			"default": false,
-			"enable-if": "dev-mode && saved:developer-version",
-			"enable-if-description": "Developer only"
-		},
-		"restart-mod": {
-			"type": "bool",
-			"name": "Restart the mod",
-			"description": "Resets everything from the mod the moment you enter the Menu layer. <cr>Only enable this</c> if you want to experience everything from the beginning.",
 			"default": false,
 			"enable-if": "dev-mode && saved:developer-version",
 			"enable-if-description": "Developer only"
