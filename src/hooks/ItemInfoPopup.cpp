@@ -25,6 +25,8 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             m_mainLayer->addChild(odysseyLabel);
         }
 
+        log::info("{}", type);
+
         if (type >= 900)
         {
             auto player = SimplePlayer::create(0);

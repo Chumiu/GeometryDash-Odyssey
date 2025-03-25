@@ -316,6 +316,9 @@ void IconUtils::addCredits(std::pair<int, UnlockType> pair, int accountID)
 
 bool IconUtils::isIconCustom(int id, IconType type)
 {
+    if (isCustomVehicle(type))
+        return true;
+
     if (id > 485 && type == IconType::Cube)
         return true;
     if (id > 169 && type == IconType::Ship)
@@ -384,4 +387,127 @@ int IconUtils::currentVehicleID()
     default:
         return gm->getPlayerFrame();
     }
+}
+
+int IconUtils::unlockTypeToInt(UnlockType type)
+{
+    return static_cast<int>(type);
+}
+
+int IconUtils::iconTypeToInt(IconType type)
+{
+    return static_cast<int>(type);
+}
+
+UnlockType IconUtils::intToUnlockType(int type)
+{
+    return static_cast<UnlockType>(type);
+}
+
+IconType IconUtils::intToIconType(int type)
+{
+    return static_cast<IconType>(type);
+}
+
+void IconUtils::setVehicleSaveId(int id, int type)
+{
+    std::vector<std::string> vehicles = {"boat", "drone", "silder", "minecart"};
+
+    if (type >= 900)
+    {
+        std::string saveIdentifier = fmt::format("{}_id", vehicles[type - 900]);
+        Mod::get()->setSavedValue<int>(saveIdentifier, id);
+    }
+}
+
+int IconUtils::currentIdForVehicle(int type)
+{
+    std::vector<std::string> vehicles = {"boat", "drone", "silder", "minecart"};
+
+    if (type >= 900)
+    {
+        std::string saveIdentifier = fmt::format("{}_id", vehicles[type - 900]);
+        return Mod::get()->getSavedValue<int>(saveIdentifier);
+    } 
+}
+
+bool IconUtils::isCustomVehicle(UnlockType type)
+{
+    return unlockTypeToInt(type) >= 900;
+}
+
+bool IconUtils::isCustomVehicle(IconType type)
+{
+    return iconTypeToInt(type) >= 900;
+}
+
+std::string IconUtils::getItemKey(int iconID, int type)
+{
+    std::string icon = "i";
+
+    switch (type)
+    {
+    case 900:
+        icon = "boat";
+        break;
+    case 901:
+        icon = "drone";
+        break;
+    case 902:
+        icon = "slider";
+        break;
+    case 903:
+        icon = "minecart";
+        break;
+    }
+
+    auto typeCast = static_cast<UnlockType>(type);
+
+    switch (typeCast)
+    {
+    case UnlockType::Ship:
+        icon = "ship";
+        break;
+    case UnlockType::Ball:
+        icon = "ball";
+        break;
+    case UnlockType::Bird:
+        icon = "bird";
+        break;
+    case UnlockType::Dart:
+        icon = "dart";
+        break;
+    case UnlockType::Robot:
+        icon = "robot";
+        break;
+    case UnlockType::Spider:
+        icon = "spider";
+        break;
+    case UnlockType::Swing:
+        icon = "swing";
+        break;
+    case UnlockType::Jetpack:
+        icon = "jetpack";
+        break;
+    case UnlockType::Death:
+        icon = "death";
+        break;
+    case UnlockType::ShipFire:
+        icon = "shipstreak";
+        break;
+    case UnlockType::Streak:
+        icon = "special";
+        break;
+    case UnlockType::GJItem:
+        icon = "item";
+        break;
+    case UnlockType::Col1:
+        icon = "c0";
+        break;
+    case UnlockType::Col2:
+        icon = "c1";
+        break;
+    }
+
+    return fmt::format("{}_{}", icon, iconID);
 }

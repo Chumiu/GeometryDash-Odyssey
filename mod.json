@@ -15,9 +15,13 @@
 	"name": "Geometry Dash: Odyssey",
 	"description": "A fanmade spin-off!",
 	"early-load": true,
-	"dependencies": {
-		"geode.node-ids": "1.18.0"
-	},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": ">=1.18.0",
+			"importance": "required"
+		}
+	],
 	"incompatibilities": {
 		"capeling.geometry-dash-lunar": {
 			"version": "*",

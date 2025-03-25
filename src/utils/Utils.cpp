@@ -227,11 +227,15 @@ int Odyssey::islandPageForLevelID(int levelID)
     if (levelID >= 7005 && levelID < 7500)
         return 1;
 
+    if (levelID > 7600)
+        return 3;
+
     if (levelID > 7500)
         return 2;
 
     return 0;
 };
+
 
 void Odyssey::verifyVaultHints()
 {

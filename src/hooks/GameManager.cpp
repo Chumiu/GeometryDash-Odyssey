@@ -66,7 +66,14 @@ class $modify(OdysseyGameManager, GameManager)
     bool isIconUnlocked(int id, IconType type)
     {
         if (IconUtils::isIconCustom(id, type))
-            return GameManager::isIconUnlocked(id, type);
+            if (IconUtils::isCustomVehicle(type))
+            {
+                auto obj = get()->m_valueKeeper->valueForKey(IconUtils::getItemKey(id, IconUtils::iconTypeToInt(type)));
+                return (id == 1) ? true : obj->intValue() == 1;
+            }
+            else
+                return GameManager::isIconUnlocked(id, type);
+            
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);

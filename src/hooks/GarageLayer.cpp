@@ -5,6 +5,11 @@
 
 class $modify(GDOGarageLayer, GJGarageLayer)
 {
+    struct Fields
+    {
+        ListButtonBar* m_customButtonbar;
+    };
+
     bool init()
     {
         if (!GJGarageLayer::init())
@@ -66,9 +71,106 @@ class $modify(GDOGarageLayer, GJGarageLayer)
         return true;
     }
 
+    void setupPage(int p0, IconType p1) {
+        
+        GJGarageLayer::setupPage(p0, p1);
+
+        m_selectedIconType = p1;
+        m_iconID = 0;
+
+        auto size = CCDirector::get()->getWinSize();
+            
+        int vehicleID = IconUtils::iconTypeToInt(p1);
+        if (vehicleID >= 900)
+        {
+            m_iconSelection->m_scrollLayer->m_extendedLayer->removeAllChildrenWithCleanup(true);
+
+            auto arr = CCArray::create();
+
+            for (int i = 0; i < 1; i++)
+            {
+                auto icon = GJItemIcon::createBrowserItem(IconUtils::intToUnlockType(vehicleID), i + 1);
+                icon->setScale(icon->scaleForType(IconUtils::intToUnlockType(vehicleID)));
+                
+                if (!GameManager::get()->isIconUnlocked(i + 1, p1))
+                    icon->changeToLockedState(1.f - icon->getScale() + 1.f);
+
+                auto btn = CCMenuItemSpriteExtra::create(icon, this, menu_selector(GJGarageLayer::onSelect));
+                btn->setTag(i + 1);
+
+                arr->addObject(btn);
+            }
+
+            auto page = ListButtonPage::create(arr, {.5f, 0}, 12, 3, 0, 0, 30);
+            page->setPosition({size.width / 2, 95});
+            page->setID("icon-page"_spr);
+            m_iconSelection->m_scrollLayer->m_extendedLayer->addChild(page);
+            m_iconSelection->goToPage(0);
+
+            auto menu = static_cast<CCMenu*>(page->getChildren()->objectAtIndex(0));
+
+            auto btn = static_cast<CCNode*>(menu->getChildren()->objectAtIndex(0));
+            
+            updateCursorPos(IconUtils::currentIdForVehicle(vehicleID));
+            
+
+            return;
+        }
+
+    }
+
+    void updateCursorPos(int btnTag)
+    {
+        if (btnTag == 0) btnTag = 1;
+        auto page = m_iconSelection->m_scrollLayer->m_extendedLayer->getChildByID("icon-page"_spr);
+
+        auto menu = static_cast<CCMenu*>(page->getChildren()->objectAtIndex(0));
+        auto btn = static_cast<CCMenu*>(menu->getChildByTag(btnTag));
+        if (!btn)
+        {
+            m_cursor1->setVisible(false);
+            return;
+        }
+
+        m_cursor1->setVisible(true);
+        m_cursor1->setPosition(menu->convertToWorldSpace(btn->getPosition()));
+    }
+
+    void onSelect(CCObject* sender) {
+        
+        int iconID = IconUtils::iconTypeToInt(m_selectedIconType);
+        if (iconID >= 900)
+        {
+            bool isSelected = m_selectedIconType == m_iconType && m_iconID == sender->getTag();
+            bool isUnlocked = GameManager::get()->isIconUnlocked(sender->getTag(), m_selectedIconType);
+            log::info("Unlocked: {} {}", isUnlocked, iconID);
+            log::info("Selected: {}", isSelected);
+
+            if (isSelected || (!isUnlocked && !isSelected))
+            {
+                ItemInfoPopup::create(sender->getTag(), IconUtils::intToUnlockType(iconID))->show();
+                return;
+            }
+
+            updateCursorPos(sender->getTag());
+            IconUtils::setVehicleSaveId(sender->getTag(), IconUtils::iconTypeToInt(m_selectedIconType));
+            m_playerObject->updatePlayerFrame(sender->getTag(), m_selectedIconType);
+            m_iconID = sender->getTag();
+            m_iconType = m_selectedIconType;
+
+        }
+        else 
+        {
+            GJGarageLayer::onSelect(sender);
+        }
+        
+       
+    }
+
     void onSelectTab(CCObject *sender)
     {
         GJGarageLayer::onSelectTab(sender);
+
         auto tag = sender->getTag();
 
         auto arr = getChildByID("category-menu")->getChildren();
@@ -87,53 +189,6 @@ class $modify(GDOGarageLayer, GJGarageLayer)
             }
         }
 
-        auto size = CCDirector::sharedDirector()->getWinSize();
-
-        if (sender->getTag() >= 900)
-        {
-            auto itemArray = CCArray::create();
-
-            auto square = CCSprite::createWithSpriteFrameName("playerSquare_001.png");
-
-            square->setOpacity(0);
-
-            auto vehicleID = static_cast<IconType>(tag);
-
-            auto itemIcon = SimplePlayer::create(0);
-            itemIcon->updatePlayerFrame(1, vehicleID);
-
-            itemIcon->setColor(GameManager::sharedState()->colorForIdx(17));
-            itemIcon->setPosition(square->getContentSize() / 2);
-
-            if (tag == 900)
-                itemIcon->setScale(.7f);
-
-            square->addChild(itemIcon);
-
-            auto selectIcon = CCSprite::createWithSpriteFrameName("GJ_select_001.png");
-            selectIcon->setPosition(square->getContentSize() / 2);
-
-            square->addChild(selectIcon);
-
-            square->setScale(.8f);
-
-            auto button = CCMenuItemSpriteExtra::create(square, this, menu_selector(GDOGarageLayer::onCustomSelect));
-            button->setTag(tag);
-
-            itemArray->addObject(button);
-
-            auto buttonBar = m_iconSelection;
-
-            auto extendedLayer = buttonBar->m_scrollLayer->m_extendedLayer;
-            extendedLayer->removeAllChildrenWithCleanup(true);
-
-            auto menu = CCMenu::create();
-            menu->setPosition({size.width / 2 - 160, size.height / 2 - 40});
-
-            menu->addChild(button);
-
-            extendedLayer->addChild(menu);
-        }
     }
 
     void onCustomSelect(CCObject *sender)
