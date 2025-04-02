@@ -136,7 +136,7 @@ bool OdysseyLevelPopup::setup(std::string const &title)
     auto coinArray = CCArray::create();
     coinMenu->setContentSize({40.0f, 25.f});
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < m_level->m_coins; i++)
     {
         bool isCollected = GameStatsManager::sharedState()->hasSecretCoin(fmt::format("{}_{}", m_level->m_levelID.value(), i + 1).c_str());
         auto node = CCSprite::createWithSpriteFrameName(isCollected ? "GJ_coinsIcon_001.png" : "GJ_coinsIcon_gray_001.png");

@@ -1,6 +1,7 @@
 #include "SecretVaultLayer2.hpp"
 #include "../utils/Dialogs.hpp"
 #include "../utils/Utils.hpp"
+#include "OdysseySelectLayer.hpp"
 
 bool SecretVaultLayer2::init()
 {
@@ -149,12 +150,37 @@ bool SecretVaultLayer2::init()
         addChild(text);
     }
 
+    //puerta
+    auto doorSpr = CCSprite::createWithSpriteFrameName("theTowerDoor_001.png");
+    doorSpr->setColor({0, 255, 0});
+    doorSpr->setScale(.7f);
+    doorSpr->setAnchorPoint({ .5f, .5f });
+
+    auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
+
+    auto doorParticle = GameToolbox::particleFromString("30a-1a2.2a0.48a11a90a180a29a0a11a0a0a0a0a0a0a0a5a1a0a0a0.0745098a0a0a0a0.611765a0a1a0a2a1a0a0a0a0a0.937255a0a1a0a1a0a0.54a0a0.57a0a56a0a11a0a-25a17a1a2a1a0a0a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
+    doorParticle->setStartColor({0, 100, 0, 0});
+    doorParticle->setEndColor({0, 255, 0, 255});
+    doorParticle->setPosition(doorSpr->getScaledContentSize() / 2);
+
+    doorBtn->addChild(doorParticle);
+
+    auto doorMenu = CCMenu::create();
+    doorMenu->setPosition({winSize.width - 45, 45});
+    doorMenu->addChild(doorBtn);
+    addChild(doorMenu);
+
     GameManager::sharedState()->fadeInMusic("SecretLoop02.mp3"_spr);
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
 
     return true;
 };
+
+void SecretVaultLayer2::onExtraLevels(CCObject*)
+{
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(3)));
+}
 
 void SecretVaultLayer2::addLevelAnimation()
 {
@@ -1372,7 +1398,7 @@ void SecretVaultLayer2::updateMessage(std::string message, MessageType type)
 void SecretVaultLayer2::keyBackClicked()
 {
     GameManager::sharedState()->fadeInMusic("IslandLoop02.mp3"_spr);
-    CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(1)));
 };
 
 void SecretVaultLayer2::onBack(CCObject *)

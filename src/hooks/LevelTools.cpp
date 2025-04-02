@@ -48,6 +48,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "Phone Me First";
 		case 604:
 			return "Wubsplosion";
+		case 605:
+			return "Granite";
 
 		default:
 			return LevelTools::getAudioTitle(levelID);
@@ -90,6 +92,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "1139782.mp3";
 		case 604:
 			return "10007269.ogg";
+		case 605: 
+			return "10007320.ogg";
 
 		default:
 			return LevelTools::getAudioFileName(levelID);
@@ -316,6 +320,16 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_levelName = getAudioTitle(604);
 			level->m_audioTrack = 604;
 			level->m_stars = 12;
+			level->m_difficulty = GJDifficulty::Insane;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 0;
+			break;
+		
+		case 7605: // Granite
+			level->m_levelName = getAudioTitle(605);
+			level->m_audioTrack = 605;
+			level->m_stars = 14;
 			level->m_difficulty = GJDifficulty::Insane;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
