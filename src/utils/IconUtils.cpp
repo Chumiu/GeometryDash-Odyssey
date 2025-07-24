@@ -428,7 +428,7 @@ int IconUtils::currentIdForVehicle(int type)
     {
         std::string saveIdentifier = fmt::format("{}_id", vehicles[type - 900]);
         return Mod::get()->getSavedValue<int>(saveIdentifier);
-    } 
+    }
 }
 
 bool IconUtils::isCustomVehicle(UnlockType type)
@@ -465,6 +465,9 @@ std::string IconUtils::getItemKey(int iconID, int type)
 
     switch (typeCast)
     {
+    case UnlockType::Cube:
+        icon = "icon";
+        break;
     case UnlockType::Ship:
         icon = "ship";
         break;
