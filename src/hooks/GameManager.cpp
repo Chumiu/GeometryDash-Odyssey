@@ -72,8 +72,9 @@ class $modify(OdysseyGameManager, GameManager)
                 return (id == 1) ? true : obj->intValue() == 1;
             }
             else
+            {
                 return GameManager::isIconUnlocked(id, type);
-            
+            }
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);
@@ -125,8 +126,9 @@ class $modify(OdysseyGameManager, GameManager)
 
     gd::string sheetNameForIcon(int iconID, int iconType)
     {
-        if(iconType >= 900){
-            const char* gamemode[4] = {"boat", "drone", "slider", "minecart"};
+        if (iconType >= 900)
+        {
+            const char *gamemode[4] = {"boat", "drone", "slider", "minecart"};
 
             return fmt::format("{}_{:02}", iconType - 900, iconID);
         }
