@@ -10,35 +10,26 @@ namespace Odyssey
     DialogLayer *createDialogResponse(const char *event, int times);
 
     //  Nodos para el Level Popup
-    CCNode *createDifficultyNode(GJDifficulty, int);
+    CCNode *createDifficultyNode(GJDifficulty, int, bool);
     CCNode *createProgressBar(int, bool);
 
     //  Funciones
     void addCorners(CCLayer *, const char *, float);
     void insertAssetsToMap(bool, std::vector<int>);
-    void updateIcon(CCNode *, int, IconType, bool);
-    void updateRobotSprite(GJRobotSprite *, int, IconType);
-    void addCreditsToIcon(std::pair<int, UnlockType>, int);
+
+    void verifyVaultHints();
     void hasAllVaultRewards();
 
-    //  Banderas
-    bool isIconCustom(int, IconType);
-    bool isIconSecret(int, IconType);
-    bool isIconShop(int, IconType);
-    bool isIconUpcoming(int, IconType);
-
     //  Enteros
-    int currentVehicleID();
     int islandPageForLevelID(int);
 
     //  Vectores
-    std::vector<std::string> getPlayerFrames(int, IconType);
     std::vector<Mod *> getEarlyLoadBreakingMods();
     std::vector<Mod *> getBreakingMods();
+    
+    int getLevelSongID(int levelID);
+    std::pair<gd::string, gd::string> getLevelAudioAssets(int levelID);
 
-    void unlockObject(int, int);
-
-    void patch(int, geode::ByteVector const&);
-
+    void patch(int, geode::ByteVector const &);
     std::vector<unsigned char> intToBytes(int);
 };

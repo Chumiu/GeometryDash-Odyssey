@@ -4,7 +4,9 @@
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PurchaseItemPopup.hpp>
+
 #include "utils/Utils.hpp"
+#include "utils/IconUtils.hpp"
 
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
@@ -41,7 +43,8 @@ class $modify(PauseLayer)
 		PauseLayer::onQuit(sender);
 		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
 
-		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page + 1));
+		auto pageID = (page + 1 < 3) ? page + 1 : 3;
+		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, pageID));
 	}
 };
 
@@ -170,6 +173,6 @@ class $modify(PurchaseItemPopup)
 				GameManager::sharedState()->setUGV("238", true);
 		}
 
-		Odyssey::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
+		IconUtils::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
 	}
 };

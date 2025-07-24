@@ -1,9 +1,22 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
+
 #include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
+
+enum class CustomIcons
+{
+    Cube = 33,
+    Ship = 10,
+    Ball = 12,
+    UFO = 10,
+    Wave = 6,
+    Swing = 5,
+    Jetpack = 1
+};
 
 class $modify(OdysseyGameManager, GameManager)
 {
@@ -12,30 +25,30 @@ class $modify(OdysseyGameManager, GameManager)
         GameManager::firstLoad();
         Mod::get()->setSavedValue<int>("Orbs", 0);
     };
-    
+
     int countForType(IconType icon)
     {
         //  auto hide = GameManager::sharedState()->getGameVariable("0202");
         switch (icon)
         {
         case IconType::Cube:
-            return 514;
+            return 485 + (int)CustomIcons::Cube;
         case IconType::Ship:
-            return 177;
+            return 169 + (int)CustomIcons::Ship;
         case IconType::Ball:
-            return 126;
+            return 118 + (int)CustomIcons::Ball;
         case IconType::Ufo:
-            return 154;
+            return 149 + (int)CustomIcons::UFO;
         case IconType::Wave:
-            return 100;
+            return 96 + (int)CustomIcons::Wave;
         case IconType::Robot:
             return 68;
         case IconType::Spider:
             return 69;
         case IconType::Swing:
-            return 47;
+            return 43 + (int)CustomIcons::Swing;
         case IconType::Jetpack:
-            return 9;
+            return 8 + (int)CustomIcons::Jetpack;
         case IconType::Special:
             return 7;
         case IconType::DeathEffect:
@@ -52,8 +65,15 @@ class $modify(OdysseyGameManager, GameManager)
 
     bool isIconUnlocked(int id, IconType type)
     {
-        if (Odyssey::isIconCustom(id, type))
-            return GameManager::isIconUnlocked(id, type);
+        if (IconUtils::isIconCustom(id, type))
+            if (IconUtils::isCustomVehicle(type))
+            {
+                auto obj = get()->m_valueKeeper->valueForKey(IconUtils::getItemKey(id, IconUtils::iconTypeToInt(type)));
+                return (id == 1) ? true : obj->intValue() == 1;
+            }
+            else
+                return GameManager::isIconUnlocked(id, type);
+            
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);
@@ -102,4 +122,16 @@ class $modify(OdysseyGameManager, GameManager)
     {
         GameManager::dataLoaded(dict);
     }
+
+    gd::string sheetNameForIcon(int iconID, int iconType)
+    {
+        if(iconType >= 900){
+            const char* gamemode[4] = {"boat", "drone", "slider", "minecart"};
+
+            return fmt::format("{}_{:02}", iconType - 900, iconID);
+        }
+
+        auto ret = GameManager::sheetNameForIcon(iconID, iconType);
+        return ret;
+    };
 };

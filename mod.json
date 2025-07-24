@@ -1,54 +1,45 @@
 {
-	"geode": "4.1.1",
-	"version": "v1.0.1",
+	"geode": "4.6.2",
 	"gd": {
 		"win": "2.2074",
 		"android": "2.2074"
 	},
+	"id": "teamtcm.geometry-dash-odyssey",
+	"name": "Geometry Dash: Odyssey",
+	"description": "A fanmade spin-off!",
+	"version": "v1.1.0-alpha.3",
 	"developers": [
 		"Team TCM",
 		"Chumiiu",
 		"Cypher",
 		"ML500"
 	],
-	"id": "teamtcm.geometry-dash-odyssey",
-	"name": "Geometry Dash: Odyssey",
-	"description": "",
 	"early-load": true,
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"version": ">=1.18.0",
-			"importance": "required"
+	"dependencies": {
+		"geode.node-ids": "1.18.0"
+	},
+	"incompatibilities": {
+		"capeling.geometry-dash-lunar": {
+			"version": "*",
+			"importance": "breaking"
+		},
+		"dankmeme.globed2": {
+			"version": "*",
+			"importance": "breaking"
+		},
+		"gdutilsdevs.gdutils": {
+			"version": "*",
+			"importance": "breaking"
+		},
+		"itzkiba.better_progression": {
+			"version": "*",
+			"importance": "breaking"
+		},
+		"ninxout.redash": {
+			"version": "*",
+			"importance": "breaking"
 		}
-	],
-	"incompatibilities": [
-		{
-			"id": "capeling.geometry-dash-lunar",
-			"version": "*",
-			"importance": "conflicting"
-		},
-		{
-			"id": "dankmeme.globed2",
-			"version": "*",
-			"importance": "conflicting"
-		},
-		{
-			"id": "gdutilsdevs.gdutils",
-			"version": "*",
-			"importance": "conflicting"
-		},
-		{
-			"id": "itzkiba.better_progression",
-			"version": "*",
-			"importance": "conflicting"
-		},
-		{
-			"id": "ninxout.redash",
-			"version": "*",
-			"importance": "conflicting"
-		}
-	],
+	},
 	"links": {
 		"community": "https://discord.gg/PNPrR4DEbw"
 	},
@@ -59,18 +50,63 @@
 		},
 		"spanish-language": {
 			"type": "bool",
-			"name": "Spanish",
-			"description": "<cy>ENG</c>: Translates most of the mod's dialogue in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en Espanol. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)",
+			"name": "Spanish Translation",
+			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos.",
 			"default": false
+		},
+		"hide-custom": {
+			"type": "bool",
+			"name": "Hide Custom Gamemodes",
+			"description": "<cy>ENG</c>: Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)\n\n<cy>ESP</c>: Oculta los botones de los gamemodes personalizados en el Icon Kit (tienen solamente un icono, por ahora...)",
+			"default": false
+		},
+		"updated-levels": {
+			"type": "bool",
+			"name": "Updated levels",
+			"description": "<cy>ENG:</c> Replaces the levels with a copy of their online version, to test out the new audio asset feature.\n\n<cy>SPA:</c> Remplaza los niveles por una copia de sus versiones online, para probar la nueva function de descargar assets de audio.",
+			"default": true
+		},
+		"dev-title": {
+			"type": "title",
+			"name": "Development Options"
+		},
+		"dev-mode": {
+			"type": "bool",
+			"name": "Developer Mode",
+			"description": "Enabling developer modes allows you to bypass most restrictions (like access to Online Menu)",
+			"default": false,
+			"enable-if": "saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"bypass-levels": {
+			"type": "bool",
+			"name": "Level Bypass",
+			"description": "Unlocks all levels, disabling the progression system",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"bypass-vaults": {
+			"type": "bool",
+			"name": "Vault Bypass",
+			"description": "Unlocks the vaults (You skip the requirements to open them)",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
+		},
+		"empty-levels": {
+			"type": "bool",
+			"name": "Empty all levels",
+			"description": "Turns all levels of the mod as empty templates (Just to test achievements and progression system)",
+			"default": false,
+			"enable-if": "dev-mode && saved:developer-version",
+			"enable-if-description": "Developer only"
 		}
 	},
 	"resources": {
 		"spritesheets": {
 			"GJO_GameSheet01": [
 				"resources/OdysseySheet/*.png"
-			],
-			"GJO_IconSheet": [
-				"resources/IconSheet/*.png"
 			],
 			"GJO_SecretSheet": [
 				"resources/VaultSheet/*.png"
@@ -79,8 +115,9 @@
 		"files": [
 			"resources/HollowVoicelines/*.mp3",
 			"resources/Soundtrack/*.mp3",
+			"resources/Icons/*.plist",
+			"resources/Icons/*.png",
 			"resources/Levels/*.txt",
-			"resources/SFX/*.ogg",
 			"resources/*.zip"
 		],
 		"sprites": [
@@ -88,6 +125,7 @@
 		]
 	},
 	"tags": [
-		"content"
+		"content",
+		"online"
 	]
 }

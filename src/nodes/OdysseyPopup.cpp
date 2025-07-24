@@ -1,5 +1,13 @@
 #include "OdysseyPopup.hpp"
 
+#ifdef GEODE_IS_WINDOWS
+    const int TIME_VALUE = 10;
+#endif
+
+#ifdef GEODE_IS_ANDROID
+    const int TIME_VALUE = 5;
+#endif
+
 bool OdysseyPopup::setup(std::string const &title, std::string const &desc)
 {
     auto contentSize = m_mainLayer->getContentSize();

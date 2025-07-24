@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/SimplePlayer.hpp>
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
 
@@ -10,6 +10,6 @@ class $modify(CustomSimplePlayer, SimplePlayer)
     {
         SimplePlayer::updatePlayerFrame(iconID, type);
 
-        Odyssey::updateIcon(this, iconID, type, false);
+        IconUtils::updateIcon(this, iconID, type, false);
     }
 };

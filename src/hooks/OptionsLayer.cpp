@@ -2,6 +2,8 @@
 #include <Geode/modify/OptionsLayer.hpp>
 #include <Geode/modify/MoreOptionsLayer.hpp>
 
+#include "../nodes/OdysseyPopup.hpp"
+
 using namespace geode::prelude;
 
 class $modify(GDO_OptionsLayer, OptionsLayer)
@@ -34,11 +36,14 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 			return false;
 
 		GameManager::sharedState()->setGameVariable("0201", Mod::get()->getSettingValue<bool>("spanish-language"));
-		GameManager::sharedState()->setGameVariable("0202", Mod::get()->getSettingValue<bool>("hide-upcoming"));
+		GameManager::sharedState()->setGameVariable("0202", Mod::get()->getSettingValue<bool>("hide-custom"));
+		GameManager::sharedState()->setGameVariable("0203", Mod::get()->getSettingValue<bool>("updated-levels"));
+		auto spanish = Mod::get()->getSettingValue<bool>("spanish-language");
 
 		//	Aun en fase de prueba
-		MoreOptionsLayer::addToggle("Spanish", "0201", "<cy>ENG</c>: Translates most of the mod's dialogue in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en Espanol. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos (como la falta de acentos)");
-		//	MoreOptionsLayer::addToggle("Hide upcoming", "0202", "<cy>ENG</c>: Hides icons that are tagged as upcoming (thus impossible to get for now).\n\n<cy>SPA</c>: Oculta los iconos etiquetados como proximos (por tanto, imposibles de conseguir por ahora).");
+		MoreOptionsLayer::addToggle("Spanish Translation", "0201", spanish ? "Traduce mayor parte del mod en lenguaje hispano. Por limitaciones de caracteres, habran errores ortograficos (Como la falta de acentos)" : "Translates most of the mod in spanish. Due to character limitations, there will be spelling errors");
+		MoreOptionsLayer::addToggle("Hide Custom Modes", "0202", spanish ? "Oculta los botones de los gamemodes personalizados en el Icon Kit (porque solo tienen un icono, por ahora...)" : "Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)");
+		MoreOptionsLayer::addToggle("Updated levels", "0203", spanish ? "Sustituye los niveles por una copia de su version online, para experimentar con las nuevas funciones de descargar assets de audio, que se agregaran en <cy>Actualizacion 1.1</c>." : "Replaces the levels with a copy of their online version, to experiment with the new audio asset features that will be added in <cy>Update 1.1</c>.");
 
 		return true;
 	}
@@ -59,9 +64,23 @@ class $modify(GDO_MoreOptionsLayer, MoreOptionsLayer)
 		log::debug("TAG: {}", tag);
 
 		if (sender->getTag() == 201)
+		{
 			Mod::get()->setSettingValue<bool>("spanish-language", GameManager::sharedState()->getGameVariable("0201"));
 
+			if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
+			{
+				auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+				popup->setWarning(false, true);
+				popup->setZOrder(104);
+				popup->m_scene = this;
+				popup->show();
+			};
+		}
+
 		if (sender->getTag() == 202)
-			Mod::get()->setSettingValue<bool>("hide-upcoming", GameManager::sharedState()->getGameVariable("0202"));
+			Mod::get()->setSettingValue<bool>("hide-custom", GameManager::sharedState()->getGameVariable("0202"));
+
+		if (sender->getTag() == 203)
+			Mod::get()->setSettingValue<bool>("updated-levels", GameManager::sharedState()->getGameVariable("0203"));
 	}
 };

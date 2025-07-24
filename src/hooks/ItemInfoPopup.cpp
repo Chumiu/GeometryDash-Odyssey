@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/ItemInfoPopup.hpp>
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
 
@@ -12,6 +12,20 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             return false;
 
         int type = static_cast<int>(p1);
+        
+        if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1)))){
+            auto winSize = CCDirector::sharedDirector()->getWinSize();
+            auto popupSize = m_mainLayer->getChildByID("background")->getContentSize();
+
+            auto odysseyLabel = CCSprite::createWithSpriteFrameName("GDO_OdysseyText_001.png"_spr);
+            odysseyLabel->setPosition({winSize.width / 2 - popupSize.width / 2 + 44, winSize.height / 2 + popupSize.height / 2 - 28});
+            odysseyLabel->setID("odyssey-label"_spr);
+            odysseyLabel->setScale(0.70f);
+
+            m_mainLayer->addChild(odysseyLabel);
+        }
+
+        log::info("{}", type);
 
         if (type >= 900)
         {
@@ -41,14 +55,14 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             }
 
             //  EL ICONO ES DE LA TIENDA DE CARP
-            if (Odyssey::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 5)
+            if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 5)
             {
                 descriptionString = fmt::format("You can <cl>buy</c> this <cg>{}</c> in the <cd>Carp's shop</c>!", iconName);
                 titleString = "Carp's Shop";
             }
 
             //  EL ICONO ES PARA UNA ACTUALIZACION FUTURA
-            if (Odyssey::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 6)
+            if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 6)
             {
                 descriptionString = fmt::format("This <cg>{}</c> can be <cl>unlocked</c> in update <cy>2.0</c>.", iconName);
                 titleString = "Coming Soon";
@@ -62,7 +76,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
         }
         else
         {
-            if (Odyssey::isIconSecret(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+            if (IconUtils::isIconSecret(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
             {
                 if (auto descriptionArea = static_cast<TextArea *>(m_mainLayer->getChildByID("description-area")))
                 {

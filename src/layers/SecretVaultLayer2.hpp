@@ -31,6 +31,8 @@ protected:
     CCLabelBMFont * m_levelTitle = nullptr;
     void addLevelAnimation();
 
+    void onExtraLevels(CCObject*);
+
 public:
     static SecretVaultLayer2 *create();
     CCScene *scene();

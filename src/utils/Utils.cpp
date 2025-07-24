@@ -79,7 +79,7 @@ CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
     return node;
 };
 
-CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars)
+CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars, bool isCompleted)
 {
     auto node = CCNode::create();
     node->setContentSize({22.f, 32.5f});
@@ -92,6 +92,9 @@ CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars)
     auto starLabel = CCLabelBMFont::create(std::to_string(stars).c_str(), "bigFont.fnt");
     starLabel->limitLabelWidth(25, 0.6f, 0.1f);
     starLabel->setPosition({0, 0});
+
+    if (isCompleted)
+        starLabel->setColor({255, 255, 0});
 
     auto starSprite = CCSprite::createWithSpriteFrameName("GJ_bigStar_noShadow_001.png");
     starSprite->setPosition({node->getContentWidth(), 0});
@@ -203,32 +206,6 @@ DialogLayer *Odyssey::createDialogResponse(const char *event, int times)
     return dialogLayer;
 }
 
-int Odyssey::currentVehicleID()
-{
-    auto gm = GameManager::get();
-    switch (gm->m_playerIconType)
-    {
-    case IconType::Ship:
-        return gm->getPlayerShip();
-    case IconType::Ball:
-        return gm->getPlayerBall();
-    case IconType::Ufo:
-        return gm->getPlayerBird();
-    case IconType::Wave:
-        return gm->getPlayerDart();
-    case IconType::Robot:
-        return gm->getPlayerRobot();
-    case IconType::Spider:
-        return gm->getPlayerSpider();
-    case IconType::Swing:
-        return gm->getPlayerSwing();
-    case IconType::Jetpack:
-        return gm->getPlayerJetpack();
-    default:
-        return gm->getPlayerFrame();
-    }
-}
-
 void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
 {
     auto map = MusicDownloadManager::sharedState()->m_resourceSfxUnorderedSet;
@@ -242,396 +219,40 @@ void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
     }
 }
 
-bool Odyssey::isIconCustom(int id, IconType type)
-{
-    if (id > 485 && type == IconType::Cube)
-        return true;
-    if (id > 169 && type == IconType::Ship)
-        return true;
-    if (id > 118 && type == IconType::Ball)
-        return true;
-    if (id > 149 && type == IconType::Ufo)
-        return true;
-    if (id > 96 && type == IconType::Wave)
-        return true;
-    if (id > 68 && type == IconType::Robot)
-        return true;
-    if (id > 69 && type == IconType::Spider)
-        return true;
-    if (id > 43 && type == IconType::Swing)
-        return true;
-    if (id > 8 && type == IconType::Jetpack)
-        return true;
-    if (id > 17 && type == IconType::Item)
-        return true;
-    if (static_cast<int>(type) >= 900)
-        return true;
-
-    return false;
-}
-
-bool Odyssey::isIconSecret(int id, IconType type)
-{
-    if ((id >= 511 && id <= 514) && type == IconType::Cube)
-        return true;
-    if ((id >= 176) && type == IconType::Ship)
-        return true;
-    if ((id >= 123) && type == IconType::Ball)
-        return true;
-    if ((id >= 150) && type == IconType::Ufo)
-        return true;
-    if ((id >= 99) && type == IconType::Wave)
-        return true;
-    if ((id >= 9) && type == IconType::Jetpack)
-        return true;
-
-    return false;
-}
-
-bool Odyssey::isIconUpcoming(int id, IconType type)
-{
-    /*
-    if (id >= 514 && type == IconType::Cube)
-        return true;
-    if (id >= 173 && type == IconType::Ship)
-        return true;
-    if (id >= 124 && type == IconType::Ball)
-        return true;
-    if (id >= 154 && type == IconType::Ufo)
-        return true;
-    if (id >= 100 && type == IconType::Wave)
-        return true;
-    if (id >= 46 && type == IconType::Swing)
-        return true;
-    */
-
-    return false;
-}
-
-std::vector<std::string> Odyssey::getPlayerFrames(int iconID, IconType type)
-{
-    std::string iconName;
-    switch (type)
-    {
-    case IconType::Ship:
-        iconName = "ship";
-        break;
-    case IconType::Ball:
-        iconName = "player_ball";
-        break;
-    case IconType::Ufo:
-        iconName = "bird";
-        break;
-    case IconType::Wave:
-        iconName = "dart";
-        break;
-    case IconType::Robot:
-        iconName = "robot";
-        break;
-    case IconType::Spider:
-        iconName = "spider";
-        break;
-    case IconType::Swing:
-        iconName = "swing";
-        break;
-    case IconType::Jetpack:
-        iconName = "jetpack";
-        break;
-    default:
-        iconName = "player";
-        break;
-    }
-
-    int typeNumber = static_cast<int>(type);
-
-    switch (typeNumber)
-    {
-    case 900:
-        iconName = "boat";
-        break;
-    case 901:
-        iconName = "drone";
-        break;
-    case 902:
-        iconName = "slider";
-        break;
-    case 903:
-        iconName = "minecart";
-        break;
-    }
-
-    if (typeNumber >= 900)
-        iconID = 1;
-
-    std::string frame1 = fmt::format("{}_{:02}_001.png"_spr, iconName, iconID);
-    std::string frame2 = fmt::format("{}_{:02}_2_001.png"_spr, iconName, iconID);
-    std::string frameExtra = fmt::format("{}_{:02}_extra_001.png"_spr, iconName, iconID);
-    std::string frameGlow = fmt::format("{}_{:02}_glow_001.png"_spr, iconName, iconID);
-    std::string frameDome = fmt::format("{}_{:02}_3_001.png"_spr, iconName, iconID);
-
-    return {frame1, frame2, frameExtra, frameGlow, frameDome};
-}
-
-void Odyssey::updateIcon(CCNode *player, int iconID, IconType type, bool isPlayerObject)
-{
-    if (!isIconCustom(iconID, type))
-        return;
-
-    if (type == IconType::Robot || type == IconType::Spider)
-        return;
-
-    auto frameCache = CCSpriteFrameCache::get();
-    auto frameDict = frameCache->m_pSpriteFrames;
-
-    auto frames = getPlayerFrames(iconID, type);
-    auto frame1Texture = frames[0];
-    auto frame2Texture = frames[1];
-    auto extraTexture = frames[2];
-    auto glowTexture = frames[3];
-    gd::string domeTexture = frames[4];
-
-    CCSprite *firstLayer;
-    CCSprite *secondLayer;
-    CCSprite *extraLayer;
-    CCSprite *glowLayer;
-    GJRobotSprite *robotSprite;
-    CCSprite *ufoDome;
-
-    if (isPlayerObject)
-    {
-        auto obj = static_cast<PlayerObject *>(player);
-
-        firstLayer = obj->m_iconSprite;
-        secondLayer = obj->m_iconSpriteSecondary;
-        extraLayer = obj->m_iconSpriteWhitener;
-        glowLayer = obj->m_iconGlow;
-        robotSprite = obj->m_robotSprite;
-
-        if (type == IconType::Ship || type == IconType::Jetpack || type == IconType::Ufo)
-        {
-            firstLayer = obj->m_vehicleSprite;
-            secondLayer = obj->m_vehicleSpriteSecondary;
-            extraLayer = obj->m_vehicleSpriteWhitener;
-            glowLayer = obj->m_vehicleGlow;
-        }
-
-        if (type == IconType::Ufo)
-            ufoDome = obj->m_birdVehicle;
-    }
-    else
-    {
-        auto obj = static_cast<SimplePlayer *>(player);
-
-        firstLayer = obj->m_firstLayer;
-        secondLayer = obj->m_secondLayer;
-        extraLayer = obj->m_detailSprite;
-        glowLayer = obj->m_outlineSprite;
-        robotSprite = obj->m_robotSprite;
-
-        if (type == IconType::Ufo)
-            ufoDome = obj->m_birdDome;
-    }
-
-    /*
-    if (type == IconType::Robot || type == IconType::Spider)
-    {
-        updateRobotSprite(robotSprite, iconID, type);
-        return;
-    }
-    */
-
-    if (frameDict->objectForKey(frame1Texture))
-    {
-        firstLayer->setDisplayFrame(frameCache->spriteFrameByName(frame1Texture.c_str()));
-    }
-
-    if (frameDict->objectForKey(frame2Texture))
-    {
-        secondLayer->setDisplayFrame(frameCache->spriteFrameByName(frame2Texture.c_str()));
-        secondLayer->setPosition(firstLayer->getContentSize() / 2);
-    }
-
-    if (frameDict->objectForKey(extraTexture))
-    {
-        extraLayer->setVisible(true);
-        extraLayer->setDisplayFrame(frameCache->spriteFrameByName(extraTexture.c_str()));
-        extraLayer->setPosition(firstLayer->getContentSize() / 2);
-    }
-    else
-        extraLayer->setVisible(false);
-
-    if (frameDict->objectForKey(glowTexture))
-    {
-        glowLayer->setDisplayFrame(frameCache->spriteFrameByName(glowTexture.c_str()));
-        if (!isPlayerObject)
-            glowLayer->setPosition(firstLayer->getContentSize() / 2);
-    }
-
-    if (type == IconType::Ufo)
-    {
-        if (frameDict->objectForKey(domeTexture))
-        {
-            ufoDome->setDisplayFrame(frameCache->spriteFrameByName(domeTexture.c_str()));
-            ufoDome->setPosition(firstLayer->getContentSize() / 2);
-        }
-    }
-}
-
-void Odyssey::updateRobotSprite(GJRobotSprite *sprite, int iconID, IconType type)
-{
-    if (!sprite)
-        return;
-
-    sprite->setBatchNode(nullptr);
-    sprite->m_paSprite->setBatchNode(nullptr);
-
-    auto spriteParts = sprite->m_paSprite->m_spriteParts;
-
-    auto frameCache = CCSpriteFrameCache::get();
-
-    const char *iconName = "robot";
-    if (type == IconType::Spider)
-        iconName = "spider";
-
-    for (int i = 0; i < spriteParts->count(); i++)
-    {
-        auto spritePart = static_cast<CCSpritePart *>(spriteParts->objectAtIndex(i));
-        auto tag = spritePart->getTag();
-
-        std::string frame1Texture = fmt::format("{}_{:02}_{:02}_001.png"_spr, iconName, iconID, tag);
-        std::string frame2Texture = fmt::format("{}_{:02}_{:02}_2_001.png"_spr, iconName, iconID, tag);
-        std::string extraTexture = fmt::format("{}_{:02}_{:02}_extra_001.png"_spr, iconName, iconID, tag);
-        std::string glowTexture = fmt::format("{}_{:02}_{:02}_glow_001.png"_spr, iconName, iconID, tag);
-
-        if (auto frame1 = frameCache->spriteFrameByName(frame1Texture.c_str()))
-        {
-            spritePart->setBatchNode(nullptr);
-            spritePart->setDisplayFrame(frame1);
-        }
-
-        if (auto secondSprite = static_cast<CCSprite *>(sprite->m_secondArray->objectAtIndex(i)))
-        {
-            if (auto frame2 = frameCache->spriteFrameByName(frame2Texture.c_str()))
-            {
-                secondSprite->setBatchNode(nullptr);
-                secondSprite->setDisplayFrame(frame2);
-                secondSprite->setPosition(spritePart->getContentSize() / 2);
-            }
-        }
-
-        if (auto glowChild = static_cast<CCSprite *>(sprite->m_glowSprite->getChildren()->objectAtIndex(i)))
-        {
-            if (auto frameGlow = frameCache->spriteFrameByName(glowTexture.c_str()))
-            {
-                glowChild->setBatchNode(nullptr);
-                glowChild->setDisplayFrame(frameGlow);
-            }
-        }
-
-        if (spritePart == sprite->m_headSprite)
-        {
-            if (auto frameExtra = frameCache->spriteFrameByName(extraTexture.c_str()))
-            {
-                if (sprite->m_extraSprite)
-                {
-                    sprite->m_extraSprite->setBatchNode(nullptr);
-                    sprite->m_extraSprite->setDisplayFrame(frameExtra);
-                }
-                else
-                {
-                    sprite->m_extraSprite = CCSprite::createWithSpriteFrame(frameExtra);
-                    sprite->m_headSprite->addChild(sprite->m_extraSprite, 2);
-                }
-
-                sprite->m_extraSprite->setPosition(spritePart->getContentSize() / 2);
-                sprite->m_extraSprite->setVisible(true);
-            }
-        }
-    }
-}
-
-void Odyssey::addCreditsToIcon(std::pair<int, UnlockType> pair, int accountID)
-{
-    GameStatsManager::sharedState()->m_accountIDForIcon.insert(std::make_pair(pair, accountID));
-}
-
 int Odyssey::islandPageForLevelID(int levelID)
 {
     if (levelID < 7005)
         return 0;
 
+    if (levelID >= 7005 && levelID < 7500)
+        return 1;
+
+    if (levelID > 7600)
+        return 3;
+
     if (levelID > 7500)
         return 2;
 
-    return 1;
+    return 0;
 };
 
-void Odyssey::unlockObject(int iconID, int type)
+
+void Odyssey::verifyVaultHints()
 {
-    auto gm = GameManager::sharedState();
+    auto AM = AchievementManager::sharedState();
 
-    std::string icon = "i";
+    //  This only is called upon game loading, to disable the Vault Riddles if they already have the achievement:
+    //  * Comic Book Fan can be collected without the vault hint
+    //  * The other three secret rewards need the hint to be enabled
 
-    auto typeCast = static_cast<UnlockType>(type);
-
-    switch (typeCast)
+    for (auto ii = 1; ii <= 24; ii++)
     {
-    case UnlockType::Cube:
-        icon = "icon";
-        break;
-    case UnlockType::Ship:
-        icon = "ship";
-        break;
-    case UnlockType::Ball:
-        icon = "ball";
-        break;
-    case UnlockType::Bird:
-        icon = "bird";
-        break;
-    case UnlockType::Dart:
-        icon = "dart";
-        break;
-    case UnlockType::Robot:
-        icon = "robot";
-        break;
-    case UnlockType::Spider:
-        icon = "spider";
-        break;
-    case UnlockType::Swing:
-        icon = "swing";
-        break;
-    case UnlockType::Jetpack:
-        icon = "jetpack";
-        break;
-    case UnlockType::Death:
-        icon = "death";
-        break;
-    case UnlockType::ShipFire:
-        icon = "shipstreak";
-        break;
-    case UnlockType::Streak:
-        icon = "special";
-        break;
-    case UnlockType::GJItem:
-        icon = "item";
-        break;
-    case UnlockType::Col1:
-        icon = "col1";
-        break;
-    case UnlockType::Col2:
-        icon = "col2";
-        break;
+        auto achievementName = fmt::format("geometry.ach.odyssey.secret{:02}", ii);
+        auto savedValueName = fmt::format("secret-hint-{:02}", ii);
+
+        Mod::get()->setSavedValue<bool>(savedValueName, AM->isAchievementEarned(achievementName.c_str()));
     }
-
-    std::string iconKey = fmt::format("{}_{}", icon, iconID);
-
-    if (typeCast == UnlockType::Col1 || typeCast == UnlockType::Col2)
-        return;
-
-    auto var = CCString::createWithFormat("%i", true);
-
-    gm->m_valueKeeper->setObject(var, iconKey.c_str());
-}
+};
 
 void Odyssey::hasAllVaultRewards()
 {
@@ -650,7 +271,7 @@ void Odyssey::hasAllVaultRewards()
         //  if(AM->isAchievementEarned(fmt::format("geometry.ach.odyssey.secret{:02}")))
     }
 
-    for (auto ii = 10; ii <= 18; ii++)
+    for (auto ii = 10; ii <= 12; ii++)
     {
         auto achievementName = fmt::format("geometry.ach.odyssey.secret{:02}", ii);
 
@@ -668,12 +289,22 @@ void Odyssey::hasAllVaultRewards()
     if (!AM->isAchievementEarned("geometry.ach.odyssey.secret20"))
         allOgre = false;
 
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret22"))
+        allOgre = false;
+
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret23"))
+        allOgre = false;
+
+    if (!AM->isAchievementEarned("geometry.ach.odyssey.secret24"))
+        allOgre = false;
+
     if (!GameManager::sharedState()->getUGV("234"))
         allOgre = false;
 
     /*
     if (!GameManager::sharedState()->getUGV("235"))
         allOgre = false;
+
     if (!GameManager::sharedState()->getUGV("236"))
         allHollow = false;
     */
@@ -684,6 +315,8 @@ void Odyssey::hasAllVaultRewards()
 
         if (!GameManager::sharedState()->getUGV("231"))
             GameManager::sharedState()->setUGV("231", true);
+
+        //  log::debug("El jugador ya tiene todos los rewards del Ogro")
     }
     else
     {
@@ -695,10 +328,9 @@ void Odyssey::hasAllVaultRewards()
         log::debug("Tiene todos los rewards del Hollow");
 
         if (!GameManager::sharedState()->getUGV("232"))
-        {
             GameManager::sharedState()->setUGV("232", true);
-            log::debug("Habilitado el Hint de Gargan (Ogro)");
-        }
+
+        //  log::debug("Habilitado el Hint de Gargan (Ogro)");
     }
     else
     {
@@ -765,3 +397,101 @@ std::vector<unsigned char> Odyssey::intToBytes(int value)
     result.push_back((value & 0xff000000) >> 24);
     return result;
 }
+
+int Odyssey::getLevelSongID(int levelID)
+{
+    switch (levelID)
+    {
+    case 7001: // The Dangerous Seas
+        return 10009443;
+    case 7002: // Ghost House
+        return 676349;
+    case 7003: // Super Ultra
+        return 10007255;
+    case 7004: // Cryptofunk
+        return 10007201;
+    case 7005: // Hellfire
+        return 10007222;
+    case 7006: // Boss Rush
+        return 10007196;
+    case 7007: // Absolute Zero
+        return 10007188;
+    case 7008: // Comfort Food
+        return 10012389;
+    case 7009: // Critical Hit
+        return 10007200;
+
+    case 7501: // Conclusive Journey
+        return 500335;
+    case 7502: // Burning Sands
+        return 880262;
+
+    case 7601: // Eclipse
+        return 10007207;
+    case 7602: // Jelly Castle
+        return 10007227;
+    case 7603: // Phone Me First
+        return 1139782;
+    case 7604: // Wubsplosion
+        return 10007269;
+
+    default:
+        return -1;
+    }
+}
+
+std::pair<gd::string, gd::string> Odyssey::getLevelAudioAssets(int levelID)
+{
+    switch (levelID)
+    {
+    case 7001: // The Dangerous Seas
+        return {"10005070, 10006468, 10009443", "288, 537, 757, 758, 759, 1005, 1373, 1374, 1375, 1376, 1548, 1992, 1993, 1994, 1995, 2037, 2038, 2039, 2040, 2779, 3081, 3383, 3384, 3556, 4273, 4274, 4293, 4294, 4395, 4397, 4404, 7501, 7874, 8180, 13536, 14554, 14563, 14575, 22875"};
+        break;
+    case 7002: // Ghost House
+        return {"676349", "539, 554, 1076, 1740, 2389, 2390, 2392, 2590, 2591, 2844, 2847, 3082, 3083, 3084, 3085, 3114, 3120, 3533, 4395, 4397, 4404, 7274, 7501, 7791, 7795, 7799, 12087, 12089, 12121, 12132, 12174, 12175, 12178, 12184, 12188, 12198, 12920, 15950, 15955, 18929, 22875"};
+        break;
+    case 7003: // Super Ultra
+        return {"10000718, 10007255", "491, 492, 493, 562, 755, 1025, 1049, 1567, 1571, 1572, 1586, 1587, 1619, 1740, 1751, 1897, 2393, 2711, 2716, 2717, 2718, 2847, 2910, 2913, 2914, 2915, 2916, 2974, 3016, 3210, 3383, 3384, 4260, 4261, 4262, 4273, 4289, 4290, 4397, 4404, 6242, 6310, 7231, 7646, 7647, 19796, 22875"};
+        break;
+    case 7004: // Cryptofunk
+        return {"10007201", "328, 493, 583, 538, 539, 1739, 2297, 3082, 3208, 4395, 4397, 4404, 4869, 6256, 7501, 7791, 12875, 13228, 13231, 17649, 17650, 17651, 17652, 22875"};
+        break;
+    case 7005: // Hellfire
+        return {"10007222", "537, 1368, 1372, 1374, 1375, 1376, 1740, 1741, 2612, 3001, 3002, 3003, 4274, 4395, 4397, 4404, 6242, 6243, 6244, 6245, 7224, 7225, 7231,  7243, 7245, 7246, 7260, 7262, 7271, 7274, 7501, 7643, 7646, 7652, 7945, 10104, 12184, 13237, 13238, 13239, 17604, 17619, 17621, 18164, 19729, 22875"};
+        break;
+    case 7006: // Boss Rush
+        return {"10007196", "554, 998, 1014, 1024, 1740, 1745, 1950, 1993, 1994, 1995, 3082, 3083, 3383, 3384, 3556, 4395, 4397, 4404, 6245, 6808, 6833, 6838, 6840, 6863, 6870, 6897, 6900, 7245, 7501, 7667, 13057, 22875"};
+        break;
+    case 7007: // Absolute Zero
+        return {"10007188, 10011788", "4395, 4397, 4404, 7501, 7659, 7943, 22875"};
+        break;
+    case 7008: // Comfort Food
+        return {"10012389", "4395, 4397, 4404, 7501, 7687, 22875"};
+        break;
+    case 7009: // Critical Hit
+        return {"10000721, 10007200, 10004463", "473, 476, 709, 717, 1950, 1993, 1994, 1995, 2032, 2074, 2856, 3112, 3548, 4395, 4563, 4566, 4841, 4883, 5222, 6256, 6881, 6882, 7501, 7653, 7659, 7687, 7799, 7945, 13237, 13980, 17604, 18267, 22879"};
+        break;
+
+    case 7501: // Conclusive Journey
+        return {"500335, 880262", "566, 4395, 4397, 4404, 7501, 21458"};
+        break;
+    case 7502: // Burning Sands
+        return {"880262, 10006666", "993, 1185, 1372, 1374, 1375, 1376, 1377, 1378, 1601, 1741, 1744, 1745, 1751, 2075, 2390, 2392, 2612, 2716, 2717, 2718, 2824, 2981, 2982, 3081, 4072, 4073, 4074, 4290, 6242, 7625, 7735, 7943, 8181, 8191, 9873, 15907, 18771"};
+        break;
+
+    case 7601: // Eclipse
+        return {"10007207, 10004233, 10007208", "566, 3114, 4395, 4397, 4404, 4470, 4846, 4847, 6620, 6621, 7501, 22875"};
+        break;
+    case 7602: // Jelly Castle
+        return {"10007227", "2390, 4060, 4395, 4397, 4404, 7501, 7625, 22875"};
+        break;
+    case 7603: // Phone Me First
+        return {"1139782", "1313, 1315, 1330, 1554, 2136, 2981, 4074, 4273, 4274, 4395, 4397, 4404, 6269, 7501, 13171, 20698, 22875"};
+        break;
+    case 7604: // Wubsplosion
+        return {"10007269", "4395, 4397, 4404, 7501"};
+        break;
+    }
+
+    return {"", ""};
+};
