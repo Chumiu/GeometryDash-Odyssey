@@ -72,9 +72,7 @@ class $modify(OdysseyGameManager, GameManager)
                 return (id == 1) ? true : obj->intValue() == 1;
             }
             else
-            {
                 return GameManager::isIconUnlocked(id, type);
-            }
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);

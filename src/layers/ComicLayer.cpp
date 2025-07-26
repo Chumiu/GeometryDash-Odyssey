@@ -192,9 +192,10 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
 
         auto language = spanishText ? "SPA" : "ENG";
         auto spriteName = fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, ii + 1);
+        auto baseName = fmt::format("Comic_BASE_{:02}_{:02}.png", issueNumber, ii + 1);
 
         log::debug("Page Sprite Name = {}", fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, ii + 1));
-        arr->addObject(createComicPage(spriteName.c_str()));
+        arr->addObject(createComicPage(spriteName.c_str(), baseName.c_str()));
     };
 
     if (issueNumber == 12)
@@ -272,23 +273,35 @@ void ComicLayer::onHollow(CCObject *)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
 };
 
-CCNode *ComicLayer::createComicPage(const char *spriteName)
+CCNode *ComicLayer::createComicPage(const char *spriteName, const char *spriteBase)
 {
     auto node = CCNode::create();
-    auto comicSprite = CCSprite::createWithSpriteFrameName(spriteName);
     auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+    auto comicSprite = CCSprite::createWithSpriteFrameName(spriteName);
+    auto baseSprite = CCSprite::createWithSpriteFrameName(spriteBase);
 
     comicSprite->setPosition(winSize / 2);
     comicSprite->setScale(1.9f);
 
+    baseSprite->setPosition(winSize / 2);
+    baseSprite->setScale(1.9f);
+
     //  log::error("LOADED QUALITY = {}", (int)CCDirector::sharedDirector()->getLoadedTextureQuality());
 
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
+    {
         comicSprite->setScale(0.95f);
+        baseSprite->setScale(0.95f);
+    }
 
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
+    {
         comicSprite->setScale(0.475f);
+        baseSprite->setScale(0.475f);
+    }
 
+    node->addChild(baseSprite);
     node->addChild(comicSprite);
     return node;
 };
