@@ -2,7 +2,7 @@
 #include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
-#include "../nodes/OdysseyPopup.hpp"
+#include "../nodes/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
 bool DeveloperLayer::init()
@@ -253,7 +253,7 @@ void DeveloperLayer::onPopup(CCObject *sender)
 
     if (tag == 1)
     {
-        auto popup = OdysseyPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
+        auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
         popup->setWarning(true, false);
         popup->m_scene = this;
         popup->show();
@@ -261,7 +261,7 @@ void DeveloperLayer::onPopup(CCObject *sender)
 
     if (tag == 2)
     {
-        auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+        auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
         popup->setWarning(false, true);
         popup->m_scene = this;
         popup->setZOrder(104);

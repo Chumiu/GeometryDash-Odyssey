@@ -21,9 +21,7 @@ bool OdysseySelectLayer::init(int page)
     auto GSM = GameStatsManager::sharedState();
 
     // canción
-
-    auto pageID = (page + 1 < 3) ? page + 1 : 3;
-    std::string song = fmt::format("IslandLoop{:02}.mp3"_spr, pageID);
+    std::string song = fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
 
     // fondo
     int bgID = 1;
@@ -188,8 +186,6 @@ bool OdysseySelectLayer::init(int page)
         menu->addChild(firstIsland);
         menu->addChild(secondIsland);
 
-        //  CONTEST ISLANDS
-
         m_islandNode->addChild(menu);
     }
 
@@ -203,10 +199,9 @@ bool OdysseySelectLayer::init(int page)
             {-103, -30},
             {0, 30},
             {103, 0},
-            {207, -30}
-        };
+            {207, -30}};
 
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 5; i++)
         {
             auto pos = m_islandPositions[i];
 
@@ -218,11 +213,12 @@ bool OdysseySelectLayer::init(int page)
                 this,
                 menu_selector(OdysseySelectLayer::onExtraLevel));
 
-            smallIslandBtn->setPosition({m_winSize.width / 2 + pos.x, m_winSize.height / 2 + + pos.y});
+            smallIslandBtn->setPosition({m_winSize.width / 2 + pos.x, m_winSize.height / 2 + +pos.y});
             smallIslandBtn->m_scaleMultiplier = 1.1f;
             smallIslandBtn->setTag(601 + i);
             menu->addChild(smallIslandBtn);
         }
+
         /*
         //  ECLIPSE ISLAND
         auto firstSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_04_001.png"_spr);
@@ -282,7 +278,7 @@ bool OdysseySelectLayer::init(int page)
         menu->addChild(fourthIsland);
 
         */
-       //menu->alignItemsHorizontallyWithPadding(10);
+        // menu->alignItemsHorizontallyWithPadding(10);
 
         m_islandNode->addChild(menu);
 
@@ -322,7 +318,7 @@ bool OdysseySelectLayer::init(int page)
     m_islandNode->runAction(CCRepeatForever::create(CCSequence::createWithTwoActions(moveUp, moveDown)));
 
     //  Titulo de la Isla
-    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("GDO_IslandTitle_0{}_001.png"_spr, pageID).c_str());
+    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("GDO_IslandTitle_0{}_001.png"_spr, page + 1).c_str());
     islandTitle->setScale(.75f);
     islandTitle->setPosition({m_winSize.width / 2, m_winSize.height - 30});
     addChild(islandTitle);
@@ -421,7 +417,7 @@ void OdysseySelectLayer::getWizardDialog03()
 
 void OdysseySelectLayer::keyBackClicked()
 {
-    //volver al ogro si está en la pagina de los niveles contest
+    // volver al ogro si está en la pagina de los niveles contest
     if (m_currentPage == 3)
     {
         auto scene = CCScene::create();
@@ -565,6 +561,7 @@ void OdysseySelectLayer::addLevelButtons()
     m_levelMenu = CCMenu::create();
     m_levelMenu->setPosition(m_winSize / 2);
     auto offSet = 0;
+
     if (m_currentPage == 1)
         offSet = 4;
 
@@ -574,6 +571,7 @@ void OdysseySelectLayer::addLevelButtons()
         for (int ii = 0; ii < m_levelAmount; ii++)
         {
             auto levelSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_locked_001.png"_spr);
+
             if (m_currentPage == 1 && ii == 4)
                 levelSprite = CCSpriteGrayscale::createWithSpriteFrameName("worldLevelBtn_002.png"_spr);
 
@@ -938,8 +936,8 @@ void OdysseySelectLayer::onOgre(CCObject *)
     {
         log::info("LOCKED OGRE");
         auto dialog = Odyssey::createDialog("lockedOgre");
-        //this->addChild(dialog, 3);
-        //return;
+        // this->addChild(dialog, 3);
+        // return;
     }
 
     auto scene = CCScene::create();
@@ -955,7 +953,7 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
     auto extra01_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 1) || GM->getUGV("237");
     auto extra02_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 2) || GM->getUGV("238");
 
-    if ((extra01_unlocked && sender->getTag() == 501) || (extra02_unlocked && sender->getTag() == 502) || sender->getTag() > 600 || Mod::get()->getSettingValue<bool>("bypass-levels"))
+    if ((extra01_unlocked && sender->getTag() == 501) || (extra02_unlocked && sender->getTag() == 502) || Mod::get()->getSettingValue<bool>("bypass-levels"))
     {
         auto popup = OdysseyLevelPopup::create(sender->getTag() + 7000);
         popup->show();

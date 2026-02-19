@@ -1,12 +1,12 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
-#include "../layers/CreditsLayer.hpp"
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
+#include "../nodes/CreditsPopup.hpp"
 #include "../nodes/CreditsNode.hpp"
 #include "../nodes/ComicPopup.hpp"
-#include "../nodes/OdysseyPopup.hpp"
+#include "../nodes/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -54,7 +54,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         //  Displays a popup for savefile info
         if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
         {
-            auto popup = OdysseyPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
+            auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
             popup->setWarning(true, false);
             popup->m_scene = this;
             popup->show();
@@ -63,7 +63,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         //  Displays a popup when the player has Spanish enabled for the first time
         if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0202"))
         {
-            auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+            auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
             popup->setWarning(false, true);
             popup->setZOrder(104);
             popup->m_scene = this;
@@ -145,7 +145,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         auto dailyCButton = static_cast<CCMenuItemSpriteExtra *>(rightMenu->getChildByID("daily-chest-button"));
         if (dailyCButton)
             dailyCButton->setVisible(false);
-        
+
         return true;
     }
 
@@ -219,7 +219,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onMoreGames(CCObject *)
     {
-        auto credits = CreditsLayer::create();
+        auto credits = CreditsPopup::create();
         credits->show();
     }
 

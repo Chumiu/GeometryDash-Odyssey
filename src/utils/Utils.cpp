@@ -248,9 +248,10 @@ void Odyssey::verifyVaultHints()
     for (auto ii = 1; ii <= 24; ii++)
     {
         auto achievementName = fmt::format("geometry.ach.odyssey.secret{:02}", ii);
-        auto savedValueName = fmt::format("secret-hint-{:02}", ii);
+        auto savedValueName = fmt::format("3{:02}", ii);
 
-        Mod::get()->setSavedValue<bool>(savedValueName, AM->isAchievementEarned(achievementName.c_str()));
+        //  Mod::get()->setSavedValue<bool>(savedValueName, AM->isAchievementEarned(achievementName.c_str()));
+        GameManager::sharedState()->setUGV(savedValueName.c_str(), AM->isAchievementEarned(achievementName.c_str()));
     }
 };
 

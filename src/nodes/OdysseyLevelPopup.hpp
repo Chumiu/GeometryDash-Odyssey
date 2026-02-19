@@ -1,24 +1,22 @@
 #pragma once
+#include <Geode/Geode.hpp>
+#include <Geode/ui/Popup.hpp>
+#include <Geode/ui/GeodeUI.hpp>
+
 using namespace geode::prelude;
 
-class OdysseyLevelPopup : public geode::Popup<std::string const &>
-{
+class OdysseyLevelPopup : public Popup{
 private:
     GJGameLevel *m_level;
     CustomSongWidget *m_audioWidget = nullptr;
     int m_levelID = 0;
 
 protected:
-    bool setup(std::string const &) override;
+    bool init();
     void onPlay(CCObject *);
     void onSettings(CCObject *);
     void onComic(CCObject *);
     void onLore(CCObject *);
-
-    /*
-    void onAudio(CCObject *);
-    void onHideAudio(CCObject *);
-    */
 
 public:
     static OdysseyLevelPopup *create(int);

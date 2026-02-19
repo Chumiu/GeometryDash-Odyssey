@@ -2,8 +2,11 @@
 #include "../layers/ComicLayer.hpp"
 #include "../utils/Utils.hpp"
 
-bool OdysseyLevelPopup::setup(std::string const &title)
+bool OdysseyLevelPopup::init()
 {
+    if (!Popup::init(380.f, 260.f))
+        return false;
+
     //  El Nivel
     m_level = GameLevelManager::get()->getMainLevel(m_levelID, true);
     auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -346,12 +349,12 @@ OdysseyLevelPopup *OdysseyLevelPopup::create(int levelID)
     auto ret = new OdysseyLevelPopup();
     ret->m_levelID = levelID;
 
-    if (ret && ret->initAnchored(380.f, 260.f, ""))
+    if (ret->init())
     {
         ret->autorelease();
         return ret;
     }
 
-    CC_SAFE_DELETE(ret);
+    delete ret;
     return nullptr;
-};
+}

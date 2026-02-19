@@ -1,9 +1,11 @@
 {
-	"geode": "4.2.0",
-	"version": "v1.1.0-alpha.3",
+	"geode": "5.0.0-beta.3",
+	"version": "v1.1.0-alpha.4",
 	"gd": {
-		"win": "2.2074",
-		"android": "2.2074"
+		"win": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081",
+		"android": "2.2081"
 	},
 	"developers": [
 		"Team TCM",
@@ -15,34 +17,16 @@
 	"name": "Geometry Dash: Odyssey",
 	"description": "A fanmade spin-off!",
 	"early-load": true,
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"version": ">=1.18.0",
-			"importance": "required"
-		}
-	],
+	"dependencies": {
+		"geode.node-ids": "1.22.0"
+	},
 	"incompatibilities": {
-		"capeling.geometry-dash-lunar": {
-			"version": "*",
-			"importance": "breaking"
-		},
-		"dankmeme.globed2": {
-			"version": "*",
-			"importance": "breaking"
-		},
-		"gdutilsdevs.gdutils": {
-			"version": "*",
-			"importance": "breaking"
-		},
-		"itzkiba.better_progression": {
-			"version": "*",
-			"importance": "breaking"
-		},
-		"ninxout.redash": {
-			"version": "*",
-			"importance": "breaking"
-		}
+		"capeling.geometry-dash-lunar": "*",
+		"chumiiu.geometry_dash_time_reborn": "*",
+		"itzkiba.better_progression": "*",
+		"gdutilsdevs.gdutils": "*",
+		"dankmeme.globed2": "*",
+		"ninxout.redash": "*"
 	},
 	"links": {
 		"community": "https://discord.gg/PNPrR4DEbw"
@@ -129,6 +113,7 @@
 		]
 	},
 	"tags": [
-		"content", "online"
+		"content",
+		"online"
 	]
 }

@@ -103,7 +103,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         if (m_fromRefresh)
             return LoadingLayer::getLoadingString();
 
-        std::vector<std::string> messages =
+        std::vector<const char *> messages =
             {
                 "Remember to play\nNukebound first!",
                 "Increasing the amount\nof mod incompatibilities...",
@@ -117,7 +117,8 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
                 "Some vault codes are based on\nMDK's lore in his website",
                 "Mathi Approved"};
 
-        return messages.at(rand() % (messages.size() - 1)).c_str();
+        int rand = (std::rand() % messages.size());
+        return messages[rand];
     };
 
     /*
@@ -182,18 +183,17 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
         //  Wubsplosion
         //  Odyssey::insertAssetsToMap(true, {10007269});
-    }
-        */
+    }*/
 
     void addOdysseyAssets()
     {
-//  Primero las texturas del Mod
-#ifdef GEODE_IS_WINDOWS
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
-#endif
-#ifdef GEODE_IS_ANDROID
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
-#endif
+    //  Primero las texturas del Mod
+    #ifdef GEODE_IS_WINDOWS
+            auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
+    #endif
+    #ifdef GEODE_IS_ANDROID
+            auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
+    #endif
         auto unzipDir = geode::Mod::get()->getResourcesDir().string();
         auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 
@@ -224,6 +224,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
             SFC->addSpriteFramesWithFile(fmt::format("swing_{}.plist", ii).c_str());
 
         SFC->addSpriteFramesWithFile("jetpack_09.plist");
+        log::debug("Icons succesfully loaded into SpriteFrameCache");
 
         //  Custom Modes
         SFC->addSpriteFramesWithFile("boat_01.plist");
@@ -234,8 +235,9 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         //  Comics
         SFC->addSpriteFramesWithFile("ComicSheetSPA.plist");
         SFC->addSpriteFramesWithFile("ComicSheetENG.plist");
+        SFC->addSpriteFramesWithFile("ComicSheetBASE.plist");
 
-        log::debug("Comic files succesfully loaded");
+        log::debug("Comics succesfully loaded into SpriteFrameCache");
     }
 
     void addCustomIconCredits()

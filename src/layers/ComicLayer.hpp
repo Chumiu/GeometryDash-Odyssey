@@ -25,8 +25,7 @@ public:
 
     //  Para crear el Scroll layer
     void createComic(CCArray *, int);
-    CCNode *createComicPage(const char *);
-    //  CCNode *createPage(int);
+    CCNode *addComicPage(int, int, bool);
 
     void verifySecretAchievement();
 

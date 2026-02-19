@@ -1,7 +1,10 @@
 #include "PromoPopup.hpp"
 
-bool PromoPopup::setup()
+bool PromoPopup::init()
 {
+    if (!Popup::init(400.f, 240.f, "GJ_square02.png"))
+        return false;
+
     auto contentSize = m_mainLayer->getContentSize();
     auto spanish = GameManager::sharedState()->getGameVariable("0201");
 
@@ -21,10 +24,10 @@ bool PromoPopup::setup()
     m_textArea->setScale(0.5f);
 
     //  Cube sprite
-    m_masterSprite = CCSprite::createWithSpriteFrameName("MTC5_01_001.png"_spr);
-    m_masterSprite->setPosition({contentSize.width / 2, 45});
-    m_masterSprite->setID("master-cube-sprite");
-    m_mainLayer->addChild(m_masterSprite);
+    m_masterSpr = CCSprite::createWithSpriteFrameName("MTC5_01_001.png"_spr);
+    m_masterSpr->setPosition({contentSize.width / 2, 45});
+    m_masterSpr->setID("master-cube-sprite");
+    m_mainLayer->addChild(m_masterSpr);
 
     //  Button
     auto buttonMenu = CCMenu::create();
@@ -46,9 +49,11 @@ bool PromoPopup::setup()
     infoButton->setPosition({contentSize.width / 2 - 25, contentSize.height / 2 - 20});
     buttonMenu->addChild(infoButton);
 
-    this->setID("promo-popup");
     this->setTitle("Bonus Rewards");
     m_title->setScale(1.0f);
+
+    this->setID("promo-popup");
+
     return true;
 };
 
@@ -57,7 +62,7 @@ void PromoPopup::onClick(CCObject *sender)
     if (m_isRewardAvailable)
     {
         auto GSM = GameStatsManager::sharedState();
-        GSM->incrementStat("14", 50 * m_randomValue);
+        GSM->incrementStat("14", 50 * m_random);
 
         //  Creates the rewards for the chest
         GJRewardObject *orbs = GJRewardObject::create(SpecialRewardItem::Orbs, 50, 0);
@@ -78,8 +83,8 @@ void PromoPopup::onClick(CCObject *sender)
     };
 
     //  Gives a randomized time
-    m_randomValue = std::rand() % 3 + 1;
-    m_countdown = m_randomValue * 10;
+    m_random = std::rand() % 3 + 1;
+    m_countdown = m_random * 10;
 
     //  Disables the button and triggers the countdown
     m_button->setEnabled(false);
@@ -118,10 +123,10 @@ void PromoPopup::onCountdown()
         m_isRewardAvailable = true;
 
         //  Quita y recrea el sprite de Master de nuevo
-        m_masterSprite->removeFromParentAndCleanup(true);
-        m_masterSprite = CCSprite::createWithSpriteFrameName("MTC5_02_001.png"_spr);
-        m_masterSprite->setPosition({contentSize.width / 2, 45});
-        m_mainLayer->addChild(m_masterSprite);
+        m_masterSpr->removeFromParentAndCleanup(true);
+        m_masterSpr = CCSprite::createWithSpriteFrameName("MTC5_02_001.png"_spr);
+        m_masterSpr->setPosition({contentSize.width / 2, 45});
+        m_mainLayer->addChild(m_masterSpr);
 
         //  Recrea el Text Area de nuevo
         m_textArea->removeFromParentAndCleanup(true);
@@ -140,16 +145,12 @@ PromoPopup *PromoPopup::create()
 {
     auto ret = new PromoPopup();
 
-    if (ret && ret->initAnchored(400.f, 240.f, "GJ_square02.png"))
+    if (ret->init())
     {
         ret->autorelease();
         return ret;
     }
 
-    CC_SAFE_DELETE(ret);
+    delete ret;
     return nullptr;
 };
-
-/*
-
-*/

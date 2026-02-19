@@ -8,7 +8,7 @@ bool SecretVaultLayer2::init()
     if (!CCLayer::init())
         return false;
 
-    //  Bandera que dice si en ingles o español
+    //  Flag that saves whenever the Vault should be in Spanish or not.
     m_spanish = GameManager::sharedState()->getGameVariable("0201");
 
     //  Title
@@ -55,6 +55,7 @@ bool SecretVaultLayer2::init()
     addChild(bgDeco1A, -1);
     addChild(bgDeco1B, -1);
 
+    //  Fireflies particles
     auto bg_particle_01 = GameToolbox::particleFromString("30a-1a5a1a5a90a180a50a25a300a150a0a0a0a0a0a0a8a4a0a0a1a0a1a0a0a0a1a0a0a0a0a0a1a0a1a0a0a0a1a0a0.3a0.15a0.3a0.15a0a0a0a0a0a0a0a2a1a0a0a0a159a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
     bg_particle_01->setPosition(winSize / 2);
     addChild(bg_particle_01, 10);
@@ -84,7 +85,7 @@ bool SecretVaultLayer2::init()
     m_response = CCLabelBMFont::create("", "gjFont42.fnt");
     addChildAtPosition(m_response, Anchor::Center, ccp(0, 100), false);
 
-    //  Mensaje inicial
+    //  Initial Message
     auto introMessage = m_spanish ? "Bienvenido" : "Welcome";
     updateMessage(introMessage, MessageType::Basic);
 
@@ -105,9 +106,11 @@ bool SecretVaultLayer2::init()
     keeperButton->setPosition({winSize.width / 2, winSize.height / 2 - 20.f});
     keeperSprite->setAnchorPoint({0.5, 1});
     keeperSprite->setPositionY(72.f);
+
     keeperMenu->addChild(keeperButton);
 
-    //  Boton para el nivel secreto "Uncertain"
+    /*
+    //  Button for "Uncertain" (No longer available)
     m_levelNode = CCNode::create();
     m_levelNode->setContentSize({0, 30});
     m_levelNode->setAnchorPoint({0.5, 0.5});
@@ -135,7 +138,9 @@ bool SecretVaultLayer2::init()
         m_levelNode->addChild(m_levelMenu);
     };
     addChild(m_levelNode);
+    */
 
+    //  Re-verifies whenever the vault rewards have been all Claimed
     Odyssey::hasAllVaultRewards();
 
     //  Message if all the rewards were collected
@@ -170,6 +175,7 @@ bool SecretVaultLayer2::init()
     doorMenu->addChild(doorBtn);
     addChild(doorMenu);
 
+    //  Menu sound
     GameManager::sharedState()->fadeInMusic("SecretLoop02.mp3"_spr);
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
@@ -225,7 +231,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     m_textInput->setString("");
 
     //  List of codes
-    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01") && Mod::get()->getSavedValue<bool>("secret-hint-01"))
+    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01") && GM->getUGV("301"))
     {
         reply = {
             "So you know how to adventure...",
@@ -237,7 +243,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02") && Mod::get()->getSavedValue<bool>("secret-hint-02"))
+    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02") && GM->getUGV("302"))
     {
         reply = {
             "Not so unknown now...",
@@ -249,7 +255,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03") && Mod::get()->getSavedValue<bool>("secret-hint-03"))
+    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03") && GM->getUGV("303"))
     {
         reply = {
             "It strikes fear into my heart...",
@@ -261,7 +267,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04") && Mod::get()->getSavedValue<bool>("secret-hint-04"))
+    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04") && GM->getUGV("304"))
     {
         reply = {
             "What a humble man",
@@ -273,7 +279,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05") && Mod::get()->getSavedValue<bool>("secret-hint-05"))
+    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05") && GM->getUGV("305"))
     {
         reply = {
             "Useless piece of scrap metal",
@@ -286,7 +292,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     };
 
     /*
-    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235") && Mod::get()->getSavedValue<bool>("secret-hint-02"))
+    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235") && GM->getUGV("302"))
     {
         reply = {
             "Good luck",
@@ -301,7 +307,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     };
     */
 
-    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06") && Mod::get()->getSavedValue<bool>("secret-hint-06"))
+    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06") && GM->getUGV("306"))
     {
         reply = {
             "Even the lord listens to his guidance...",
@@ -313,7 +319,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07") && Mod::get()->getSavedValue<bool>("secret-hint-07"))
+    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07") && GM->getUGV("307"))
     {
         reply = {
             "My hatred towards him grows every day...",
@@ -325,7 +331,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08") && Mod::get()->getSavedValue<bool>("secret-hint-08"))
+    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08") && GM->getUGV("308"))
     {
         reply = {
             "All of them together... what will happen?",
@@ -337,7 +343,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09") && Mod::get()->getSavedValue<bool>("secret-hint-09"))
+    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09") && GM->getUGV("309"))
     {
         reply = {
             "SEE? I wasn't lying!",
@@ -349,7 +355,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("sigma") && !AM->isAchievementEarned("geometry.ach.odyssey.secret22") && Mod::get()->getSavedValue<bool>("secret-hint-22"))
+    if (std::string_view(lower) == std::string_view("sigma") && !AM->isAchievementEarned("geometry.ach.odyssey.secret22") && GM->getUGV("322"))
     {
         reply = {
             "What? I thought it was Delta", "Huh? Crei que era Delta"};
@@ -359,7 +365,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("editor") && !AM->isAchievementEarned("geometry.ach.odyssey.secret23") && Mod::get()->getSavedValue<bool>("secret-hint-23"))
+    if (std::string_view(lower) == std::string_view("editor") && !AM->isAchievementEarned("geometry.ach.odyssey.secret23") && GM->getUGV("323"))
     {
         reply = {
             "Have you made a level yet?", "Ya hicistes un nivel?"};
@@ -608,7 +614,7 @@ std::string SecretVaultLayer2::getMessage()
 
 std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 {
-    //  auto GM = GameManager::sharedState();
+    auto GM = GameManager::sharedState();
     auto AM = AchievementManager::sharedState();
     //  log::debug("ID: {} - IDX: {}", ID, index);
     std::vector<std::string> messages;
@@ -638,11 +644,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Cual era el titulo?",
             };
 
+        if (!GM->getUGV("301"))
+        {
+            log::info("Hint for Secret 01 enabled");
+            GM->setUGV("301", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-01", true))
-                log::info("Hint for Secret 01 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -677,10 +686,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Como se dice en ingles?",
             };
 
+        if (!GM->getUGV("302"))
+        {
+            log::info("Hint for Secret 02 enabled");
+            GM->setUGV("302", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-02", true))
-                log::info("Hint for Secret 02 enabled");
 
             m_messageID = 0;
             m_messageIDX = 0;
@@ -720,11 +733,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Ojala pudiera recordarlo...",
             };
 
+        if (!GM->getUGV("303"))
+        {
+            log::info("Hint for Secret 03 enabled");
+            GM->setUGV("303", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-03", true))
-                log::info("Hint for Secret 03 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -764,11 +780,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Ojala pudiera recordar su nombre...",
             };
 
+        if (!GM->getUGV("304"))
+        {
+            log::info("Hint for Secret 04 enabled");
+            GM->setUGV("304", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-04", true))
-                log::info("Hint for Secret 04 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -804,11 +823,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Afortunadamente, Olvide su nombre.",
             };
 
+        if (!GM->getUGV("305"))
+        {
+            log::info("Hint for Secret 05 enabled");
+            GM->setUGV("305", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-05", true))
-                log::info("Hint for Secret 05 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -878,11 +900,13 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "De lo contrario, me avergonzare de lo facil de hallarlas",
             };
 
+        if (!GM->getUGV("306"))
+        {
+            log::info("Hint for Secret 06 enabled");
+            GM->setUGV("306", true);
+        };
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-06", true))
-                log::info("Hint for Secret 06 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -918,11 +942,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "En entregarnos las legendarias herramientas de creacion...",
             };
 
+        if (!GM->getUGV("307"))
+        {
+            log::info("Hint for Secret 07 enabled");
+            GM->setUGV("307", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-07", true))
-                log::info("Hint for Secret 07 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -957,11 +984,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Solo estoy recitando de este libro que tengo",
             };
 
+        if (!GM->getUGV("308"))
+        {
+            log::info("Hint for Secret 08 enabled");
+            GM->setUGV("308", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-08", true))
-                log::info("Hint for Secret 08 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1003,11 +1033,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Preparate para un Infierno",
             };
 
+        if (!GM->getUGV("309"))
+        {
+            log::info("Hint for Secret 09 enabled");
+            GM->setUGV("309", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-09", true))
-                log::info("Hint for Secret 09 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1105,11 +1138,11 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Uno de los tres...",
             };
 
+        if (!GameManager::sharedState()->getUGV("209"))
+            GameManager::sharedState()->setUGV("209", true);
+
         if (index >= messages.size())
         {
-            if (!GameManager::sharedState()->getUGV("209"))
-                GameManager::sharedState()->setUGV("209", true);
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1142,13 +1175,16 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Gargan",
                 "Que sera de ti?"};
 
+        if (!GM->getUGV("323"))
+        {
+            log::info("Hint for Secret 23 enabled");
+            GM->setUGV("323", true);
+        };
+
         if (index >= messages.size())
         {
             if (!GameManager::sharedState()->getUGV("233"))
                 GameManager::sharedState()->setUGV("233", true);
-
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-23", true))
-                log::info("Hint for Secret 23 enabled");
 
             m_messageID = 0;
             m_messageIDX = 0;
@@ -1184,11 +1220,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Lo dice un cubo con ojos equis...",
                 "Tal vez tu sabes cual es?"};
 
+        if (!GM->getUGV("322"))
+        {
+            log::info("Hint for Secret 22 enabled");
+            GM->setUGV("322", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-22", true))
-                log::info("Hint for Secret 22 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1217,11 +1256,14 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Para plasmar tus ideas en este lienzo...",
                 "Asegurate de leer la guia primero"};
 
+        if (!GM->getUGV("323"))
+        {
+            log::info("Hint for Secret 23 enabled");
+            GM->setUGV("323", true);
+        };
+
         if (index >= messages.size())
         {
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-23", true))
-                log::info("Hint for Secret 23 enabled");
-
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1254,13 +1296,16 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Una buena recompensa",
                 "Si atrapas un cubo de forma familiar"};
 
+        if (!GM->getUGV("324"))
+        {
+            log::info("Hint for Secret 24 enabled");
+            GM->setUGV("324", true);
+        };
+
         if (index >= messages.size())
         {
             if (!GameManager::sharedState()->getUGV("239"))
                 GameManager::sharedState()->setUGV("239", true);
-
-            if (!Mod::get()->setSavedValue<bool>("secret-hint-24", true))
-                log::info("Hint for Secret 24 enabled");
 
             m_messageID = 0;
             m_messageIDX = 0;

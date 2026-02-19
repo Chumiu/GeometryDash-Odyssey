@@ -9,7 +9,7 @@ class $modify(GDO_GameLevelOptionsLayer, GameLevelOptionsLayer)
 {
     static GameLevelOptionsLayer *create(GJGameLevel *p0)
     {
-        if (p0->m_levelType == GJLevelType::Local)
+        if (p0->m_levelType == GJLevelType::Main)
         {
             auto layer = GameLevelOptionsLayer::create(p0);
             auto winSize = CCDirector::sharedDirector()->getWinSize();

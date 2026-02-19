@@ -25,7 +25,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level06a", "All Bosses (No Damage)", "Completed \"Boss Rush\" in practice mode", "Complete \"Boss Rush\" in practice mode", "icon_494", 1);
 		AchievementManager::addAchievement("geometry.ach.level06b", "Boss Rush!", "Completed \"Boss Rush\" in normal mode", "Complete \"Boss Rush\" in normal mode", "ship_171", 1);
 
-		AchievementManager::addAchievement("geometry.ach.level07a", "I'm freezing here...", "Completed \"Absolute Zero\" in practice mode", "Complete \"Absolute Zero\" in practice mode", "icon_495", 1);
+		AchievementManager::addAchievement("geometry.ach.level07a", "I'm freezing here...", "CompleteDd \"Absolute Zero\" in practice mode", "Complete \"Absolute Zero\" in practice mode", "icon_495", 1);
 		AchievementManager::addAchievement("geometry.ach.level07b", "Absolute Zero!", "Completed \"Absolute Zero\" in normal mode", "Complete \"Absolute Zero\" in normal mode", "ball_120", 1);
 
 		AchievementManager::addAchievement("geometry.ach.level08a", "Yummers", "Completed \"Comfort Food\" in practice mode", "Complete \"Comfort Food\" in practice mode", "icon_496", 1);

@@ -17,13 +17,6 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     m_comicNumber = issueNumber;
     m_RedirectToMap = redirectToMap;
 
-    /*
-    //  Cancion de musica para el cuarto
-    m_backgroundMusic = fmt::format("comic_{:02}.mp3"_spr, issueNumber).c_str();
-    log::debug("Comic MP3: {}", fmt::format("comic_{:02}.mp3"_spr, issueNumber).c_str());
-    GameManager::sharedState()->fadeInMusic(m_backgroundMusic);
-    */
-
     auto spanishText = GameManager::sharedState()->getGameVariable("0201");
     auto size = m_background->getContentSize();
 
@@ -59,7 +52,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     backBtn->setSizeMult(1.2f);
     backBtn->setPosition({24, m_winSize.height - 24});
 
-    auto infoText = spanishText ? "La calidad de los comics tuvo que ser reducida, de lo contrario el mod tendria problemas.\nSi no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>." : "The quality of the comics had to be reduced, else the mod would have issues.\nIf you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>";
+    auto infoText = spanishText ? "La calidad de los comics tuvo que ser reducida, de lo contrario el mod tendria problemas. Si no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>." : "The quality of the comics had to be reduced, else the mod would have issues. If you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>";
 
     auto infoBtn = InfoAlertButton::create("Quality Issues", infoText, 1);
     infoBtn->setPosition({m_winSize.width - 24, 24});
@@ -72,7 +65,8 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     menuBack->addChild(infoBtn);
     menuBack->setZOrder(5);
     addChild(menuBack);
-
+    
+    //  If the comic issue is 4 (Super Ultra's comic), adds the Hollow's button
     if (issueNumber == 4)
     {
         auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
@@ -131,7 +125,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     //  Mod::get()->setSettingValue<bool>("watched-comic-0" + std::to_string(m_comicNumber), true);
     GameManager::sharedState()->setUGV(fmt::format("2{}", m_comicNumber + 10).c_str(), true);
 
-    //  Para verificar el achievement de Comic Book fan
+    //  To verify the secret achievement of reading all the Comics
     auto AM = AchievementManager::sharedState();
     if (!AM->isAchievementEarned("geometry.ach.odyssey.secret19"))
     {
@@ -141,7 +135,6 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
             0));
     }
 
-    //  Llama a la funcion para el logro secreto
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
 
@@ -187,14 +180,7 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
 
     for (int ii = 0; ii < m_totalPages; ii++)
     {
-        //  auto pages = getPage(issueNumber, ii + 1);
-        //  auto pageSprite = spanishText ? pages.second : pages.first;
-
-        auto language = spanishText ? "SPA" : "ENG";
-        auto spriteName = fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, ii + 1);
-
-        log::debug("Page Sprite Name = {}", fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, ii + 1));
-        arr->addObject(createComicPage(spriteName.c_str()));
+        arr->addObject(addComicPage(issueNumber, ii + 1, spanishText));
     };
 
     if (issueNumber == 12)
@@ -218,6 +204,48 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
     }
 };
 
+CCNode *ComicLayer::addComicPage(int issueNumber, int page, bool spanish)
+{
+    auto node = CCNode::create();
+    auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+    //  Adds the base sprite of the comic (The drawings without the dialog)
+    auto baseSpriteName = fmt::format("Comic_BASE_{:02}_{:02}.png", issueNumber, page);
+    auto comicSprite = CCSprite::createWithSpriteFrameName(baseSpriteName.c_str());
+    comicSprite->setPosition(winSize / 2);
+    comicSprite->setScale(1.9f);
+
+    //  Resizes the sprite based on the Texture Quality
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
+        comicSprite->setScale(0.95f);
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
+        comicSprite->setScale(0.475f);
+    node->addChild(comicSprite);
+
+    //  Comic pages without dialog  (COMIC NUMBER / PAGE): C02/P1 - C05/P6 - C08/P1 - C08/P4 - C10/P5 - C11/P4 - C11/P5 - C12/P4 - C12/P5
+    //  * If the current page is one of those, skips adding the dialog, returning the node.
+    if ((issueNumber == 2 && page == 1) || (issueNumber == 5 && page == 6) || (issueNumber == 8 && (page == 1 || page == 4)) || (issueNumber == 10 && page == 5) || (issueNumber == 11 && (page == 4 || page == 5)) || (issueNumber == 12 && page == 4) || (issueNumber == 12 && page == 5))
+        return node;
+
+    //  Adds the dialog as an extra layer into the node
+    auto language = spanish ? "SPA" : "ENG";
+    auto dialogueSpriteName = fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, page);
+    auto dialogSprite = CCSprite::createWithSpriteFrameName(dialogueSpriteName.c_str());
+    dialogSprite->setPosition(winSize / 2);
+    dialogSprite->setScale(1.9f);
+    dialogSprite->setZOrder(10);
+
+    //  Resizes the sprite based on the Texture Quality
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
+        dialogSprite->setScale(0.95f);
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
+        dialogSprite->setScale(0.475f);
+
+    //  Returns the node
+    node->addChild(dialogSprite);
+    return node;
+};
+
 void ComicLayer::onCredits(CCObject *)
 {
     auto scene = CCScene::create();
@@ -232,7 +260,7 @@ void ComicLayer::onHollow(CCObject *)
 
     if (!Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
-        //  Conoce al Hollow por primera vez
+        //  Meets the hollow for the first time
         if (!GM->getUGV("205"))
         {
             if (auto hollowBtn = this->getChildByIDRecursive("hollow-button"))
@@ -247,7 +275,7 @@ void ComicLayer::onHollow(CCObject *)
             return;
         }
 
-        //  No tiene las monedas
+        //  Not enough secret coins
         if (GSM->getStat("8") < HOLLOW_COIN_QUOTA)
         {
             log::info("HOLLOW NOT ENOUGH");
@@ -256,7 +284,7 @@ void ComicLayer::onHollow(CCObject *)
             return;
         }
 
-        //  Suficientes monedas pero no vio el dialogo
+        //  Enough coins, gets special dialog (executed for the first time)
         if (GSM->getStat("8") >= HOLLOW_COIN_QUOTA && !GM->getUGV("210"))
         {
             log::info("HOLLOW ENOUGH");
@@ -270,27 +298,6 @@ void ComicLayer::onHollow(CCObject *)
     auto scene = CCScene::create();
     scene->addChild(SecretVaultLayer::create());
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
-};
-
-CCNode *ComicLayer::createComicPage(const char *spriteName)
-{
-    auto node = CCNode::create();
-    auto comicSprite = CCSprite::createWithSpriteFrameName(spriteName);
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
-
-    comicSprite->setPosition(winSize / 2);
-    comicSprite->setScale(1.9f);
-
-    //  log::error("LOADED QUALITY = {}", (int)CCDirector::sharedDirector()->getLoadedTextureQuality());
-
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
-        comicSprite->setScale(0.95f);
-
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
-        comicSprite->setScale(0.475f);
-
-    node->addChild(comicSprite);
-    return node;
 };
 
 void ComicLayer::verifySecretAchievement()

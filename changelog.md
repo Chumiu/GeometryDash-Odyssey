@@ -1,17 +1,24 @@
 # Changelog
 
-### <cg>v1.1.0-alpha.1 (WIP)</c>
+### <cg>v1.1.0-alpha.4</c> (Work in Progress)
 
-#### **Additions**
+* <co>Ported mod to Update 2.2081</c>
+* Rewriting the code as we speak
+
+### <cb>v1.1.0-alpha.3</c>
+
+* New level "<cg>Granite</c>"!
+* <cg>Added</c> new comic method that saves so much space.
+
+### <cb>v1.1.0-alpha.2</c>
 
 * New level "<cg>Eclipse</c>"!
 * New level "<cg>Jelly Castle</c>"!
 * New level "<cg>Phone me First</c>"!
 * New level "<cg>Wubsplosion</c>"!
-* New Achievements and Icons!
-* New secrets to find!
+* <cg>Added</c> method to download level audio assets online.
 
-#### **Changes**
+### <cb>v1.1.0-alpha.1</c>
 
 * <co>Critical Hit</c>: Last segment nerfed, shader usage reduced
 * <cg>Added</c> reward if you watch a video from the Shop's TV
@@ -32,7 +39,7 @@
 * <cg>Added</c> message if an Incompatible mod is found
 * <cg>Added</c> popup to the fangames, instead of a direct link
 * <cg>Added</c> message if you collected all rewards of a vault
-* <cy>Fixed</c> incompatibility with Custom keybinds
+* <cy>Fixed</c> incompatibility with Custom Keybinds
 * <cy>Fixed</c> incompatibility with Comments on pause menu
 * <cy>Fixed</c> bug of extra islands get locked upon game reload
 * <cy>Fixed</c> bug of shop icons getting locked upon game reload

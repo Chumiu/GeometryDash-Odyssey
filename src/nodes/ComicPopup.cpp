@@ -1,8 +1,11 @@
 #include "ComicPopup.hpp"
 #include "../layers/ComicLayer.hpp"
 
-bool ComicPopup::setup()
+bool ComicPopup::init()
 {
+    if (!Popup::init(400.f, 200.f))
+        return false;
+
     auto contentSize = m_mainLayer->getContentSize();
 
     //  Fondo del Popup
@@ -48,13 +51,15 @@ bool ComicPopup::setup()
     creditsText->setScale(0.8f);
     m_mainLayer->addChild(creditsText);
 
-    this->setID("comic-popup"_spr);
     this->setTitle("Comics");
     m_title->setScale(1.0f);
+    
+    this->setID("comic-popup"_spr);
     return true;
 };
 
-void ComicPopup::onComic(CCObject * sender){
+void ComicPopup::onComic(CCObject *sender)
+{
     auto comic = ComicLayer::create(sender->getTag(), false);
     comic->m_fromPopup = true;
 
@@ -72,12 +77,12 @@ ComicPopup *ComicPopup::create()
 {
     auto ret = new ComicPopup();
 
-    if (ret && ret->initAnchored(400.f, 200.f))
+    if (ret->init())
     {
         ret->autorelease();
         return ret;
     }
 
-    CC_SAFE_DELETE(ret);
+    delete ret;
     return nullptr;
 };

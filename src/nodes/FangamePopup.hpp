@@ -1,17 +1,19 @@
 #pragma once
+#include <Geode/Geode.hpp>
+#include <Geode/ui/Popup.hpp>
+#include <Geode/ui/GeodeUI.hpp>
 using namespace geode::prelude;
 
-class FangamePopup : public geode::Popup<const char *, const char *>
-{
-protected:
-    const char *m_link = nullptr;
-    const char *m_buttonText = "Text";
-    CCMenuItemSpriteExtra *m_linkButton = nullptr;
+class FangamePopup : public Popup{
+    protected:
+        const char *m_link;
+        const char *m_buttonText = "Test";
+        CCMenuItemSpriteExtra * m_linkBtn = nullptr;
 
-    bool setup(const char *, const char *) override;
-    void onLink(CCObject *);
+        bool init(const char *, const char *);
+        void onLink(CCObject *);
 
-public:
-    static FangamePopup *create(const char *, const char *);
-    void setButtonText(const char *);
+    public:
+        static FangamePopup * create(const char *, const char *);
+        void setButtonText(const char *);
 };

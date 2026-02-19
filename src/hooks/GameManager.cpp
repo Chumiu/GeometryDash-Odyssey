@@ -70,10 +70,8 @@ class $modify(OdysseyGameManager, GameManager)
             {
                 auto obj = get()->m_valueKeeper->valueForKey(IconUtils::getItemKey(id, IconUtils::iconTypeToInt(type)));
                 return (id == 1) ? true : obj->intValue() == 1;
-            }
-            else
+            } else
                 return GameManager::isIconUnlocked(id, type);
-            
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);
@@ -88,7 +86,7 @@ class $modify(OdysseyGameManager, GameManager)
 
     void returnToLastScene(GJGameLevel *level)
     {
-        if (level->m_levelType == GJLevelType::Local)
+        if (level->m_levelType == GJLevelType::Main)
         {
             int page = Odyssey::islandPageForLevelID(level->m_levelID);
 
