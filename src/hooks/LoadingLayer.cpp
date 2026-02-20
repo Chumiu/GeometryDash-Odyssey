@@ -205,7 +205,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto SFC = CCSpriteFrameCache::get();
 
         //  Icons
-        for (int ii = 486; ii <= 518; ii++)
+        for (int ii = 486; ii <= 519; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_{}.plist", ii).c_str());
 
         for (int ii = 170; ii <= 179; ii++)

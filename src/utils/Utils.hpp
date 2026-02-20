@@ -32,4 +32,7 @@ namespace Odyssey
 
     void patch(int, geode::ByteVector const &);
     std::vector<unsigned char> intToBytes(int);
+
+    // debug
+    void logObjectsFromDictionary(CCDictionary*, bool values = false);
 };

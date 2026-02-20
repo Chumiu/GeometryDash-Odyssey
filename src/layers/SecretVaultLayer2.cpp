@@ -151,16 +151,14 @@ bool SecretVaultLayer2::init()
     }
 
     //puerta
-    auto doorSpr = CCSprite::createWithSpriteFrameName("theTowerDoor_001.png");
-    doorSpr->setColor({0, 255, 0});
+    auto doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    //doorSpr->setColor({0, 255, 0});
     doorSpr->setScale(.7f);
     doorSpr->setAnchorPoint({ .5f, .5f });
 
     auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
 
-    auto doorParticle = GameToolbox::particleFromString("30a-1a2.2a0.48a11a90a180a29a0a11a0a0a0a0a0a0a0a5a1a0a0a0.0745098a0a0a0a0.611765a0a1a0a2a1a0a0a0a0a0.937255a0a1a0a1a0a0.54a0a0.57a0a56a0a11a0a-25a17a1a2a1a0a0a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
-    doorParticle->setStartColor({0, 100, 0, 0});
-    doorParticle->setEndColor({0, 255, 0, 255});
+    auto doorParticle = GameToolbox::particleFromString("30a-1a1a0.3a16a90a7a0a0a34a35a0a-17a30a0a20a0a8a6a0a0a0.890196a0a1a0a0a0a1a0a1a1a0a0a0.0823529a0a0.72549a0a0a0a1a0a0.19a0a0.38a0a0a0a0a0a0a0a0a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
     doorParticle->setPosition(doorSpr->getScaledContentSize() / 2);
 
     doorBtn->addChild(doorParticle);

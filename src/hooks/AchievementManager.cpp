@@ -45,6 +45,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level602b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "bird_155", 1);
 		AchievementManager::addAchievement("geometry.ach.level603b", "Phone me First!", "Completed \"Phone me First\" in normal mode", "Complete \"Phone me First\" in normal mode", "swing_48", 1);
 		AchievementManager::addAchievement("geometry.ach.level604b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "icon_516", 1);
+		AchievementManager::addAchievement("geometry.ach.level605b", "Granite!", "Completed \"Granite\" in normal mode", "Complete \"Granite\" in normal mode", "icon_519", 1);
 
 		//	Ultimate Achievements
 		AchievementManager::addAchievement("geometry.ach.level04c", "Ultimate Cryptofunk!", "Completed \"Cryptofunk\" with all coins", "Complete \"Cryptofunk\" with all coins", "ship_173", 1);

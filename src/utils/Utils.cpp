@@ -147,6 +147,11 @@ DialogLayer *Odyssey::createDialog(const char *event)
         dialogList = HollowEnough;
         dialogColor = 5;
     }
+    if (std::string_view(event) == std::string_view("ogreExtraLevelsLocked"))
+    {
+        dialogList = LockedLevelsOgre;
+        dialogColor = 3;
+    }
 
     //  Al tener ya una lista de dialogos asignado, se hace este ciclo
     //  Donde cada parte del dialogo es agregado al Array
@@ -434,6 +439,8 @@ int Odyssey::getLevelSongID(int levelID)
         return 1139782;
     case 7604: // Wubsplosion
         return 10007269;
+    case 7605: // Granite
+        return 10007320;
 
     default:
         return -1;
@@ -489,9 +496,27 @@ std::pair<gd::string, gd::string> Odyssey::getLevelAudioAssets(int levelID)
         return {"1139782", "1330, 1554, 2136, 2981, 4024, 4025, 4074, 4273, 4274, 4394, 6269, 13171, 20698, 22875"};
         break;
     case 7604: // Wubsplosion
-        return {"10007269", ""};
+        return {"10007269", "4395, 4397, 4404, 7501"};
+        break;
+    case 7605: // Granite
+        return {"10007320", "709, 2032, 2075, 2076, 2500, 2979, 4397, 7491, 10731, 14901"};
         break;
     }
 
     return {"", ""};
 };
+
+void Odyssey::logObjectsFromDictionary(CCDictionary *dict, bool values)
+{
+    auto keys = dict->allKeys();
+
+    for (auto keyObj : CCArrayExt<CCString*>(keys))
+    {
+        CCString* value = static_cast<CCString*>(dict->objectForKey(keyObj->getCString()));
+
+        if (values)
+            log::info("Key: {} Value: {} \n", keyObj->getCString(), value->getCString());
+        else
+            log::info("Key: {} \n", keyObj->getCString());
+    };
+}

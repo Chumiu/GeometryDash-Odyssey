@@ -41,11 +41,15 @@ bool CreditsLayer::setup()
     m_creditsPlayTestLayer = CCLayer::create();
     m_creditsPlayTestLayer->setID("creditsPlayTesters-tab"_spr);
 
+    m_creditsContestLevelsLayer = CCLayer::create();
+    m_creditsContestLevelsLayer->setID("creditsContestLevels-tab"_spr);
+
     setupCreditsOrgTab();
     setupCreditsModDeveloperTab();
     setupCreditsCreatorsTab();
     setupCreditsArtistsTab();
     setupCreditsTestersTab();
+    setupCreditsContestLevelsTab();
     setupCreditsSpecialThanksTab();
 
     bg_LayerSprite02->addChild(m_bgSprite02);
@@ -73,6 +77,9 @@ bool CreditsLayer::setup()
 
     m_mainLayer->addChild(m_creditsPlayTestLayer, 1);
     m_creditsPlayTestLayer->setPosition(m_mainLayer->convertToNodeSpace(ccp(0, 0)));
+
+    m_mainLayer->addChild(m_creditsContestLevelsLayer, 1);
+    m_creditsContestLevelsLayer->setPosition(m_mainLayer->convertToNodeSpace(ccp(0, 0)));
 
     auto fowardTabSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png");
     fowardTabSpr->setFlipX(true);
@@ -424,6 +431,53 @@ void CreditsLayer::setupCreditsTestersTab()
     GameToolbox::alignItemsHorisontally(row3CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
 }
 
+void CreditsLayer::setupCreditsContestLevelsTab()
+{
+    auto director = CCDirector::sharedDirector();
+    auto winSize = director->getWinSize();
+
+    auto creditsReason = CCLabelBMFont::create("Creator Contest Winners", "goldFont.fnt");
+    creditsReason->setScale(0.7f);
+    creditsReason->setAlignment(CCTextAlignment::kCCTextAlignmentCenter);
+    creditsReason->setAnchorPoint({0.5f, 1.0f});
+    creditsReason->limitLabelWidth(180.0f, 0.6f, 0.f);
+    creditsReason->setPosition(ccp(winSize.width / 2, creditsLabel->getPositionY() - 32));
+
+    auto elDanielUser = CreditsNode::create("ElDanielYT", 151, 8, 3, 12, true, 26443361);
+    elDanielUser->setScale(0.85);
+
+    auto lojickalUser = CreditsNode::create("Lojickal", 267, 35, 3, 12, true, 22472683);
+    lojickalUser->setScale(0.85);
+    
+    auto emixilitoUser = CreditsNode::create("Emilixito", 35, 9, 3, 3, false, 10656247);
+    emixilitoUser->setScale(0.85);
+
+    auto zaxvortUser = CreditsNode::create("Zaxvort", 206, 49, 72, 70, true, 27686509);
+    zaxvortUser->setScale(0.85);
+
+    auto studioBoisUser = CreditsNode::create("StudioBois", 263, 4, 2, 2, true, 17028382);
+    studioBoisUser->setScale(0.85);
+
+    CCArray *row1CreditArray = CCArray::create();
+
+    row1CreditArray->addObject(elDanielUser);
+    row1CreditArray->addObject(lojickalUser);
+    row1CreditArray->addObject(emixilitoUser);
+    row1CreditArray->addObject(zaxvortUser);
+    row1CreditArray->addObject(studioBoisUser);
+
+    m_creditsContestLevelsLayer->addChild(elDanielUser, 4);
+    m_creditsContestLevelsLayer->addChild(lojickalUser, 4);
+    m_creditsContestLevelsLayer->addChild(emixilitoUser, 4);
+    m_creditsContestLevelsLayer->addChild(zaxvortUser, 4);
+    m_creditsContestLevelsLayer->addChild(studioBoisUser, 4);
+
+    GameToolbox::alignItemsHorisontally(row1CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2), false);
+
+    m_creditsContestLevelsLayer->addChild(bgLayer, 3);
+    m_creditsContestLevelsLayer->addChild(creditsReason, 4);
+}
+
 void CreditsLayer::setupCreditsModDeveloperTab()
 {
     auto director = CCDirector::sharedDirector();
@@ -568,6 +622,7 @@ void CreditsLayer::changeTab()
     m_creditsCreatorsLayer->setVisible(false);
     m_creditsArtLayer->setVisible(false);
     m_creditsPlayTestLayer->setVisible(false);
+    m_creditsContestLevelsLayer->setVisible(false);
 
     m_fowardTabBtn->setVisible(m_tab < m_lastTab);
     m_backTabBtn->setVisible(m_tab > 0);
@@ -611,6 +666,12 @@ void CreditsLayer::changeTab()
         break;
 
     case 5:
+        m_bgSprite02->setColor({ 255, 251, 75 });
+        bgLayer->setColor({ 204, 200, 85 });
+        m_creditsContestLevelsLayer->setVisible(true);
+        break;
+
+    case 6:
         m_bgSprite02->setColor({100, 0, 150});
         bgLayer->setColor({100, 10, 150});
         m_creditsrobLayer->setVisible(true);

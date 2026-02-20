@@ -11,6 +11,8 @@
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/ProfilePage.hpp>
 #endif
 
 using namespace geode::prelude;
@@ -111,7 +113,7 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 		return LocalLevelManager::getMainLevelString(id);
 	}
 };
-
+/*
 class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 {
 	gd::string pathForSFXFolder(int sfxID)
@@ -133,7 +135,7 @@ class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 
 		return path;
 	}
-};
+};*/
 
 class $modify(SongsLayer)
 {
@@ -181,3 +183,41 @@ class $modify(PurchaseItemPopup)
 		IconUtils::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
 	}
 };
+
+
+#ifdef DEVELOPER_MODE
+class $modify(PlayLayer)
+{
+	bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects)
+	{
+		if (!PlayLayer::init(level, useReplay, dontCreateObjects))
+			return false;
+		
+		log::info("Timestamp: {}", level->m_timestamp);
+		return true;
+	}
+};
+
+class $modify(ProfilePage)
+{
+	void loadPageFromUserInfo(GJUserScore* p0)
+	{
+		ProfilePage::loadPageFromUserInfo(p0);
+
+		log::info(
+			"{}'s information: \n"
+			"Account ID: {}\n"
+			"Cube: {}\n"
+			"Col 1: {}\n"
+			"Col 2: {}\n"
+			"Col 3: {}\n",
+			p0->m_userName,
+			p0->m_accountID,
+			p0->m_playerCube,
+			p0->m_color1,
+			p0->m_color2,
+			p0->m_color3
+		);
+	}
+};
+#endif
