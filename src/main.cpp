@@ -99,7 +99,6 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 		// auto file = CCString::createWithFormat("level-%i.txt"_spr, id);
 		auto file = Mod::get()->getSettingValue<bool>("empty-levels") ? CCString::create("base.txt"_spr) : (Mod::get()->getSettingValue<bool>("updated-levels") && id < 7600) ? CCString::createWithFormat("level-%iB.txt"_spr, id)
 																																							   : CCString::createWithFormat("level-%i.txt"_spr, id);
-
 		if (file == nullptr)
 			return "";
 
