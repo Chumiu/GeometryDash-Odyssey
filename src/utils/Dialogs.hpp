@@ -364,6 +364,23 @@ const std::vector<std::vector<gd::string>> LockedOgre = {
     },
 };
 
+const std::vector<std::vector<gd::string>> LockedLevelsOgre = {
+    {"The Ogre",
+     "28",
+     "What do you think you're doing?...",
+     "Que crees que estás haciendo?..."},
+    {"The Ogre",
+     "28",
+     "Complete the previous levels to unlock this one!",
+     "Completa los anteriores niveles para desbloquear este nivel!"}
+    /*{
+        "The Ogre",
+        28,
+        "Complete the previous levels to unlock this one!",
+        "Completa los anteriores niveles para desbloquear este nivel!"
+    },*/
+};
+
 const std::vector<std::vector<gd::string>> Base = {
     {
         "Nombre del personaje",

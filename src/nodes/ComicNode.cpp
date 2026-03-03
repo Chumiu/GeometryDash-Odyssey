@@ -31,14 +31,16 @@ void ComicNode::loadImage()
         {
             if (!res.ok())
             {
-                onImageFail();
                 log::error("REQUEST FAILED");
+                onImageFail();
             }
             else
             {
                 auto data = res.data();
-                m_image = new CCImage();
-                m_image->initWithImageData(const_cast<uint8_t *>(data.data()), data.size());
+
+                m_sprite = LazySprite::create({480, 270});
+                m_sprite->loadFromData(const_cast<uint8_t *>(data.data()), data.size(), LazySprite::Format::kFmtPng);
+
                 onImageSuccess();
             }
         });
@@ -47,23 +49,15 @@ void ComicNode::loadImage()
 void ComicNode::onImageSuccess()
 {
     fadeLoadingCircle();
-    auto size = this->getContentSize();
-
-    auto texture = new CCTexture2D();
-    texture->initWithImage(m_image);
-
-    auto comicSprite = CCSprite::createWithTexture(texture);
-    texture->autorelease();
-    comicSprite->setPosition({size.width / 2, size.height / 2});
 
     //  Resizes the sprite based on the Texture Quality
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
-        comicSprite->setScale(0.5f);
+        m_sprite->setScale(0.5f);
 
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
-        comicSprite->setScale(0.25f);
+        m_sprite->setScale(0.25f);
 
-    this->addChild(comicSprite);
+    this->addChildAtPosition(m_sprite, Anchor::Center, ccp(0, 0), false);
 }
 
 void ComicNode::onImageFail()

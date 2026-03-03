@@ -6,11 +6,12 @@ class ComicNode : public CCLayer
 protected:
     TaskHolder<web::WebResponse> m_listener;
     LoadingCircle *m_circle = nullptr;
-    CCImage *m_image;
 
+    LazySprite * m_sprite = nullptr;
     const char *m_spriteName = nullptr;
 
     bool init(const char *comicPage);
+
     void loadImage();
     void onImageSuccess();
     void onImageFail();
