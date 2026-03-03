@@ -8,8 +8,6 @@ protected:
     CCMenuItemSpriteExtra *m_rightBtn = nullptr;
     CCMenuItemSpriteExtra *m_leftBtn = nullptr;
     CCSprite *m_background = nullptr;
-    CCSprite *m_cornerBL = nullptr;
-    CCSprite *m_cornerBR = nullptr;
     CCSize m_winSize;
 
     const char *m_backgroundMusic = "menuLoop.mp3";
@@ -22,23 +20,22 @@ protected:
     virtual void keyBackClicked();
     void scrollLayerMoved(CCPoint);
 
-    //  Para crear el Scroll layer
-    void createComic(CCArray *, int);
-    CCNode *addComicPage(int, int, bool);
+    //  Para crear el comic
+    void loadComic(CCArray *array, int comicNumber);
 
+    //  Functions
     void onCredits(CCObject *);
     void onHollow(CCObject *);
     void onPrev(CCObject *);
     void onNext(CCObject *);
     void onBack(CCObject *);
 
+    //  Misc.
     void verifySecretAchievement();
-
-    //  New features
-    void loadComic(CCArray *array, int comicNumber);
 
 public:
     bool m_fromPopup = false;
+
     static ComicLayer *create(int comicNumber, bool redirect);
     CCScene *scene(int comicNumber, bool redirect);
 };

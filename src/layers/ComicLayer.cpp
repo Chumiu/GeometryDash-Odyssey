@@ -92,13 +92,13 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
         addChild(secretMenu);
     };
 
-    m_cornerBL = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+    auto m_cornerBL = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
     m_cornerBL->setPosition({-1, -1});
     m_cornerBL->setAnchorPoint({0, 0});
     m_cornerBL->setID("corner-bl"_spr);
     addChild(m_cornerBL, 2);
 
-    m_cornerBR = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+    auto m_cornerBR = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
     m_cornerBR->setPosition({m_winSize.width + 1, -1});
     m_cornerBR->setAnchorPoint({1, 0});
     m_cornerBR->setFlipX(true);
@@ -141,69 +141,6 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     setKeypadEnabled(true);
 
     return true;
-};
-
-void ComicLayer::createComic(CCArray *arr, int issueNumber)
-{
-    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
-
-    std::vector<ccColor3B> colors = {
-        {33, 33, 33},
-        {63, 6, 155},
-        {0, 32, 59},
-        {29, 24, 51},
-        {173, 41, 66},
-        {120, 0, 0},
-        {0, 142, 17},
-        {0, 69, 184},
-        {0, 207, 228},
-        {0, 207, 228},
-        {4, 0, 171},
-        {107, 0, 10},
-    };
-
-    std::vector<int> totalPages = {
-        5, // 1st
-        5, // 2nd
-        4, // 3rd
-        4, // 4th
-        9, // 5th
-        6, // 6th
-        3, // 7th
-        4, // 8th
-        3, // 9th
-        5, // 10th
-        6, // 11th
-        6  // 12th
-    };
-
-    m_background->setColor(colors[issueNumber - 1]);
-    m_totalPages = totalPages[issueNumber - 1];
-
-    for (int ii = 0; ii < m_totalPages; ii++)
-    {
-        arr->addObject(addComicPage(issueNumber, ii + 1, spanishText));
-    };
-
-    if (issueNumber == 12)
-    {
-        m_totalPages++;
-
-        auto node = CCNode::create();
-        auto menu = CCMenu::create();
-
-        auto sprite = CrossButtonSprite::createWithSpriteFrameName("GDO_CreditsIcon_001.png"_spr, 1.5f);
-        sprite->setScale(1.5f);
-
-        auto button = CCMenuItemSpriteExtra::create(
-            sprite,
-            this,
-            menu_selector(ComicLayer::onCredits));
-
-        menu->addChild(button);
-        node->addChild(menu);
-        arr->addObject(node);
-    }
 };
 
 void ComicLayer::loadComic(CCArray *array, int comicNumber)
@@ -270,48 +207,6 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
         node->addChild(menu);
         array->addObject(node);
     }
-};
-
-CCNode *ComicLayer::addComicPage(int issueNumber, int page, bool spanish)
-{
-    auto node = CCNode::create();
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
-
-    //  Adds the base sprite of the comic (The drawings without the dialog)
-    auto baseSpriteName = fmt::format("Comic_BASE_{:02}_{:02}.png", issueNumber, page);
-    auto comicSprite = CCSprite::createWithSpriteFrameName(baseSpriteName.c_str());
-    comicSprite->setPosition(winSize / 2);
-    comicSprite->setScale(1.9f);
-
-    //  Resizes the sprite based on the Texture Quality
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
-        comicSprite->setScale(0.95f);
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
-        comicSprite->setScale(0.475f);
-    node->addChild(comicSprite);
-
-    //  Comic pages without dialog  (COMIC NUMBER / PAGE): C02/P1 - C05/P6 - C08/P1 - C08/P4 - C10/P5 - C11/P4 - C11/P5 - C12/P4 - C12/P5
-    //  * If the current page is one of those, skips adding the dialog, returning the node.
-    if ((issueNumber == 2 && page == 1) || (issueNumber == 5 && page == 6) || (issueNumber == 8 && (page == 1 || page == 4)) || (issueNumber == 10 && page == 5) || (issueNumber == 11 && (page == 4 || page == 5)) || (issueNumber == 12 && page == 4) || (issueNumber == 12 && page == 5))
-        return node;
-
-    //  Adds the dialog as an extra layer into the node
-    auto language = spanish ? "SPA" : "ENG";
-    auto dialogueSpriteName = fmt::format("Comic_{}_{:02}_{:02}.png", language, issueNumber, page);
-    auto dialogSprite = CCSprite::createWithSpriteFrameName(dialogueSpriteName.c_str());
-    dialogSprite->setPosition(winSize / 2);
-    dialogSprite->setScale(1.9f);
-    dialogSprite->setZOrder(10);
-
-    //  Resizes the sprite based on the Texture Quality
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
-        dialogSprite->setScale(0.95f);
-    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
-        dialogSprite->setScale(0.475f);
-
-    //  Returns the node
-    node->addChild(dialogSprite);
-    return node;
 };
 
 void ComicLayer::onCredits(CCObject *)
