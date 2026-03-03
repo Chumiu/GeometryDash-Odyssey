@@ -155,17 +155,15 @@ bool SecretVaultLayer2::init()
         addChild(text);
     }
 
-    //puerta
-    auto doorSpr = CCSprite::createWithSpriteFrameName("theTowerDoor_001.png");
-    doorSpr->setColor({0, 255, 0});
+    // puerta
+    auto doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    // doorSpr->setColor({0, 255, 0});
     doorSpr->setScale(.7f);
-    doorSpr->setAnchorPoint({ .5f, .5f });
+    doorSpr->setAnchorPoint({.5f, .5f});
 
     auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
 
-    auto doorParticle = GameToolbox::particleFromString("30a-1a2.2a0.48a11a90a180a29a0a11a0a0a0a0a0a0a0a5a1a0a0a0.0745098a0a0a0a0.611765a0a1a0a2a1a0a0a0a0a0.937255a0a1a0a1a0a0.54a0a0.57a0a56a0a11a0a-25a17a1a2a1a0a0a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
-    doorParticle->setStartColor({0, 100, 0, 0});
-    doorParticle->setEndColor({0, 255, 0, 255});
+    auto doorParticle = GameToolbox::particleFromString("30a-1a1a0.3a16a90a7a0a0a34a35a0a-17a30a0a20a0a8a6a0a0a0.890196a0a1a0a0a0a1a0a1a1a0a0a0.0823529a0a0.72549a0a0a0a1a0a0.19a0a0.38a0a0a0a0a0a0a0a0a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
     doorParticle->setPosition(doorSpr->getScaledContentSize() / 2);
 
     doorBtn->addChild(doorParticle);
@@ -183,7 +181,7 @@ bool SecretVaultLayer2::init()
     return true;
 };
 
-void SecretVaultLayer2::onExtraLevels(CCObject*)
+void SecretVaultLayer2::onExtraLevels(CCObject *)
 {
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(3)));
 }
@@ -358,7 +356,9 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     if (std::string_view(lower) == std::string_view("sigma") && !AM->isAchievementEarned("geometry.ach.odyssey.secret22") && GM->getUGV("322"))
     {
         reply = {
-            "What? I thought it was Delta", "Huh? Crei que era Delta"};
+            "What? I thought it was Delta",
+            "Huh? Crei que era Delta",
+        };
         updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
 
         GM->reportAchievementWithID("geometry.ach.odyssey.secret22", 100, false);
@@ -368,7 +368,9 @@ void SecretVaultLayer2::onSubmit(CCObject *)
     if (std::string_view(lower) == std::string_view("editor") && !AM->isAchievementEarned("geometry.ach.odyssey.secret23") && GM->getUGV("323"))
     {
         reply = {
-            "Have you made a level yet?", "Ya hicistes un nivel?"};
+            "Have you made a level yet?",
+            "Ya hicistes un nivel?",
+        };
         updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
 
         GM->reportAchievementWithID("geometry.ach.odyssey.secret23", 100, false);
@@ -410,20 +412,6 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Que es un slimeboy?",
         };
         updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
-        return;
-    };
-
-    if (std::string_view(lower) == std::string_view("ghostpower"))
-    {
-        response = "XD";
-        updateMessage(response, MessageType::WrongAnswer);
-        return;
-    };
-
-    if (std::string_view(lower) == std::string_view("nando"))
-    {
-        response = "Donde he oido antes ese nombre?";
-        updateMessage(response, MessageType::WrongAnswer);
         return;
     };
 

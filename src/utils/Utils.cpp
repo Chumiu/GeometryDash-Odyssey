@@ -236,7 +236,6 @@ int Odyssey::islandPageForLevelID(int levelID)
     return 0;
 };
 
-
 void Odyssey::verifyVaultHints()
 {
     auto AM = AchievementManager::sharedState();
@@ -435,6 +434,8 @@ int Odyssey::getLevelSongID(int levelID)
         return 1139782;
     case 7604: // Wubsplosion
         return 10007269;
+    case 7605: // Granite
+        return 10007320;
 
     default:
         return -1;
@@ -491,6 +492,9 @@ std::pair<gd::string, gd::string> Odyssey::getLevelAudioAssets(int levelID)
         break;
     case 7604: // Wubsplosion
         return {"10007269", "4395, 4397, 4404, 7501"};
+        break;
+    case 7605: // Granite
+        return {"10007320", "709, 2032, 2075, 2076, 2500, 2979, 4397, 7491, 10731, 14901"};
         break;
     }
 

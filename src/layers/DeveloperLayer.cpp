@@ -181,7 +181,7 @@ bool DeveloperLayer::init()
     levelsLabel->setScale(0.75f);
     addChild(levelsLabel);
 
-    for (auto ii = 601; ii <= 604; ii++)
+    for (auto ii = 601; ii <= 605; ii++)
     {
         auto level = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
