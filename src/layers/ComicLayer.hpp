@@ -3,7 +3,7 @@ using namespace geode::prelude;
 
 class ComicLayer : public cocos2d::CCLayer, public BoomScrollLayerDelegate, public DynamicScrollDelegate
 {
-public:
+protected:
     BoomScrollLayer *m_scrollLayer = nullptr;
     CCMenuItemSpriteExtra *m_rightBtn = nullptr;
     CCMenuItemSpriteExtra *m_leftBtn = nullptr;
@@ -17,7 +17,6 @@ public:
     int m_currentPage = 0;
     int m_totalPages = 1;
     bool m_RedirectToMap;
-    bool m_fromPopup = false;
 
     virtual bool init(int, bool);
     virtual void keyBackClicked();
@@ -27,15 +26,19 @@ public:
     void createComic(CCArray *, int);
     CCNode *addComicPage(int, int, bool);
 
-    void verifySecretAchievement();
-
     void onCredits(CCObject *);
     void onHollow(CCObject *);
     void onPrev(CCObject *);
     void onNext(CCObject *);
     void onBack(CCObject *);
 
+    void verifySecretAchievement();
+
+    //  New features
+    void loadComic(CCArray *array, int comicNumber);
+
 public:
-    static ComicLayer *create(int, bool);
-    CCScene *scene(int, bool);
+    bool m_fromPopup = false;
+    static ComicLayer *create(int comicNumber, bool redirect);
+    CCScene *scene(int comicNumber, bool redirect);
 };

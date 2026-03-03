@@ -45,6 +45,7 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level602b", "Jelly Castle!", "Completed \"Jelly Castle\" in normal mode", "Complete \"Jelly Castle\" in normal mode", "bird_155", 1);
 		AchievementManager::addAchievement("geometry.ach.level603b", "Phone me First!", "Completed \"Phone me First\" in normal mode", "Complete \"Phone me First\" in normal mode", "swing_48", 1);
 		AchievementManager::addAchievement("geometry.ach.level604b", "Wubsplosion!", "Completed \"Wubsplosion\" in normal mode", "Complete \"Wubsplosion\" in normal mode", "icon_516", 1);
+		AchievementManager::addAchievement("geometry.ach.level605b", "Granite!", "Completed \"Granite\" in normal mode", "Complete \"Granite\" in normal mode", "icon_517", 1);
 
 		//	Ultimate Achievements
 		AchievementManager::addAchievement("geometry.ach.level04c", "Ultimate Cryptofunk!", "Completed \"Cryptofunk\" with all coins", "Complete \"Cryptofunk\" with all coins", "ship_173", 1);
@@ -52,11 +53,11 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level502c", "Ultimate Burning Sands", "Completed \"Burning Sands\" with all coins", "Complete \"Burning Sands\" with all coins", "icon_499", 1);
 
 		//  Secret Coins
-		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "icon_517", 1);
+		AchievementManager::addAchievement("geometry.ach.coins01", "Oh, these again!", "Collected 5 Secret Coins", "Collect 5 Secret Coins", "icon_518", 1);
 		AchievementManager::addAchievement("geometry.ach.coins02", "Did I miss a key?", "Collected 10 Secret Coins", "Collect 10 Secret Coins", "ball_130", 1);
 		AchievementManager::addAchievement("geometry.ach.coins03", "Hollow's Payday", "Collected 15 Secret Coins", "Collect 15 Secret Coins", "dart_101", 1);
 		AchievementManager::addAchievement("geometry.ach.coins04", "Will Colon review these?", "Collected 20 Secret Coins", "Collect 20 Secret Coins", "bird_156", 1);
-		AchievementManager::addAchievement("geometry.ach.coins05", "That one drone coin...", "Collected 25 Secret Coins", "Collect 25 Secret Coins", "icon_518", 1);
+		AchievementManager::addAchievement("geometry.ach.coins05", "That one drone coin...", "Collected 25 Secret Coins", "Collect 25 Secret Coins", "icon_519", 1);
 		AchievementManager::addAchievement("geometry.ach.coins06", "Pocket Change", "Collected 30 Secret Coins", "Collect 30 Secret Coins", "dart_102", 1);
 		AchievementManager::addAchievement("geometry.ach.coins07", "Piggy Bank", "Collected 35 Secret Coins", "Collect 35 Secret Coins", "ship_179", 1);
 		AchievementManager::addAchievement("geometry.ach.coins08", "Rent's Due", "Collected 40 Secret Coins", "Collect 40 Secret Coins", "bird_157", 1);

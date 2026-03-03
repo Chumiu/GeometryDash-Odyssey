@@ -26,11 +26,26 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{106,106}</string>
+				<string>{108,108}</string>
 				<key>spriteSourceSize</key>
-				<string>{106,106}</string>
+				<string>{108,108}</string>
 				<key>textureRect</key>
-				<string>{{0,129},{106,106}}</string>
+				<string>{{0,129},{108,108}}</string>
+				<key>textureRotated</key>
+				<false/>
+			</dict>
+			<key>player_518_extra_001.png</key>
+			<dict>
+				<key>aliases</key>
+				<array/>
+				<key>spriteOffset</key>
+				<string>{0,0}</string>
+				<key>spriteSize</key>
+				<string>{18,18}</string>
+				<key>spriteSourceSize</key>
+				<string>{18,18}</string>
+				<key>textureRect</key>
+				<string>{{109,129},{18,18}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -61,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_518-uhd.png</string>
 			<key>size</key>
-			<string>{249,235}</string>
+			<string>{249,237}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_518-uhd.png</string>
 		</dict>

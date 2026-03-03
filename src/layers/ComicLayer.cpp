@@ -2,6 +2,8 @@
 #include "OdysseySelectLayer.hpp"
 #include "EndCreditsLayer.hpp"
 #include "SecretVaultLayer.hpp"
+
+#include "../nodes/ComicNode.hpp"
 #include "../utils/Utils.hpp"
 
 const int HOLLOW_COIN_QUOTA = 12;
@@ -32,7 +34,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     auto dotMenu = CCMenu::create();
 
     //  Calls the function to create the whole comic (by adding it to the Array for BoomScrollLayer)
-    createComic(arr, issueNumber);
+    loadComic(arr, issueNumber);
 
     m_scrollLayer = BoomScrollLayer::create(arr, 0, false, nullptr, static_cast<DynamicScrollDelegate *>(this));
     m_scrollLayer->m_extendedLayer->m_delegate = static_cast<BoomScrollLayerDelegate *>(this);
@@ -65,7 +67,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     menuBack->addChild(infoBtn);
     menuBack->setZOrder(5);
     addChild(menuBack);
-    
+
     //  If the comic issue is 4 (Super Ultra's comic), adds the Hollow's button
     if (issueNumber == 4)
     {
@@ -161,7 +163,7 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
     };
 
     std::vector<int> totalPages = {
-        9, // 1st
+        5, // 1st
         5, // 2nd
         4, // 3rd
         4, // 4th
@@ -171,7 +173,7 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
         4, // 8th
         3, // 9th
         5, // 10th
-        7, // 11th
+        6, // 11th
         6  // 12th
     };
 
@@ -201,6 +203,72 @@ void ComicLayer::createComic(CCArray *arr, int issueNumber)
         menu->addChild(button);
         node->addChild(menu);
         arr->addObject(node);
+    }
+};
+
+void ComicLayer::loadComic(CCArray *array, int comicNumber)
+{
+    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
+
+    std::vector<ccColor3B> colors = {
+        {33, 33, 33},
+        {63, 6, 155},
+        {0, 32, 59},
+        {29, 24, 51},
+        {173, 41, 66},
+        {120, 0, 0},
+        {0, 142, 17},
+        {0, 69, 184},
+        {0, 207, 228},
+        {0, 207, 228},
+        {4, 0, 171},
+        {107, 0, 10},
+    };
+
+    std::vector<int> totalPages = {
+        5, // 1st
+        5, // 2nd
+        4, // 3rd
+        4, // 4th
+        9, // 5th
+        6, // 6th
+        3, // 7th
+        4, // 8th
+        3, // 9th
+        5, // 10th
+        6, // 11th
+        6  // 12th
+    };
+
+    m_background->setColor(colors[comicNumber - 1]);
+    m_totalPages = totalPages[comicNumber - 1];
+
+    for (int ii = 0; ii < m_totalPages; ii++)
+    {
+        auto languageRef = spanishText ? "SPA" : "ENG";
+        auto spriteName = fmt::format("Comic_{}_{:02}_{:02}.png", languageRef, comicNumber, ii + 1);
+        auto node = ComicNode::create(spriteName.c_str());
+        array->addObject(node);
+    };
+
+    if (comicNumber == 12)
+    {
+        m_totalPages++;
+
+        auto node = CCNode::create();
+        auto menu = CCMenu::create();
+
+        auto sprite = CrossButtonSprite::createWithSpriteFrameName("GDO_CreditsIcon_001.png"_spr, 1.5f);
+        sprite->setScale(1.5f);
+
+        auto button = CCMenuItemSpriteExtra::create(
+            sprite,
+            this,
+            menu_selector(ComicLayer::onCredits));
+
+        menu->addChild(button);
+        node->addChild(menu);
+        array->addObject(node);
     }
 };
 

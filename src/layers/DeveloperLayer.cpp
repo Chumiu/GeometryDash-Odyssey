@@ -168,7 +168,7 @@ bool DeveloperLayer::init()
     //  Menu de Niveles
     auto levelsMenu = CCMenu::create();
     levelsMenu->setID("levels-menu"_spr);
-    levelsMenu->setContentSize({500.0f, 40.0f});
+    levelsMenu->setContentSize({560.0f, 40.0f});
     levelsMenu->setLayout(RowLayout::create()
                               ->setGap(14.0f)
                               ->setAutoScale(false)
@@ -184,7 +184,7 @@ bool DeveloperLayer::init()
     for (auto ii = 601; ii <= 605; ii++)
     {
         auto level = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii)).c_str(), 80, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.4f),
+            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii)).c_str(), 60, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.3f),
             this,
             menu_selector(DeveloperLayer::onLevel));
 

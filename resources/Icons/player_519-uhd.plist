@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0.5,-0.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{121,121}</string>
+				<string>{120,120}</string>
 				<key>spriteSourceSize</key>
-				<string>{130,130}</string>
+				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{131,0},{121,121}}</string>
+				<string>{{129,0},{120,120}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,28 +24,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0.5,5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{33,18}</string>
+				<string>{106,106}</string>
 				<key>spriteSourceSize</key>
-				<string>{130,130}</string>
+				<string>{106,106}</string>
 				<key>textureRect</key>
-				<string>{{110,131},{33,18}}</string>
-				<key>textureRotated</key>
-				<true/>
-			</dict>
-			<key>player_519_extra_001.png</key>
-			<dict>
-				<key>aliases</key>
-				<array/>
-				<key>spriteOffset</key>
-				<string>{0.5,28}</string>
-				<key>spriteSize</key>
-				<string>{109,52}</string>
-				<key>spriteSourceSize</key>
-				<string>{130,130}</string>
-				<key>textureRect</key>
-				<string>{{0,131},{109,52}}</string>
+				<string>{{0,129},{106,106}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -56,11 +41,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{130,130}</string>
+				<string>{128,128}</string>
 				<key>spriteSourceSize</key>
-				<string>{130,130}</string>
+				<string>{128,128}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{130,130}}</string>
+				<string>{{0,0},{128,128}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +61,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_519-uhd.png</string>
 			<key>size</key>
-			<string>{252,183}</string>
+			<string>{249,235}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_519-uhd.png</string>
 		</dict>

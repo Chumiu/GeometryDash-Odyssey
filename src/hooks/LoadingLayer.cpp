@@ -187,13 +187,13 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
     void addOdysseyAssets()
     {
-    //  Primero las texturas del Mod
-    #ifdef GEODE_IS_WINDOWS
-            auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
-    #endif
-    #ifdef GEODE_IS_ANDROID
-            auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
-    #endif
+//  Primero las texturas del Mod
+#ifdef GEODE_IS_WINDOWS
+        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
+#endif
+#ifdef GEODE_IS_ANDROID
+        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
+#endif
         auto unzipDir = geode::Mod::get()->getResourcesDir().string();
         auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 
@@ -205,7 +205,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto SFC = CCSpriteFrameCache::get();
 
         //  Icons
-        for (int ii = 486; ii <= 518; ii++)
+        for (int ii = 486; ii <= 519; ii++)
             SFC->addSpriteFramesWithFile(fmt::format("player_{}.plist", ii).c_str());
 
         for (int ii = 170; ii <= 179; ii++)
@@ -231,13 +231,6 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         SFC->addSpriteFramesWithFile("drone_01.plist");
         SFC->addSpriteFramesWithFile("slider_01.plist");
         SFC->addSpriteFramesWithFile("minecart_01.plist");
-
-        //  Comics
-        SFC->addSpriteFramesWithFile("ComicSheetSPA.plist");
-        SFC->addSpriteFramesWithFile("ComicSheetENG.plist");
-        SFC->addSpriteFramesWithFile("ComicSheetBASE.plist");
-
-        log::debug("Comics succesfully loaded into SpriteFrameCache");
     }
 
     void addCustomIconCredits()
@@ -271,8 +264,9 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(514, UnlockType::Cube), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(515, UnlockType::Cube), (int)Artist::Retro);  // Retro
         IconUtils::addCredits(std::make_pair(516, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
-        IconUtils::addCredits(std::make_pair(517, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
+        IconUtils::addCredits(std::make_pair(517, UnlockType::Cube), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(518, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
+        IconUtils::addCredits(std::make_pair(519, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
 
         //  Ships
         IconUtils::addCredits(std::make_pair(170, UnlockType::Ship), (int)Artist::Danky);  // Danky

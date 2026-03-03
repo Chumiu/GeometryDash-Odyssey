@@ -9,13 +9,13 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,0}</string>
+				<string>{0.5,-0.5}</string>
 				<key>spriteSize</key>
-				<string>{120,120}</string>
+				<string>{121,121}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{130,130}</string>
 				<key>textureRect</key>
-				<string>{{129,0},{120,120}}</string>
+				<string>{{131,0},{121,121}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -24,28 +24,28 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,0}</string>
+				<string>{0.5,5}</string>
 				<key>spriteSize</key>
-				<string>{108,108}</string>
+				<string>{33,18}</string>
 				<key>spriteSourceSize</key>
-				<string>{108,108}</string>
+				<string>{130,130}</string>
 				<key>textureRect</key>
-				<string>{{0,129},{108,108}}</string>
+				<string>{{110,131},{33,18}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>player_517_extra_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,0}</string>
+				<string>{0.5,28}</string>
 				<key>spriteSize</key>
-				<string>{18,18}</string>
+				<string>{109,52}</string>
 				<key>spriteSourceSize</key>
-				<string>{18,18}</string>
+				<string>{130,130}</string>
 				<key>textureRect</key>
-				<string>{{109,129},{18,18}}</string>
+				<string>{{0,131},{109,52}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -56,11 +56,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{128,128}</string>
+				<string>{130,130}</string>
 				<key>spriteSourceSize</key>
-				<string>{128,128}</string>
+				<string>{130,130}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{128,128}}</string>
+				<string>{{0,0},{130,130}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
 			<key>size</key>
-			<string>{249,237}</string>
+			<string>{252,183}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_517-uhd.png</string>
 		</dict>
