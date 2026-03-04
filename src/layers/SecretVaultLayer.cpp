@@ -308,13 +308,14 @@ void SecretVaultLayer::onSubmit(CCObject *)
     std::vector<gd::string> messages;
     std::vector<gd::string> voiceFiles;
     std::string response;
-    std::string lower;
 
     auto GM = GameManager::sharedState();
     auto AM = AchievementManager::sharedState();
 
-    for (auto elem : m_textInput->getString())
-        lower += std::tolower(elem);
+    std::string lower = m_textInput->getString();
+    std::transform(
+        lower.begin(), lower.end(), lower.begin(), [](unsigned char c)
+        { return std::tolower(c); });
 
     m_textInput->setString("");
     m_achievementName = "";
