@@ -38,42 +38,42 @@ void FanmadeGamesLayer::customSetup()
 
 void FanmadeGamesLayer::onNexitron(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_GDNX.png"_spr, "https://gamejolt.com/games/nexitron/797397");
+    auto popup = FangamePopup::create("Popup_GDNX.png", "https://gamejolt.com/games/nexitron/797397");
     popup->setButtonText("Play on Gamejolt!");
     popup->show();
 };
 
 void FanmadeGamesLayer::onTimeReborn(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_GDTR.png"_spr, "https://gamejolt.com/games/timereborn/908956");
+    auto popup = FangamePopup::create("Popup_GDTR.png", "https://gamejolt.com/games/timereborn/908956");
     popup->setButtonText("Play on Gamejolt!");
     popup->show();
 };
 
 void FanmadeGamesLayer::onMegaWorld(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_GDMW.png"_spr, "https://www.youtube.com/watch?v=5XNSWryOhV4&list=PLv_H3yhLON9FY0okZ0cYIIEppZXvRkPIz");
+    auto popup = FangamePopup::create("Popup_GDMW.png", "https://www.youtube.com/watch?v=5XNSWryOhV4&list=PLv_H3yhLON9FY0okZ0cYIIEppZXvRkPIz");
     popup->setButtonText("Check the Trailer!");
     popup->show();
 };
 
 void FanmadeGamesLayer::onUnnamed(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_UGDPS.png"_spr, "https://discord.gg/EHMUfj6EE2?event=1313001542730907770");
+    auto popup = FangamePopup::create("Popup_UGDPS.png", "https://discord.gg/EHMUfj6EE2?event=1313001542730907770");
     popup->setButtonText("Join the Discord Server!");
     popup->show();
 };
 
 void FanmadeGamesLayer::onLight(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_LIGHT.png"_spr, "https://discord.com/invite/mvbjWdC6cF");
+    auto popup = FangamePopup::create("Popup_LIGHT.png", "https://discord.com/invite/mvbjWdC6cF");
     popup->setButtonText("Join the Discord Server!");
     popup->show();
 };
 
 void FanmadeGamesLayer::onAdventure(CCObject *sender)
 {
-    auto popup = FangamePopup::create("Popup_GDNA.png"_spr, "https://discord.gg/SYWfGKY4nu");
+    auto popup = FangamePopup::create("Popup_GDNA.png", "https://discord.gg/SYWfGKY4nu");
     popup->setButtonText("Join the Discord Server!");
     popup->show();
 };
