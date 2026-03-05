@@ -137,6 +137,28 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
             0));
     }
 
+#ifdef GEODE_IS_DESKTOP
+    this->addEventListener(
+        KeybindSettingPressedEventV3(Mod::get(), "keybind-comic-next-page"),
+        [this](Keybind const &, bool down, bool, double)
+        {
+            if (down)
+            {
+                ComicLayer::onNext(this);
+            }
+        });
+
+    this->addEventListener(
+        KeybindSettingPressedEventV3(Mod::get(), "keybind-comic-prev-page"),
+        [this](Keybind const &, bool down, bool, double)
+        {
+            if (down)
+            {
+                ComicLayer::onPrev(this);
+            }
+        });
+#endif
+
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
 
