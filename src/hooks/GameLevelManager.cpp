@@ -59,6 +59,10 @@ public:
             level->m_accountID = 236473480;
             break;
 
+        case 7605:
+            level->m_creatorName = "StudioBois";
+            level->m_accountID = 17028382;
+
         default:
             level->m_creatorName = "SwitchstepGDYT";
             level->m_accountID = 10158911;

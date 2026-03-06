@@ -258,6 +258,8 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
 
         auto level = GameLevelManager::get()->getMainLevel(m_levelID, true);
         level->m_levelString = LocalLevelManager::get()->getMainLevelString(m_levelID);
+        level->m_songIDs = Odyssey::getLevelAudioAssets(m_levelID).first;
+        level->m_songID = Odyssey::getLevelSongID(m_levelID);
         log::info("ID: {}", level->m_songID);
 
         CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, PlayLayer::scene(level, false, false)));

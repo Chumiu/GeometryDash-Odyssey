@@ -92,7 +92,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "1139782.mp3";
 		case 604:
 			return "10007269.ogg";
-		case 605: 
+		case 605:
 			return "10007320.ogg";
 
 		default:
@@ -136,6 +136,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return 13;
 		case 604:
 			return 7;
+		case 605:
+			return 14;
 
 		default:
 			return LevelTools::artistForAudio(p0);
@@ -150,6 +152,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "Schtiffles";
 		case 13:
 			return "cYsmix";
+		case 14:
+			return "Shirobon";
 		default:
 			return LevelTools::nameForArtist(p0);
 		}
@@ -292,7 +296,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_stars = 6;
 			level->m_difficulty = GJDifficulty::Hard;
 			level->m_requiredCoins = 0;
-			level->m_timestamp = 0;
+			level->m_timestamp = 14682;
 			level->m_coins = 3;
 			break;
 
@@ -323,16 +327,16 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_difficulty = GJDifficulty::Insane;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
-			level->m_coins = 0;
+			level->m_coins = 3;
 			break;
-		
+
 		case 7605: // Granite
 			level->m_levelName = getAudioTitle(605);
 			level->m_audioTrack = 605;
 			level->m_stars = 14;
 			level->m_difficulty = GJDifficulty::Insane;
 			level->m_requiredCoins = 0;
-			level->m_timestamp = 0;
+			level->m_timestamp = 24273;
 			level->m_coins = 3;
 			break;
 		}
@@ -394,6 +398,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "https://www.youtube.com/watch?v=uDYdecWY85w"; // Phone Me First
 		case 604:
 			return "https://www.youtube.com/watch?v=lBXlBuuents"; // Wubsplosion
+		case 605:
+			return "https://www.youtube.com/watch?v=oqGmRagXxRc"; // Granite
 
 		default:
 			return LevelTools::urlForAudio(songID);
