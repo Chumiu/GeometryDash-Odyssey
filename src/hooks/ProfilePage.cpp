@@ -5,9 +5,6 @@ using namespace geode::prelude;
 
 class $modify(GDOProfilePage, ProfilePage)
 {
-    //  MISSING BINDINGS
-
-    /*
     void loadPageFromUserInfo(GJUserScore *p0)
     {
         ProfilePage::loadPageFromUserInfo(p0);
@@ -58,7 +55,6 @@ class $modify(GDOProfilePage, ProfilePage)
             m_mainLayer->addChild(menu);
         };
     }
-    */
 
     //  Al encontrar el secreto, se le asigna al usuario orbes gratis
     void onSecret(CCObject *sender)

@@ -4,68 +4,30 @@
 
 The mod uses it's own separate save-file, so the player's data will not be modified. Once they disable the mod in Geode, they will go back to their actual save.
 
-## **Development status: Active**
+## Development status: Active
 
 The mod is undergoing through development for the next major update, which includes four new extra levels, icons and more. As well as a massive optimization on the mod's file size.
 
-### **To-do List:**
+### To-do List:
 
-- [ ] New extra levels:
-  - [ ] Eclipse
-  - [ ] Jelly Castle
-  - [ ] Phone Me first
-  - [ ] Wubsplosion
-- [ ] Audio asset system
-- [ ] Optimized comics
-- [ ] New Achievements
-- [ ] New Icons
+- [x] New extra levels:
+  - [x] Eclipse
+  - [x] Jelly Castle
+  - [x] Phone Me first
+  - [x] Wubsplosion
+  - [x] Granite
+- [x] Audio asset system
+- [x] Optimized comics
+- [x] New Achievements
+- [x] New Icons
+- [ ] Updating the levels
 
-## **Bug Reporting**:
+## Bug Reporting:
 
 To report bugs, crashes or issues with other mods, you're free to contact us through [TCM Team's Discord](https://discord.gg/PNPrR4DEbw) or by creating a GitHub Issue.
 
-## **Credits**:
+## Credits:
 
-### <cy>Management</c>:
-
-- SwitchStepGDYT
-- ZapManiac
-- MathisCreator
-- Sear15
-
-### <cb>Mod Developers</c>: 
-
-- ML500
-- Chumiu
-- Cypher
-
-### <cg>Level Creators</c>:
-
-- MathisCreator
-- SwitchstepGDYT
-- ZapManiac
-- Jinta22
-- KoromiGD
-- Danky99
-- MasterTheCube5
-- GenaMorphosis
-- NotKaizer
-- Dogner
-- JoshuaGD23
-- Bonntu
-- Sear15
-- TheBreadCat24
-- ReyBenGDYT
-
-### <cp>Artists</c>:
-
-- Danky99
-- ReyBenGDYT
-- 3lipng
-- Vaughners
-- MinoX28
-- ML500
-- cyanflower
-- AngelozDD
-- MasterTheCube5
-- SweeSwag
+| Management                                         | Programming               | Level Creators (1/2)                                                                                                                 | Level Creators (2/2)                                          | Artists                                                                                                                   |
+|----------------------------------------------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Switchstep<br>ZapManiac<br>MathisCreator<br>Sear15 | Chumiu<br>Cypher<br>ML500 | Switchstep<br>MathisCreator<br>ZapManiac<br>Jinta22<br>KoromiGD<br>Danky99<br>MasterTheCube5<br>GenaMorphosis<br>NotKaizer<br>Dogner | JoshuaGD23<br>Bonntu<br>Sear15<br>TheBreadCat24<br>ReyBenGDYT | Danky99<br>ReyBenGDYT<br>3lipng<br>Vaughners<br>MinoX28<br>ML500<br>Cyanflower<br>AngelozDD<br>MasterTheCube5<br>SweeSwag |

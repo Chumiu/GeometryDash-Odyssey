@@ -5,7 +5,8 @@ Geometry Dash: Odyssey is a fanmade spin-off made by Team TCM that includes it's
 This mod uses it's own save file, your save data will not be modified. You will go back to your actual save data when the mod is turned off. Regardless, be aware to save your data beforehand.
 
 ---
-### **Features**:
+
+### **Features**
 
 - Storymode told via it's comics and unique characters!
 - Brand new official levels!
@@ -17,40 +18,44 @@ This mod uses it's own save file, your save data will not be modified. You will 
 And More!
 
 ---
+
 ### **<cr>WARNING:</c>**
 
 The mod will <cr>HEAVILY BREAK</c> with the following mods:
 
+- **Geometry Dash Time Reborn**
+- **Geometry Dash Lunar**
 - **More Icons (Android Only)**
 - **Overcharged Main Menu**
-- **Geometry Dash Lunar**
 - **GDUtils**
 - **Globed**
 
 It is also recommended to disable mods that change the look of the Main Menu (such as overcharged) or modify the official levels (such as other fangames), because they would become unstable with Odyssey.
 
 ---
-### **Bug Reporting**:
+
+### **Bug Reporting**
 
 To report bugs, crashes or issues with other mods, you're free to contact us through [TCM Team's Discord](https://discord.gg/PNPrR4DEbw) or by creating a GitHub Issue.
 
 ---
-### **Credits**:
 
-#### <cy>Management</c>:
+### **Credits**
+
+#### <cy>Management</c>
 
 - SwitchStepGDYT
 - ZapManiac
 - MathisCreator
 - Sear15
 
-#### <cb>Mod Developers</c>: 
+#### <cb>Mod Developers</c>
 
 - ML500
 - Chumiu
 - Cypher
 
-### <cg>Level Creators</c>:
+### <cg>Level Creators</c>
 
 - MathisCreator
 - SwitchstepGDYT
@@ -68,7 +73,7 @@ To report bugs, crashes or issues with other mods, you're free to contact us thr
 - TheBreadCat24
 - ReyBenGDYT
 
-### <cp>Artists</c>:
+### <cp>Artists</c>
 
 - Danky99
 - ReyBenGDYT

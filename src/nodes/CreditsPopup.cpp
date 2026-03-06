@@ -44,9 +44,13 @@ bool CreditsPopup::init()
     m_creditsPlayTestLayer = CCLayer::create();
     m_creditsPlayTestLayer->setID("creditsPlayTesters-tab"_spr);
 
+    m_creditsContestLevelsLayer = CCLayer::create();
+    m_creditsContestLevelsLayer->setID("creditsContestLevels-tab"_spr);
+
     setupCreditsOrgTab();
     setupCreditsModDeveloperTab();
     setupCreditsCreatorsTab();
+    setupCreditsContestLevelsTab();
     setupCreditsArtistsTab();
     setupCreditsTestersTab();
     setupCreditsSpecialThanksTab();
@@ -70,6 +74,9 @@ bool CreditsPopup::init()
 
     m_mainLayer->addChild(m_creditsCreatorsLayer, 1);
     m_creditsCreatorsLayer->setPosition(m_mainLayer->convertToNodeSpace(ccp(0, 0)));
+
+    m_mainLayer->addChild(m_creditsContestLevelsLayer, 1);
+    m_creditsContestLevelsLayer->setPosition(m_mainLayer->convertToNodeSpace(ccp(0, 0)));
 
     m_mainLayer->addChild(m_creditsArtLayer, 1);
     m_creditsArtLayer->setPosition(m_mainLayer->convertToNodeSpace(ccp(0, 0)));
@@ -427,6 +434,53 @@ void CreditsPopup::setupCreditsTestersTab()
     GameToolbox::alignItemsHorisontally(row3CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2 - 70), false);
 }
 
+void CreditsPopup::setupCreditsContestLevelsTab()
+{
+    auto director = CCDirector::sharedDirector();
+    auto winSize = director->getWinSize();
+
+    auto creditsReason = CCLabelBMFont::create("Creator Contest Winners", "goldFont.fnt");
+    creditsReason->setScale(0.7f);
+    creditsReason->setAlignment(CCTextAlignment::kCCTextAlignmentCenter);
+    creditsReason->setAnchorPoint({0.5f, 1.0f});
+    creditsReason->limitLabelWidth(180.0f, 0.6f, 0.f);
+    creditsReason->setPosition(ccp(winSize.width / 2, creditsLabel->getPositionY() - 32));
+
+    auto elDanielUser = CreditsNode::create("ElDanielYT", 151, 8, 3, 12, true, 26443361);
+    elDanielUser->setScale(0.85);
+
+    auto lojickalUser = CreditsNode::create("Lojickal", 267, 35, 3, 12, true, 22472683);
+    lojickalUser->setScale(0.85);
+
+    auto emixilitoUser = CreditsNode::create("Emilixito", 35, 9, 3, 3, false, 10656247);
+    emixilitoUser->setScale(0.85);
+
+    auto zaxvortUser = CreditsNode::create("Zaxvort", 206, 49, 72, 70, true, 27686509);
+    zaxvortUser->setScale(0.85);
+
+    auto studioBoisUser = CreditsNode::create("StudioBois", 263, 4, 2, 2, true, 17028382);
+    studioBoisUser->setScale(0.85);
+
+    CCArray *row1CreditArray = CCArray::create();
+
+    row1CreditArray->addObject(elDanielUser);
+    row1CreditArray->addObject(lojickalUser);
+    row1CreditArray->addObject(emixilitoUser);
+    row1CreditArray->addObject(zaxvortUser);
+    row1CreditArray->addObject(studioBoisUser);
+
+    m_creditsContestLevelsLayer->addChild(elDanielUser, 4);
+    m_creditsContestLevelsLayer->addChild(lojickalUser, 4);
+    m_creditsContestLevelsLayer->addChild(emixilitoUser, 4);
+    m_creditsContestLevelsLayer->addChild(zaxvortUser, 4);
+    m_creditsContestLevelsLayer->addChild(studioBoisUser, 4);
+
+    GameToolbox::alignItemsHorisontally(row1CreditArray, 74.f, ccp(winSize.width / 2, winSize.height / 2), false);
+
+    m_creditsContestLevelsLayer->addChild(bgLayer, 3);
+    m_creditsContestLevelsLayer->addChild(creditsReason, 4);
+}
+
 void CreditsPopup::setupCreditsModDeveloperTab()
 {
     auto director = CCDirector::sharedDirector();
@@ -571,6 +625,7 @@ void CreditsPopup::changeTab()
     m_creditsCreatorsLayer->setVisible(false);
     m_creditsArtLayer->setVisible(false);
     m_creditsPlayTestLayer->setVisible(false);
+    m_creditsContestLevelsLayer->setVisible(false);
 
     m_fowardTabBtn->setVisible(m_tab < m_lastTab);
     m_backTabBtn->setVisible(m_tab > 0);
@@ -584,38 +639,44 @@ void CreditsPopup::changeTab()
     switch (m_tab)
     {
     case 0:
-        m_bgSprite02->setColor({0, 0, 255});
-        bgLayer->setColor({0, 10, 255});
+        m_bgSprite02->setColor({255, 0, 0});
+        bgLayer->setColor({255, 100, 100});
         m_creditsOrgLayer->setVisible(true);
         break;
 
     case 1:
-        m_bgSprite02->setColor({0, 125, 255});
-        bgLayer->setColor({0, 135, 255});
+        m_bgSprite02->setColor({255, 75, 0});
+        bgLayer->setColor({255, 150, 100});
         m_creditsmoddevLayer->setVisible(true);
         break;
 
     case 2:
-        m_bgSprite02->setColor({0, 255, 0});
-        bgLayer->setColor({0, 255, 10});
+        m_bgSprite02->setColor({255, 255, 0});
+        bgLayer->setColor({255, 255, 100});
         m_creditsCreatorsLayer->setVisible(true);
         break;
 
     case 3:
-        m_bgSprite02->setColor({255, 0, 125});
-        bgLayer->setColor({255, 0, 135});
-        m_creditsArtLayer->setVisible(true);
+        m_bgSprite02->setColor({0, 255, 0});
+        bgLayer->setColor({100, 255, 100});
+        m_creditsContestLevelsLayer->setVisible(true);
         break;
 
     case 4:
-        m_bgSprite02->setColor({175, 175, 175});
-        bgLayer->setColor({175, 185, 175});
-        m_creditsPlayTestLayer->setVisible(true);
+        m_bgSprite02->setColor({0, 255, 255});
+        bgLayer->setColor({100, 255, 255});
+        m_creditsArtLayer->setVisible(true);
         break;
 
     case 5:
-        m_bgSprite02->setColor({100, 0, 150});
-        bgLayer->setColor({100, 10, 150});
+        m_bgSprite02->setColor({0, 0, 255});
+        bgLayer->setColor({100, 100, 255});
+        m_creditsPlayTestLayer->setVisible(true);
+        break;
+
+    case 6:
+        m_bgSprite02->setColor({150, 0, 255});
+        bgLayer->setColor({150, 100, 255});
         m_creditsrobLayer->setVisible(true);
         break;
     }

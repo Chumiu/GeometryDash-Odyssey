@@ -67,8 +67,8 @@ bool OdysseySelectLayer::init(int page)
 
     case 3:
         bgID = 8;
-        bgColor = {20, 0, 90};
-        gradientColorTop = {0, 0, 255, 30};
+        bgColor = { 0, 90, 0 };
+        gradientColorTop = { 9, 255, 0, 30 };
         islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
         islandScale = .75f;

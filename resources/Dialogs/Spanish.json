@@ -41,14 +41,7 @@
         ]
     },
     "wizard-introduction": {
-        "names": [
-            "????",
-            "????",
-            "????",
-            "????",
-            "????",
-            "????"
-        ],
+        "name": "????",
         "dialogs": [
             "Hola ahi! <d040>Antes de comenzar, dejame decirte algo.",
             "Para tener la <cy>experiencia completa</c>, te recomiendo leer los <cg>comics</c>.",
@@ -67,12 +60,7 @@
         ]
     },
     "first-island-clear": {
-        "names": [
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf"
-        ],
+        "name": "Dumbledalf",
         "dialogs": [
             "<s250><co>WOW, <d020>Que destrezas!!!</c></s>",
             "Tu has jugado estos tipos de <cg>juegos</c> antes, <d020>verdad?",
@@ -87,15 +75,7 @@
         ]
     },
     "ending": {
-        "names": [
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf"
-        ],
+        "name": "Dumbledalf",
         "dialogs": [
             "Oye <cy>muchacho</c>! Completastes todos los niveles!",
             "Gran trabajo! <d030>Continuaremos la adventura en una <cg>futura actualizacion</c>.",
@@ -116,17 +96,7 @@
         ]
     },
     "hollow-introduction": {
-        "names": [
-            "????",
-            "????",
-            "????",
-            "????",
-            "????",
-            "????",
-            "????",
-            "????",
-            "????"
-        ],
+        "name": "????",
         "dialogs": [
             "<d020>.<d020>.<d020>.",
             "Quien eres tu?<d020>.<d020>.<d020>.",
@@ -151,11 +121,7 @@
         ]
     },
     "hollow-quota-fail": {
-        "names": [
-            "????",
-            "????",
-            "????"
-        ],
+        "name": "????",
         "dialogs": [
             "No es lo suficiente<d020>.<d020>.",
             "Requiero <s100><cr>mas</c></s><d020>.<d020>.<d020>.",
@@ -188,11 +154,7 @@
         ]
     },
     "ogre-locked": {
-        "names": [
-            "Dumbledalf",
-            "Dumbledalf",
-            "Dumbledalf"
-        ],
+        "name": "Dumbledalf",
         "dialogs": [
             "Disculpas<d020>.<d020>.<d020>. <d040><cg>El</c> no esta listo para aceptar visitantes todavia",
             "Creo que una vez que colecciones el <co>primer elemento</c>, <d030>te dejara entrar",
@@ -276,10 +238,10 @@
         ],
         "sprites": [
             15,
+            15,
+            15,
+            15,
             16,
-            15,
-            15,
-            15,
             16,
             16,
             15

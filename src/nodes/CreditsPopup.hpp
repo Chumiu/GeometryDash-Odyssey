@@ -19,13 +19,14 @@ protected:
     cocos2d::CCLayer *m_creditsCreatorsLayer = nullptr;
     cocos2d::CCLayer *m_creditsArtLayer = nullptr;
     cocos2d::CCLayer *m_creditsPlayTestLayer = nullptr;
+    cocos2d::CCLayer *m_creditsContestLevelsLayer = nullptr;
 
     cocos2d::extension::CCScale9Sprite *m_bgSprite02 = nullptr;
     cocos2d::extension::CCScale9Sprite *bgLayer = nullptr;
     CCLabelBMFont *creditsLabel = nullptr;
 
     int m_tab = 0;
-    int m_lastTab = 5;
+    int m_lastTab = 6;
 
     bool init();
     void setupCreditsOrgTab();
@@ -34,6 +35,7 @@ protected:
     void setupCreditsTestersTab();
     void setupCreditsModDeveloperTab();
     void setupCreditsSpecialThanksTab();
+    void setupCreditsContestLevelsTab();
     void onDanky(CCObject *);
     void onNext(CCObject *);
     void onPrev(CCObject *);

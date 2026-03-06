@@ -234,14 +234,14 @@
             "From what I remember<d010>.<d010>.<d010>.",
             "I heard things about a castle<d010>.<d010>.<d010>.",
             "Maybe try searching over there?",
-            "Go on with your trip, player."
+            "Go on with your trip, Player."
         ],
         "sprites": [
             15,
+            15,
+            15,
+            15,
             16,
-            15,
-            15,
-            15,
             16,
             16,
             15
