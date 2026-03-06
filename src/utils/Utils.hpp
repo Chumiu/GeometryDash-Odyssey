@@ -26,10 +26,13 @@ namespace Odyssey
     //  Vectores
     std::vector<Mod *> getEarlyLoadBreakingMods();
     std::vector<Mod *> getBreakingMods();
-    
+
     int getLevelSongID(int levelID);
     std::pair<gd::string, gd::string> getLevelAudioAssets(int levelID);
 
     void patch(int, geode::ByteVector const &);
     std::vector<unsigned char> intToBytes(int);
+
+    //  Dialogos Actualizados
+    DialogLayer *createDialogExt(const char *event, int background = 1, bool sameName = true);
 };

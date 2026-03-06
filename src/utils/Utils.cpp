@@ -165,6 +165,61 @@ DialogLayer *Odyssey::createDialog(const char *event)
     return dialogLayer;
 };
 
+//  Version actualizada de la funcion de Dialogos
+DialogLayer *Odyssey::createDialogExt(const char *eventName, int background, bool sameName)
+{
+    auto spanish = GameManager::sharedState()->getGameVariable("0201");
+    auto fileName = spanish ? "Spanish.json" : "English.json";
+
+    //  Obtains the info from the selected Language File
+    std::ifstream file(Mod::get()->getResourcesDir() / fileName);
+    Result<matjson::Value, matjson::ParseError> rawData = matjson::parse(file);
+    CCArray *array = CCArray::create();
+
+    if (rawData.isOk())
+    {
+        matjson::Value data = rawData.unwrap();
+
+        if (data.isObject() && data.contains(eventName))
+        {
+            auto &dataObject = data[eventName];
+
+            if (dataObject.isObject())
+            {
+                auto name = dataObject["name"].asString().unwrapOr("");
+                auto sprites = dataObject["sprites"].asArray().unwrap();
+                auto dialogs = dataObject["dialogs"].asArray().unwrap();
+
+                //  If the dialog has more than one name
+                std::vector<matjson::Value> names;
+                if (!sameName && dataObject.contains("names"))
+                    names = dataObject["names"].asArray().unwrap();
+
+                //  Fills the array with the dialog objects from the data
+                for (auto ii = 0; ii < dialogs.size(); ii++)
+                {
+                    auto auxName = sameName ? name : names.at(ii).asString().unwrap();
+                    auto dialogObj = DialogObject::create(auxName, dialogs.at(ii).asString().unwrap(), sprites.at(ii).asInt().unwrap(), 1, false, {255, 255, 255});
+                    array->addObject(dialogObj);
+                }
+            }
+        }
+    }
+
+    //  If there was an error during the process, just stores this error message.
+    if (array->count() == 0)
+    {
+        auto dialogObj = DialogObject::create("ERROR 404", "[There was an error while loading the data]", 28, 3, false, {255, 255, 255});
+        array->addObject(dialogObj);
+    }
+
+    //  Creates the layer to return it
+    auto dialogLayer = DialogLayer::createDialogLayer(nullptr, array, background);
+    dialogLayer->animateInRandomSide();
+    dialogLayer->setZOrder(10);
+    return dialogLayer;
+};
+
 DialogLayer *Odyssey::createDialogResponse(const char *event, int times)
 {
     CCArray *arr = CCArray::create();

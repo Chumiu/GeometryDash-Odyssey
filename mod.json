@@ -132,6 +132,7 @@
 		"files": [
 			"resources/HollowVoicelines/*.mp3",
 			"resources/Soundtrack/*.mp3",
+			"resources/Dialogs/*.json",
 			"resources/Icons/*.plist",
 			"resources/Icons/*.png",
 			"resources/Levels/*.txt",

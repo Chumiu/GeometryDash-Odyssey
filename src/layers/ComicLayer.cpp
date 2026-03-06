@@ -254,7 +254,7 @@ void ComicLayer::onHollow(CCObject *)
             };
 
             log::info("MEETING HOLLOW");
-            auto dialog = Odyssey::createDialog("meetingHollow");
+            auto dialog = Odyssey::createDialogExt("hollow-introduction", 5);
             this->addChild(dialog, 3);
             GM->setUGV("205", true);
             return;
@@ -264,7 +264,7 @@ void ComicLayer::onHollow(CCObject *)
         if (GSM->getStat("8") < HOLLOW_COIN_QUOTA)
         {
             log::info("HOLLOW NOT ENOUGH");
-            auto dialog = Odyssey::createDialog("belowHollowQuota");
+            auto dialog = Odyssey::createDialogExt("hollow-quota-fail",5);
             this->addChild(dialog, 3);
             return;
         }
@@ -273,7 +273,7 @@ void ComicLayer::onHollow(CCObject *)
         if (GSM->getStat("8") >= HOLLOW_COIN_QUOTA && !GM->getUGV("210"))
         {
             log::info("HOLLOW ENOUGH");
-            auto dialog = Odyssey::createDialog("hollowQuotaReached");
+            auto dialog = Odyssey::createDialogExt("hollow-quota-success", 5, false);
             this->addChild(dialog, 3);
             GM->setUGV("210", true);
             return;

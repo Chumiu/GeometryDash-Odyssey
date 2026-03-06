@@ -38,9 +38,9 @@ bool DeveloperLayer::init()
     //  Menu de dialogos
     auto dialogMenu = CCMenu::create();
     dialogMenu->setID("dialog-menu"_spr);
-    dialogMenu->setContentSize({480.0f, 140.0f});
+    dialogMenu->setContentSize({560.0f, 140.0f});
     dialogMenu->setLayout(RowLayout::create()
-                              ->setGap(14.0f)
+                              ->setGap(6.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
@@ -52,42 +52,37 @@ bool DeveloperLayer::init()
     dialogLabel->setScale(0.75f);
     addChild(dialogLabel);
 
-    auto carp01 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Carp (Shop)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    carp01->setTag(0);
+    std::vector<const char *> events = {
+        "Carp (Meet)",
+        "Wizard (Meet)",
+        "Wizard (Island Clear)",
+        "Wizard (Ending)",
+        "Hollow (Meet)",
+        "Hollow (Quota Fail)",
+        "Hollow (Quota Success)",
+        "Ogre (Locked)",
+        //  v1.1.0
+        "Ogre (Meet)",
+        "Ogre (Start)",
+        "Ogre (1st Clear)",
+        "Ogre (2nd Clear)",
+        "Ogre (3rd Clear)",
+        "Ogre (4th Clear)",
+        "Ogre (Finale)",
+    };
 
-    auto wizard01 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Dumbledalf (Introduction)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    wizard01->setTag(1);
+    for (auto ii = 0; ii < events.size(); ii++)
+    {
+        auto button = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create(events[ii], 90, true, "goldFont.fnt", "GJ_button_01.png", 20.f, 0.4f),
+            this,
+            menu_selector(DeveloperLayer::onStoryDialogNew));
+        button->setTag(ii);
+        dialogMenu->addChild(button);
+        dialogMenu->updateLayout();
+    }
 
-    auto wizard02 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Dumbledalf (Island)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    wizard02->setTag(2);
-
-    auto wizard03 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Dumbledalf (Finale)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    wizard03->setTag(3);
-
-    auto hollow01 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Hollow (Introduction)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    hollow01->setTag(4);
-
-    auto hollow02 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Hollow (Coin quota)", 160, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onStoryDialog));
-    hollow02->setTag(5);
-
+    /*
     auto carp02 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Carp (Extras)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
         this,
@@ -105,6 +100,7 @@ bool DeveloperLayer::init()
         this,
         menu_selector(DeveloperLayer::onCarp04));
     carp04->setTag(0);
+    */
 
     auto popup01 = CCMenuItemSpriteExtra::create(
         ButtonSprite::create("Savefile Notice", 160, true, "goldFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
@@ -118,14 +114,6 @@ bool DeveloperLayer::init()
         menu_selector(DeveloperLayer::onPopup));
     popup02->setTag(2);
 
-    dialogMenu->addChild(carp01);
-    dialogMenu->addChild(wizard01);
-    dialogMenu->addChild(wizard02);
-    dialogMenu->addChild(wizard03);
-    dialogMenu->addChild(hollow01);
-    dialogMenu->addChild(hollow02);
-    dialogMenu->addChild(carp02);
-    dialogMenu->addChild(carp03);
     dialogMenu->addChild(popup01);
     dialogMenu->addChild(popup02);
     dialogMenu->updateLayout();
@@ -232,18 +220,66 @@ void DeveloperLayer::onComic(CCObject *sender)
 };
 
 //  En dialogo de historia
-void DeveloperLayer::onStoryDialog(CCObject *sender)
+void DeveloperLayer::onStoryDialogNew(CCObject *sender)
 {
     std::vector<const char *> events = {
-        "meetingShopkeeper",
-        "meetingWizard",
-        "firstIslandClear",
-        "end",
-        "meetingHollow",
-        "hollowQuotaReached",
+        "carp-introduction",
+        "wizard-introduction",
+        "first-island-clear",
+        "ending",
+        "hollow-introduction",
+        "hollow-quota-fail",
+        "hollow-quota-success",
+        "ogre-locked",
+        //  v1.1.0
+        "ogre-meeting",
+        "ogre-beginning",
+        "ogre-first-clear",
+        "ogre-second-clear",
+        "ogre-third-clear",
+        "ogre-fourth-clear",
+        "ogre-final-clear",
     };
 
-    auto dialog = Odyssey::createDialog(events[sender->getTag()]);
+    std::vector<int> backgrounds = {
+        2,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        4,
+        //  v1.1.0
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+    };
+
+    std::vector<bool> sameNames = {
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        //  v1.1.0
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+    };
+
+    auto dialog = Odyssey::createDialogExt(events[sender->getTag()], backgrounds[sender->getTag()], sameNames[sender->getTag()]);
     this->addChild(dialog, 10);
 }
 

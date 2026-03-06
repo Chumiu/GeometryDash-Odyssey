@@ -13,7 +13,7 @@ protected:
     void onCarp02(CCObject *);
     void onCarp03(CCObject *);
     void onCarp04(CCObject *);
-    void onStoryDialog(CCObject *);
+    void onStoryDialogNew(CCObject *);
     void onPopup(CCObject *);
 
     void onComic(CCObject *);

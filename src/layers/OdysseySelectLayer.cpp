@@ -398,21 +398,21 @@ bool OdysseySelectLayer::init(int page)
 
 void OdysseySelectLayer::getWizardDialog01()
 {
-    auto dialog = Odyssey::createDialog("meetingWizard");
+    auto dialog = Odyssey::createDialogExt("wizard-introduction", 4);
     GameManager::sharedState()->setUGV("203", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog02()
 {
-    auto dialog = Odyssey::createDialog("firstIslandClear");
+    auto dialog = Odyssey::createDialogExt("first-island-clear", 4);
     GameManager::sharedState()->setUGV("207", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog03()
 {
-    auto dialog = Odyssey::createDialog("end");
+    auto dialog = Odyssey::createDialogExt("ending", 4);
     GameManager::sharedState()->setUGV("208", true);
     this->addChild(dialog, 3);
 };
@@ -1072,9 +1072,9 @@ void OdysseySelectLayer::onOgre(CCObject *)
     if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level05b") && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
         log::info("LOCKED OGRE");
-        auto dialog = Odyssey::createDialog("lockedOgre");
+        auto dialog = Odyssey::createDialogExt("ogre-locked", 4, true);
         this->addChild(dialog, 3);
-        // return;
+        return;
     }
 
     auto scene = CCScene::create();
@@ -1101,7 +1101,7 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
     {
         if (sender->getTag() > 600)
         {
-            auto dialog = Odyssey::createDialog("ogreExtraLevelsLocked");
+            auto dialog = Odyssey::createDialogExt("ogre-level-locked", 3);
             this->addChild(dialog, 200);
             return;
         }

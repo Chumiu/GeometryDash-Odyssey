@@ -1,0 +1,443 @@
+{
+    "carp-introduction": {
+        "names": [
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "Carp",
+            "Carp",
+            "Carp",
+            "Carp",
+            "Carp",
+            "Carp"
+        ],
+        "dialogs": [
+            "Uh, <d030>hola...",
+            "Espera<d010>.<d010>.<d010>.",
+            "<s250>ESPERA!</s>",
+            "Un <cg>cliente!</c><d020> No puede ser! <d020>Crei que nadie llegaria aqui jamas!",
+            "Mi nombre es <cp>Carp</c>, soy el vendedor de <cl>The Dangerous Zones</c>!",
+            "Porque vivo aqui? <d020>Bueno...",
+            "Digamos que me entere de <cr>algo que no debi</c><d010>.<d010>.<d010>.",
+            "No revises el historial de busqueda de la computadora de <cy>RubRub</c>...",
+            "Como castigo,<d020> me sacaron de la tienda comunitaria y me enviaron aqui.",
+            "¡Tengo cosas para vender! <d020>Asi que si necesitas algo puedes obtenerlo aqui!",
+            "O no<d010>.<d010>.<d010>."
+        ],
+        "sprites": [
+            25,
+            24,
+            20,
+            20,
+            21,
+            22,
+            22,
+            23,
+            22,
+            20,
+            19
+        ]
+    },
+    "wizard-introduction": {
+        "names": [
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "????"
+        ],
+        "dialogs": [
+            "Hola ahi! <d040>Antes de comenzar, dejame decirte algo.",
+            "Para tener la <cy>experiencia completa</c>, te recomiendo leer los <cg>comics</c>.",
+            "Disponibles en el menu de cada nivel! <d020>Leelos antes de jugar los niveles!",
+            "Ok, <d020>Ya no mas romper la cuarta pared, volvere <co>al Bunker</c>!",
+            "Oh... <d030>Dije demasiado<d010>.<d010>.<d010>.",
+            "<s250><cy>Adios, muchacho!</c></s>"
+        ],
+        "sprites": [
+            56,
+            56,
+            56,
+            53,
+            54,
+            55
+        ]
+    },
+    "first-island-clear": {
+        "names": [
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf"
+        ],
+        "dialogs": [
+            "<s250><co>WOW, <d020>Que destrezas!!!</c></s>",
+            "Tu has jugado estos tipos de <cg>juegos</c> antes, <d020>verdad?",
+            "Bien, <d020>ahora a viajar a la <cl>siguiente isla</c>, <d020>muchacho.",
+            "<cg>La jungla de los ecos</c> nos espera<d010>.<d010>.<d010>."
+        ],
+        "sprites": [
+            55,
+            56,
+            56,
+            53
+        ]
+    },
+    "ending": {
+        "names": [
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf"
+        ],
+        "dialogs": [
+            "Oye <cy>muchacho</c>! Completastes todos los niveles!",
+            "Gran trabajo! <d030>Continuaremos la adventura en una <cg>futura actualizacion</c>.",
+            "Mientras esperamos, <d030>Que tal si consigues todas las <cy>monedas</c>?",
+            "Tal vez descubras mas <cr>secretos</c><d010>.<d010>.<d010>.",
+            "O ponte a prueba con los <co>niveles extra!</c>",
+            "Tu decision, <d030>nos volveremos a encontrar.",
+            "<cg>Muchas gracias por jugar!</c>"
+        ],
+        "sprites": [
+            56,
+            53,
+            56,
+            56,
+            53,
+            56,
+            55
+        ]
+    },
+    "hollow-introduction": {
+        "names": [
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "????",
+            "????"
+        ],
+        "dialogs": [
+            "<d020>.<d020>.<d020>.",
+            "Quien eres tu?<d020>.<d020>.<d020>.",
+            "Ya veo<d020>.<d020>.<d020>. <d020>eres una nueva persona<d020>.<d020>.<d020>.",
+            "Interesante<d020>.<d020>.<d020>.",
+            "Pero no veo nada de valor en ti<d020>.<d020>.<d020>.",
+            "Requiero algo<d020>.<d020>.<d020>.",
+            "Algo <cy>brillante</c><d020>.<d020>.<d020>.",
+            "Traeme algo <cy>dorado</c><d010>.<d010>.<d010>. <d020>Y te puedo dejar<d010>.<d010>.<d010>.",
+            "Ahora <cr>Vete.</c>"
+        ],
+        "sprites": [
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28,
+            28
+        ]
+    },
+    "hollow-quota-fail": {
+        "names": [
+            "????",
+            "????",
+            "????"
+        ],
+        "dialogs": [
+            "No es lo suficiente<d020>.<d020>.",
+            "Requiero <s100><cr>mas</c></s><d020>.<d020>.<d020>.",
+            "Una <cg>docena</c> de las <cy>doradas</c><d020>.<d020>.<d020>."
+        ],
+        "sprites": [
+            28,
+            28,
+            28
+        ]
+    },
+    "hollow-quota-success": {
+        "names": [
+            "????",
+            "????",
+            "????",
+            "Hollow"
+        ],
+        "dialogs": [
+            "Las veo<d020>.<d020>.<d020>.",
+            "Tienes <cy>oro</c> suficiente<d020>.<d020>.<d020>.",
+            "Ya puedes entrar, mortal<d020>.<d020>.<d020>.",
+            "<cr>Bienvenido a mi recamara<d020>.<d020>.<d020>.</c>"
+        ],
+        "sprites": [
+            28,
+            28,
+            28,
+            28
+        ]
+    },
+    "ogre-locked": {
+        "names": [
+            "Dumbledalf",
+            "Dumbledalf",
+            "Dumbledalf"
+        ],
+        "dialogs": [
+            "Disculpas<d020>.<d020>.<d020>. <d040><cg>El</c> no esta listo para aceptar visitantes todavia",
+            "Creo que una vez que colecciones el <co>primer elemento</c>, <d030>te dejara entrar",
+            "Hasta entonces, nada<d020>.<d020>.<d020>."
+        ],
+        "sprites": [
+            56,
+            56,
+            53
+        ]
+    },
+    "ogre-meeting": {
+        "name": "Ogre",
+        "dialogs": [
+            "<d010>.<d010>.<d010>.",
+            "Entonces<d010>.<d010>.<d010>.",
+            "Ya coleccionastes cada elemento, eh?",
+            "Buen trabajo<d010>.<d010>.<d010>.",
+            "<d010>.<d010>.<d010>.",
+            "Tengo algo que decirte.",
+            "Nos vemos dentro de mi cueva",
+            "Y tengamos una conversasion."
+        ],
+        "sprites": [
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15
+        ]
+    },
+    "ogre-beginning": {
+        "name": "Ogre",
+        "dialogs": [
+            "Nos encontramos de nuevo.",
+            "Escuche sobre tu viaje por las islas.",
+            "Y como ya estas libre<d010>.<d010>.<d010>.",
+            "Necesito que me hagas un favor.",
+            "He perdido algo muy especial para mi",
+            "Algo que no puedo vivir sin ella",
+            "<cy>Betsy</c>",
+            "Estoy atrapado aqui, y no puedo buscarla.",
+            "Pero tu<d010>.<d010>.<d010>. No estas atado a este lugar.",
+            "Entonces, me puedes ayudar a buscarla?",
+            "Demostrastes lo que eres capas despues de derrotar a Astral<d010>.<d010>.<d010>.",
+            "Asi que esta tarea sera pan comido.",
+            "Las puerta se abrira.",
+            "Ve<d010>.<d010>.<d010>. y buena suerte."
+        ],
+        "sprites": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+        ]
+    },
+    "ogre-first-clear": {
+        "name": "Ogre",
+        "dialogs": [
+            "Ya la has encontrado?",
+            "No<d010>.<d010>.<d010>.<d010>?",
+            "Ya veo.",
+            "Tal vez, deberias ver por otro lado.",
+            "Ahora que lo recuerdo<d010>.<d010>.<d010>.",
+            "Escuche algo sobre un castillo<d010>.<d010>.<d010>.",
+            "Tal vez deberias buscar por ahi?",
+            "Continua con tu viaje, jugador"
+        ],
+        "sprites": [
+            15,
+            16,
+            15,
+            15,
+            15,
+            16,
+            16,
+            15
+        ]
+    },
+    "ogre-second-clear": {
+        "name": "Ogre",
+        "dialogs": [
+            "Alguna nueva pista de <cy>Betsy</c>?",
+            "Aun no?",
+            "Hmm<d010>.<d010>.<d010>.",
+            "Espera<d010>.<d010>.<d010>.",
+            "Recuerdo algo mas<d010>.<d010>.<d010>.",
+            "Algo, sobre la cima de un monte<d010>.<d010>.<d010>.",
+            "Debe haber una zona por ahi cerca del castillo",
+            "Ya sabes a donde ir ahora."
+        ],
+        "sprites": [
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            15
+        ]
+    },
+    "ogre-third-clear": {
+        "name": "Ogre",
+        "dialogs": [
+            "Algo nuevo?",
+            "Ella no esta ahi? Demonios.",
+            "Bueno, aprecio tus efuerzos en esto<d010>.<d010>.<d010>.",
+            "Me recuerda a alguien que conocia<d010>.<d010>.<d010>.",
+            "Alguien querido, igual a mi preciosa <cy>Betsy</c><d010>.<d010>.<d010>.",
+            "Alguien que confiaba con todo<d010>.<d010>.<d010>.",
+            "A mi <cr>hermano<d010>.<d010>.<d010>.</c>",
+            "El fue la que me dio mi preciosa<d010>.<d010>.<d010>.",
+            "...",
+            "Hmm<d010>.<d010>.<d010>.",
+            "A donde ir ahora<d010>.<d010>.<d010>.",
+            "Ah<d010>.<d010>.<d010>.",
+            "Talvez esos <co>Invasores Espaciales</c> se la robaron.",
+            "Lo que significa<d010>.<d010>.<d010>.",
+            "Que debes ir mas lejos que la cima del monte.",
+            "Tienes que ir<d010>.<d010>.<d010>. <d020>al Espacio",
+            "Y yo conozco una ruta que puedas tomar.",
+            "Ese sera tu siguiente destino.",
+            "Ten cuidado, la ruta no es para los debiles.",
+            "Ojala estas listo para el desafio."
+        ],
+        "sprites": [
+            15,
+            16,
+            16,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            16,
+            16,
+            15,
+            16,
+            16,
+            16,
+            16,
+            16,
+            15,
+            16,
+            15
+        ]
+    },
+    "ogre-fourth-clear": {
+        "name": "Ogre",
+        "dialogs": [
+            "No se como te puedo hablar<d010>.<d010>.<d010>.",
+            "Si estas ahi arriba<d010>.<d010>.<d010>.",
+            "De todas maneras<d010>.<d010>.<d010>. <d020>Bienvenido al espacio.",
+            "Tu destino final.",
+            "Que dices? <d020>Los invasores se fueron?",
+            "Y dejaron un desorden?",
+            "Ten cuidado ahi arriba<d010>.<d010>.<d010>.",
+            "Ella debe estar cerca, lo presiento<d010>.<d010>.<d010>.",
+            "Nos encontraremos de nuevo, mi preciosa<d010>.<d010>.<d010>.",
+            "Un obstauculo mas, jugador.",
+            "Buena suerte."
+        ],
+        "sprites": [
+            15,
+            15,
+            16,
+            16,
+            16,
+            16,
+            15,
+            16,
+            16,
+            15,
+            15
+        ]
+    },
+    "ogre-final-clear": {
+        "name": "Ogre",
+        "dialogs": [
+            "<cy>Betsy</c><d010>.<d010>.<d010>.",
+            "Finalmente en mis manos de nuevo<d010>.<d010>.<d010>.",
+            "<d010>.<d010>.<d010>.",
+            "Jugador<d010>.<d010>.<d010>.",
+            "<d010>.<d010>.<d010>.",
+            "Muchas gracias.",
+            "Ahora no me siento solo.",
+            "Y es gracias a ti.",
+            "<d010>.<d010>.<d010>.",
+            "Ojala mi hermano estuviera aqui<d010>.<d010>.<d010>.",
+            "<cr>Gargan.</c>",
+            "No ha sido el mismo desde que nos separamos.",
+            "Tal vez, <d020>nos encontremos de nuevo.",
+            "Lo hecho de menos.",
+            "<d010>.<d010>.<d010>.",
+            "No hay nada mas de mi, <d020><cy>Jugador.</c>",
+            "Ojala hayas disfrutado de este viaje secundario<d010>.<d010>.<d010>.",
+            "<co>Gracias.</c>"
+        ],
+        "sprites": [
+            16,
+            16,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16
+        ]
+    },
+    "ogre-level-locked": {
+        "name": "Ogre",
+        "dialogs": [
+            "A donde crees que vas?",
+            "Enfocate en el camino principal.",
+            "Completa los <cy>niveles anteriores</c> para desbloquear este."
+        ],
+        "sprites": [
+            15,
+            15,
+            15
+        ]
+    }
+}
