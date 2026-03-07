@@ -46,7 +46,12 @@
 			"type": "bool",
 			"name": "Hide Custom Gamemodes",
 			"description": "<cy>ENG</c>: Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)\n\n<cy>ESP</c>: Oculta los botones de los gamemodes personalizados en el Icon Kit (tienen solamente un icono, por ahora...)",
-			"default": false
+			"default": false,
+			"platforms": [
+				"mac",
+				"win",
+				"android"
+			]
 		},
 		"keybinds-title": {
 			"type": "title",

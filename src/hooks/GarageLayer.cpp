@@ -30,6 +30,8 @@ class $modify(GDOGarageLayer, GJGarageLayer)
         if (auto shopButton = getChildByID("top-left-menu")->getChildByID("shop-button"))
             shopButton->setVisible(false);
 
+        #ifndef GEODE_IS_IOS
+
         //  Si la opcion de "Esconder gamemodes custom" esta deshabilitado, agrega los botones de los gamemodes personalizados
         if (!GameManager::sharedState()->getGameVariable("0202"))
         {
@@ -67,6 +69,8 @@ class $modify(GDOGarageLayer, GJGarageLayer)
                 categoryMenu->updateLayout();
             }
         }
+
+        #endif
 
         return true;
     }

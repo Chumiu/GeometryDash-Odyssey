@@ -5,11 +5,15 @@
 
 using namespace geode::prelude;
 
+//  The main function (CreateBrowserItem) is inlined on iOS :c
+
+#ifndef GEODE_IS_IOS
+
 class $modify(GJItemIcon)
 {
-    static GJItemIcon* createBrowserItem(UnlockType unlockType, int itemID) 
+    static GJItemIcon *createBrowserItem(UnlockType unlockType, int itemID)
     {
-        GJItemIcon* ret = GJItemIcon::createBrowserItem(unlockType, itemID);
+        GJItemIcon *ret = GJItemIcon::createBrowserItem(unlockType, itemID);
 
         int vehicleID = IconUtils::unlockTypeToInt(unlockType);
 
@@ -26,12 +30,12 @@ class $modify(GJItemIcon)
             ret->m_player = icon;
             ret->addChild(ret->m_player);
         }
-        
+
         return ret;
     }
 
-    static float scaleForType(UnlockType p0) 
-    { 
+    static float scaleForType(UnlockType p0)
+    {
         switch (IconUtils::unlockTypeToInt(p0))
         {
         case 900:
@@ -42,28 +46,28 @@ class $modify(GJItemIcon)
         case 903:
             return .7f;
         }
-        
+
         return GJItemIcon::scaleForType(p0);
     }
 
-    void changeToLockedState(float p0) 
+    void changeToLockedState(float p0)
     {
-        
+
         GJItemIcon::changeToLockedState(p0);
 
         if (IconUtils::isCustomVehicle(m_unlockType))
-        {   
-            auto layer = static_cast<SimplePlayer*>(m_player)->m_firstLayer;
+        {
+            auto layer = static_cast<SimplePlayer *>(m_player)->m_firstLayer;
             layer->setOpacity(120);
             layer->setColor({0, 0, 0});
             layer->setVisible(true);
-            
-            for(auto child : CCArrayExt<CCSprite*>(layer->getChildren()))
+
+            for (auto child : CCArrayExt<CCSprite *>(layer->getChildren()))
             {
                 child->setVisible(false);
             }
         }
-
     }
-
 };
+
+#endif
