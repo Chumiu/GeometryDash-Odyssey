@@ -67,8 +67,8 @@ bool OdysseySelectLayer::init(int page)
 
     case 3:
         bgID = 8;
-        bgColor = { 0, 90, 0 };
-        gradientColorTop = { 9, 255, 0, 30 };
+        bgColor = {0, 30, 0};
+        gradientColorTop = {0, 60, 0, 30};
         islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
         islandScale = .75f;
@@ -390,10 +390,35 @@ bool OdysseySelectLayer::init(int page)
             0));
     }
 
+    if (GM->getUGV("208") && !GM->getUGV("280"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
+            0));
+    }
+
     animateLevelCompletation();
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
     return true;
+};
+
+void OdysseySelectLayer::getOgreDialog()
+{
+    std::vector<gd::string> dialogEvents = {
+        "ogre-meeting",
+        "ogre-beginning", // Just to skip
+        "ogre-first-clear",
+        "ogre-second-clear",
+        "ogre-third-clear",
+        "ogre-fourth-clear",
+        "ogre-final-clear",
+    };
+
+    auto dialog = Odyssey::createDialogExt(dialogEvents[m_ogreDialog].c_str(), 3);
+    GameManager::sharedState()->setUGV(fmt::format("{}", m_ogreDialog + 280).c_str(), true);
+    this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog01()
@@ -815,6 +840,7 @@ void OdysseySelectLayer::animateLevelCompletation()
     if (m_currentPage == 2)
         return;
 
+    auto GM = GameManager::sharedState();
     auto GLM = GameLevelManager::sharedState();
     auto level1 = GLM->getMainLevel(7001, false);
     auto level2 = GLM->getMainLevel(7002, false);
@@ -869,6 +895,7 @@ void OdysseySelectLayer::animateLevelCompletation()
     int lastDot = 0;
     int nextLevel = 1;
     bool shouldAnimate = false;
+    bool ogreDialog = false;
 
     auto scaleAction = CCScaleTo::create(0.5, 1, 0.5); // Escala al 60% durante 0.5 segundos
     auto scaleWithBounce = CCEaseBounceOut::create(scaleAction);
@@ -939,6 +966,12 @@ void OdysseySelectLayer::animateLevelCompletation()
             firstDot = 0;
             lastDot = 7;
             nextLevel = 602;
+
+            if (!GM->getUGV("282"))
+            {
+                m_ogreDialog = 2;
+                ogreDialog = true;
+            }
         }
 
         if (extraLevel2->m_normalPercent == 100 && extraLevel3->m_normalPercent < 100)
@@ -946,6 +979,12 @@ void OdysseySelectLayer::animateLevelCompletation()
             firstDot = 8;
             lastDot = 15;
             nextLevel = 603;
+
+            if (!GM->getUGV("283"))
+            {
+                m_ogreDialog = 3;
+                ogreDialog = true;
+            }
         }
 
         if (extraLevel3->m_normalPercent == 100 && extraLevel4->m_normalPercent < 100)
@@ -953,6 +992,12 @@ void OdysseySelectLayer::animateLevelCompletation()
             firstDot = 16;
             lastDot = 23;
             nextLevel = 604;
+
+            if (!GM->getUGV("284"))
+            {
+                m_ogreDialog = 4;
+                ogreDialog = true;
+            }
         }
 
         if (extraLevel4->m_normalPercent == 100)
@@ -960,6 +1005,12 @@ void OdysseySelectLayer::animateLevelCompletation()
             firstDot = 24;
             lastDot = 31;
             nextLevel = 605;
+
+            if (!GM->getUGV("285"))
+            {
+                m_ogreDialog = 5;
+                ogreDialog = true;
+            }
         }
     }
 
@@ -971,6 +1022,14 @@ void OdysseySelectLayer::animateLevelCompletation()
 
         if (nextLevel != 5)
             shouldAnimate = true;
+    }
+
+    if (ogreDialog)
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
+            0));
     }
 
     log::info("Page: {}", m_currentPage);

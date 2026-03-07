@@ -17,6 +17,7 @@ public:
     int m_currentPage = 0;
     int m_levelAmount = 0;
     int m_extraTimes = 0;
+    int m_ogreDialog = 0;
 
     bool m_animating = false;
 
@@ -56,6 +57,7 @@ public:
     void getComic01();
     void getComic06();
     void getComic12();
+    void getOgreDialog();
 
 public:
     static OdysseySelectLayer *create(int);

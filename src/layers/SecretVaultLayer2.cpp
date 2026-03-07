@@ -109,37 +109,6 @@ bool SecretVaultLayer2::init()
 
     keeperMenu->addChild(keeperButton);
 
-    /*
-    //  Button for "Uncertain" (No longer available)
-    m_levelNode = CCNode::create();
-    m_levelNode->setContentSize({0, 30});
-    m_levelNode->setAnchorPoint({0.5, 0.5});
-    m_levelNode->setPosition({winSize.width - 60.f, winSize.height / 2});
-
-    if (GameManager::sharedState()->getUGV("235"))
-    {
-        auto m_levelMenu = CCMenu::create();
-        m_levelMenu->setContentSize(m_levelNode->getContentSize());
-        m_levelMenu->setPosition({0, 0});
-
-        auto m_levelBtnSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-        m_levelBtnSprite->setScale(0.45f);
-
-        m_levelBtn = CCMenuItemSpriteExtra::create(
-            m_levelBtnSprite,
-            this,
-            nullptr);
-        m_levelMenu->addChildAtPosition(m_levelBtn, Anchor::Center);
-
-        m_levelTitle = CCLabelBMFont::create("Uncertain", "bigFont.fnt");
-        m_levelTitle->setScale(0.5f);
-
-        m_levelNode->addChildAtPosition(m_levelTitle, Anchor::Top);
-        m_levelNode->addChild(m_levelMenu);
-    };
-    addChild(m_levelNode);
-    */
-
     //  Re-verifies whenever the vault rewards have been all Claimed
     Odyssey::hasAllVaultRewards();
 
@@ -158,8 +127,8 @@ bool SecretVaultLayer2::init()
     // puerta
     auto doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
     // doorSpr->setColor({0, 255, 0});
-    doorSpr->setScale(.7f);
     doorSpr->setAnchorPoint({.5f, .5f});
+    doorSpr->setScale(.7f);
 
     auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
 
@@ -171,7 +140,43 @@ bool SecretVaultLayer2::init()
     auto doorMenu = CCMenu::create();
     doorMenu->setPosition({winSize.width - 45, 45});
     doorMenu->addChild(doorBtn);
-    addChild(doorMenu);
+    //  addChild(doorMenu);
+
+    auto m_doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    m_doorSpr->setAnchorPoint({.5f, .5f});
+    m_doorSpr->setScale(.7f);
+
+    m_doorBtn = CCMenuItemSpriteExtra::create(
+        doorSpr,
+        this,
+        menu_selector(SecretVaultLayer2::onExtraLevels));
+    m_doorBtn->setID("ogre-path-door");
+    m_doorBtn->m_scaleMultiplier = 1;
+    m_doorBtn->m_colorEnabled = true;
+    m_doorBtn->m_colorDip = 100.f;
+    keeperMenu->addChildAtPosition(m_doorBtn, Anchor::BottomRight, ccp(-50, 50), false);
+
+    auto m_doorParticles = GameToolbox::particleFromString("30a-1a1a0.3a16a90a7a0a0a34a35a0a-17a30a0a20a0a8a6a0a0a0.890196a0a1a0a0a0a1a0a1a1a0a0a0.0823529a0a0.72549a0a0a0a1a0a0.19a0a0.38a0a0a0a0a0a0a0a0a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
+    m_doorParticles->setID("door-particles");
+    m_doorBtn->addChildAtPosition(m_doorParticles, Anchor::Center, ccp(0, 0), false);
+
+    auto GM = GameManager::sharedState();
+    if ((!GM->getUGV("280") || !GM->getUGV("281")) && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
+    {
+        m_doorParticles->setOpacity(0);
+        m_doorBtn->setColor({0, 0, 0});
+        m_doorBtn->setEnabled(false);
+    }
+
+    if (GM->getUGV("280") && !GM->getUGV("281"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::getOgreDialog)),
+            CCDelayTime::create(3.0f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::enableGate)),
+            0));
+    }
 
     //  Menu sound
     GameManager::sharedState()->fadeInMusic("SecretLoop02.mp3"_spr);
@@ -181,37 +186,31 @@ bool SecretVaultLayer2::init()
     return true;
 };
 
+void SecretVaultLayer2::getOgreDialog()
+{
+    auto dialog = Odyssey::createDialogExt("ogre-beginning", 3);
+    GameManager::sharedState()->setUGV("281", true);
+    addChild(dialog, 3);
+};
+
+void SecretVaultLayer2::enableGate()
+{
+    if (m_doorBtn)
+    {
+        m_doorBtn->runAction(CCTintTo::create(2, 255, 255, 255));
+        m_doorBtn->setEnabled(true);
+
+        if (auto particles = this->getChildByIDRecursive("door-particles"))
+        {
+            particles->runAction(CCFadeTo::create(2, 255));
+        }
+    }
+};
+
 void SecretVaultLayer2::onExtraLevels(CCObject *)
 {
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(3)));
 }
-
-void SecretVaultLayer2::addLevelAnimation()
-{
-    auto m_levelMenu = CCMenu::create();
-    m_levelMenu->setContentSize(m_levelNode->getContentSize());
-    m_levelMenu->setPosition({0, 0});
-
-    auto m_levelBtnSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-    m_levelBtnSprite->setScale(0.45f);
-
-    m_levelBtn = CCMenuItemSpriteExtra::create(
-        m_levelBtnSprite,
-        this,
-        nullptr);
-    m_levelMenu->addChildAtPosition(m_levelBtn, Anchor::Center);
-    m_levelBtn->setPositionX(100);
-
-    m_levelTitle = CCLabelBMFont::create("Uncertain", "bigFont.fnt");
-    m_levelTitle->setScale(0.5f);
-    m_levelTitle->setOpacity(0);
-
-    m_levelNode->addChildAtPosition(m_levelTitle, Anchor::Top);
-    m_levelNode->addChild(m_levelMenu);
-
-    m_levelTitle->runAction(CCFadeTo::create(0.5f, 255));
-    m_levelBtn->runAction(CCEaseSineOut::create(CCMoveTo::create(0.5, {0, 15})));
-};
 
 void SecretVaultLayer2::onSubmit(CCObject *)
 {
@@ -289,22 +288,6 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         GM->reportAchievementWithID("geometry.ach.odyssey.secret05", 100, false);
         return;
     };
-
-    /*
-    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235") && GM->getUGV("302"))
-    {
-        reply = {
-            "Good luck",
-            "Buena suerte",
-        };
-
-        addLevelAnimation();
-        GameManager::sharedState()->setUGV("235", true);
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
-
-        return;
-    };
-    */
 
     if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06") && GM->getUGV("306"))
     {
