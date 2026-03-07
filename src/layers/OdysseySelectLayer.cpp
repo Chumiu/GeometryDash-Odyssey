@@ -454,7 +454,7 @@ void OdysseySelectLayer::keyBackClicked()
     }
 
     GameManager::sharedState()->setIntGameVariable("1001", 0);
-    CCDirector::sharedDirector()->replaceScene(cocos2d::CCTransitionFade::create(0.5, MenuLayer::scene(false)));
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
     GameManager::sharedState()->fadeInMenuMusic();
 };
 
@@ -1098,7 +1098,7 @@ void OdysseySelectLayer::enableButtonTouch()
 void OdysseySelectLayer::switchToPage(int page)
 {
     auto scene = OdysseySelectLayer::scene(page);
-    CCDirector::sharedDirector()->replaceScene(CCTransitionFadeTR::create(0.5f, scene));
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, scene));
 }
 
 void OdysseySelectLayer::onNextPage(CCObject *)
