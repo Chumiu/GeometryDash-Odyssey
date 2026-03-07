@@ -191,12 +191,11 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 #ifdef GEODE_IS_WINDOWS
         auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
 #endif
-#ifdef GEODE_IS_ANDROID
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
+
+#if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS) || defined(GEODE_IS_ANDROID)
+		auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
 #endif
-#ifdef GEODE_IS_MACOS
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
-#endif
+
         auto unzipDir = geode::Mod::get()->getResourcesDir().string();
         auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 

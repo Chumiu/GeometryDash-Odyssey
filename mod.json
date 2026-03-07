@@ -1,9 +1,10 @@
 {
 	"geode": "5.3.0",
-	"version": "v1.1.0-alpha.7",
+	"version": "v1.1.0-alpha.8",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
+		"ios": "2.2081",
 		"android": "2.2081"
 	},
 	"developers": [
@@ -46,12 +47,6 @@
 			"name": "Hide Custom Gamemodes",
 			"description": "<cy>ENG</c>: Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)\n\n<cy>ESP</c>: Oculta los botones de los gamemodes personalizados en el Icon Kit (tienen solamente un icono, por ahora...)",
 			"default": false
-		},
-		"updated-levels": {
-			"type": "bool",
-			"name": "Updated levels",
-			"description": "<cy>ENG:</c> Replaces the levels with a copy of their online version, to test out the new audio asset feature.\n\n<cy>SPA:</c> Remplaza los niveles por una copia de sus versiones online, para probar la nueva function de descargar assets de audio.",
-			"default": true
 		},
 		"keybinds-title": {
 			"type": "title",
