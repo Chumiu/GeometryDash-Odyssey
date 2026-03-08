@@ -17,7 +17,7 @@ bool PromoPopup::init()
     m_mainLayer->addChild(m_background);
 
     //  Text area that displays the message
-    m_textArea = TextArea::create(spanish ? "Puedes ver una animacion hecha por\n<co>MasterTheCube5</c>\nPara tener monedas extra " : "You can watch an animation made by\n<co>MasterTheCube5</c>\nTo get an extra coins.", "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
+    m_textArea = TextArea::create(spanish ? "Puedes ver una animacion hecha por\n<co>MasterTheCube5</c>\nPara tener orbes extra " : "You can watch an animation made by\n<co>MasterTheCube5</c>\nTo get an extra orbs.", "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
     m_textArea->setPosition(m_background->getPosition());
     m_textArea->setID("promo-text-area");
     m_mainLayer->addChild(m_textArea);

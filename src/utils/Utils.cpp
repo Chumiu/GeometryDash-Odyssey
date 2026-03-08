@@ -1,9 +1,9 @@
 #include "Utils.hpp"
 #include "Dialogs.hpp"
 
+//  Adds corners to the "Level Popups"
 void Odyssey::addCorners(CCLayer *layer, const char *cornerSprite, float offset)
 {
-    //  Corners
     auto m_cornerBL = CCSprite::createWithSpriteFrameName(cornerSprite);
     m_cornerBL->setAnchorPoint({0, 0});
     m_cornerBL->setPosition({0 - offset, 0 - offset});
@@ -34,6 +34,7 @@ void Odyssey::addCorners(CCLayer *layer, const char *cornerSprite, float offset)
     layer->addChild(m_cornerTR);
 };
 
+//  Adds a node that's the progress bar of a Level
 CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
 {
     auto node = CCNode::create();
@@ -79,6 +80,7 @@ CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
     return node;
 };
 
+//  Adds a Node that's the difficulty of a level
 CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars, bool isCompleted)
 {
     auto node = CCNode::create();
@@ -106,68 +108,10 @@ CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars, bool isCompl
     return node;
 };
 
-DialogLayer *Odyssey::createDialog(const char *event)
+//  Updated function to get the dialogs of the game
+DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool sameName)
 {
-    CCArray *arr = CCArray::create();
-
-    auto dialogColor = 2;
-    std::vector<std::vector<gd::string>> dialogList;
-    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
-
-    //  Puede que esto si o no sirva, pero a este punta ya vale
-    if (std::string_view(event) == std::string_view("meetingShopkeeper"))
-        dialogList = CarpIntroduction;
-
-    if (std::string_view(event) == std::string_view("meetingWizard"))
-        dialogList = WizardIntroduction;
-
-    if (std::string_view(event) == std::string_view("firstIslandClear"))
-        dialogList = FirstIslandClear;
-
-    if (std::string_view(event) == std::string_view("end"))
-        dialogList = Ending;
-
-    if (std::string_view(event) == std::string_view("lockedOgre"))
-        dialogList = LockedOgre;
-
-    if (std::string_view(event) == std::string_view("meetingHollow"))
-    {
-        dialogList = HollowIntroduction;
-        dialogColor = 5;
-    }
-
-    if (std::string_view(event) == std::string_view("belowHollowQuota"))
-    {
-        dialogList = HollowNotEnough;
-        dialogColor = 5;
-    }
-
-    if (std::string_view(event) == std::string_view("hollowQuotaReached"))
-    {
-        dialogList = HollowEnough;
-        dialogColor = 5;
-    }
-
-    //  Al tener ya una lista de dialogos asignado, se hace este ciclo
-    //  Donde cada parte del dialogo es agregado al Array
-    for (auto ii = dialogList.begin(); ii != dialogList.end(); ii++)
-    {
-        auto text = ii->at(2 + spanishText);
-        auto dialog = DialogObject::create(ii->at(0), text, std::stoi(ii->at(1)), 1, false, {255, 255, 255});
-        arr->addObject(dialog);
-    }
-
-    //  Al terminar, crea el Layer del dialogo y lo agrega al a escena
-    auto dialogLayer = DialogLayer::createDialogLayer(nullptr, arr, dialogColor);
-    dialogLayer->animateInRandomSide();
-    dialogLayer->setZOrder(10);
-
-    return dialogLayer;
-};
-
-//  Version actualizada de la funcion de Dialogos
-DialogLayer *Odyssey::createDialogExt(const char *eventName, int background, bool sameName)
-{
+    //  Based on language, the file name is assignated.
     auto spanish = GameManager::sharedState()->getGameVariable("0201");
     auto fileName = spanish ? "Spanish.json" : "English.json";
 
@@ -184,6 +128,7 @@ DialogLayer *Odyssey::createDialogExt(const char *eventName, int background, boo
         {
             auto &dataObject = data[eventName];
 
+            //  If the event exists, enters here
             if (dataObject.isObject())
             {
                 auto name = dataObject["name"].asString().unwrapOr("");
@@ -261,6 +206,7 @@ DialogLayer *Odyssey::createDialogResponse(const char *event, int times)
     return dialogLayer;
 }
 
+//  Adds the audio assets to the Music Download Manager
 void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
 {
     auto map = MusicDownloadManager::sharedState()->m_resourceSfxUnorderedSet;
@@ -274,6 +220,7 @@ void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
     }
 }
 
+//  Returns what's the island page of the current level
 int Odyssey::islandPageForLevelID(int levelID)
 {
     if (levelID < 7005)
@@ -291,6 +238,7 @@ int Odyssey::islandPageForLevelID(int levelID)
     return 0;
 };
 
+//  Verifies the hints you have collected from the Vaults.
 void Odyssey::verifyVaultHints()
 {
     auto AM = AchievementManager::sharedState();
@@ -309,6 +257,7 @@ void Odyssey::verifyVaultHints()
     }
 };
 
+//  If all the vault rewards were collected, activates the special event
 void Odyssey::hasAllVaultRewards()
 {
     auto AM = AchievementManager::sharedState();

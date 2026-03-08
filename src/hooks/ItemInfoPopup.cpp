@@ -12,8 +12,9 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             return false;
 
         int type = static_cast<int>(p1);
-        
-        if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1)))){
+
+        if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+        {
             auto winSize = CCDirector::sharedDirector()->getWinSize();
             auto popupSize = m_mainLayer->getChildByID("background")->getContentSize();
 
@@ -47,25 +48,32 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             const char *titleString = "Full version";
             std::string descriptionString = fmt::format("You can <cl>get</c> this <cg>{}</c> in the full version of <cy>Geometry Dash</c>!", iconName);
 
-            //  EL ICONO ES UNO DE LOS DEFAULT
+            //  Default Icons
             if ((p1 == UnlockType::Cube && p0 <= 4) || p0 == 1 || ((p1 == UnlockType::Col1 || p1 == UnlockType::Col2) && p0 <= 3))
             {
                 descriptionString = fmt::format("This <cg>{}</c> is <cl>unlocked</c> by default.", iconName);
                 titleString = "Default";
             }
 
-            //  EL ICONO ES DE LA TIENDA DE CARP
+            //  This icon comes from Carp's Shop
             if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 5)
             {
                 descriptionString = fmt::format("You can <cl>buy</c> this <cg>{}</c> in the <cd>Carp's shop</c>!", iconName);
                 titleString = "Carp's Shop";
             }
 
-            //  EL ICONO ES PARA UNA ACTUALIZACION FUTURA
+            //  Icon is for a future update
             if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 6)
             {
                 descriptionString = fmt::format("This <cg>{}</c> can be <cl>unlocked</c> in update <cy>2.0</c>.", iconName);
                 titleString = "Coming Soon";
+            }
+
+            //  Icon is from a chest
+            if (IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))) && GameStatsManager::sharedState()->getItemUnlockState(p0, p1) == 7)
+            {
+                descriptionString = fmt::format("You can <cl>get</c> this <cg>{}</c> from a <cy>Special Chest</c>.", iconName);
+                titleString = "Special Reward";
             }
 
             if (auto descriptionArea = static_cast<TextArea *>(m_mainLayer->getChildByID("description-area")))

@@ -116,7 +116,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("geode.loader/settings.png", 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
+                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
                 this,
                 menu_selector(OdysseyMenuLayer::onDev));
 

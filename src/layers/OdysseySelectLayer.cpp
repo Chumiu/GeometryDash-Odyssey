@@ -3,6 +3,7 @@
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
 #include "../nodes/InstantMenuItemSprite.hpp"
+#include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -416,28 +417,51 @@ void OdysseySelectLayer::getOgreDialog()
         "ogre-final-clear",
     };
 
-    auto dialog = Odyssey::createDialogExt(dialogEvents[m_ogreDialog].c_str(), 3);
+    auto dialog = Odyssey::createDialog(dialogEvents[m_ogreDialog].c_str(), 3);
     GameManager::sharedState()->setUGV(fmt::format("{}", m_ogreDialog + 280).c_str(), true);
     this->addChild(dialog, 3);
 };
 
+void OdysseySelectLayer::unlockOgreChest()
+{
+    CCArray *rewardsArray = CCArray::create();
+
+    rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::Cube, 520));
+    rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::GJItem, 4));
+    rewardsArray->addObject(GJRewardObject::create(SpecialRewardItem::Orbs, 2500, 14));
+
+    GJRewardItem *rewardItems = GJRewardItem::createWithObjects(GJRewardType::Key100Treasure, rewardsArray);
+    RewardUnlockLayer *layer = RewardUnlockLayer::create(7, nullptr);
+    layer->m_chestType = 8;
+
+    GameStatsManager::get()->incrementStat("14", 2500);
+    IconUtils::unlockReward(520, UnlockType::Cube);
+
+    cocos2d::CCDirector::sharedDirector()->getRunningScene()->addChild(layer);
+    layer->showCollectReward(rewardItems);
+    layer->setZOrder(500);
+
+    //  Has collected Betsy
+    GameManager::sharedState()->setUGV("286", true);
+};
+
 void OdysseySelectLayer::getWizardDialog01()
 {
-    auto dialog = Odyssey::createDialogExt("wizard-introduction", 4);
+    auto dialog = Odyssey::createDialog("wizard-introduction", 4);
     GameManager::sharedState()->setUGV("203", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog02()
 {
-    auto dialog = Odyssey::createDialogExt("first-island-clear", 4);
+    auto dialog = Odyssey::createDialog("first-island-clear", 4);
     GameManager::sharedState()->setUGV("207", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog03()
 {
-    auto dialog = Odyssey::createDialogExt("ending", 4);
+    auto dialog = Odyssey::createDialog("ending", 4);
     GameManager::sharedState()->setUGV("208", true);
     this->addChild(dialog, 3);
 };
@@ -1012,6 +1036,17 @@ void OdysseySelectLayer::animateLevelCompletation()
                 ogreDialog = true;
             }
         }
+
+        if (extraLevel5->m_normalPercent == 100)
+        {
+            if (!GM->getUGV("286"))
+            {
+                this->runAction(CCSequence::create(
+                    CCDelayTime::create(1.f),
+                    CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::unlockOgreChest)),
+                    0));
+            }
+        }
     }
 
     log::info("Next level: {}", nextLevel);
@@ -1131,7 +1166,7 @@ void OdysseySelectLayer::onOgre(CCObject *)
     if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level05b") && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
         log::info("LOCKED OGRE");
-        auto dialog = Odyssey::createDialogExt("ogre-locked", 4, true);
+        auto dialog = Odyssey::createDialog("ogre-locked", 4, true);
         this->addChild(dialog, 3);
         return;
     }
@@ -1160,7 +1195,7 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
     {
         if (sender->getTag() > 600)
         {
-            auto dialog = Odyssey::createDialogExt("ogre-level-locked", 3);
+            auto dialog = Odyssey::createDialog("ogre-level-locked", 3);
             this->addChild(dialog, 200);
             return;
         }

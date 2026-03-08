@@ -15,7 +15,7 @@
 				<key>spriteSourceSize</key>
 				<string>{120,120}</string>
 				<key>textureRect</key>
-				<string>{{129,0},{120,120}}</string>
+				<string>{{130,0},{120,120}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -26,11 +26,11 @@
 				<key>spriteOffset</key>
 				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{108,108}</string>
+				<string>{112,112}</string>
 				<key>spriteSourceSize</key>
-				<string>{108,108}</string>
+				<string>{112,112}</string>
 				<key>textureRect</key>
-				<string>{{0,129},{108,108}}</string>
+				<string>{{0,130},{112,112}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -39,15 +39,15 @@
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,0}</string>
+				<string>{0,28}</string>
 				<key>spriteSize</key>
-				<string>{108,108}</string>
+				<string>{108,52}</string>
 				<key>spriteSourceSize</key>
-				<string>{108,108}</string>
+				<string>{108,52}</string>
 				<key>textureRect</key>
-				<string>{{109,129},{108,108}}</string>
+				<string>{{114,130},{108,52}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>player_510_glow_001.png</key>
 			<dict>
@@ -76,7 +76,7 @@
 			<key>realTextureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_510-uhd.png</string>
 			<key>size</key>
-			<string>{249,237}</string>
+			<string>{250,242}</string>
 			<key>textureFileName</key>
 			<string>teamtcm.geometry-dash-odyssey/player_510-uhd.png</string>
 		</dict>

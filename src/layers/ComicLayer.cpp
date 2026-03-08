@@ -54,7 +54,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     backBtn->setSizeMult(1.2f);
     backBtn->setPosition({24, m_winSize.height - 24});
 
-    auto infoText = spanishText ? "La calidad de los comics tuvo que ser reducida, de lo contrario el mod tendria problemas. Si no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>." : "The quality of the comics had to be reduced, else the mod would have issues. If you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>";
+    auto infoText = spanishText ? "Los comics ahora son manejados como contenido <cg>Online</c> dado a que sus dimensiones eran muy pesadas para el mod. Si no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>." : "The comics are now handled as <cg>Online Content</c> because they were too heavy to handle locally via the Mod. If you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>.";
 
     auto infoBtn = InfoAlertButton::create("Quality Issues", infoText, 1);
     infoBtn->setPosition({m_winSize.width - 24, 24});
@@ -254,7 +254,7 @@ void ComicLayer::onHollow(CCObject *)
             };
 
             log::info("MEETING HOLLOW");
-            auto dialog = Odyssey::createDialogExt("hollow-introduction", 5);
+            auto dialog = Odyssey::createDialog("hollow-introduction", 5);
             this->addChild(dialog, 3);
             GM->setUGV("205", true);
             return;
@@ -264,7 +264,7 @@ void ComicLayer::onHollow(CCObject *)
         if (GSM->getStat("8") < HOLLOW_COIN_QUOTA)
         {
             log::info("HOLLOW NOT ENOUGH");
-            auto dialog = Odyssey::createDialogExt("hollow-quota-fail",5);
+            auto dialog = Odyssey::createDialog("hollow-quota-fail", 5);
             this->addChild(dialog, 3);
             return;
         }
@@ -273,7 +273,7 @@ void ComicLayer::onHollow(CCObject *)
         if (GSM->getStat("8") >= HOLLOW_COIN_QUOTA && !GM->getUGV("210"))
         {
             log::info("HOLLOW ENOUGH");
-            auto dialog = Odyssey::createDialogExt("hollow-quota-success", 5, false);
+            auto dialog = Odyssey::createDialog("hollow-quota-success", 5, false);
             this->addChild(dialog, 3);
             GM->setUGV("210", true);
             return;

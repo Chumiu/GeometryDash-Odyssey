@@ -10,11 +10,13 @@ namespace IconUtils
     void updateIcon(CCNode *, int, IconType, bool);
     void updateRobotSprite(GJRobotSprite *, int, IconType);
     void unlockObject(int, int);
+    void unlockReward(int id, UnlockType type);
     void addCredits(std::pair<int, UnlockType>, int);
     void setVehicleSaveId(int, int);
 
     bool isIconCustom(int, IconType);
     bool isIconSecret(int, IconType);
+    bool isIconSpecial(int, IconType);
     bool isCustomVehicle(UnlockType);
     bool isCustomVehicle(IconType);
 

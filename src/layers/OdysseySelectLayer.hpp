@@ -58,6 +58,7 @@ public:
     void getComic06();
     void getComic12();
     void getOgreDialog();
+    void unlockOgreChest();
 
 public:
     static OdysseySelectLayer *create(int);

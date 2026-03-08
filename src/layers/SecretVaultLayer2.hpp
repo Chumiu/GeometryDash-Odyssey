@@ -29,6 +29,7 @@ protected:
 
     void enableGate();
     void getOgreDialog();
+    void getOgreFinalDialog();
     void onExtraLevels(CCObject *);
 
 public:

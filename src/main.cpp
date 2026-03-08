@@ -177,6 +177,6 @@ class $modify(PurchaseItemPopup)
 				GameManager::sharedState()->setUGV("238", true);
 		}
 
-		IconUtils::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
+		IconUtils::unlockReward(m_storeItem->m_typeID.value(), static_cast<UnlockType>(m_storeItem->m_unlockType.value()));
 	}
 };

@@ -69,6 +69,9 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
         //  if (IconUtils::isIconUpcoming(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
         //  return 6;
 
+        if (IconUtils::isIconSpecial(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+            return 7;
+
         //  Icono de tienda
         return 5;
     }
@@ -76,6 +79,7 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
     void createStoreItems()
     {
         auto newShop = static_cast<ShopType>(6);
+
         if (!m_allStoreItems)
         {
             m_allStoreItems = CCDictionary::create();

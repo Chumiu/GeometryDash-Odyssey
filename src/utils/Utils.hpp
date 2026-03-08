@@ -6,7 +6,7 @@ namespace Odyssey
     inline static std::vector<Mod *> breakingModsList;
 
     //  Dialogos
-    DialogLayer *createDialog(const char *event);
+    DialogLayer *createDialog(const char *event, int background = 1, bool sameName = true);
     DialogLayer *createDialogResponse(const char *event, int times);
 
     //  Nodos para el Level Popup
@@ -32,7 +32,4 @@ namespace Odyssey
 
     void patch(int, geode::ByteVector const &);
     std::vector<unsigned char> intToBytes(int);
-
-    //  Dialogos Actualizados
-    DialogLayer *createDialogExt(const char *event, int background = 1, bool sameName = true);
 };

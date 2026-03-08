@@ -76,7 +76,7 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 
 	void getCarpDialog()
 	{
-		auto dialog = Odyssey::createDialogExt("carp-introduction", 2, false);
+		auto dialog = Odyssey::createDialog("carp-introduction", 2, false);
 		GameManager::sharedState()->setUGV("204", true);
 		this->addChild(dialog, 200);
 	}

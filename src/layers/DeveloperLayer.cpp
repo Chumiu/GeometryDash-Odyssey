@@ -3,6 +3,7 @@
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
 #include "../nodes/AlertPopup.hpp"
+#include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
 bool DeveloperLayer::init()
@@ -103,19 +104,26 @@ bool DeveloperLayer::init()
     */
 
     auto popup01 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Savefile Notice", 160, true, "goldFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
+        ButtonSprite::create("Savefile Notice", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
         this,
         menu_selector(DeveloperLayer::onPopup));
     popup01->setTag(1);
 
     auto popup02 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Translation Notice", 160, true, "goldFont.fnt", "GJ_button_04.png", 25.f, 0.5f),
+        ButtonSprite::create("Translation Notice", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
         this,
         menu_selector(DeveloperLayer::onPopup));
     popup02->setTag(2);
 
+    auto popup03 = CCMenuItemSpriteExtra::create(
+        ButtonSprite::create("Ogre Chest", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
+        this,
+        menu_selector(DeveloperLayer::onPopup));
+    popup03->setTag(3);
+
     dialogMenu->addChild(popup01);
     dialogMenu->addChild(popup02);
+    dialogMenu->addChild(popup03);
     dialogMenu->updateLayout();
     addChild(dialogMenu);
 
@@ -279,7 +287,7 @@ void DeveloperLayer::onStoryDialogNew(CCObject *sender)
         true,
     };
 
-    auto dialog = Odyssey::createDialogExt(events[sender->getTag()], backgrounds[sender->getTag()], sameNames[sender->getTag()]);
+    auto dialog = Odyssey::createDialog(events[sender->getTag()], backgrounds[sender->getTag()], sameNames[sender->getTag()]);
     this->addChild(dialog, 10);
 }
 
@@ -302,6 +310,23 @@ void DeveloperLayer::onPopup(CCObject *sender)
         popup->m_scene = this;
         popup->setZOrder(104);
         popup->show();
+    }
+
+    if (tag == 3)
+    {
+        CCArray *rewardsArray = CCArray::create();
+
+        rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::Cube, 520));
+        rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::GJItem, 4));
+        rewardsArray->addObject(GJRewardObject::create(SpecialRewardItem::Orbs, 2500, 14));
+
+        GJRewardItem *rewardItems = GJRewardItem::createWithObjects(GJRewardType::Key100Treasure, rewardsArray);
+        RewardUnlockLayer *layer = RewardUnlockLayer::create(7, nullptr);
+        layer->m_chestType = 8;
+
+        cocos2d::CCDirector::sharedDirector()->getRunningScene()->addChild(layer);
+        layer->showCollectReward(rewardItems);
+        layer->setZOrder(500);
     }
 };
 

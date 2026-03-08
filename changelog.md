@@ -1,28 +1,36 @@
 # Changelog
 
-### <cg>v1.1.0-alpha.4</c> (Work in Progress)
+### <cg>v1.1.0-beta.1</c> (Work in Progress)
 
-* <co>Ported mod to Update 2.2081</c>
-* Rewriting the code as we speak
+* <cp>Ported Mod to Geode v5.0.0</c>
+* <cp>New Side-Quest with the Ogre!</c>
+* <cp>MacOS & iOS support!</c> (Hopefully)
+* New Level "<cg>Eclipse</c>"!
+* New Level "<cg>Jelly Castle</c>"!
+* New Level "<cg>Phone Me First</c>"!
+* New Level "<cg>Wubsplosion</c>"!
+* New Level "<cg>Granite</c>"!
+* New Achievements!
+* New Icons!
 
-### <cb>v1.1.0-alpha.3</c>
+#### **Levels**
 
-* New level "<cg>Granite</c>"!
-* <cg>Added</c> new comic method that saves so much space.
+* <co>Cryptofunk</c>: Updated difficulty to Demon.
+* <co>Critical Hit</c>: Last segment nerfed.
+* Some smaller fixes in existing levels.
 
-### <cb>v1.1.0-alpha.2</c>
+#### **Misc.**
 
-* New level "<cg>Eclipse</c>"!
-* New level "<cg>Jelly Castle</c>"!
-* New level "<cg>Phone me First</c>"!
-* New level "<cg>Wubsplosion</c>"!
-* <cg>Added</c> method to download level audio assets online.
-
-### <cb>v1.1.0-alpha.1</c>
-
-* <co>Critical Hit</c>: Last segment nerfed, shader usage reduced
-* <cg>Added</c> reward if you watch a video from the Shop's TV
-* Lots of bugfixes and improvements
+* <c-666666>Some of the code was rewritten to help optimize the mod.</c>
+* <cg>Added</c> method to prevent unlocking vault icons prematurely.
+* <cg>Added</c> keybind settings to move through the comics.
+* <cg>Added</c> online features to download Audio Assets.
+* <cg>Added</c> online feature to read the Comics.
+* <cg>Added</c> contest winners to the credits.
+* <cg>Added</c> method to receive extra orbs.
+* <cy>Fixed</c> bug of the shopkeeper items not registering.
+* <cy>Fixed</c> some bugs, added more.
+* <cr>Removed</c> custom currency sprites (many issues).
 
 ### <cb>v1.0.1</c>
 
@@ -92,6 +100,6 @@
 * <cg>Added</c> first Island redesign.
 * <cg>Added</c> second Island redesign.
 * <cg>Added</c> visual improvements to Vaults.
-* <cy>Fixed</c> comic loop error.
 * <cy>Fixed</c> Hollow voicelines error.
+* <cy>Fixed</c> Comic loop error.
 * Bugfixes.

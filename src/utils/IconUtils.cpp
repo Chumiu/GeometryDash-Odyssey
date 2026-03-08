@@ -242,6 +242,22 @@ void IconUtils::updateRobotSprite(GJRobotSprite *sprite, int iconID, IconType ty
     }
 }
 
+//  Unlocks the reward
+void IconUtils::unlockReward(int id, UnlockType type)
+{
+    auto GM = GameManager::sharedState();
+
+    gd::string rewardKey;
+    if (type == UnlockType::Col1 || type == UnlockType::Col2)
+        rewardKey = GM->colorKey(id, type);
+
+    else
+        rewardKey = GM->iconKey(id, GM->unlockTypeToIconType((int)type));
+
+    auto var = CCString::createWithFormat("%i", true);
+    GM->m_valueKeeper->setObject(var, rewardKey.c_str());
+};
+
 void IconUtils::unlockObject(int iconID, int type)
 {
     auto gm = GameManager::sharedState();
@@ -363,6 +379,14 @@ bool IconUtils::isIconSecret(int id, IconType type)
     return false;
 }
 
+bool IconUtils::isIconSpecial(int id, IconType type)
+{
+    if (id == 520 && type == IconType::Cube)
+        return true;
+
+    return false;
+}
+
 int IconUtils::currentVehicleID()
 {
     auto gm = GameManager::get();
@@ -428,7 +452,7 @@ int IconUtils::currentIdForVehicle(int type)
     {
         std::string saveIdentifier = fmt::format("{}_id", vehicles[type - 900]);
         return Mod::get()->getSavedValue<int>(saveIdentifier);
-    } 
+    }
 
     return type;
 }

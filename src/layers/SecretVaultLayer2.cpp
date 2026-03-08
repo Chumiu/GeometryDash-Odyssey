@@ -178,6 +178,14 @@ bool SecretVaultLayer2::init()
             0));
     }
 
+    if (GM->getUGV("286") && !GM->getUGV("287"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::getOgreFinalDialog)),
+            0));
+    }
+
     //  Menu sound
     GameManager::sharedState()->fadeInMusic("SecretLoop02.mp3"_spr);
     setKeyboardEnabled(true);
@@ -188,8 +196,15 @@ bool SecretVaultLayer2::init()
 
 void SecretVaultLayer2::getOgreDialog()
 {
-    auto dialog = Odyssey::createDialogExt("ogre-beginning", 3);
+    auto dialog = Odyssey::createDialog("ogre-beginning", 3);
     GameManager::sharedState()->setUGV("281", true);
+    addChild(dialog, 3);
+};
+
+void SecretVaultLayer2::getOgreFinalDialog()
+{
+    auto dialog = Odyssey::createDialog("ogre-final-clear", 3);
+    GameManager::sharedState()->setUGV("287", true);
     addChild(dialog, 3);
 };
 
@@ -1248,25 +1263,29 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
     if (ID == 27 && !AM->isAchievementEarned("geometry.ach.odyssey.secret24"))
     {
         messages = {
-            "I sadly remember another thing",
-            "The pink guy boasts about...",
+            "I do remember another thing...",
+            "The pink robot brags about...",
             "The decoration he puts in his shop",
-            "Changing it every time when a client comes",
-            "Waste of time",
+            "Changes every time when a client comes in",
+            "What a waste of time.",
             "Also something about...",
-            "The good reward",
-            "If you catch a cube of a peculiar shape"};
+            "Giving you a good reward...",
+            "If you tap on a level creator...",
+            "With a cube exactly like one wanted poster?",
+            "No idea, the guy is nuts"};
 
         if (m_spanish)
             messages = {
-                "Por desgracia recuerdo otra cosa",
-                "De la que presume el tipo rosa...",
+                "Yo recuerdo otra cosa...",
+                "Que presume el tipo rosa...",
                 "La decoracion que pone en su tienda",
                 "La cambia cada vez que viene un cliente",
-                "Una perdida de tiempo",
-                "Tambien algo sobre...",
-                "Una buena recompensa",
-                "Si atrapas un cubo de forma familiar"};
+                "Que perdida de tiempo.",
+                "Algo tambien sobre...",
+                "Una buena recompensa...",
+                "Si haces click a un creador de nivel",
+                "Cuyo icono es uno que aparece en un cartel de se busca?",
+                "No tengo idea, el tipo esta loco."};
 
         if (!GM->getUGV("324"))
         {
