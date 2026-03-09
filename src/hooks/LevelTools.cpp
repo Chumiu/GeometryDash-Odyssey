@@ -1,6 +1,5 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelTools.hpp>
-
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;

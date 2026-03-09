@@ -10,11 +10,12 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
     void onMenu(CCObject *sender)
     {
         auto level = PlayLayer::get()->m_level->m_levelID;
-        int page = Odyssey::islandPageForLevelID(level);
+        int page = Odyssey::getIslandForLevel(level);
 
-        log::debug("ON MENU, LEVEL: {}", (int)level);
-    
-        if(level == 7004 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level04b") && !GameManager::sharedState()->getUGV("216")){
+        //  log::debug("ON MENU, LEVEL: {}", (int)level);
+
+        if (level == 7004 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level04b") && !GameManager::sharedState()->getUGV("216"))
+        {
             auto layer = ComicLayer::create(6, true);
             auto scene = CCScene::create();
             scene->addChild(layer);
@@ -25,7 +26,8 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
             return;
         }
 
-        if(level == 7009 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level09b") && !GameManager::sharedState()->getUGV("222")){
+        if (level == 7009 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level09b") && !GameManager::sharedState()->getUGV("222"))
+        {
             auto layer = ComicLayer::create(12, true);
             auto scene = CCScene::create();
             scene->addChild(layer);
@@ -37,6 +39,7 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
         }
 
         EndLevelLayer::onMenu(sender);
-        GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page + 1));
+        std::string song = (page == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
+        GameManager::sharedState()->fadeInMusic(song);
     };
 };

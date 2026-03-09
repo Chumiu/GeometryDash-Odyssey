@@ -1,7 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
-
 #include "../utils/Utils.hpp"
 #include "../utils/IconUtils.hpp"
 
@@ -66,6 +65,7 @@ class $modify(OdysseyGameManager, GameManager)
     bool isIconUnlocked(int id, IconType type)
     {
         if (IconUtils::isIconCustom(id, type))
+        {
             if (IconUtils::isCustomVehicle(type))
             {
                 auto obj = get()->m_valueKeeper->valueForKey(IconUtils::getItemKey(id, IconUtils::iconTypeToInt(type)));
@@ -75,6 +75,7 @@ class $modify(OdysseyGameManager, GameManager)
             {
                 return GameManager::isIconUnlocked(id, type);
             }
+        }
 
         if (type == IconType::Item)
             return GameManager::isIconUnlocked(id, type);
@@ -91,11 +92,11 @@ class $modify(OdysseyGameManager, GameManager)
     {
         if (level->m_levelType == GJLevelType::Main)
         {
-            int page = Odyssey::islandPageForLevelID(level->m_levelID);
+            auto page = Odyssey::getIslandForLevel(level->m_levelID);
+            auto bgMusic = (page == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
 
             CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(page)));
-            GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page + 1));
-            // CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
+            GameManager::sharedState()->fadeInMusic(bgMusic);
             return;
         }
 

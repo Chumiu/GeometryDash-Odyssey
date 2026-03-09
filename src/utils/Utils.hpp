@@ -21,7 +21,7 @@ namespace Odyssey
     void hasAllVaultRewards();
 
     //  Enteros
-    int islandPageForLevelID(int);
+    int getIslandForLevel(int levelID);
 
     //  Vectores
     std::vector<Mod *> getEarlyLoadBreakingMods();

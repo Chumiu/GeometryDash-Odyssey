@@ -41,10 +41,10 @@ class $modify(PauseLayer)
 	void onQuit(CCObject *sender)
 	{
 		PauseLayer::onQuit(sender);
-		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
+		int page = Odyssey::getIslandForLevel(PlayLayer::get()->m_level->m_levelID);
 
-		auto pageID = (page + 1 < 3) ? page + 1 : 3;
-		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, pageID));
+        std::string song = (page == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
+        GameManager::sharedState()->fadeInMusic(song);
 	}
 };
 
@@ -110,6 +110,7 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 	}
 };
 
+/*
 class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 {
 	gd::string pathForSFXFolder(int sfxID)
@@ -132,6 +133,7 @@ class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 		return path;
 	}
 };
+*/
 
 class $modify(SongsLayer)
 {

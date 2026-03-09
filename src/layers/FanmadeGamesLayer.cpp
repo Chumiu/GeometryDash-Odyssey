@@ -1,7 +1,6 @@
 #include "FanmadeGamesLayer.hpp"
-#include "FanmadeGamesCell.hpp"
-#include "FanmadeGamesCell.hpp"
-#include "../nodes/FangamePopup.hpp"
+#include "../nodes/FanmadeGamesCell.hpp"
+#include "../ui/FangamePopup.hpp"
 
 void FanmadeGamesLayer::customSetup()
 {

@@ -274,13 +274,15 @@ void OdysseyLevelPopup::onSettings(CCObject *sender)
 
 void OdysseyLevelPopup::onComic(CCObject *sender)
 {
+    auto offset = Odyssey::getIslandForLevel(m_levelID) - 7000 + 1;
+
     auto scene = CCScene::create();
-    scene->addChild(ComicLayer::create(m_levelID + 1 + Odyssey::islandPageForLevelID(m_levelID) - 7000, false));
+    scene->addChild(ComicLayer::create(m_levelID + offset, false));
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
     button->setSprite(CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small));
 
-    GameManager::sharedState()->fadeInMusic(fmt::format("comic_{:02}.mp3"_spr, m_levelID + 1 + Odyssey::islandPageForLevelID(m_levelID) - 7000).c_str());
+    GameManager::sharedState()->fadeInMusic(fmt::format("comic_{:02}.mp3"_spr, m_levelID + offset).c_str());
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 };
 

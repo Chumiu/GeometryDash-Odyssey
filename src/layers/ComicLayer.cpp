@@ -2,7 +2,6 @@
 #include "OdysseySelectLayer.hpp"
 #include "EndCreditsLayer.hpp"
 #include "SecretVaultLayer.hpp"
-
 #include "../nodes/ComicNode.hpp"
 #include "../utils/Utils.hpp"
 

@@ -1,8 +1,8 @@
 #include "DeveloperLayer.hpp"
 #include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
-#include "../nodes/OdysseyLevelPopup.hpp"
-#include "../nodes/AlertPopup.hpp"
+#include "../ui/OdysseyLevelPopup.hpp"
+#include "../ui/AlertPopup.hpp"
 #include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 

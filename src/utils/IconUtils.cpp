@@ -491,6 +491,9 @@ std::string IconUtils::getItemKey(int iconID, int type)
 
     switch (typeCast)
     {
+    case UnlockType::Cube:
+        icon = "icon";
+        break;
     case UnlockType::Ship:
         icon = "ship";
         break;

@@ -3,10 +3,9 @@
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
-#include "../nodes/CreditsPopup.hpp"
-#include "../nodes/CreditsNode.hpp"
-#include "../nodes/ComicPopup.hpp"
-#include "../nodes/AlertPopup.hpp"
+#include "../ui/ComicPopup.hpp"
+#include "../ui/AlertPopup.hpp"
+#include "../ui/CreditsPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;

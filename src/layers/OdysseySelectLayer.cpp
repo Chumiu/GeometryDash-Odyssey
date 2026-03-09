@@ -1,8 +1,8 @@
 #include "OdysseySelectLayer.hpp"
 #include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
-#include "../nodes/OdysseyLevelPopup.hpp"
 #include "../nodes/InstantMenuItemSprite.hpp"
+#include "../ui/OdysseyLevelPopup.hpp"
 #include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
@@ -23,7 +23,7 @@ bool OdysseySelectLayer::init(int page)
 
     // canción
     auto pageID = (page + 1 < 4) ? page + 1 : 4;
-    std::string song = fmt::format("IslandLoop{:02}.mp3"_spr, pageID);
+    std::string song = (page == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, pageID);
 
     // fondo
     int bgID = 1;

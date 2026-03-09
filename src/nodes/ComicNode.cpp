@@ -50,12 +50,14 @@ void ComicNode::onImageSuccess()
 {
     fadeLoadingCircle();
 
+    m_sprite->setScale(0.90f);
+
     //  Resizes the sprite based on the Texture Quality
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
-        m_sprite->setScale(0.5f);
+        m_sprite->setScale(0.45f);
 
     if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
-        m_sprite->setScale(0.25f);
+        m_sprite->setScale(0.225f);
 
     this->addChildAtPosition(m_sprite, Anchor::Center, ccp(0, 0), false);
 }

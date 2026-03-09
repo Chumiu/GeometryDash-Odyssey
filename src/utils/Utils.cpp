@@ -221,19 +221,19 @@ void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
 }
 
 //  Returns what's the island page of the current level
-int Odyssey::islandPageForLevelID(int levelID)
+int Odyssey::getIslandForLevel(int levelID)
 {
-    if (levelID < 7005)
+    if (levelID <= 7004)
         return 0;
 
-    if (levelID >= 7005 && levelID < 7500)
+    if (levelID > 7004 && levelID <= 7009)
         return 1;
 
-    if (levelID > 7600)
-        return 3;
-
-    if (levelID > 7500)
+    if (levelID > 7500 && levelID <= 7505)
         return 2;
+
+    if (levelID > 7600 && levelID <= 7605)
+        return 3;
 
     return 0;
 };

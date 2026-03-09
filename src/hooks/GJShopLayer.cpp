@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJShopLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../nodes/PromoPopup.hpp"
+#include "../ui/PromoPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -18,6 +18,7 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 		auto extraMenu = CCMenu::create();
 		extraMenu->setID("shop-tv-menu"_spr);
 		extraMenu->setPosition({0, 0});
+		extraMenu->setZOrder(3);
 
 		auto spriteTV = CCSprite::createWithSpriteFrameName("gj_videoRewardBtn_001.png");
 		spriteTV->setScale(0.9f);

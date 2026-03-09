@@ -1,8 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/OptionsLayer.hpp>
 #include <Geode/modify/MoreOptionsLayer.hpp>
-
-#include "../nodes/AlertPopup.hpp"
+#include "../ui/AlertPopup.hpp"
 
 using namespace geode::prelude;
 

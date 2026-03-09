@@ -2,7 +2,6 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <filesystem>
 #include <iostream>
-
 #include "../utils/Utils.hpp"
 #include "../utils/IconUtils.hpp"
 

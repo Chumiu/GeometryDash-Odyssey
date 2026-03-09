@@ -1,6 +1,5 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameLevelOptionsLayer.hpp>
-
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;

@@ -2,7 +2,6 @@
 #include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../utils/Utils.hpp"
-#include "../nodes/OdysseyLevelPopup.hpp"
 #include "../nodes/EndCreditsNode.hpp"
 using namespace geode::prelude;
 
