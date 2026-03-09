@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
 
@@ -18,8 +18,8 @@ class $modify(OdysseyPlayerObject, PlayerObject)
 
         m_fields->cubeID = p0;
 
-        Odyssey::updateIcon(this, p0, IconType::Cube, true);
-        //Odyssey::updateIcon(this, GameManager::sharedState()->m_playerShip.value(), IconType::Ship, true);
+        IconUtils::updateIcon(this, p0, IconType::Cube, true);
+        //IconUtils::updateIcon(this, GameManager::sharedState()->m_playerShip.value(), IconType::Ship, true);
     
         return true;
     }
@@ -28,52 +28,52 @@ class $modify(OdysseyPlayerObject, PlayerObject)
     {
         PlayerObject::updatePlayerFrame(id);
 
-        Odyssey::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
+        IconUtils::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
     }
 
     void updatePlayerRollFrame(int id)
     {
         PlayerObject::updatePlayerRollFrame(id);
 
-        Odyssey::updateIcon(this, id, IconType::Ball, true);
+        IconUtils::updateIcon(this, id, IconType::Ball, true);
     }
 
     void updatePlayerBirdFrame(int id)
     {
         PlayerObject::updatePlayerBirdFrame(id);
 
-        Odyssey::updateIcon(this, id, IconType::Ufo, true);
+        IconUtils::updateIcon(this, id, IconType::Ufo, true);
     }
 
     void updatePlayerSwingFrame(int id)
     {
         PlayerObject::updatePlayerSwingFrame(id);
 
-        Odyssey::updateIcon(this, id, IconType::Swing, true);
+        IconUtils::updateIcon(this, id, IconType::Swing, true);
     }
 
     void updatePlayerShipFrame(int id)
     {
         PlayerObject::updatePlayerShipFrame(id);
 
-        Odyssey::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
+        IconUtils::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
         m_fields->shipID = id;
-        Odyssey::updateIcon(this, id, IconType::Ship, true);
+        IconUtils::updateIcon(this, id, IconType::Ship, true);
     }
 
     void updatePlayerDartFrame(int id)
     {
         PlayerObject::updatePlayerDartFrame(id);
         
-        Odyssey::updateIcon(this, id, IconType::Wave, true);
+        IconUtils::updateIcon(this, id, IconType::Wave, true);
     }
 
     void resetPlayerIcon()
     {
         PlayerObject::resetPlayerIcon();
 
-        Odyssey::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
-        Odyssey::updateIcon(this, m_fields->shipID, IconType::Ship, true);
+        IconUtils::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
+        IconUtils::updateIcon(this, m_fields->shipID, IconType::Ship, true);
 
     }
 
@@ -81,8 +81,8 @@ class $modify(OdysseyPlayerObject, PlayerObject)
     {
         PlayerObject::updatePlayerJetpackFrame(id);
         
-        Odyssey::updateIcon(this, id, IconType::Jetpack, true);
-        Odyssey::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
+        IconUtils::updateIcon(this, id, IconType::Jetpack, true);
+        IconUtils::updateIcon(this, m_fields->cubeID, IconType::Cube, true);
     }
 
 

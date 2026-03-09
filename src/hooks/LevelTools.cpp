@@ -1,6 +1,8 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelTools.hpp>
 
+#include "../utils/Utils.hpp"
+
 using namespace geode::prelude;
 
 class $modify(OdysseyLevelTools, LevelTools)
@@ -37,8 +39,17 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return "Conclusion";
 		case 502:
 			return "Burning Sands";
-		case 503:
-			return "Super Wubtendo";
+
+		case 601:
+			return "Eclipse";
+		case 602:
+			return "Jelly Castle";
+		case 603:
+			return "Phone Me First";
+		case 604:
+			return "Wubsplosion";
+		case 605:
+			return "Granite";
 
 		default:
 			return LevelTools::getAudioTitle(levelID);
@@ -50,30 +61,39 @@ class $modify(OdysseyLevelTools, LevelTools)
 		switch (levelID)
 		{
 		case 101:
-			return "10009443.ogg"_spr;
+			return "10009443.ogg";
 		case 102:
-			return "GhostHouse.mp3"_spr;
+			return "676349.mp3";
 		case 103:
-			return "10007255.ogg"_spr;
+			return "10007255.ogg";
 		case 104:
-			return "10007201.ogg"_spr;
+			return "10007201.ogg";
 		case 105:
-			return "10007222.mp3"_spr;
+			return "10007222.mp3";
 		case 106:
-			return "10007196.ogg"_spr;
+			return "10007196.ogg";
 		case 107:
-			return "10007188.ogg"_spr;
+			return "10007188.ogg";
 		case 108:
-			return "10012389.ogg"_spr;
+			return "10012389.ogg";
 		case 109:
-			return "10007200.ogg"_spr;
+			return "10007200.ogg";
 
 		case 501:
-			return "ConclusiveJourney.mp3"_spr;
+			return "1139782.mp3";
 		case 502:
-			return "BurningSands.mp3"_spr;
-		case 503:
-			return "SuperWubtendo.mp3"_spr;
+			return "880262.mp3";
+
+		case 601:
+			return "10007208.ogg";
+		case 602:
+			return "10007227.ogg";
+		case 603:
+			return "1139782.mp3";
+		case 604:
+			return "10007269.ogg";
+		case 605:
+			return "10007320.ogg";
 
 		default:
 			return LevelTools::getAudioFileName(levelID);
@@ -107,8 +127,17 @@ class $modify(OdysseyLevelTools, LevelTools)
 			return 1;
 		case 502:
 			return 9;
-		case 503:
+
+		case 601:
 			return 7;
+		case 602:
+			return 7;
+		case 603:
+			return 13;
+		case 604:
+			return 7;
+		case 605:
+			return 14;
 
 		default:
 			return LevelTools::artistForAudio(p0);
@@ -121,6 +150,10 @@ class $modify(OdysseyLevelTools, LevelTools)
 		{
 		case 12:
 			return "Schtiffles";
+		case 13:
+			return "cYsmix";
+		case 14:
+			return "Shirobon";
 		default:
 			return LevelTools::nameForArtist(p0);
 		}
@@ -132,6 +165,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 		{
 		case 12:
 			return "https://schtiffles.newgrounds.com";
+		case 13:
+			return "https://cysmix.newgrounds.com/";
 		default:
 			return LevelTools::ngURLForArtist(p0);
 		}
@@ -175,11 +210,12 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 7004: // Cryptofunk
 			level->m_levelName = getAudioTitle(104);
 			level->m_audioTrack = 104;
-			level->m_stars = 12;
-			level->m_difficulty = GJDifficulty::Insane;
+			level->m_stars = 14;
+			level->m_difficulty = GJDifficulty::DemonEasy;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
 			level->m_coins = 3;
+			level->m_demon = 1;
 			break;
 
 		case 7005: // Hellfire
@@ -226,11 +262,11 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_levelName = getAudioTitle(109);
 			level->m_audioTrack = 109;
 			level->m_stars = 15;
-			level->m_difficulty = GJDifficulty::Demon;
+			level->m_difficulty = GJDifficulty::DemonMedium;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
-			level->m_demon = 1;
 			level->m_coins = 3;
+			level->m_demon = 1;
 			break;
 
 		case 7501: // Conclusive Journey
@@ -250,17 +286,57 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_difficulty = GJDifficulty::Demon;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
+			level->m_coins = 3;
 			level->m_demon = 1;
+			break;
+
+		case 7601: // Eclipse
+			level->m_levelName = getAudioTitle(601);
+			level->m_audioTrack = 601;
+			level->m_stars = 6;
+			level->m_difficulty = GJDifficulty::Hard;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 14682;
 			level->m_coins = 3;
 			break;
 
-		case 7503: // Super Wubtendo
-			level->m_levelName = getAudioTitle(503);
-			level->m_audioTrack = 503;
+		case 7602: // Jelly Castle
+			level->m_levelName = getAudioTitle(602);
+			level->m_audioTrack = 602;
+			level->m_stars = 8;
+			level->m_difficulty = GJDifficulty::Harder;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7603: // Phone Me First
+			level->m_levelName = getAudioTitle(603);
+			level->m_audioTrack = 603;
+			level->m_stars = 10;
+			level->m_difficulty = GJDifficulty::Insane;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7604: // Wubsplosion
+			level->m_levelName = getAudioTitle(604);
+			level->m_audioTrack = 604;
 			level->m_stars = 12;
 			level->m_difficulty = GJDifficulty::Insane;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
+			level->m_coins = 3;
+			break;
+
+		case 7605: // Granite
+			level->m_levelName = getAudioTitle(605);
+			level->m_audioTrack = 605;
+			level->m_stars = 14;
+			level->m_difficulty = GJDifficulty::Insane;
+			level->m_requiredCoins = 0;
+			level->m_timestamp = 24273;
 			level->m_coins = 3;
 			break;
 		}
@@ -268,8 +344,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 		if (!loaded)
 			level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(levelID);
 
+		level->m_levelType = GJLevelType::Main;
 		level->m_levelID = levelID;
-		level->m_levelType = GJLevelType::Local;
 
 		return level;
 	};
@@ -307,12 +383,23 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 110:
 			return "https://www.newgrounds.com/audio/listen/678590"; // Harmony Of The Heart
 
+			//	Extra Levels
 		case 501:
 			return "https://youtu.be/BcoURwJr9PI?si=Mb3Zi1azTN2bbrYE"; // Conclusive
 		case 502:
 			return "https://youtu.be/gyxh9R59oj4?si=IhxSU7XQvwJX32z3"; // Burning Sands
-		case 503:
-			return "https://youtu.be/EnmAuu92RKo?si=Ywq4DfaiC0f2jr2d"; // Super Wubtendo
+
+			//	Contest Levels
+		case 601:
+			return "https://www.youtube.com/watch?v=Y1OQkWm_sw4"; // Eclipse
+		case 602:
+			return "https://www.youtube.com/watch?v=oMoYbINoShc"; // Jelly Castle
+		case 603:
+			return "https://www.youtube.com/watch?v=uDYdecWY85w"; // Phone Me First
+		case 604:
+			return "https://www.youtube.com/watch?v=lBXlBuuents"; // Wubsplosion
+		case 605:
+			return "https://www.youtube.com/watch?v=oqGmRagXxRc"; // Granite
 
 		default:
 			return LevelTools::urlForAudio(songID);

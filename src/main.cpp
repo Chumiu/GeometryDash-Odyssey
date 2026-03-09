@@ -4,7 +4,9 @@
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/PurchaseItemPopup.hpp>
+
 #include "utils/Utils.hpp"
+#include "utils/IconUtils.hpp"
 
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
@@ -41,7 +43,8 @@ class $modify(PauseLayer)
 		PauseLayer::onQuit(sender);
 		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
 
-		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, page + 1));
+		auto pageID = (page + 1 < 3) ? page + 1 : 3;
+		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, pageID));
 	}
 };
 
@@ -95,7 +98,6 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 	{
 		// auto file = CCString::createWithFormat("level-%i.txt"_spr, id);
 		auto file = Mod::get()->getSettingValue<bool>("empty-levels") ? CCString::create("base.txt"_spr) : CCString::createWithFormat("level-%i.txt"_spr, id);
-
 		if (file == nullptr)
 			return "";
 
@@ -147,6 +149,11 @@ class $modify(SongsLayer)
 		songObjectArray->addObject(SongObject::create(109));
 		songObjectArray->addObject(SongObject::create(501));
 		songObjectArray->addObject(SongObject::create(502));
+		songObjectArray->addObject(SongObject::create(601));
+		songObjectArray->addObject(SongObject::create(602));
+		songObjectArray->addObject(SongObject::create(603));
+		songObjectArray->addObject(SongObject::create(604));
+		songObjectArray->addObject(SongObject::create(605));
 		songObjectArray->addObject(SongObject::create(-1));
 
 		m_listLayer->m_listView = CustomListView::create(songObjectArray, nullptr, 220.0, 356.0, 0, BoomListType::Song, 0.0);
@@ -170,6 +177,6 @@ class $modify(PurchaseItemPopup)
 				GameManager::sharedState()->setUGV("238", true);
 		}
 
-		Odyssey::unlockObject(m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
+		IconUtils::unlockReward(m_storeItem->m_typeID.value(), static_cast<UnlockType>(m_storeItem->m_unlockType.value()));
 	}
 };

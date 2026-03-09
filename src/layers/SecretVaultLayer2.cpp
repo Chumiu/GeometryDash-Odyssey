@@ -1,13 +1,14 @@
 #include "SecretVaultLayer2.hpp"
 #include "../utils/Dialogs.hpp"
 #include "../utils/Utils.hpp"
+#include "OdysseySelectLayer.hpp"
 
 bool SecretVaultLayer2::init()
 {
     if (!CCLayer::init())
         return false;
 
-    //  Bandera que dice si en ingles o español
+    //  Flag that saves whenever the Vault should be in Spanish or not.
     m_spanish = GameManager::sharedState()->getGameVariable("0201");
 
     //  Title
@@ -54,6 +55,7 @@ bool SecretVaultLayer2::init()
     addChild(bgDeco1A, -1);
     addChild(bgDeco1B, -1);
 
+    //  Fireflies particles
     auto bg_particle_01 = GameToolbox::particleFromString("30a-1a5a1a5a90a180a50a25a300a150a0a0a0a0a0a0a8a4a0a0a1a0a1a0a0a0a1a0a0a0a0a0a1a0a1a0a0a0a1a0a0.3a0.15a0.3a0.15a0a0a0a0a0a0a0a2a1a0a0a0a159a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
     bg_particle_01->setPosition(winSize / 2);
     addChild(bg_particle_01, 10);
@@ -83,7 +85,7 @@ bool SecretVaultLayer2::init()
     m_response = CCLabelBMFont::create("", "gjFont42.fnt");
     addChildAtPosition(m_response, Anchor::Center, ccp(0, 100), false);
 
-    //  Mensaje inicial
+    //  Initial Message
     auto introMessage = m_spanish ? "Bienvenido" : "Welcome";
     updateMessage(introMessage, MessageType::Basic);
 
@@ -104,37 +106,10 @@ bool SecretVaultLayer2::init()
     keeperButton->setPosition({winSize.width / 2, winSize.height / 2 - 20.f});
     keeperSprite->setAnchorPoint({0.5, 1});
     keeperSprite->setPositionY(72.f);
+
     keeperMenu->addChild(keeperButton);
 
-    //  Boton para el nivel secreto "Uncertain"
-    m_levelNode = CCNode::create();
-    m_levelNode->setContentSize({0, 30});
-    m_levelNode->setAnchorPoint({0.5, 0.5});
-    m_levelNode->setPosition({winSize.width - 60.f, winSize.height / 2});
-
-    if (GameManager::sharedState()->getUGV("235"))
-    {
-        auto m_levelMenu = CCMenu::create();
-        m_levelMenu->setContentSize(m_levelNode->getContentSize());
-        m_levelMenu->setPosition({0, 0});
-
-        auto m_levelBtnSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-        m_levelBtnSprite->setScale(0.45f);
-
-        m_levelBtn = CCMenuItemSpriteExtra::create(
-            m_levelBtnSprite,
-            this,
-            nullptr);
-        m_levelMenu->addChildAtPosition(m_levelBtn, Anchor::Center);
-
-        m_levelTitle = CCLabelBMFont::create("Uncertain", "bigFont.fnt");
-        m_levelTitle->setScale(0.5f);
-
-        m_levelNode->addChildAtPosition(m_levelTitle, Anchor::Top);
-        m_levelNode->addChild(m_levelMenu);
-    };
-    addChild(m_levelNode);
-
+    //  Re-verifies whenever the vault rewards have been all Claimed
     Odyssey::hasAllVaultRewards();
 
     //  Message if all the rewards were collected
@@ -149,6 +124,69 @@ bool SecretVaultLayer2::init()
         addChild(text);
     }
 
+    // puerta
+    auto doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    // doorSpr->setColor({0, 255, 0});
+    doorSpr->setAnchorPoint({.5f, .5f});
+    doorSpr->setScale(.7f);
+
+    auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
+
+    auto doorParticle = GameToolbox::particleFromString("30a-1a1a0.3a16a90a7a0a0a34a35a0a-17a30a0a20a0a8a6a0a0a0.890196a0a1a0a0a0a1a0a1a1a0a0a0.0823529a0a0.72549a0a0a0a1a0a0.19a0a0.38a0a0a0a0a0a0a0a0a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
+    doorParticle->setPosition(doorSpr->getScaledContentSize() / 2);
+
+    doorBtn->addChild(doorParticle);
+
+    auto doorMenu = CCMenu::create();
+    doorMenu->setPosition({winSize.width - 45, 45});
+    doorMenu->addChild(doorBtn);
+    //  addChild(doorMenu);
+
+    auto m_doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    m_doorSpr->setAnchorPoint({.5f, .5f});
+    m_doorSpr->setScale(.7f);
+
+    m_doorBtn = CCMenuItemSpriteExtra::create(
+        doorSpr,
+        this,
+        menu_selector(SecretVaultLayer2::onExtraLevels));
+    m_doorBtn->setID("ogre-path-door");
+    m_doorBtn->m_scaleMultiplier = 1;
+    m_doorBtn->m_colorEnabled = true;
+    m_doorBtn->m_colorDip = 100.f;
+    keeperMenu->addChildAtPosition(m_doorBtn, Anchor::BottomRight, ccp(-50, 50), false);
+
+    auto m_doorParticles = GameToolbox::particleFromString("30a-1a1a0.3a16a90a7a0a0a34a35a0a-17a30a0a20a0a8a6a0a0a0.890196a0a1a0a0a0a1a0a1a1a0a0a0.0823529a0a0.72549a0a0a0a1a0a0.19a0a0.38a0a0a0a0a0a0a0a0a2a1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0", NULL, false);
+    m_doorParticles->setID("door-particles");
+    m_doorBtn->addChildAtPosition(m_doorParticles, Anchor::Center, ccp(0, 0), false);
+
+    auto GM = GameManager::sharedState();
+    if ((!GM->getUGV("280") || !GM->getUGV("281")) && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
+    {
+        m_doorParticles->setOpacity(0);
+        m_doorBtn->setColor({0, 0, 0});
+        m_doorBtn->setEnabled(false);
+    }
+
+    if (GM->getUGV("280") && !GM->getUGV("281"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::getOgreDialog)),
+            CCDelayTime::create(3.0f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::enableGate)),
+            0));
+    }
+
+    if (GM->getUGV("286") && !GM->getUGV("287"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::getOgreFinalDialog)),
+            0));
+    }
+
+    //  Menu sound
     GameManager::sharedState()->fadeInMusic("SecretLoop02.mp3"_spr);
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
@@ -156,50 +194,57 @@ bool SecretVaultLayer2::init()
     return true;
 };
 
-void SecretVaultLayer2::addLevelAnimation()
+void SecretVaultLayer2::getOgreDialog()
 {
-    auto m_levelMenu = CCMenu::create();
-    m_levelMenu->setContentSize(m_levelNode->getContentSize());
-    m_levelMenu->setPosition({0, 0});
-
-    auto m_levelBtnSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
-    m_levelBtnSprite->setScale(0.45f);
-
-    m_levelBtn = CCMenuItemSpriteExtra::create(
-        m_levelBtnSprite,
-        this,
-        nullptr);
-    m_levelMenu->addChildAtPosition(m_levelBtn, Anchor::Center);
-    m_levelBtn->setPositionX(100);
-
-    m_levelTitle = CCLabelBMFont::create("Uncertain", "bigFont.fnt");
-    m_levelTitle->setScale(0.5f);
-    m_levelTitle->setOpacity(0);
-
-    m_levelNode->addChildAtPosition(m_levelTitle, Anchor::Top);
-    m_levelNode->addChild(m_levelMenu);
-
-    m_levelTitle->runAction(CCFadeTo::create(0.5f, 255));
-    m_levelBtn->runAction(CCEaseSineOut::create(CCMoveTo::create(0.5, {0, 15})));
+    auto dialog = Odyssey::createDialog("ogre-beginning", 3);
+    GameManager::sharedState()->setUGV("281", true);
+    addChild(dialog, 3);
 };
+
+void SecretVaultLayer2::getOgreFinalDialog()
+{
+    auto dialog = Odyssey::createDialog("ogre-final-clear", 3);
+    GameManager::sharedState()->setUGV("287", true);
+    addChild(dialog, 3);
+};
+
+void SecretVaultLayer2::enableGate()
+{
+    if (m_doorBtn)
+    {
+        m_doorBtn->runAction(CCTintTo::create(2, 255, 255, 255));
+        m_doorBtn->setEnabled(true);
+
+        if (auto particles = this->getChildByIDRecursive("door-particles"))
+        {
+            particles->runAction(CCFadeTo::create(2, 255));
+        }
+    }
+};
+
+void SecretVaultLayer2::onExtraLevels(CCObject *)
+{
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(3)));
+}
 
 void SecretVaultLayer2::onSubmit(CCObject *)
 {
     std::string response = getMessage();
     std::vector<gd::string> messages;
     std::vector<gd::string> reply;
-    std::string lower;
 
     auto GM = GameManager::sharedState();
     auto AM = AchievementManager::sharedState();
 
-    for (auto elem : m_textInput->getString())
-        lower += std::tolower(elem);
+    std::string lower = m_textInput->getString();
+    std::transform(
+        lower.begin(), lower.end(), lower.begin(), [](unsigned char c)
+        { return std::tolower(c); });
 
     m_textInput->setString("");
 
     //  List of codes
-    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01"))
+    if (std::string_view(lower) == std::string_view("odyssey") && !AM->isAchievementEarned("geometry.ach.odyssey.secret01") && GM->getUGV("301"))
     {
         reply = {
             "So you know how to adventure...",
@@ -211,7 +256,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02"))
+    if (std::string_view(lower) == std::string_view("invaders") && !AM->isAchievementEarned("geometry.ach.odyssey.secret02") && GM->getUGV("302"))
     {
         reply = {
             "Not so unknown now...",
@@ -223,7 +268,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03"))
+    if (std::string_view(lower) == std::string_view("astral") && !AM->isAchievementEarned("geometry.ach.odyssey.secret03") && GM->getUGV("303"))
     {
         reply = {
             "It strikes fear into my heart...",
@@ -235,7 +280,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04"))
+    if (std::string_view(lower) == std::string_view("dumbledalf") && !AM->isAchievementEarned("geometry.ach.odyssey.secret04") && GM->getUGV("304"))
     {
         reply = {
             "What a humble man",
@@ -247,7 +292,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05"))
+    if (std::string_view(lower) == std::string_view("carp") && !AM->isAchievementEarned("geometry.ach.odyssey.secret05") && GM->getUGV("305"))
     {
         reply = {
             "Useless piece of scrap metal",
@@ -259,23 +304,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    /*
-    if (std::string_view(lower) == std::string_view("uncertain")&& !GameManager::sharedState()->getUGV("235"))
-    {
-        reply = {
-            "Good luck",
-            "Buena suerte",
-        };
-
-        addLevelAnimation();
-        GameManager::sharedState()->setUGV("235", true);
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
-
-        return;
-    };
-    */
-
-    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06"))
+    if (std::string_view(lower) == std::string_view("colon") && !AM->isAchievementEarned("geometry.ach.odyssey.secret06") && GM->getUGV("306"))
     {
         reply = {
             "Even the lord listens to his guidance...",
@@ -287,7 +316,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07"))
+    if (std::string_view(lower) == std::string_view("rubrub") && !AM->isAchievementEarned("geometry.ach.odyssey.secret07") && GM->getUGV("307"))
     {
         reply = {
             "My hatred towards him grows every day...",
@@ -299,7 +328,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08"))
+    if (std::string_view(lower) == std::string_view("elemental") && !AM->isAchievementEarned("geometry.ach.odyssey.secret08") && GM->getUGV("308"))
     {
         reply = {
             "All of them together... what will happen?",
@@ -311,7 +340,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09"))
+    if (std::string_view(lower) == std::string_view("demon gauntlet") && !AM->isAchievementEarned("geometry.ach.odyssey.secret09") && GM->getUGV("309"))
     {
         reply = {
             "SEE? I wasn't lying!",
@@ -323,6 +352,30 @@ void SecretVaultLayer2::onSubmit(CCObject *)
         return;
     };
 
+    if (std::string_view(lower) == std::string_view("sigma") && !AM->isAchievementEarned("geometry.ach.odyssey.secret22") && GM->getUGV("322"))
+    {
+        reply = {
+            "What? I thought it was Delta",
+            "Huh? Crei que era Delta",
+        };
+        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret22", 100, false);
+        return;
+    };
+
+    if (std::string_view(lower) == std::string_view("editor") && !AM->isAchievementEarned("geometry.ach.odyssey.secret23") && GM->getUGV("323"))
+    {
+        reply = {
+            "Have you made a level yet?",
+            "Ya hicistes un nivel?",
+        };
+        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+
+        GM->reportAchievementWithID("geometry.ach.odyssey.secret23", 100, false);
+        return;
+    };
+
     //  Random easter eggs
     if (std::string_view(lower) == std::string_view("switch"))
     {
@@ -330,7 +383,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "The skeleton appears",
             "El esqueleto aparece!",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -340,7 +393,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Cubical genius",
             "Genio cubico",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -357,21 +410,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "What's a slimeboy?",
             "Que es un slimeboy?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
-        return;
-    };
-
-    if (std::string_view(lower) == std::string_view("ghostpower"))
-    {
-        response = "XD";
-        updateMessage(response, MessageType::WrongAnswer);
-        return;
-    };
-
-    if (std::string_view(lower) == std::string_view("nando"))
-    {
-        response = "Donde he oido antes ese nombre?";
-        updateMessage(response, MessageType::WrongAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -381,7 +420,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "One day, surely...",
             "Un dia, seguramente...",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -391,7 +430,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "We don't talk about spooky",
             "Aqui no se habla de spooky",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -401,7 +440,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "No coins here, bud",
             "Aqui no vas a encontrar una moneda",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -411,7 +450,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Never liked him",
             "Nunca me agrado",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -421,7 +460,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "We used to be togeher... but then I got locked here",
             "Estabamos juntos. Pero me encerraron aqui",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -431,7 +470,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Always being a one-liner. Makes me mad",
             "Solo escuchar su nombre me enfurece",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -448,7 +487,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Who?",
             "Quien?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -458,7 +497,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Nukebound to what?",
             "Que es eso? Se puede comer?",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -468,7 +507,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "I'm pretty sure he isn't dead",
             "Te aseguro que ese no esta muerto",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -478,7 +517,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "Maybe say her name to my brother...",
             "Tal vez deberias decir su nombre a mi hermano",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -488,7 +527,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
             "That name sounds familiar...",
             "Ese nombre suena familiar...",
         };
-        updateMessage(reply.at(m_spanish), MessageType::CorrectAnswer);
+        updateMessage(reply.at(m_spanish), MessageType::WrongAnswer);
         return;
     };
 
@@ -536,7 +575,7 @@ void SecretVaultLayer2::onSubmit(CCObject *)
 
 std::string SecretVaultLayer2::getMessage()
 {
-    int rand = std::rand() % 50 + 1;
+    int rand = std::rand() % 40 + 1;
 
     if (m_messageID == 0)
     {
@@ -562,7 +601,7 @@ std::string SecretVaultLayer2::getMessage()
 
 std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
 {
-    //  auto GM = GameManager::sharedState();
+    auto GM = GameManager::sharedState();
     auto AM = AchievementManager::sharedState();
     //  log::debug("ID: {} - IDX: {}", ID, index);
     std::vector<std::string> messages;
@@ -591,6 +630,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "uh...",
                 "Cual era el titulo?",
             };
+
+        if (!GM->getUGV("301"))
+        {
+            log::info("Hint for Secret 01 enabled");
+            GM->setUGV("301", true);
+        };
 
         if (index >= messages.size())
         {
@@ -628,8 +673,15 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Como se dice en ingles?",
             };
 
+        if (!GM->getUGV("302"))
+        {
+            log::info("Hint for Secret 02 enabled");
+            GM->setUGV("302", true);
+        };
+
         if (index >= messages.size())
         {
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -667,6 +719,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "He olvidado el nombre de ese repugnante crustaceo...",
                 "Ojala pudiera recordarlo...",
             };
+
+        if (!GM->getUGV("303"))
+        {
+            log::info("Hint for Secret 03 enabled");
+            GM->setUGV("303", true);
+        };
 
         if (index >= messages.size())
         {
@@ -709,6 +767,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Ojala pudiera recordar su nombre...",
             };
 
+        if (!GM->getUGV("304"))
+        {
+            log::info("Hint for Secret 04 enabled");
+            GM->setUGV("304", true);
+        };
+
         if (index >= messages.size())
         {
             m_messageID = 0;
@@ -745,6 +809,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Vendiendo sus porquerias!",
                 "Afortunadamente, Olvide su nombre.",
             };
+
+        if (!GM->getUGV("305"))
+        {
+            log::info("Hint for Secret 05 enabled");
+            GM->setUGV("305", true);
+        };
 
         if (index >= messages.size())
         {
@@ -817,6 +887,11 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "De lo contrario, me avergonzare de lo facil de hallarlas",
             };
 
+        if (!GM->getUGV("306"))
+        {
+            log::info("Hint for Secret 06 enabled");
+            GM->setUGV("306", true);
+        };
         if (index >= messages.size())
         {
             m_messageID = 0;
@@ -854,6 +929,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "En entregarnos las legendarias herramientas de creacion...",
             };
 
+        if (!GM->getUGV("307"))
+        {
+            log::info("Hint for Secret 07 enabled");
+            GM->setUGV("307", true);
+        };
+
         if (index >= messages.size())
         {
             m_messageID = 0;
@@ -889,6 +970,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Lo que sea que eso signifique, en realidad",
                 "Solo estoy recitando de este libro que tengo",
             };
+
+        if (!GM->getUGV("308"))
+        {
+            log::info("Hint for Secret 08 enabled");
+            GM->setUGV("308", true);
+        };
 
         if (index >= messages.size())
         {
@@ -932,6 +1019,12 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Si tu fueras a desafiarlos",
                 "Preparate para un Infierno",
             };
+
+        if (!GM->getUGV("309"))
+        {
+            log::info("Hint for Secret 09 enabled");
+            GM->setUGV("309", true);
+        };
 
         if (index >= messages.size())
         {
@@ -1032,10 +1125,11 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Uno de los tres...",
             };
 
+        if (!GameManager::sharedState()->getUGV("209"))
+            GameManager::sharedState()->setUGV("209", true);
+
         if (index >= messages.size())
         {
-            if (!GameManager::sharedState()->getUGV("209"))
-                GameManager::sharedState()->setUGV("209", true);
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1068,10 +1162,142 @@ std::string SecretVaultLayer2::getThreadMessage(int ID, int index)
                 "Gargan",
                 "Que sera de ti?"};
 
+        if (!GM->getUGV("323"))
+        {
+            log::info("Hint for Secret 23 enabled");
+            GM->setUGV("323", true);
+        };
+
         if (index >= messages.size())
         {
             if (!GameManager::sharedState()->getUGV("233"))
                 GameManager::sharedState()->setUGV("233", true);
+
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Sigma
+    if (ID == 25 && !AM->isAchievementEarned("geometry.ach.odyssey.secret22"))
+    {
+        messages = {
+            "I keep hearing these words...",
+            "From the cubes that come by",
+            "Rizz... Edge... Aura...",
+            "What is as Ski Bee Dee?",
+            "They also use Greek letters",
+            "Alpha, Beta, Gamma...",
+            "There's a specific one",
+            "Said by a cube with X eyes...",
+            "Perhaps you might know?"};
+
+        if (m_spanish)
+            messages = {
+                "He escuchado estas palabras...",
+                "De los cubos que visitan por aca",
+                "Peak... Curi... Momos...",
+                "Que es una papeada?",
+                "Tambien usan letras Griegas",
+                "Alfa, Beta, Gamma...",
+                "Hay una en especifico",
+                "Lo dice un cubo con ojos equis...",
+                "Tal vez tu sabes cual es?"};
+
+        if (!GM->getUGV("322"))
+        {
+            log::info("Hint for Secret 22 enabled");
+            GM->setUGV("322", true);
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Editor
+    if (ID == 26 && !AM->isAchievementEarned("geometry.ach.odyssey.secret23"))
+    {
+        messages = {
+            "From the simplest of looks...",
+            "To full blown games",
+            "Hundreds of tools and styles",
+            "Thousands of ways...",
+            "To plaster your ideas in this canvas...",
+            "Make sure you read it's guide first"};
+
+        if (m_spanish)
+            messages = {
+                "Desde aspectos muy sencillos...",
+                "Hasta juegos completos",
+                "Cientos de instrumentos y estilos",
+                "Miles de maneras...",
+                "Para plasmar tus ideas en este lienzo...",
+                "Asegurate de leer la guia primero"};
+
+        if (!GM->getUGV("323"))
+        {
+            log::info("Hint for Secret 23 enabled");
+            GM->setUGV("323", true);
+        };
+
+        if (index >= messages.size())
+        {
+            m_messageID = 0;
+            m_messageIDX = 0;
+            return "";
+        }
+
+        return messages[index];
+    }
+
+    //  Wanted!
+    if (ID == 27 && !AM->isAchievementEarned("geometry.ach.odyssey.secret24"))
+    {
+        messages = {
+            "I do remember another thing...",
+            "The pink robot brags about...",
+            "The decoration he puts in his shop",
+            "Changes every time when a client comes in",
+            "What a waste of time.",
+            "Also something about...",
+            "Giving you a good reward...",
+            "If you tap on a level creator...",
+            "With a cube exactly like one wanted poster?",
+            "No idea, the guy is nuts"};
+
+        if (m_spanish)
+            messages = {
+                "Yo recuerdo otra cosa...",
+                "Que presume el tipo rosa...",
+                "La decoracion que pone en su tienda",
+                "La cambia cada vez que viene un cliente",
+                "Que perdida de tiempo.",
+                "Algo tambien sobre...",
+                "Una buena recompensa...",
+                "Si haces click a un creador de nivel",
+                "Cuyo icono es uno que aparece en un cartel de se busca?",
+                "No tengo idea, el tipo esta loco."};
+
+        if (!GM->getUGV("324"))
+        {
+            log::info("Hint for Secret 24 enabled");
+            GM->setUGV("324", true);
+        };
+
+        if (index >= messages.size())
+        {
+            if (!GameManager::sharedState()->getUGV("239"))
+                GameManager::sharedState()->setUGV("239", true);
+
             m_messageID = 0;
             m_messageIDX = 0;
             return "";
@@ -1208,7 +1434,7 @@ void SecretVaultLayer2::updateMessage(std::string message, MessageType type)
 void SecretVaultLayer2::keyBackClicked()
 {
     GameManager::sharedState()->fadeInMusic("IslandLoop02.mp3"_spr);
-    CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
+    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, OdysseySelectLayer::scene(1)));
 };
 
 void SecretVaultLayer2::onBack(CCObject *)

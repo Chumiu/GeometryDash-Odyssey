@@ -1,12 +1,12 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
-#include "../layers/OdysseyCreditsLayer.hpp"
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../layers/OdysseyDevLayer.hpp"
+#include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
-#include "../nodes/OdysseyCreditNode.hpp"
-#include "../nodes/OdysseyComicPopup.hpp"
-#include "../nodes/OdysseyPopup.hpp"
+#include "../nodes/CreditsPopup.hpp"
+#include "../nodes/CreditsNode.hpp"
+#include "../nodes/ComicPopup.hpp"
+#include "../nodes/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -23,6 +23,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("restart-mod"))
             OdysseyMenuLayer::Restart();
 
+        //  Incompatibilities fixed in 4.2.0
         auto breakingMods = Odyssey::getBreakingMods();
         if (!breakingMods.empty())
         {
@@ -50,17 +51,19 @@ class $modify(OdysseyMenuLayer, MenuLayer)
                 return true;
         }
 
-        if (!GameManager::sharedState()->getUGV("201"))
+        //  Displays a popup for savefile info
+        if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
         {
-            auto popup = OdysseyPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
+            auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
             popup->setWarning(true, false);
             popup->m_scene = this;
             popup->show();
         };
 
-        if (!GameManager::sharedState()->getUGV("202") && GameManager::sharedState()->getGameVariable("0201"))
+        //  Displays a popup when the player has Spanish enabled for the first time
+        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0202"))
         {
-            auto popup = OdysseyPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+            auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
             popup->setWarning(false, true);
             popup->setZOrder(104);
             popup->m_scene = this;
@@ -90,6 +93,15 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         //  Boton para acceder a los comics mas facil
         auto bottomMenu = static_cast<CCMenu *>(this->getChildByID("bottom-menu"));
 
+        //  Agregua el boton de MDK
+        auto MDKButton = CCMenuItemSpriteExtra::create(
+            CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
+            this,
+            menu_selector(OdysseyMenuLayer::onMDK));
+
+        bottomMenu->addChild(MDKButton);
+        bottomMenu->updateLayout();
+
         if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
         {
             auto comicButton = CCMenuItemSpriteExtra::create(
@@ -104,7 +116,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("geode.loader/settings.png", 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
+                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
                 this,
                 menu_selector(OdysseyMenuLayer::onDev));
 
@@ -140,10 +152,26 @@ class $modify(OdysseyMenuLayer, MenuLayer)
     void onDev(CCObject *)
     {
         auto scene = CCScene::create();
-        scene->addChild(OdysseyDevLayer::create());
+        scene->addChild(DeveloperLayer::create());
 
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
     }
+
+    void onMDK(CCObject *)
+    {
+        auto popup = createQuickPopup(
+            "MDK Music",
+            "Wanna visit <cy>MDK</c>'s website for awesome music and know more about the <cg>World of Wubstep</c>?",
+            "Cancel",
+            "Open",
+            [](auto, bool btn2)
+            {
+                if (btn2)
+                {
+                    CCApplication::sharedApplication()->openURL("https://morgandavidking.com/");
+                }
+            });
+    };
 
     void onPlay(CCObject *)
     {
@@ -191,13 +219,13 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onMoreGames(CCObject *)
     {
-        auto credits = OdysseyCreditsLayer::create();
+        auto credits = CreditsPopup::create();
         credits->show();
     }
 
     void onComics(CCObject *)
     {
-        auto comicPopup = OdysseyComicPopup::create();
+        auto comicPopup = ComicPopup::create();
         comicPopup->show();
     }
 

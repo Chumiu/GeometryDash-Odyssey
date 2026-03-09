@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
-#include "../layers/OdysseyComicLayer.hpp"
+#include "../layers/ComicLayer.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -15,7 +15,7 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
         log::debug("ON MENU, LEVEL: {}", (int)level);
     
         if(level == 7004 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level04b") && !GameManager::sharedState()->getUGV("216")){
-            auto layer = OdysseyComicLayer::create(6, true);
+            auto layer = ComicLayer::create(6, true);
             auto scene = CCScene::create();
             scene->addChild(layer);
 
@@ -26,7 +26,7 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
         }
 
         if(level == 7009 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level09b") && !GameManager::sharedState()->getUGV("222")){
-            auto layer = OdysseyComicLayer::create(12, true);
+            auto layer = ComicLayer::create(12, true);
             auto scene = CCScene::create();
             scene->addChild(layer);
 

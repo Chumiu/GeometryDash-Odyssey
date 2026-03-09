@@ -1,6 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GameStatsManager.hpp>
-#include "../utils/Utils.hpp"
+#include "../utils/IconUtils.hpp"
 
 using namespace geode::prelude;
 
@@ -26,7 +26,7 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
         auto achievementID = fmt::format("geometry.ach.level{:02}c", level->m_levelID.value() - 7000);
         log::info("coinPercent: {}, achID: {}", coinPercent, achievementID);
 
-        if (level->m_levelType == GJLevelType::Local)
+        if (level->m_levelType == GJLevelType::Main)
         {
             GM->reportAchievementWithID(achievementID.c_str(), coinPercent, false);
         }
@@ -34,6 +34,9 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
     int getBaseCurrencyForLevel(GJGameLevel *level)
     {
+        if (level->m_levelID.value() == 7004)
+            return 500;
+
         if (level->m_levelID.value() == 7009)
             return 500;
 
@@ -55,7 +58,7 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
     int getItemUnlockState(int p0, UnlockType p1)
     {
         //  El icono no es custom
-        if (!Odyssey::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+        if (!IconUtils::isIconCustom(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
             return 4;
 
         //  No tiene achievement
@@ -63,8 +66,11 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
             return 1;
 
         //  Icono aun no ha salido
-        if (Odyssey::isIconUpcoming(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
-            return 6;
+        //  if (IconUtils::isIconUpcoming(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+        //  return 6;
+
+        if (IconUtils::isIconSpecial(p0, GameManager::sharedState()->unlockTypeToIconType(static_cast<int>(p1))))
+            return 7;
 
         //  Icono de tienda
         return 5;
@@ -73,6 +79,7 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
     void createStoreItems()
     {
         auto newShop = static_cast<ShopType>(6);
+
         if (!m_allStoreItems)
         {
             m_allStoreItems = CCDictionary::create();
@@ -98,8 +105,8 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
             addStoreItem(5, 1, 12, 500, newShop);  // LLAVE
             addStoreItem(6, 2, 12, 500, newShop);  // LLAVE
-            addStoreItem(7, 46, 13, 100, newShop); // SWING
-            addStoreItem(8, 47, 13, 100, newShop); // SWING
+            addStoreItem(7, 46, 13, 200, newShop); // SWING
+            addStoreItem(8, 47, 13, 200, newShop); // SWING
 
             addStoreItem(9, 504, 1, 100, newShop);  // CUBO
             addStoreItem(10, 505, 1, 100, newShop); // CUBO
@@ -108,12 +115,15 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
             addStoreItem(13, 121, 5, 100, newShop); // BOLA
             addStoreItem(14, 122, 5, 100, newShop); // BOLA
-            addStoreItem(15, 174, 4, 100, newShop); // NAVE
-            addStoreItem(16, 175, 4, 100, newShop); // NAVE
+            addStoreItem(15, 174, 4, 150, newShop); // NAVE
+            addStoreItem(16, 175, 4, 150, newShop); // NAVE
 
-            addStoreItem(17, 18, 12, 50, newShop); // ANIMACION
-            addStoreItem(18, 19, 12, 50, newShop); // ANIMACION
-            addStoreItem(19, 20, 12, 50, newShop); // ANIMACION
+            addStoreItem(17, 158, 6, 150, newShop); // UFO
+            addStoreItem(18, 159, 6, 150, newShop); // UFO
+
+            addStoreItem(21, 18, 12, 50, newShop); // ANIMACION
+            addStoreItem(22, 19, 12, 50, newShop); // ANIMACION
+            addStoreItem(23, 20, 12, 50, newShop); // ANIMACION
         }
     }
 };

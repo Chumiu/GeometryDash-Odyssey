@@ -1,7 +1,9 @@
 #include "OdysseySelectLayer.hpp"
-#include "OdysseyComicLayer.hpp"
+#include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/OdysseyLevelPopup.hpp"
+#include "../nodes/InstantMenuItemSprite.hpp"
+#include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -20,7 +22,8 @@ bool OdysseySelectLayer::init(int page)
     auto GSM = GameStatsManager::sharedState();
 
     // canción
-    std::string song = fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
+    auto pageID = (page + 1 < 4) ? page + 1 : 4;
+    std::string song = fmt::format("IslandLoop{:02}.mp3"_spr, pageID);
 
     // fondo
     int bgID = 1;
@@ -61,6 +64,15 @@ bool OdysseySelectLayer::init(int page)
         islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
         islandScale = 1.f;
+        break;
+
+    case 3:
+        bgID = 8;
+        bgColor = {0, 30, 0};
+        gradientColorTop = {0, 60, 0, 30};
+        islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
+        islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
+        islandScale = .75f;
         break;
 
     default:
@@ -122,34 +134,6 @@ bool OdysseySelectLayer::init(int page)
 
     m_islandNode = CCNode::create();
 
-    if (page == 1)
-    {
-        auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
-        hollowSprite->setColor({255, 255, 255});
-        hollowSprite->setOpacity(150);
-
-        auto hollowBtn = CCMenuItemSpriteExtra::create(
-            hollowSprite,
-            this,
-            menu_selector(OdysseySelectLayer::onOgre));
-
-        hollowBtn->setPosition({48, 102});
-        hollowBtn->setOpacity(0);
-        hollowBtn->setTag(0);
-
-        auto secretMenu = CCMenu::create();
-        secretMenu->addChild(hollowBtn);
-        secretMenu->setPosition({0, 0});
-        secretMenu->setZOrder(10);
-        m_islandNode->addChild(secretMenu);
-
-        auto comingSoonLabel = CCLabelBMFont::create("In the full version! :)", "bigFont.fnt");
-        comingSoonLabel->setScale(.7f);
-        comingSoonLabel->setPosition(m_winSize / 2);
-
-        // m_islandNode->addChild(comingSoonLabel, 999);
-    }
-
     if (page == 2)
     {
         auto extra01_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 1) || GM->getUGV("237");
@@ -168,6 +152,7 @@ bool OdysseySelectLayer::init(int page)
 
         firstIsland->setColor(islandColor);
         firstIsland->setPosition(islandPosition);
+        firstIsland->m_scaleMultiplier = 1.1f;
         firstIsland->setTag(501);
 
         auto secondSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_02_001.png"_spr);
@@ -179,6 +164,7 @@ bool OdysseySelectLayer::init(int page)
             menu_selector(OdysseySelectLayer::onExtraLevel));
 
         secondIsland->setPosition({m_winSize.width / 2 + 100, m_winSize.height / 2});
+        secondIsland->m_scaleMultiplier = 1.1f;
         secondIsland->setTag(502);
 
         if (!extra01_unlocked)
@@ -202,7 +188,108 @@ bool OdysseySelectLayer::init(int page)
         menu->addChild(firstIsland);
         menu->addChild(secondIsland);
 
+        //  CONTEST ISLANDS
         m_islandNode->addChild(menu);
+    }
+
+    if (page == 3)
+    {
+        auto menu = CCMenu::create();
+        menu->setPosition({0, 0});
+
+        std::vector<CCPoint> m_islandPositions = {
+            {-207, 0},
+            {-103, -30},
+            {0, 30},
+            {103, 0},
+            {207, -30}};
+
+        for (int i = 0; i < 5; i++)
+        {
+            auto pos = m_islandPositions[i];
+
+            auto smallIsland = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str());
+            smallIsland->setScale(islandScale);
+
+            auto smallIslandBtn = CCMenuItemSpriteExtra::create(
+                smallIsland,
+                this,
+                menu_selector(OdysseySelectLayer::onExtraLevel));
+
+            smallIslandBtn->setPosition({m_winSize.width / 2 + pos.x, m_winSize.height / 2 + +pos.y});
+            smallIslandBtn->m_scaleMultiplier = 1.1f;
+            smallIslandBtn->setTag(601 + i);
+            menu->addChild(smallIslandBtn);
+        }
+
+        /*
+        //  ECLIPSE ISLAND
+        auto firstSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_04_001.png"_spr);
+        firstSprite->setScale(islandScale);
+
+        auto firstIsland = CCMenuItemSpriteExtra::create(
+            firstSprite,
+            this,
+            menu_selector(OdysseySelectLayer::onExtraLevel));
+
+        firstIsland->setPosition({m_winSize.width / 2 - 170, m_winSize.height / 2});
+        firstIsland->m_scaleMultiplier = 1.1f;
+        firstIsland->setTag(601);
+
+        //  JELLY CASTLE ISLAND
+        auto secondSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_05_001.png"_spr);
+        secondSprite->setScale(islandScale);
+
+        auto secondIsland = CCMenuItemSpriteExtra::create(
+            secondSprite,
+            this,
+            menu_selector(OdysseySelectLayer::onExtraLevel));
+
+        secondIsland->setPosition({m_winSize.width / 2 - 60, m_winSize.height / 2 - 30});
+        secondIsland->m_scaleMultiplier = 1.1f;
+        secondIsland->setTag(602);
+
+        //  PHONE ME FIRST ISLAND
+        auto thirdSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_06_001.png"_spr);
+        thirdSprite->setScale(islandScale);
+
+        auto thirdIsland = CCMenuItemSpriteExtra::create(
+            thirdSprite,
+            this,
+            menu_selector(OdysseySelectLayer::onExtraLevel));
+
+        thirdIsland->setPosition({m_winSize.width / 2 + 60, m_winSize.height / 2 + 30});
+        thirdIsland->m_scaleMultiplier = 1.1f;
+        thirdIsland->setTag(603);
+
+        //  WUBSPLOSION ISLAND
+        auto fourthSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_07_001.png"_spr);
+        fourthSprite->setScale(islandScale);
+
+        auto fourthIsland = CCMenuItemSpriteExtra::create(
+            fourthSprite,
+            this,
+            menu_selector(OdysseySelectLayer::onExtraLevel));
+
+        fourthIsland->setPosition({m_winSize.width / 2 + 170, m_winSize.height / 2});
+        fourthIsland->m_scaleMultiplier = 1.1f;
+        fourthIsland->setTag(604);
+
+        menu->addChild(firstIsland);
+        menu->addChild(secondIsland);
+        menu->addChild(thirdIsland);
+        menu->addChild(fourthIsland);
+
+
+       //menu->alignItemsHorizontallyWithPadding(10);
+
+        m_islandNode->addChild(menu);*/
+
+        auto comingSoonLabel = CCLabelBMFont::create("Work in progress, subject to changes", "bigFont.fnt");
+        comingSoonLabel->setPosition({m_winSize.width / 2, 20});
+        comingSoonLabel->setOpacity(120);
+        comingSoonLabel->setScale(.4f);
+        addChild(comingSoonLabel, 999);
     }
 
     m_islandTexture = CCSprite::createWithSpriteFrameName(islandTexture);
@@ -214,6 +301,9 @@ bool OdysseySelectLayer::init(int page)
     m_islandTexture->setPosition(islandPosition);
 
     if (page == 2)
+        m_islandTexture->setVisible(false);
+
+    if (page == 3)
         m_islandTexture->setVisible(false);
 
     m_islandNode->addChild(m_islandTexture);
@@ -231,29 +321,29 @@ bool OdysseySelectLayer::init(int page)
     m_islandNode->runAction(CCRepeatForever::create(CCSequence::createWithTwoActions(moveUp, moveDown)));
 
     //  Titulo de la Isla
-    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("GDO_IslandTitle_0{}_001.png"_spr, page + 1).c_str());
+    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("GDO_IslandTitle_{:02}_001.png"_spr, pageID).c_str());
     islandTitle->setScale(.75f);
     islandTitle->setPosition({m_winSize.width / 2, m_winSize.height - 30});
     addChild(islandTitle);
 
     auto switchMenu = CCMenu::create();
 
-    if (page > 0)
+    if (page > 0 && page < 3)
     {
         auto navSprite = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
         navSprite->setFlipX(true);
 
         auto leftButton = CCMenuItemSpriteExtra::create(navSprite, this, menu_selector(OdysseySelectLayer::onBackPage));
-        leftButton->setPositionX(-m_winSize.width / 2 + 45);
+        leftButton->setPositionX(-m_winSize.width / 2 + 25);
         switchMenu->addChild(leftButton);
     }
 
-    if (page < m_pageAmount - 1)
+    if (page < 2)
     {
         auto navSprite = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
 
         auto rightButton = CCMenuItemSpriteExtra::create(navSprite, this, menu_selector(OdysseySelectLayer::onNextPage));
-        rightButton->setPositionX(m_winSize.width / 2 - 45);
+        rightButton->setPositionX(m_winSize.width / 2 - 25);
         switchMenu->addChild(rightButton);
     }
 
@@ -301,38 +391,94 @@ bool OdysseySelectLayer::init(int page)
             0));
     }
 
-    animateLevelCompletation();
+    if (GM->getUGV("208") && !GM->getUGV("280"))
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
+            0));
+    }
 
+    animateLevelCompletation();
     setKeyboardEnabled(true);
     setKeypadEnabled(true);
     return true;
 };
 
+void OdysseySelectLayer::getOgreDialog()
+{
+    std::vector<gd::string> dialogEvents = {
+        "ogre-meeting",
+        "ogre-beginning", // Just to skip
+        "ogre-first-clear",
+        "ogre-second-clear",
+        "ogre-third-clear",
+        "ogre-fourth-clear",
+        "ogre-final-clear",
+    };
+
+    auto dialog = Odyssey::createDialog(dialogEvents[m_ogreDialog].c_str(), 3);
+    GameManager::sharedState()->setUGV(fmt::format("{}", m_ogreDialog + 280).c_str(), true);
+    this->addChild(dialog, 3);
+};
+
+void OdysseySelectLayer::unlockOgreChest()
+{
+    CCArray *rewardsArray = CCArray::create();
+
+    rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::Cube, 520));
+    rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::GJItem, 4));
+    rewardsArray->addObject(GJRewardObject::create(SpecialRewardItem::Orbs, 2500, 14));
+
+    GJRewardItem *rewardItems = GJRewardItem::createWithObjects(GJRewardType::Key100Treasure, rewardsArray);
+    RewardUnlockLayer *layer = RewardUnlockLayer::create(7, nullptr);
+    layer->m_chestType = 8;
+
+    GameStatsManager::get()->incrementStat("14", 2500);
+    IconUtils::unlockReward(520, UnlockType::Cube);
+
+    cocos2d::CCDirector::sharedDirector()->getRunningScene()->addChild(layer);
+    layer->showCollectReward(rewardItems);
+    layer->setZOrder(500);
+
+    //  Has collected Betsy
+    GameManager::sharedState()->setUGV("286", true);
+};
+
 void OdysseySelectLayer::getWizardDialog01()
 {
-    auto dialog = Odyssey::createDialog("meetingWizard");
+    auto dialog = Odyssey::createDialog("wizard-introduction", 4);
     GameManager::sharedState()->setUGV("203", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog02()
 {
-    auto dialog = Odyssey::createDialog("firstIslandClear");
+    auto dialog = Odyssey::createDialog("first-island-clear", 4);
     GameManager::sharedState()->setUGV("207", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::getWizardDialog03()
 {
-    auto dialog = Odyssey::createDialog("end");
+    auto dialog = Odyssey::createDialog("ending", 4);
     GameManager::sharedState()->setUGV("208", true);
     this->addChild(dialog, 3);
 };
 
 void OdysseySelectLayer::keyBackClicked()
 {
+    // volver al ogro si está en la pagina de los niveles contest
+    if (m_currentPage == 3)
+    {
+        auto scene = CCScene::create();
+        scene->addChild(SecretVaultLayer2::create());
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
+        return;
+    }
+
     GameManager::sharedState()->setIntGameVariable("1001", 0);
-    CCDirector::sharedDirector()->replaceScene(cocos2d::CCTransitionFade::create(0.5, MenuLayer::scene(false)));
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene(false)));
     GameManager::sharedState()->fadeInMenuMusic();
 };
 
@@ -361,6 +507,14 @@ std::vector<CCPoint> OdysseySelectLayer::getPositionForButtons()
             {30, 63},
             {141, -14},
             {150, 82}};
+
+    case 3:
+        return {
+            {-180, -68},
+            {-90, 38},
+            {0, -68},
+            {90, 38},
+            {180, -68}};
     }
 
     return arr;
@@ -456,6 +610,46 @@ std::vector<CCPoint> OdysseySelectLayer::getPositionForDots()
             {145, 52},
             {154, 61},
             {161, 68}};
+        break;
+    case 3:
+        return {
+            // camino 1
+            {141, 98},
+            {152, 107},
+            {156, 122},
+            {152, 137},
+            {146, 152},
+            {142, 167},
+            {146, 181},
+            {156, 192},
+            // camino 2
+            {232, 192},
+            {243, 181},
+            {247, 167},
+            {242, 152},
+            {237, 137},
+            {232, 122},
+            {236, 107},
+            {247, 98},
+            // camino 3
+            {321, 98},
+            {332, 107},
+            {336, 122},
+            {332, 137},
+            {326, 152},
+            {322, 167},
+            {326, 181},
+            {336, 192},
+            // camino 4
+            {412, 192},
+            {423, 181},
+            {427, 167},
+            {422, 152},
+            {417, 137},
+            {412, 122},
+            {416, 107},
+            {427, 98},
+        };
     }
     return arr;
 }
@@ -466,15 +660,17 @@ void OdysseySelectLayer::addLevelButtons()
     m_levelMenu = CCMenu::create();
     m_levelMenu->setPosition(m_winSize / 2);
     auto offSet = 0;
+
     if (m_currentPage == 1)
         offSet = 4;
 
     //  Agrega los niveles con un ciclo
-    if (m_levelAmount > 0)
+    if (m_levelAmount > 0 && m_currentPage != 3)
     {
         for (int ii = 0; ii < m_levelAmount; ii++)
         {
             auto levelSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_locked_001.png"_spr);
+
             if (m_currentPage == 1 && ii == 4)
                 levelSprite = CCSpriteGrayscale::createWithSpriteFrameName("worldLevelBtn_002.png"_spr);
 
@@ -521,6 +717,46 @@ void OdysseySelectLayer::addLevelButtons()
         volcanoLight->setPosition({m_winSize.width / 2 + 148, m_winSize.height / 2 + 94});
         volcanoLight->setZOrder(-1);
         m_islandNode->addChild(volcanoLight);
+
+        auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
+        hollowSprite->setColor({255, 255, 255});
+        hollowSprite->setOpacity(150);
+
+        auto hollowBtn = InstantMenuItemSprite::create(
+            hollowSprite,
+            this,
+            menu_selector(OdysseySelectLayer::onOgre));
+
+        hollowBtn->setOpacity(0);
+        hollowBtn->setTag(0);
+
+        auto secretMenu = CCMenu::create();
+        secretMenu->setContentSize(hollowSprite->getContentSize());
+        secretMenu->addChild(hollowBtn);
+        secretMenu->setPosition({m_winSize / 2 - ccp(250, 68)});
+        hollowBtn->setPosition(secretMenu->getContentSize() / 2);
+        secretMenu->setZOrder(10);
+        m_islandNode->addChild(secretMenu);
+    }
+    if (m_currentPage == 3)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            std::string extraIslandTexture = fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str();
+
+            auto smallIsland = isLevelComplete(i + 600) ? CCSprite::createWithSpriteFrameName(extraIslandTexture.c_str()) : CCSpriteGrayscale::createWithSpriteFrameName(extraIslandTexture.c_str());
+            smallIsland->setScale(.75f);
+
+            auto smallIslandBtn = CCMenuItemSpriteExtra::create(
+                smallIsland,
+                this,
+                menu_selector(OdysseySelectLayer::onExtraLevel));
+
+            smallIslandBtn->setPosition(getPositionForButtons()[i]);
+            smallIslandBtn->m_scaleMultiplier = 1.1f;
+            smallIslandBtn->setTag(601 + i);
+            m_levelMenu->addChild(smallIslandBtn);
+        }
     }
 
     m_islandNode->addChild(m_levelMenu);
@@ -537,6 +773,8 @@ void OdysseySelectLayer::addIslandDots()
     {
         auto dot = CCSprite::createWithSpriteFrameName("worldDot_001.png"_spr);
         dot->setPosition(getPositionForDots()[ii]);
+        if (m_currentPage == 3)
+            dot->setPosition(dot->getPosition() - m_winSize / 2);
         m_dotNode->addChild(dot);
     }
 
@@ -545,7 +783,7 @@ void OdysseySelectLayer::addIslandDots()
 
 bool OdysseySelectLayer::isLevelComplete(int level)
 {
-    if (level < 1)
+    if (level < 1 || level == 600)
         return true;
 
     return GameManager::sharedState()->getUGV(fmt::format("{}", level + 240).c_str());
@@ -564,10 +802,21 @@ void OdysseySelectLayer::enableLevelAnimation(CCObject *p0)
     if (btn->getTag() == 9)
         btn->setNormalImage(CCSprite::createWithSpriteFrameName("worldLevelBtn_002.png"_spr));
 
+    if (btn->getTag() > 600)
+    {
+        auto islandTexture = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, btn->getTag() - 600 + 3).c_str());
+        islandTexture->setScale(.75f);
+        btn->setNormalImage(islandTexture);
+        btn->setContentSize(islandTexture->getScaledContentSize());
+    }
+
     btn->setScale(1.2f);
     btn->runAction(CCSequence::createWithTwoActions(
         CCFadeIn::create(.1f),
         CCEaseBounceOut::create(CCEaseBounceOut::create(CCScaleTo::create(0.5, 1)))));
+
+    if (btn->getTag() > 600)
+        return;
 
     auto particle = CCParticleSystemQuad::create("coinPickupEffect.plist", true);
     particle->setAnchorPoint({0.5f, 0.5f});
@@ -615,6 +864,7 @@ void OdysseySelectLayer::animateLevelCompletation()
     if (m_currentPage == 2)
         return;
 
+    auto GM = GameManager::sharedState();
     auto GLM = GameLevelManager::sharedState();
     auto level1 = GLM->getMainLevel(7001, false);
     auto level2 = GLM->getMainLevel(7002, false);
@@ -626,10 +876,20 @@ void OdysseySelectLayer::animateLevelCompletation()
     auto level8 = GLM->getMainLevel(7008, false);
     auto level9 = GLM->getMainLevel(7009, false);
 
+    auto extraLevel1 = GLM->getMainLevel(7601, false);
+    auto extraLevel2 = GLM->getMainLevel(7602, false);
+    auto extraLevel3 = GLM->getMainLevel(7603, false);
+    auto extraLevel4 = GLM->getMainLevel(7604, false);
+    auto extraLevel5 = GLM->getMainLevel(7605, false);
+
     auto buttonSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_001.png"_spr);
     int offset = 0;
     if (m_currentPage == 1)
         offset = 4;
+
+    if (m_currentPage == 3)
+        offset = 600;
+
     for (int i = 0; i < m_levelMenu->getChildrenCount(); i++)
     {
         // log::info("{}, {}, {}", i, i + offset, i + offset - 1);
@@ -638,12 +898,19 @@ void OdysseySelectLayer::animateLevelCompletation()
         if (m_currentPage == 1 && i == 4)
             buttonSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_002.png"_spr);
 
+        if (m_currentPage == 3)
+        {
+            buttonSprite = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str());
+            buttonSprite->setScale(.75f);
+        }
+
         // log::info("{}", i + offset + 240);
         if (levelButton)
         {
             if (GameManager::sharedState()->getUGV(fmt::format("{}", i + offset + 240).c_str()) || (i == 0 && m_currentPage == 0))
             {
                 levelButton->setNormalImage(buttonSprite);
+                levelButton->setContentSize(buttonSprite->getScaledContentSize());
             }
         }
     }
@@ -652,6 +919,7 @@ void OdysseySelectLayer::animateLevelCompletation()
     int lastDot = 0;
     int nextLevel = 1;
     bool shouldAnimate = false;
+    bool ogreDialog = false;
 
     auto scaleAction = CCScaleTo::create(0.5, 1, 0.5); // Escala al 60% durante 0.5 segundos
     auto scaleWithBounce = CCEaseBounceOut::create(scaleAction);
@@ -715,6 +983,74 @@ void OdysseySelectLayer::animateLevelCompletation()
         }
     }
 
+    if (m_currentPage == 3)
+    {
+        if (extraLevel1->m_normalPercent == 100 && extraLevel2->m_normalPercent < 100)
+        {
+            firstDot = 0;
+            lastDot = 7;
+            nextLevel = 602;
+
+            if (!GM->getUGV("282"))
+            {
+                m_ogreDialog = 2;
+                ogreDialog = true;
+            }
+        }
+
+        if (extraLevel2->m_normalPercent == 100 && extraLevel3->m_normalPercent < 100)
+        {
+            firstDot = 8;
+            lastDot = 15;
+            nextLevel = 603;
+
+            if (!GM->getUGV("283"))
+            {
+                m_ogreDialog = 3;
+                ogreDialog = true;
+            }
+        }
+
+        if (extraLevel3->m_normalPercent == 100 && extraLevel4->m_normalPercent < 100)
+        {
+            firstDot = 16;
+            lastDot = 23;
+            nextLevel = 604;
+
+            if (!GM->getUGV("284"))
+            {
+                m_ogreDialog = 4;
+                ogreDialog = true;
+            }
+        }
+
+        if (extraLevel4->m_normalPercent == 100)
+        {
+            firstDot = 24;
+            lastDot = 31;
+            nextLevel = 605;
+
+            if (!GM->getUGV("285"))
+            {
+                m_ogreDialog = 5;
+                ogreDialog = true;
+            }
+        }
+
+        if (extraLevel5->m_normalPercent == 100)
+        {
+            if (!GM->getUGV("286"))
+            {
+                this->runAction(CCSequence::create(
+                    CCDelayTime::create(1.f),
+                    CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::unlockOgreChest)),
+                    0));
+            }
+        }
+    }
+
+    log::info("Next level: {}", nextLevel);
+
     if (!isLevelComplete(nextLevel - 1))
     {
         setLevelComplete(nextLevel - 1);
@@ -722,6 +1058,16 @@ void OdysseySelectLayer::animateLevelCompletation()
         if (nextLevel != 5)
             shouldAnimate = true;
     }
+
+    if (ogreDialog)
+    {
+        this->runAction(CCSequence::create(
+            CCDelayTime::create(0.5f),
+            CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
+            0));
+    }
+
+    log::info("Page: {}", m_currentPage);
 
     for (int ii = 0; ii < m_dotNode->getChildrenCount(); ii++)
     {
@@ -754,10 +1100,12 @@ void OdysseySelectLayer::animateLevelCompletation()
 
                 if (ii == lastDot)
                 {
+                    log::info("Next Level: {}", nextLevel);
                     auto levelButton = static_cast<CCMenuItemSpriteExtra *>(m_levelMenu->getChildByTag(nextLevel));
-                    levelButton->runAction(CCSequence::createWithTwoActions(
-                        CCDelayTime::create(delayTime + .3f),
-                        CCCallFuncO::create(levelButton, callfuncO_selector(OdysseySelectLayer::enableLevelAnimation), levelButton)));
+                    if (levelButton)
+                        levelButton->runAction(CCSequence::createWithTwoActions(
+                            CCDelayTime::create(delayTime + .3f),
+                            CCCallFuncO::create(levelButton, callfuncO_selector(OdysseySelectLayer::enableLevelAnimation), levelButton)));
 
                     this->runAction(CCSequence::createWithTwoActions(
                         CCDelayTime::create(delayTime + .3f),
@@ -785,7 +1133,7 @@ void OdysseySelectLayer::enableButtonTouch()
 void OdysseySelectLayer::switchToPage(int page)
 {
     auto scene = OdysseySelectLayer::scene(page);
-    CCDirector::sharedDirector()->replaceScene(CCTransitionFadeTR::create(0.5f, scene));
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5f, scene));
 }
 
 void OdysseySelectLayer::onNextPage(CCObject *)
@@ -818,7 +1166,7 @@ void OdysseySelectLayer::onOgre(CCObject *)
     if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level05b") && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
         log::info("LOCKED OGRE");
-        auto dialog = Odyssey::createDialog("lockedOgre");
+        auto dialog = Odyssey::createDialog("ogre-locked", 4, true);
         this->addChild(dialog, 3);
         return;
     }
@@ -836,13 +1184,22 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
     auto extra01_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 1) || GM->getUGV("237");
     auto extra02_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 2) || GM->getUGV("238");
 
-    if ((extra01_unlocked && sender->getTag() == 501) || (extra02_unlocked && sender->getTag() == 502) || Mod::get()->getSettingValue<bool>("bypass-levels"))
+    log::info("Tag: {}", sender->getTag());
+
+    if ((extra01_unlocked && sender->getTag() == 501) || (extra02_unlocked && sender->getTag() == 502) || (sender->getTag() > 600 && isLevelComplete(sender->getTag() - 1)) || Mod::get()->getSettingValue<bool>("bypass-levels"))
     {
         auto popup = OdysseyLevelPopup::create(sender->getTag() + 7000);
         popup->show();
     }
     else
     {
+        if (sender->getTag() > 600)
+        {
+            auto dialog = Odyssey::createDialog("ogre-level-locked", 3);
+            this->addChild(dialog, 200);
+            return;
+        }
+
         auto dialog = Odyssey::createDialogResponse("onExtraLevel", m_extraTimes);
         //  GM->setUGV("52", true);
         this->addChild(dialog, 3);

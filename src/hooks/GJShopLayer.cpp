@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJShopLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
+#include "../nodes/PromoPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -69,18 +70,13 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 
 	void onPlayVideo(CCObject *)
 	{
-		std::vector<gd::string> videoLinks = {
-			"https://youtu.be/34ajXNmtI4U?si=cLptfnth-uhYDq9E",
-			"https://youtu.be/aRdpABVEKho?si=2huyHafEWQFz1R58",
-			"https://youtu.be/uvN5OGo_fcY?si=piU_ncFAZvQJCUUD",
-			"https://youtu.be/abB1-zyyHSI?si=1XBhha5sC1ho9MqU"};
-
-		CCApplication::sharedApplication()->openURL(videoLinks.at(rand() % videoLinks.size()).c_str());
+		auto promo = PromoPopup::create();
+		promo->show();
 	}
 
 	void getCarpDialog()
 	{
-		auto dialog = Odyssey::createDialog("meetingShopkeeper");
+		auto dialog = Odyssey::createDialog("carp-introduction", 2, false);
 		GameManager::sharedState()->setUGV("204", true);
 		this->addChild(dialog, 200);
 	}

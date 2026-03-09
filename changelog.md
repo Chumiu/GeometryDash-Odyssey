@@ -1,6 +1,38 @@
 # Changelog
 
-### <cg>v1.0.1 (Latest)</c>
+### <cg>v1.1.0-beta.1</c> (Work in Progress)
+
+* <cp>Ported Mod to Geode v5.0.0</c>
+* <cp>New Side-Quest with the Ogre!</c>
+* <cp>MacOS & iOS support!</c> (Hopefully)
+* New Level "<cg>Eclipse</c>"!
+* New Level "<cg>Jelly Castle</c>"!
+* New Level "<cg>Phone Me First</c>"!
+* New Level "<cg>Wubsplosion</c>"!
+* New Level "<cg>Granite</c>"!
+* New Achievements!
+* New Icons!
+
+#### **Levels**
+
+* <co>Cryptofunk</c>: Updated difficulty to Demon.
+* <co>Critical Hit</c>: Last segment nerfed.
+* Some smaller fixes in existing levels.
+
+#### **Misc.**
+
+* <c-666666>Some of the code was rewritten to help optimize the mod.</c>
+* <cg>Added</c> method to prevent unlocking vault icons prematurely.
+* <cg>Added</c> keybind settings to move through the comics.
+* <cg>Added</c> online features to download Audio Assets.
+* <cg>Added</c> online feature to read the Comics.
+* <cg>Added</c> contest winners to the credits.
+* <cg>Added</c> method to receive extra orbs.
+* <cy>Fixed</c> bug of the shopkeeper items not registering.
+* <cy>Fixed</c> some bugs, added more.
+* <cr>Removed</c> custom currency sprites (many issues).
+
+### <cb>v1.0.1</c>
 
 <cr>*We aware on game crashing bugs on android and shop items still showing as not bought, developing a fix as we speak*</c>
 
@@ -15,7 +47,7 @@
 * <cg>Added</c> message if an Incompatible mod is found
 * <cg>Added</c> popup to the fangames, instead of a direct link
 * <cg>Added</c> message if you collected all rewards of a vault
-* <cy>Fixed</c> incompatibility with Custom keybinds
+* <cy>Fixed</c> incompatibility with Custom Keybinds
 * <cy>Fixed</c> incompatibility with Comments on pause menu
 * <cy>Fixed</c> bug of extra islands get locked upon game reload
 * <cy>Fixed</c> bug of shop icons getting locked upon game reload
@@ -68,6 +100,6 @@
 * <cg>Added</c> first Island redesign.
 * <cg>Added</c> second Island redesign.
 * <cg>Added</c> visual improvements to Vaults.
-* <cy>Fixed</c> comic loop error.
 * <cy>Fixed</c> Hollow voicelines error.
+* <cy>Fixed</c> Comic loop error.
 * Bugfixes.

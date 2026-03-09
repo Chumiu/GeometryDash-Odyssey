@@ -13,10 +13,11 @@ public:
     CCMenuItemSpriteExtra *m_shopButton;
     CCSprite *m_islandTexture;
 
-    int m_pageAmount = 3;
+    int m_pageAmount = 4;
     int m_currentPage = 0;
     int m_levelAmount = 0;
     int m_extraTimes = 0;
+    int m_ogreDialog = 0;
 
     bool m_animating = false;
 
@@ -56,6 +57,8 @@ public:
     void getComic01();
     void getComic06();
     void getComic12();
+    void getOgreDialog();
+    void unlockOgreChest();
 
 public:
     static OdysseySelectLayer *create(int);
