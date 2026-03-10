@@ -15,27 +15,6 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded)
-{
-	if (!Odyssey::getEarlyLoadBreakingMods().empty())
-	{
-		auto mod = Loader::get()->getLoadedMod("teamtcm.geometry-dash-odyssey");
-
-		for (Hook *hook : mod->getHooks())
-		{
-			if (hook->getDisplayName() == "MenuLayer::init")
-				continue;
-
-			if (hook->getDisplayName() == "LoadingLayer::init")
-				continue;
-
-			(void)hook->disable();
-		}
-
-		return;
-	}
-};
-
 class $modify(PauseLayer)
 {
 	void onQuit(CCObject *sender)

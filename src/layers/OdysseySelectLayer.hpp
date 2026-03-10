@@ -20,6 +20,7 @@ public:
     int m_ogreDialog = 0;
 
     bool m_animating = false;
+    bool m_ogreWillTalk = false;
 
     virtual bool init(int);
     virtual void keyBackClicked();

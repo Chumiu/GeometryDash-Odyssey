@@ -59,6 +59,19 @@
             55
         ]
     },
+    "main-level-locked": {
+        "name": "Dumbledalf",
+        "dialogs": [
+            "Oy<d010>.<d010>.<d010>. <d020>Don't be in such a hurry.",
+            "The level isn't going anywhere!",
+            "You gotta complete the <cy>previous levels</c> to unlock this one!"
+        ],
+        "sprites": [
+            53,
+            53,
+            56
+        ]
+    },
     "first-island-clear": {
         "name": "Dumbledalf",
         "dialogs": [
@@ -74,7 +87,7 @@
             53
         ]
     },
-    "ending": {
+    "main-ending": {
         "name": "Dumbledalf",
         "dialogs": [
             "Hey <cy>Buddy</c>! You finished all the levels!",
@@ -93,6 +106,21 @@
             53,
             56,
             55
+        ]
+    },
+    "extra-level-locked": {
+        "name": "Dumbledalf",
+        "dialogs": [
+            "Sorry, that island is locked.",
+            "To access the level, you need a <cy>key</c>.",
+            "I think I seen one somewhere<d010>.<d010>.<d010>.",
+            "Maybe the <cp>pink fella</c> sells one in his shop?"
+        ],
+        "sprites": [
+            56,
+            56,
+            53,
+            53
         ]
     },
     "hollow-introduction": {
@@ -154,19 +182,36 @@
         ]
     },
     "ogre-locked": {
-        "name": "Dumbledalf",
+        "name": "????",
         "dialogs": [
-            "Apologies<d020>.<d020>.<d020>. <d040><cg>He's</c> not ready to accept visitors yet",
-            "I believe once you collect the <co>first element</c>, <d030>he would let you in",
-            "Until then, nothing<d020>.<d020>.<d020>."
+            "Who's there?",
+            "Darn, I can't see. It's too dark!",
+            "If you want to come in, I need you to bring something to <co>light up my cave</c>.",
+            "Maybe an element?"
         ],
         "sprites": [
-            56,
-            56,
-            53
+            15,
+            15,
+            15,
+            15
         ]
     },
     "ogre-meeting": {
+        "name": "????",
+        "dialogs": [
+            "Oh, you got it?",
+            "That's better! I can see you now!",
+            "So, your name is <cy>{PLAYER}</c>.",
+            "Let's see how you manage to answer my riddles<d010>.<d010>.<d010>."
+        ],
+        "sprites": [
+            15,
+            16,
+            16,
+            16
+        ]
+    },
+    "ogre-quest-intro": {
         "name": "Ogre",
         "dialogs": [
             "<d010>.<d010>.<d010>.",
@@ -189,7 +234,7 @@
             15
         ]
     },
-    "ogre-beginning": {
+    "ogre-quest-start": {
         "name": "Ogre",
         "dialogs": [
             "We meet again.",
@@ -234,7 +279,7 @@
             "From what I remember<d010>.<d010>.<d010>.",
             "I heard things about a castle<d010>.<d010>.<d010>.",
             "Maybe try searching over there?",
-            "Go on with your trip, Player."
+            "Go on with your trip, [PLAYER]."
         ],
         "sprites": [
             15,
@@ -346,7 +391,7 @@
             15
         ]
     },
-    "ogre-final-clear": {
+    "ogre-quest-ending": {
         "name": "Ogre",
         "dialogs": [
             "<cy>Betsy</c><d010>.<d010>.<d010>.",

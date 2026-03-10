@@ -1,9 +1,7 @@
 #include "DeveloperLayer.hpp"
 #include "ComicLayer.hpp"
-#include "SecretVaultLayer2.hpp"
 #include "../ui/OdysseyLevelPopup.hpp"
 #include "../ui/AlertPopup.hpp"
-#include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
 bool DeveloperLayer::init()
@@ -15,6 +13,7 @@ bool DeveloperLayer::init()
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     auto size = m_background->getContentSize();
 
+    //  Background
     m_background->setScale(winSize.width / size.width);
     m_background->setAnchorPoint({0, 0});
     m_background->setPosition({0, -75});
@@ -22,122 +21,122 @@ bool DeveloperLayer::init()
     m_background->setID("background"_spr);
     addChild(m_background, -2);
 
+    //  Back Button
+    auto menuBack = CCMenu::create();
+    menuBack->setID("back-menu"_spr);
+    addChildAtPosition(menuBack, Anchor::TopLeft, ccp(24, -24), false);
+
     auto backBtn = CCMenuItemSpriteExtra::create(
         CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
         this,
         menu_selector(DeveloperLayer::onBack));
-
     backBtn->setID("back-button"_spr);
     backBtn->setSizeMult(1.2f);
-
-    auto menuBack = CCMenu::create();
     menuBack->addChild(backBtn);
-    menuBack->setPosition({24, winSize.height - 24});
-    menuBack->setID("back-menu"_spr);
-    addChild(menuBack);
 
-    //  Menu de dialogos
-    auto dialogMenu = CCMenu::create();
-    dialogMenu->setID("dialog-menu"_spr);
-    dialogMenu->setContentSize({560.0f, 140.0f});
-    dialogMenu->setLayout(RowLayout::create()
-                              ->setGap(6.0f)
+    //  Talk Menu
+    auto pageTalkMenu = CCMenu::create();
+    pageTalkMenu->setLayout(RowLayout::create()
+                                ->setGap(460.0f)
+                                ->setGrowCrossAxis(true)
+                                ->setCrossAxisOverflow(false));
+    pageTalkMenu->setID("page-menu");
+    addChildAtPosition(pageTalkMenu, Anchor::Center, ccp(0, 0), false);
+
+    auto prevTalkBtn = CCMenuItemSpriteExtra::create(
+        CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png"),
+        this,
+        menu_selector(DeveloperLayer::onTalkNav));
+    prevTalkBtn->setID("arrow-prev-talk");
+    prevTalkBtn->setTag(-1);
+
+    auto nextTalkSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png");
+    nextTalkSpr->setFlipX(true);
+
+    auto nextTalkBtn = CCMenuItemSpriteExtra::create(
+        nextTalkSpr,
+        this,
+        menu_selector(DeveloperLayer::onTalkNav));
+    nextTalkBtn->setID("arrow-next-talk");
+    nextTalkBtn->setTag(1);
+
+    //  Talk Main Menu
+    m_talkMenu = CCMenu::create();
+    m_talkMenu->setID("dialogs-menu"_spr);
+    m_talkMenu->setContentSize({370.0f, 70.0f});
+    m_talkMenu->setLayout(RowLayout::create()
+                              ->setGap(8.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    dialogMenu->setPositionY(winSize.height / 2 + 60.0f);
+    addChildAtPosition(m_talkMenu, Anchor::Center, ccp(0, 100), false);
 
-    auto dialogLabel = CCLabelBMFont::create("Events", "goldFont.fnt");
-    dialogLabel->setPosition({winSize.width / 2, dialogMenu->getPositionY() + dialogMenu->getContentHeight() / 2 + 15.0f});
-    dialogLabel->setScale(0.75f);
-    addChild(dialogLabel);
+    pageTalkMenu->addChildAtPosition(prevTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / -2, 100), false);
+    pageTalkMenu->addChildAtPosition(nextTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / 2, 100), false);
 
-    std::vector<const char *> events = {
-        "Carp (Meet)",
-        "Wizard (Meet)",
-        "Wizard (Island Clear)",
-        "Wizard (Ending)",
-        "Hollow (Meet)",
-        "Hollow (Quota Fail)",
-        "Hollow (Quota Success)",
-        "Ogre (Locked)",
-        //  v1.1.0
-        "Ogre (Meet)",
-        "Ogre (Start)",
-        "Ogre (1st Clear)",
-        "Ogre (2nd Clear)",
-        "Ogre (3rd Clear)",
-        "Ogre (4th Clear)",
-        "Ogre (Finale)",
-    };
+    auto talkLabel = CCLabelBMFont::create("Dialog Events:", "goldFont.fnt");
+    talkLabel->setPosition({m_talkMenu->getPositionX(), m_talkMenu->getPositionY() + m_talkMenu->getContentHeight() / 2 + 10.0f});
+    talkLabel->setScale(0.75f);
+    addChild(talkLabel);
 
-    for (auto ii = 0; ii < events.size(); ii++)
-    {
-        auto button = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(events[ii], 90, true, "goldFont.fnt", "GJ_button_01.png", 20.f, 0.4f),
-            this,
-            menu_selector(DeveloperLayer::onStoryDialogNew));
-        button->setTag(ii);
-        dialogMenu->addChild(button);
-        dialogMenu->updateLayout();
-    }
+    //  Levels Page Menu
+    auto pageLevelMenu = CCMenu::create();
+    pageLevelMenu->setLayout(RowLayout::create()
+                                 ->setGap(460.0f)
+                                 ->setGrowCrossAxis(true)
+                                 ->setCrossAxisOverflow(false));
+    pageLevelMenu->setID("page-menu");
+    addChildAtPosition(pageLevelMenu, Anchor::Center, ccp(0, 0), false);
 
-    /*
-    auto carp02 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Carp (Extras)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
+    auto prevLvlBtn = CCMenuItemSpriteExtra::create(
+        CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png"),
         this,
-        menu_selector(DeveloperLayer::onCarp02));
-    carp02->setTag(0);
+        menu_selector(DeveloperLayer::onLevelNav));
+    prevLvlBtn->setID("arrow-prev-talk");
+    prevLvlBtn->setTag(-1);
 
-    auto carp03 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Carp (Comic)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
+    auto nextLvlSpr = CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png");
+    nextLvlSpr->setFlipX(true);
+
+    auto nextLvlBtn = CCMenuItemSpriteExtra::create(
+        nextLvlSpr,
         this,
-        menu_selector(DeveloperLayer::onCarp03));
-    carp03->setTag(0);
+        menu_selector(DeveloperLayer::onLevelNav));
+    nextLvlBtn->setID("arrow-next-talk");
+    nextLvlBtn->setTag(1);
 
-    auto carp04 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Carp (No Coins)", 160, true, "goldFont.fnt", "GJ_button_02.png", 25.f, 0.5f),
-        this,
-        menu_selector(DeveloperLayer::onCarp04));
-    carp04->setTag(0);
-    */
+    //  Levels Main Menu
+    m_levelsMenu = CCMenu::create();
+    m_levelsMenu->setID("levels-menu"_spr);
+    m_levelsMenu->setContentSize({370.0f, 70.0f});
+    m_levelsMenu->setLayout(RowLayout::create()
+                                ->setGap(8.0f)
+                                ->setAutoScale(false)
+                                ->setGrowCrossAxis(true)
+                                ->setCrossAxisOverflow(false)
+                                ->setCrossAxisLineAlignment(AxisAlignment::Even));
+    addChildAtPosition(m_levelsMenu, Anchor::Center, ccp(0, 10), false);
 
-    auto popup01 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Savefile Notice", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
-        this,
-        menu_selector(DeveloperLayer::onPopup));
-    popup01->setTag(1);
+    pageLevelMenu->addChildAtPosition(prevLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / -2, 10), false);
+    pageLevelMenu->addChildAtPosition(nextLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / 2, 10), false);
 
-    auto popup02 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Translation Notice", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
-        this,
-        menu_selector(DeveloperLayer::onPopup));
-    popup02->setTag(2);
+    auto levelsLabel = CCLabelBMFont::create("Levels:", "goldFont.fnt");
+    levelsLabel->setPosition({m_levelsMenu->getPositionX(), m_levelsMenu->getPositionY() + m_levelsMenu->getContentHeight() / 2 + 10.0f});
+    levelsLabel->setScale(0.75f);
+    addChild(levelsLabel);
 
-    auto popup03 = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("Ogre Chest", 120, true, "goldFont.fnt", "GJ_button_04.png", 20.f, 0.4f),
-        this,
-        menu_selector(DeveloperLayer::onPopup));
-    popup03->setTag(3);
-
-    dialogMenu->addChild(popup01);
-    dialogMenu->addChild(popup02);
-    dialogMenu->addChild(popup03);
-    dialogMenu->updateLayout();
-    addChild(dialogMenu);
-
-    //  Menu de Comics
+    //  Comics Menu
     auto comicsMenu = CCMenu::create();
     comicsMenu->setID("comics-menu"_spr);
-    comicsMenu->setContentSize({400.0f, 65.0f});
+    comicsMenu->setContentSize({420.0f, 64.0f});
     comicsMenu->setLayout(RowLayout::create()
                               ->setGap(8.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    comicsMenu->setPositionY(90);
+    addChildAtPosition(comicsMenu, Anchor::Center, ccp(0, -70), false);
 
     auto comicsLabel = CCLabelBMFont::create("Comics", "goldFont.fnt");
     comicsLabel->setPosition({winSize.width / 2, comicsMenu->getPositionY() + comicsMenu->getContentHeight() / 2 + 10.0f});
@@ -156,53 +155,121 @@ bool DeveloperLayer::init()
 
         comic->setTag(ii + 1);
         comicsMenu->addChild(comic);
+        comicsMenu->updateLayout();
     };
 
-    comicsMenu->updateLayout();
-    addChild(comicsMenu);
-
-    //  Menu de Niveles
-    auto levelsMenu = CCMenu::create();
-    levelsMenu->setID("levels-menu"_spr);
-    levelsMenu->setContentSize({560.0f, 40.0f});
-    levelsMenu->setLayout(RowLayout::create()
-                              ->setGap(14.0f)
-                              ->setAutoScale(false)
-                              ->setGrowCrossAxis(true)
-                              ->setCrossAxisOverflow(false)
-                              ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    levelsMenu->setPositionY(20);
-    auto levelsLabel = CCLabelBMFont::create("contest levels (WIP)", "goldFont.fnt");
-    levelsLabel->setPosition({winSize.width / 2, levelsMenu->getPositionY() + levelsMenu->getContentHeight() / 2 + 10.0f});
-    levelsLabel->setScale(0.75f);
-    addChild(levelsLabel);
-
-    for (auto ii = 601; ii <= 605; ii++)
-    {
-        auto level = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(fmt::format("{}", LevelTools::getAudioTitle(ii)).c_str(), 60, true, "goldFont.fnt", "GJ_button_05.png", 22.5f, 0.3f),
-            this,
-            menu_selector(DeveloperLayer::onLevel));
-
-        level->setTag(ii + 7000);
-        levelsMenu->addChild(level);
-    };
-    levelsMenu->updateLayout();
-    addChild(levelsMenu);
+    //  Calls the functions to update each
+    updateTalk();
+    updateLevels();
 
     setKeypadEnabled(true);
     return true;
-};
+}
 
-//  Boton del Ogro
-void DeveloperLayer::onOgre(CCObject *)
+void DeveloperLayer::onLevelNav(CCObject *sender)
 {
-    auto scene = CCScene::create();
-    scene->addChild(SecretVaultLayer2::create());
-    CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
+    if (m_levelPage + sender->getTag() < 0 || m_levelPage + sender->getTag() > 3)
+        return;
+
+    m_levelPage = m_levelPage + sender->getTag();
+    updateLevels();
+}
+
+void DeveloperLayer::onTalkNav(CCObject *sender)
+{
+    if (m_talkPage + sender->getTag() < 0 || m_talkPage + sender->getTag() > 4)
+        return;
+
+    m_talkPage = m_talkPage + sender->getTag();
+    updateTalk();
+}
+
+//  Updates the button of the Events
+void DeveloperLayer::updateTalk()
+{
+    m_talkMenu->removeAllChildren();
+
+    std::vector<gd::string> events = {
+        "Carp (Meet)",
+        "Wizard (Meet)",
+        "Wizard (Level Locked)",
+        "Wizard (Island Clear)",
+        "Wizard (Main Ending)",
+        "Wizard (Extra Locked)",
+        "Hollow (Meet)",
+        "Hollow (Quota Fail)",
+        "Hollow (Quota Success)",
+        "Ogre (Locked)",
+        "Ogre (Meet)",
+        "Ogre (Quest Intro)",
+        "Ogre (Quest Start)",
+        "Ogre (1st Clear)",
+        "Ogre (2nd Clear)",
+        "Ogre (3rd Clear)",
+        "Ogre (4th Clear)",
+        "Ogre (Quest End)",
+        "Ogre (Level Locked)",
+        "Wizard (Full Completion)",
+    };
+
+    auto offset = m_talkPage * 4;
+
+    for (auto ii = 0; ii < 4; ii++)
+    {
+        auto eventBtn = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create(events[ii + offset].c_str(), 140, true, "goldFont.fnt", "GJ_button_01.png", 22.5f, 0.4f),
+            this,
+            menu_selector(DeveloperLayer::onTalk));
+
+        eventBtn->setTag(ii + offset);
+        m_talkMenu->addChild(eventBtn);
+    }
+
+    m_talkMenu->updateLayout();
+}
+
+//  Updates the buttons of the levels
+void DeveloperLayer::updateLevels()
+{
+    m_levelsMenu->removeAllChildren();
+
+    std::vector<int> levels = {
+        7001,
+        7002,
+        7003,
+        7004,
+        7005,
+        7006,
+        7007,
+        7008,
+        7009,
+        7501,
+        7502,
+        7601,
+        7602,
+        7603,
+        7604,
+        7605};
+
+    auto offset = m_levelPage * 4;
+
+    for (auto ii = 0; ii < 4; ii++)
+    {
+        auto level = LevelTools::getLevel(levels[ii + offset], false);
+
+        auto levelBtn = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create(level->m_levelName.c_str(), 140, true, "goldFont.fnt", "GJ_button_01.png", 22.5f, 0.4f),
+            this,
+            menu_selector(DeveloperLayer::onLevel));
+
+        levelBtn->setTag(levels[ii + offset]);
+        m_levelsMenu->addChild(levelBtn);
+    }
+
+    m_levelsMenu->updateLayout();
 };
 
-//  En Nivel
+//  On Level
 void DeveloperLayer::onLevel(CCObject *sender)
 {
     auto scene = CCScene::create();
@@ -211,7 +278,7 @@ void DeveloperLayer::onLevel(CCObject *sender)
     popup->show();
 };
 
-//  En Comic
+//  Opens the specified Comic
 void DeveloperLayer::onComic(CCObject *sender)
 {
     auto comic = ComicLayer::create(sender->getTag(), false);
@@ -227,26 +294,29 @@ void DeveloperLayer::onComic(CCObject *sender)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 };
 
-//  En dialogo de historia
-void DeveloperLayer::onStoryDialogNew(CCObject *sender)
+void DeveloperLayer::onTalk(CCObject *sender)
 {
     std::vector<const char *> events = {
         "carp-introduction",
         "wizard-introduction",
+        "main-level-locked",
         "first-island-clear",
-        "ending",
+        "main-ending",
+        "extra-level-locked",
         "hollow-introduction",
         "hollow-quota-fail",
         "hollow-quota-success",
         "ogre-locked",
-        //  v1.1.0
         "ogre-meeting",
-        "ogre-beginning",
+        "ogre-quest-intro",
+        "ogre-quest-start",
+        "ogre-level-locked",
         "ogre-first-clear",
         "ogre-second-clear",
         "ogre-third-clear",
         "ogre-fourth-clear",
-        "ogre-final-clear",
+        "ogre-quest-ending",
+        "full-completion",
     };
 
     std::vector<int> backgrounds = {
@@ -254,11 +324,11 @@ void DeveloperLayer::onStoryDialogNew(CCObject *sender)
         4,
         4,
         4,
-        5,
-        5,
-        5,
         4,
-        //  v1.1.0
+        4,
+        5,
+        5,
+        5,
         3,
         3,
         3,
@@ -266,7 +336,10 @@ void DeveloperLayer::onStoryDialogNew(CCObject *sender)
         3,
         3,
         3,
-    };
+        3,
+        3,
+        3,
+        4};
 
     std::vector<bool> sameNames = {
         false,
@@ -275,9 +348,10 @@ void DeveloperLayer::onStoryDialogNew(CCObject *sender)
         true,
         true,
         true,
+        true,
+        true,
         false,
         true,
-        //  v1.1.0
         true,
         true,
         true,
@@ -285,11 +359,13 @@ void DeveloperLayer::onStoryDialogNew(CCObject *sender)
         true,
         true,
         true,
-    };
+        true,
+        true,
+        true};
 
     auto dialog = Odyssey::createDialog(events[sender->getTag()], backgrounds[sender->getTag()], sameNames[sender->getTag()]);
     this->addChild(dialog, 10);
-}
+};
 
 void DeveloperLayer::onPopup(CCObject *sender)
 {
@@ -328,45 +404,6 @@ void DeveloperLayer::onPopup(CCObject *sender)
         layer->showCollectReward(rewardItems);
         layer->setZOrder(500);
     }
-};
-
-void DeveloperLayer::onCarp02(CCObject *sender)
-{
-    auto dialog = Odyssey::createDialogResponse("onExtraLevel", sender->getTag());
-
-    int tag = (sender->getTag() == 0)   ? 1
-              : (sender->getTag() == 1) ? 2
-                                        : 0;
-
-    sender->setTag(tag);
-
-    this->addChild(dialog, 3);
-};
-
-void DeveloperLayer::onCarp03(CCObject *sender)
-{
-    auto dialog = Odyssey::createDialogResponse("onFinalComic", sender->getTag());
-
-    int tag = (sender->getTag() == 0)   ? 1
-              : (sender->getTag() == 1) ? 2
-              : (sender->getTag() == 2) ? 3
-              : (sender->getTag() == 3) ? 4
-              : (sender->getTag() == 4) ? 5
-                                        : 0;
-    sender->setTag(tag);
-    this->addChild(dialog, 3);
-};
-
-void DeveloperLayer::onCarp04(CCObject *sender)
-{
-    auto dialog = Odyssey::createDialogResponse("onShopItem", sender->getTag());
-
-    int tag = (sender->getTag() == 0)   ? 1
-              : (sender->getTag() == 1) ? 2
-                                        : 0;
-
-    sender->setTag(tag);
-    this->addChild(dialog, 3);
 };
 
 void DeveloperLayer::keyBackClicked()

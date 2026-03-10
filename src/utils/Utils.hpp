@@ -3,11 +3,8 @@ using namespace geode::prelude;
 
 namespace Odyssey
 {
-    inline static std::vector<Mod *> breakingModsList;
-
     //  Dialogos
     DialogLayer *createDialog(const char *event, int background = 1, bool sameName = true);
-    DialogLayer *createDialogResponse(const char *event, int times);
 
     //  Nodos para el Level Popup
     CCNode *createDifficultyNode(GJDifficulty, int, bool);
@@ -22,10 +19,6 @@ namespace Odyssey
 
     //  Enteros
     int getIslandForLevel(int levelID);
-
-    //  Vectores
-    std::vector<Mod *> getEarlyLoadBreakingMods();
-    std::vector<Mod *> getBreakingMods();
 
     int getLevelSongID(int levelID);
     std::pair<gd::string, gd::string> getLevelAudioAssets(int levelID);

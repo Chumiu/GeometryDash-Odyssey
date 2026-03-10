@@ -144,7 +144,11 @@ DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool s
                 for (auto ii = 0; ii < dialogs.size(); ii++)
                 {
                     auto auxName = sameName ? name : names.at(ii).asString().unwrap();
-                    auto dialogObj = DialogObject::create(auxName, dialogs.at(ii).asString().unwrap(), sprites.at(ii).asInt().unwrap(), 1, false, {255, 255, 255});
+
+                    std::string auxText = dialogs.at(ii).asString().unwrap();
+                    auxText = utils::string::replace(auxText, "<username>", GameManager::get()->m_playerName);
+
+                    auto dialogObj = DialogObject::create(auxName, auxText, sprites.at(ii).asInt().unwrap(), 1, false, {255, 255, 255});
                     array->addObject(dialogObj);
                 }
             }
@@ -154,7 +158,7 @@ DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool s
     //  If there was an error during the process, just stores this error message.
     if (array->count() == 0)
     {
-        auto dialogObj = DialogObject::create("ERROR 404", "[There was an error while loading the data]", 28, 3, false, {255, 255, 255});
+        auto dialogObj = DialogObject::create("ERROR 404", "[There was an error while loading the data]", 28, 1, false, {255, 255, 255});
         array->addObject(dialogObj);
     }
 
@@ -164,47 +168,6 @@ DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool s
     dialogLayer->setZOrder(10);
     return dialogLayer;
 };
-
-DialogLayer *Odyssey::createDialogResponse(const char *event, int times)
-{
-    CCArray *arr = CCArray::create();
-
-    auto dialogColor = 2;
-    std::vector<std::vector<gd::string>> dialogList;
-    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
-    auto knowsCarp = GameManager::sharedState()->getUGV("204");
-
-    if (std::string_view(event) == std::string_view("onExtraLevel"))
-    {
-        dialogList = LockedExtraLevel;
-
-        auto dialogData = dialogList.at(times);
-        auto character = knowsCarp ? dialogData[0] : "????";
-        auto text = dialogData[2 + spanishText];
-
-        auto dialog = DialogObject::create(character, text, std::stoi(dialogData[1]), 1, false, {255, 255, 255});
-        arr->addObject(dialog);
-    }
-
-    if (std::string_view(event) == std::string_view("onFinalComic"))
-    {
-        dialogList = LockedFinalComic;
-
-        auto dialogData = dialogList.at(times);
-        auto character = knowsCarp ? dialogData[0] : "????";
-        auto text = dialogData[2 + spanishText];
-
-        auto dialog = DialogObject::create(character, text, std::stoi(dialogData[1]), 1, false, {255, 255, 255});
-        arr->addObject(dialog);
-    }
-
-    //  Al terminar, crea el Layer del dialogo y lo agrega al a escena
-    auto dialogLayer = DialogLayer::createDialogLayer(nullptr, arr, dialogColor);
-    dialogLayer->animateInRandomSide();
-    dialogLayer->setZOrder(10);
-
-    return dialogLayer;
-}
 
 //  Adds the audio assets to the Music Download Manager
 void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)
@@ -340,51 +303,6 @@ void Odyssey::hasAllVaultRewards()
     {
         GameManager::sharedState()->setUGV("232", false);
     }
-};
-
-std::vector<Mod *> Odyssey::getEarlyLoadBreakingMods()
-{
-    std::vector<Mod *> breakingMods;
-    std::vector<std::string> breakingModIDs = {
-        "capeling.geometry-dash-lunar"};
-
-    for (std::string id : breakingModIDs)
-    {
-        Mod *mod = Loader::get()->getInstalledMod(id);
-
-        if (mod && Loader::get()->isModLoaded(id))
-        {
-            breakingMods.push_back(mod);
-        }
-    }
-
-    return breakingMods;
-};
-
-std::vector<Mod *> Odyssey::getBreakingMods()
-{
-    std::vector<Mod *> breakingMods;
-    std::vector<std::string> breakingModIDs = {
-        "capeling.geometry-dash-lunar",
-        "dankmeme.globed2",
-        "gdutilsdevs.gdutils",
-        "itzkiba.better_progression",
-        "ninxout.redash"};
-
-#ifdef GEODE_IS_ANDROID
-    breakingModIDs.push_back("hiimjustin000.more_icons");
-#endif
-    for (std::string id : breakingModIDs)
-    {
-        Mod *mod = Loader::get()->getInstalledMod(id);
-
-        if (mod && Loader::get()->isModLoaded(id))
-        {
-            breakingMods.push_back(mod);
-        }
-    }
-
-    return breakingMods;
 };
 
 void Odyssey::patch(int address, geode::ByteVector const &data)

@@ -59,6 +59,19 @@
             55
         ]
     },
+    "main-level-locked": {
+        "name": "Dumbledalf",
+        "dialogs": [
+            "Oye<d010>.<d010>.<d010>. <d020>No te apresures!",
+            "El nivel no ira a ningun lado.",
+            "Tienes que completar los <cy>niveles anterios</c> para desbloquear este!"
+        ],
+        "sprites": [
+            53,
+            53,
+            56
+        ]
+    },
     "first-island-clear": {
         "name": "Dumbledalf",
         "dialogs": [
@@ -74,7 +87,7 @@
             53
         ]
     },
-    "ending": {
+    "main-ending": {
         "name": "Dumbledalf",
         "dialogs": [
             "Oye <cy>muchacho</c>! Completastes todos los niveles!",
@@ -93,6 +106,21 @@
             53,
             56,
             55
+        ]
+    },
+    "extra-level-locked": {
+        "name": "Dumbledalf",
+        "dialogs": [
+            "Lo siento, esa isla esta bloqueada.",
+            "Para acceder a este nivel, necesitas una <cy>llave</c>.",
+            "Creo que he visto una antes<d010>.<d010>.<d010>.",
+            "Tal vez el <cp>amigo rosado</c> lo tenga en su tienda?"
+        ],
+        "sprites": [
+            56,
+            56,
+            53,
+            53
         ]
     },
     "hollow-introduction": {
@@ -154,19 +182,36 @@
         ]
     },
     "ogre-locked": {
-        "name": "Dumbledalf",
+        "name": "????",
         "dialogs": [
-            "Disculpas<d020>.<d020>.<d020>. <d040><cg>El</c> no esta listo para aceptar visitantes todavia",
-            "Creo que una vez que colecciones el <co>primer elemento</c>, <d030>te dejara entrar",
-            "Hasta entonces, nada<d020>.<d020>.<d020>."
+            "Quien esta ahi?!",
+            "Demonios, no puedo er nada. Esta muy oscuro!",
+            "Si quieres pasar, necesito que traigas algo que pueda <co>iluminar mi cueva</c>.",
+            "Quizas algun elemento?"
         ],
         "sprites": [
-            56,
-            56,
-            53
+            15,
+            15,
+            15,
+            15
         ]
     },
     "ogre-meeting": {
+        "name": "????",
+        "dialogs": [
+            "Oh, ya lo tienes?",
+            "Mucho mejor, ahora puedo verte!",
+            "Asi que te llamas [Userplayer]",
+            "Veamos si mis acertijos son de tu talla<d010>.<d010>.<d010>."
+        ],
+        "sprites": [
+            15,
+            16,
+            16,
+            16
+        ]
+    },
+    "ogre-quest-intro": {
         "name": "Ogre",
         "dialogs": [
             "<d010>.<d010>.<d010>.",
@@ -189,7 +234,7 @@
             15
         ]
     },
-    "ogre-beginning": {
+    "ogre-quest-start": {
         "name": "Ogre",
         "dialogs": [
             "Nos encontramos de nuevo.",
@@ -346,7 +391,7 @@
             15
         ]
     },
-    "ogre-final-clear": {
+    "ogre-quest-ending": {
         "name": "Ogre",
         "dialogs": [
             "<cy>Betsy</c><d010>.<d010>.<d010>.",

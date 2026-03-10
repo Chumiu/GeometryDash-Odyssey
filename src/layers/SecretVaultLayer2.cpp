@@ -196,14 +196,14 @@ bool SecretVaultLayer2::init()
 
 void SecretVaultLayer2::getOgreDialog()
 {
-    auto dialog = Odyssey::createDialog("ogre-beginning", 3);
+    auto dialog = Odyssey::createDialog("ogre-quest-start", 3);
     GameManager::sharedState()->setUGV("281", true);
     addChild(dialog, 3);
 };
 
 void SecretVaultLayer2::getOgreFinalDialog()
 {
-    auto dialog = Odyssey::createDialog("ogre-final-clear", 3);
+    auto dialog = Odyssey::createDialog("ogre-quest-ending", 3);
     GameManager::sharedState()->setUGV("287", true);
     addChild(dialog, 3);
 };

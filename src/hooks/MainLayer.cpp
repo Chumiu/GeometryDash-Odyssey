@@ -22,34 +22,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("restart-mod"))
             OdysseyMenuLayer::Restart();
 
-        //  Incompatibilities fixed in 4.2.0
-        auto breakingMods = Odyssey::getBreakingMods();
-        if (!breakingMods.empty())
-        {
-            if (!shownAlert)
-            {
-                std::string description = "Disable the following Mods to use <cy>Geometry Dash: Odyssey</c>:";
-
-                for (Mod *mod : breakingMods)
-                {
-                    log::debug("{}", mod->getName());
-                    description += "\n- <cr>" + mod->getName() + "</c>";
-                }
-
-                auto popup = FLAlertLayer::create(
-                    "Incompatible Mods",
-                    description,
-                    "OK");
-
-                shownAlert = true;
-                popup->m_scene = this;
-                popup->show();
-            }
-
-            if (!Odyssey::getEarlyLoadBreakingMods().empty() || Loader::get()->isModLoaded("ninxout.redash"))
-                return true;
-        }
-
         //  Displays a popup for savefile info
         if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
         {
@@ -115,7 +87,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
+                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::DarkPurple, CircleBaseSize::MediumAlt),
                 this,
                 menu_selector(OdysseyMenuLayer::onDev));
 
@@ -174,27 +146,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onPlay(CCObject *)
     {
-        auto breakingMods = Odyssey::getBreakingMods();
-
-        if (!breakingMods.empty())
-        {
-            std::string description = "Disable the following Mods to use <cy>Geometry Dash: Odyssey</c>:";
-
-            for (Mod *mod : breakingMods)
-            {
-                log::debug("{}", mod->getName());
-                description += "\n- <cr>" + mod->getName() + "</c>";
-            }
-
-            auto popup = FLAlertLayer::create(
-                "Incompatible Mods",
-                description,
-                "OK");
-
-            popup->show();
-            return;
-        }
-
         auto levelscene = OdysseySelectLayer::scene(0);
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, levelscene));
     }

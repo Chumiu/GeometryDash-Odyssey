@@ -24,12 +24,6 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         if (!LoadingLayer::init(reload))
             return false;
 
-        if (!Odyssey::getEarlyLoadBreakingMods().empty())
-            return true;
-
-        if (!Odyssey::getBreakingMods().empty())
-            return true;
-
 //  Solo para el mod en Modo desarrollador
 #ifndef DEVELOPER_MODE
         Mod::get()->setSavedValue<bool>("developer-version", false);

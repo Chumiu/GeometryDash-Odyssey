@@ -407,16 +407,20 @@ bool OdysseySelectLayer::init(int page)
 
 void OdysseySelectLayer::getOgreDialog()
 {
+    if (!m_ogreWillTalk)
+        return;
+
     std::vector<gd::string> dialogEvents = {
-        "ogre-meeting",
-        "ogre-beginning", // Just to skip
+        "ogre-quest-intro",
+        "ogre-quest-start", // Just to skip
         "ogre-first-clear",
         "ogre-second-clear",
         "ogre-third-clear",
         "ogre-fourth-clear",
-        "ogre-final-clear",
+        "ogre-quest-ending",
     };
 
+    m_ogreWillTalk = false;
     auto dialog = Odyssey::createDialog(dialogEvents[m_ogreDialog].c_str(), 3);
     GameManager::sharedState()->setUGV(fmt::format("{}", m_ogreDialog + 280).c_str(), true);
     this->addChild(dialog, 3);
@@ -461,7 +465,7 @@ void OdysseySelectLayer::getWizardDialog02()
 
 void OdysseySelectLayer::getWizardDialog03()
 {
-    auto dialog = Odyssey::createDialog("ending", 4);
+    auto dialog = Odyssey::createDialog("main-ending", 4);
     GameManager::sharedState()->setUGV("208", true);
     this->addChild(dialog, 3);
 };
@@ -919,7 +923,6 @@ void OdysseySelectLayer::animateLevelCompletation()
     int lastDot = 0;
     int nextLevel = 1;
     bool shouldAnimate = false;
-    bool ogreDialog = false;
 
     auto scaleAction = CCScaleTo::create(0.5, 1, 0.5); // Escala al 60% durante 0.5 segundos
     auto scaleWithBounce = CCEaseBounceOut::create(scaleAction);
@@ -994,7 +997,7 @@ void OdysseySelectLayer::animateLevelCompletation()
             if (!GM->getUGV("282"))
             {
                 m_ogreDialog = 2;
-                ogreDialog = true;
+                m_ogreWillTalk = true;
             }
         }
 
@@ -1007,7 +1010,7 @@ void OdysseySelectLayer::animateLevelCompletation()
             if (!GM->getUGV("283"))
             {
                 m_ogreDialog = 3;
-                ogreDialog = true;
+                m_ogreWillTalk = true;
             }
         }
 
@@ -1020,7 +1023,7 @@ void OdysseySelectLayer::animateLevelCompletation()
             if (!GM->getUGV("284"))
             {
                 m_ogreDialog = 4;
-                ogreDialog = true;
+                m_ogreWillTalk = true;
             }
         }
 
@@ -1033,7 +1036,7 @@ void OdysseySelectLayer::animateLevelCompletation()
             if (!GM->getUGV("285"))
             {
                 m_ogreDialog = 5;
-                ogreDialog = true;
+                m_ogreWillTalk = true;
             }
         }
 
@@ -1042,7 +1045,7 @@ void OdysseySelectLayer::animateLevelCompletation()
             if (!GM->getUGV("286"))
             {
                 this->runAction(CCSequence::create(
-                    CCDelayTime::create(1.f),
+                    CCDelayTime::create(2.f),
                     CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::unlockOgreChest)),
                     0));
             }
@@ -1057,14 +1060,6 @@ void OdysseySelectLayer::animateLevelCompletation()
 
         if (nextLevel != 5)
             shouldAnimate = true;
-    }
-
-    if (ogreDialog)
-    {
-        this->runAction(CCSequence::create(
-            CCDelayTime::create(0.5f),
-            CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
-            0));
     }
 
     log::info("Page: {}", m_currentPage);
@@ -1102,14 +1097,20 @@ void OdysseySelectLayer::animateLevelCompletation()
                 {
                     log::info("Next Level: {}", nextLevel);
                     auto levelButton = static_cast<CCMenuItemSpriteExtra *>(m_levelMenu->getChildByTag(nextLevel));
+
+                    //  The level button is enabled
                     if (levelButton)
                         levelButton->runAction(CCSequence::createWithTwoActions(
                             CCDelayTime::create(delayTime + .3f),
                             CCCallFuncO::create(levelButton, callfuncO_selector(OdysseySelectLayer::enableLevelAnimation), levelButton)));
 
-                    this->runAction(CCSequence::createWithTwoActions(
+                    //  When the animation is done, the ogre will talk
+                    this->runAction(CCSequence::create(
                         CCDelayTime::create(delayTime + .3f),
-                        CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::enableButtonTouch))));
+                        CCDelayTime::create(.5f),
+                        CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
+                        CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::enableButtonTouch)),
+                        0));
                 }
             }
         }
@@ -1163,11 +1164,21 @@ void OdysseySelectLayer::onLevel(CCObject *sender)
 //  Boton del Ogro
 void OdysseySelectLayer::onOgre(CCObject *)
 {
+    //  If the ogre hasn't been unlocked yet
     if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level05b") && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
         log::info("LOCKED OGRE");
         auto dialog = Odyssey::createDialog("ogre-locked", 4, true);
         this->addChild(dialog, 3);
+        return;
+    }
+
+    //  First dialogue when meeting the Ogre
+    if (!GameManager::sharedState()->getUGV("288"))
+    {
+        auto dialog = Odyssey::createDialog("ogre-meeting", 3, true);
+        this->addChild(dialog, 3);
+        GameManager::sharedState()->setUGV("288", true);
         return;
     }
 
@@ -1200,14 +1211,8 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
             return;
         }
 
-        auto dialog = Odyssey::createDialogResponse("onExtraLevel", m_extraTimes);
-        //  GM->setUGV("52", true);
+        auto dialog = Odyssey::createDialog("extra-level-locked", 4);
         this->addChild(dialog, 3);
-
-        int tag = (m_extraTimes == 0)   ? 1
-                  : (m_extraTimes == 1) ? 2
-                                        : 0;
-        m_extraTimes = tag;
     }
 }
 

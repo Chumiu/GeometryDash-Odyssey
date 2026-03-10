@@ -292,7 +292,7 @@ void OdysseyLevelPopup::onLore(CCObject *sender)
 
     if (m_levelID == 7501)
     {
-        auto lore = spanish ? "<cg>\"Conclusive Journey\"</c> cuenta la historia de un Antiguo Camino que conduce al desolado desierto. Antes de que ocurran los eventos de <cy>GD: Odyssey</c>, el equipo de aventureros deambula por aqui en busca de mas pistas que ayuden a comprender lo que esta ocurriendo en Geometry City." : "<cg>\"Conclusive Journey\"</c> tells the tale of an Ancient Road leading to the desolate desert. Before the events of <cy>GD: Odyssey</c>, the team of adventurers wander here in search for more clues to help understand what's happening in Geometry City.";
+        auto lore = spanish ? "<cg>\"Conclusive Journey\"</c> cuenta la historia de un antiguo camino que conduce al desolado desierto. Antes de que ocurran los eventos de <cy>GD: Odyssey</c>, el equipo de aventureros deambula por aqui en busca de mas pistas que ayuden a comprender lo que esta ocurriendo en Geometry City." : "<cg>\"Conclusive Journey\"</c> tells the tale of an ancient road leading to the desolate desert. Before the events of <cy>GD: Odyssey</c>, the team of adventurers wander here in search for more clues to help understand what's happening in Geometry City.";
 
         auto credits = FLAlertLayer::create("Info", lore, "ok");
         credits->show();
