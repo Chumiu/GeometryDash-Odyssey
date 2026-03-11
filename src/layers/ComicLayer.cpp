@@ -32,7 +32,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     auto arr = CCArray::create();
     auto dotMenu = CCMenu::create();
 
-    //  Calls the function to create the whole comic (by adding it to the Array for BoomScrollLayer)
+    //	Calls the function that creates the comic (by adding it to the BoomScrollLayer array)
     loadComic(arr, issueNumber);
 
     m_scrollLayer = BoomScrollLayer::create(arr, 0, false, nullptr, static_cast<DynamicScrollDelegate *>(this));
@@ -123,8 +123,8 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     navMenu->addChild(m_rightBtn);
     this->addChild(navMenu);
 
-    //  Mod::get()->setSettingValue<bool>("watched-comic-0" + std::to_string(m_comicNumber), true);
-    GameManager::sharedState()->setUGV(fmt::format("2{}", m_comicNumber + 10).c_str(), true);
+    //  Enables the flag that is required to verify if all the comics were read
+    GameManager::sharedState()->setUGV(fmt::format("2{:02}", m_comicNumber + 10).c_str(), true);
 
     //  To verify the secret achievement of reading all the Comics
     auto AM = AchievementManager::sharedState();
@@ -137,6 +137,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     }
 
 #ifdef GEODE_IS_DESKTOP
+    //  Adds keybind features for desktop-only users (PC or MacOS)
     this->addEventListener(
         KeybindSettingPressedEventV3(Mod::get(), "keybind-comic-next-page"),
         [this](Keybind const &, bool down, bool, double)
@@ -164,6 +165,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     return true;
 };
 
+//  Loads the comic (hence the name)
 void ComicLayer::loadComic(CCArray *array, int comicNumber)
 {
     auto spanishText = Odyssey::isSpanish();
@@ -201,6 +203,7 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
     m_background->setColor(colors[comicNumber - 1]);
     m_totalPages = totalPages[comicNumber - 1];
 
+    //  Calls the function that gives the node of the comic page (which is handled online)
     for (int ii = 0; ii < m_totalPages; ii++)
     {
         auto languageRef = spanishText ? "SPA" : "ENG";
@@ -209,6 +212,7 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
         array->addObject(node);
     };
 
+    //  If it's the last comic, adds the button for the ending credits
     if (comicNumber == 12)
     {
         m_totalPages++;
@@ -224,12 +228,13 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
             this,
             menu_selector(ComicLayer::onCredits));
 
-        menu->addChild(button);
         node->addChild(menu);
+        menu->addChild(button);
         array->addObject(node);
     }
 };
 
+//  When the credits button is pressed
 void ComicLayer::onCredits(CCObject *)
 {
     auto scene = CCScene::create();
@@ -237,6 +242,7 @@ void ComicLayer::onCredits(CCObject *)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
 };
 
+//  When the Hollow's button is pressed.
 void ComicLayer::onHollow(CCObject *)
 {
     auto GM = GameManager::sharedState();
@@ -252,7 +258,6 @@ void ComicLayer::onHollow(CCObject *)
                 hollowBtn->runAction(CCFadeTo::create(1, 150));
             };
 
-            log::info("MEETING HOLLOW");
             auto dialog = Odyssey::createDialog("hollow-introduction", 5);
             this->addChild(dialog, 3);
             GM->setUGV("205", true);
@@ -262,7 +267,6 @@ void ComicLayer::onHollow(CCObject *)
         //  Not enough secret coins
         if (GSM->getStat("8") < HOLLOW_COIN_QUOTA)
         {
-            log::info("HOLLOW NOT ENOUGH");
             auto dialog = Odyssey::createDialog("hollow-quota-fail", 5);
             this->addChild(dialog, 3);
             return;
@@ -271,7 +275,6 @@ void ComicLayer::onHollow(CCObject *)
         //  Enough coins, gets special dialog (executed for the first time)
         if (GSM->getStat("8") >= HOLLOW_COIN_QUOTA && !GM->getUGV("210"))
         {
-            log::info("HOLLOW ENOUGH");
             auto dialog = Odyssey::createDialog("hollow-quota-success", 5, false);
             this->addChild(dialog, 3);
             GM->setUGV("210", true);
@@ -284,18 +287,19 @@ void ComicLayer::onHollow(CCObject *)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
 };
 
+//  Counts if all the comics were read, giving the extra achievement.
 void ComicLayer::verifySecretAchievement()
 {
     int comicProgress = 0;
     for (auto ii = 1; ii <= COMICS_AMOUNT; ii++)
     {
         comicProgress += GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str());
-        log::debug("Comic {}, UGV {}, Value {}", ii, fmt::format("2{}", ii + 10).c_str(), GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str()));
+        //  log::debug("Comic {}, UGV {}, Value {}", ii, fmt::format("2{}", ii + 10).c_str(), GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str()));
     };
-    log::debug("Comic progress: {}", comicProgress);
+    //  log::debug("Comic progress: {}", comicProgress);
 
     auto percent = (comicProgress * 100) / COMICS_AMOUNT;
-    log::info("Secret Comic Achievement progress: {}", percent);
+    log::debug("Comics achievement progress: {}", percent);
     GameManager::sharedState()->reportAchievementWithID("geometry.ach.odyssey.secret19", percent, false);
 };
 

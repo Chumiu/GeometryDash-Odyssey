@@ -19,7 +19,8 @@ void ComicNode::loadImage()
     m_circle->setZOrder(25);
     m_circle->show();
 
-    // Load the image
+    //  Fetches the image from the Github URL
+    //  * If there's an alternative for this, let me know (ML5)
     std::string URL = fmt::format("https://raw.githubusercontent.com/Chumiu/GeometryDash-Odyssey/refs/heads/main/resources/Comics/{}", m_spriteName);
 
     auto req = web::WebRequest();
@@ -31,7 +32,7 @@ void ComicNode::loadImage()
         {
             if (!res.ok())
             {
-                log::error("REQUEST FAILED");
+                log::error("ERROR - Failed to load comic page");
                 onImageFail();
             }
             else
@@ -46,10 +47,10 @@ void ComicNode::loadImage()
         });
 }
 
+//  If the image succeeded in loading
 void ComicNode::onImageSuccess()
 {
     fadeLoadingCircle();
-
     m_sprite->setScale(0.90f);
 
     //  Resizes the sprite based on the Texture Quality
@@ -62,16 +63,16 @@ void ComicNode::onImageSuccess()
     this->addChildAtPosition(m_sprite, Anchor::Center, ccp(0, 0), false);
 }
 
+//  If the image fails to load
 void ComicNode::onImageFail()
 {
     fadeLoadingCircle();
 
     auto size = this->getContentSize();
-    auto label = CCLabelBMFont::create("Error while loading Comic page", "bigFont.fnt", 0.0f, kCCTextAlignmentCenter);
-    label->setPosition({size.width / 2, size.height / 2});
+    auto label = CCLabelBMFont::create("Error: Failed to load page :(", "bigFont.fnt", 0.0f, kCCTextAlignmentCenter);
     label->setScale(0.75f);
 
-    this->addChild(label);
+    this->addChildAtPosition(label, Anchor::Center, ccp(0,0), false);
 }
 
 void ComicNode::fadeLoadingCircle()

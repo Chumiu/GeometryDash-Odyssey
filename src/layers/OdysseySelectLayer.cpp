@@ -454,6 +454,8 @@ bool OdysseySelectLayer::init(int page)
 
     if (GM->getUGV("208") && !GM->getUGV("280"))
     {
+        m_ogreWillTalk = true;
+
         this->runAction(CCSequence::create(
             CCDelayTime::create(0.5f),
             CCCallFunc::create(this, callfunc_selector(OdysseySelectLayer::getOgreDialog)),
@@ -1231,7 +1233,7 @@ void OdysseySelectLayer::onOgre(CCObject *)
     if (!AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level05b") && !Mod::get()->getSettingValue<bool>("bypass-vaults"))
     {
         log::info("LOCKED OGRE");
-        auto dialog = Odyssey::createDialog("ogre-locked", 4, true);
+        auto dialog = Odyssey::createDialog("ogre-locked", 3, true);
         this->addChild(dialog, 10);
         return;
     }

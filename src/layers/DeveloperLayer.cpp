@@ -1,5 +1,6 @@
 #include "DeveloperLayer.hpp"
 #include "ComicLayer.hpp"
+#include "EndCreditsLayer.hpp"
 #include "../ui/OdysseyLevelPopup.hpp"
 #include "../ui/LanguagePopup.hpp"
 #include "../ui/AlertPopup.hpp"
@@ -64,17 +65,17 @@ bool DeveloperLayer::init()
     //  Talk Main Menu
     m_talkMenu = CCMenu::create();
     m_talkMenu->setID("dialogs-menu"_spr);
-    m_talkMenu->setContentSize({370.0f, 70.0f});
+    m_talkMenu->setContentSize({360.0f, 60.0f});
     m_talkMenu->setLayout(RowLayout::create()
                               ->setGap(8.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    addChildAtPosition(m_talkMenu, Anchor::Center, ccp(0, 100), false);
+    addChildAtPosition(m_talkMenu, Anchor::Center, ccp(0, 105), false);
 
-    pageTalkMenu->addChildAtPosition(prevTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / -2, 100), false);
-    pageTalkMenu->addChildAtPosition(nextTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / 2, 100), false);
+    pageTalkMenu->addChildAtPosition(prevTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / -2, 105), false);
+    pageTalkMenu->addChildAtPosition(nextTalkBtn, Anchor::Center, ccp(m_talkMenu->getContentWidth() / 2, 105), false);
 
     auto talkLabel = CCLabelBMFont::create("Dialog Events:", "goldFont.fnt");
     talkLabel->setPosition({m_talkMenu->getPositionX(), m_talkMenu->getPositionY() + m_talkMenu->getContentHeight() / 2 + 10.0f});
@@ -110,17 +111,17 @@ bool DeveloperLayer::init()
     //  Levels Main Menu
     m_levelsMenu = CCMenu::create();
     m_levelsMenu->setID("levels-menu"_spr);
-    m_levelsMenu->setContentSize({370.0f, 70.0f});
+    m_levelsMenu->setContentSize({360.0f, 60.0f});
     m_levelsMenu->setLayout(RowLayout::create()
                                 ->setGap(8.0f)
                                 ->setAutoScale(false)
                                 ->setGrowCrossAxis(true)
                                 ->setCrossAxisOverflow(false)
                                 ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    addChildAtPosition(m_levelsMenu, Anchor::Center, ccp(0, 10), false);
+    addChildAtPosition(m_levelsMenu, Anchor::Center, ccp(0, 25), false);
 
-    pageLevelMenu->addChildAtPosition(prevLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / -2, 10), false);
-    pageLevelMenu->addChildAtPosition(nextLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / 2, 10), false);
+    pageLevelMenu->addChildAtPosition(prevLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / -2, 25), false);
+    pageLevelMenu->addChildAtPosition(nextLvlBtn, Anchor::Center, ccp(m_levelsMenu->getContentWidth() / 2, 25), false);
 
     auto levelsLabel = CCLabelBMFont::create("Levels:", "goldFont.fnt");
     levelsLabel->setPosition({m_levelsMenu->getPositionX(), m_levelsMenu->getPositionY() + m_levelsMenu->getContentHeight() / 2 + 10.0f});
@@ -130,14 +131,14 @@ bool DeveloperLayer::init()
     //  Comics Menu
     auto comicsMenu = CCMenu::create();
     comicsMenu->setID("comics-menu"_spr);
-    comicsMenu->setContentSize({420.0f, 64.0f});
+    comicsMenu->setContentSize({400.0f, 60.0f});
     comicsMenu->setLayout(RowLayout::create()
                               ->setGap(8.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    addChildAtPosition(comicsMenu, Anchor::Center, ccp(0, -70), false);
+    addChildAtPosition(comicsMenu, Anchor::Center, ccp(0, -55), false);
 
     auto comicsLabel = CCLabelBMFont::create("Comics", "goldFont.fnt");
     comicsLabel->setPosition({winSize.width / 2, comicsMenu->getPositionY() + comicsMenu->getContentHeight() / 2 + 10.0f});
@@ -162,25 +163,27 @@ bool DeveloperLayer::init()
     //  Popups
     auto popupsMenu = CCMenu::create();
     popupsMenu->setID("popups-menu"_spr);
-    popupsMenu->setContentSize({500.0f, 30.0f});
+    popupsMenu->setContentSize({400.0f, 60.0f});
     popupsMenu->setLayout(RowLayout::create()
                               ->setGap(8.0f)
                               ->setAutoScale(false)
                               ->setGrowCrossAxis(true)
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
-    addChildAtPosition(popupsMenu, Anchor::Center, ccp(0, -130), false);
+    addChildAtPosition(popupsMenu, Anchor::Center, ccp(0, -120), false);
 
     std::vector<gd::string> popups = {
         "Savefile Notice",
         "Translation Notice",
-        "Ogre Chest",
-        "Language Select"};
+        "Language Select",
+        "End Credits",
+        "Ogre Quest Chest",
+    };
 
     for (auto ii = 0; ii < popups.size(); ii++)
     {
         auto popup = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(popups[ii].c_str(), 100, true, "goldFont.fnt", "GJ_button_04.png", 22.5f, 0.4f),
+            ButtonSprite::create(popups[ii].c_str(), 90, true, "goldFont.fnt", "GJ_button_04.png", 22.5f, 0.4f),
             this,
             menu_selector(DeveloperLayer::onPopup));
 
@@ -431,6 +434,21 @@ void DeveloperLayer::onPopup(CCObject *sender)
 
     if (tag == 2)
     {
+        auto popup = LanguagePopup::create();
+        popup->m_scene = this;
+        popup->setZOrder(104);
+        popup->show();
+    }
+
+    if (tag == 3)
+    {
+        auto scene = CCScene::create();
+        scene->addChild(EndCreditsLayer::create());
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(1.f, scene));
+    }
+
+    if (tag == 4)
+    {
         CCArray *rewardsArray = CCArray::create();
 
         rewardsArray->addObject(GJRewardObject::createItemUnlock(UnlockType::Cube, 520));
@@ -444,13 +462,6 @@ void DeveloperLayer::onPopup(CCObject *sender)
         cocos2d::CCDirector::sharedDirector()->getRunningScene()->addChild(layer);
         layer->showCollectReward(rewardItems);
         layer->setZOrder(500);
-    }
-
-    if(tag == 3){
-        auto popup = LanguagePopup::create();
-        popup->m_scene = this;
-        popup->setZOrder(104);
-        popup->show();
     }
 };
 
