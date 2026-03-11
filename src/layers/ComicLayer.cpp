@@ -18,7 +18,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
     m_comicNumber = issueNumber;
     m_RedirectToMap = redirectToMap;
 
-    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
+    auto spanishText = Odyssey::isSpanish();
     auto size = m_background->getContentSize();
 
     m_background->setScaleX((m_winSize.width) / size.width);
@@ -166,7 +166,7 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
 
 void ComicLayer::loadComic(CCArray *array, int comicNumber)
 {
-    auto spanishText = GameManager::sharedState()->getGameVariable("0201");
+    auto spanishText = Odyssey::isSpanish();
 
     std::vector<ccColor3B> colors = {
         {33, 33, 33},

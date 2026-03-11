@@ -3,9 +3,9 @@
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
-#include "../ui/ComicPopup.hpp"
-#include "../ui/AlertPopup.hpp"
+#include "../ui/LanguagePopup.hpp"
 #include "../ui/CreditsPopup.hpp"
+#include "../ui/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -19,25 +19,12 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (!MenuLayer::init())
             return false;
 
-        if (Mod::get()->getSettingValue<bool>("restart-mod"))
-            OdysseyMenuLayer::Restart();
-
-        //  Displays a popup for savefile info
-        if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
+        //  Shows the language setting at the start
+        if (!Mod::get()->setSavedValue("show-language-setting", true))
         {
-            auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
-            popup->setWarning(true, false);
+            auto popup = LanguagePopup::create();
             popup->m_scene = this;
-            popup->show();
-        };
-
-        //  Displays a popup when the player has Spanish enabled for the first time
-        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0202"))
-        {
-            auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
-            popup->setWarning(false, true);
             popup->setZOrder(104);
-            popup->m_scene = this;
             popup->show();
         };
 
@@ -72,17 +59,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
         bottomMenu->addChild(MDKButton);
         bottomMenu->updateLayout();
-
-        if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
-        {
-            auto comicButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
-                this,
-                menu_selector(OdysseyMenuLayer::onComics));
-
-            bottomMenu->addChild(comicButton);
-            bottomMenu->updateLayout();
-        }
 
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
@@ -171,25 +147,5 @@ class $modify(OdysseyMenuLayer, MenuLayer)
     {
         auto credits = CreditsPopup::create();
         credits->show();
-    }
-
-    void onComics(CCObject *)
-    {
-        auto comicPopup = ComicPopup::create();
-        comicPopup->show();
-    }
-
-    void Restart()
-    {
-        Mod::get()->setSettingValue<bool>("restart-mod", false);
-
-        for (auto ii = 1; ii <= 40; ii++)
-        {
-            auto variable = (ii < 10) ? fmt::format("20{}", ii) : fmt::format("2{}", ii);
-            GameManager::sharedState()->setUGV(variable.c_str(), false);
-            log::debug("Restarting UGV = {}", variable);
-        };
-
-        log::debug("Variables succesfully restarted");
     }
 };

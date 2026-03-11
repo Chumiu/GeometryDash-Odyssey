@@ -90,17 +90,21 @@
     "main-ending": {
         "name": "Dumbledalf",
         "dialogs": [
-            "Hey <cy>Buddy</c>! You finished all the levels!",
-            "Amazing work! <d030>We'll continue our adventure in the next <cg>Update</c>.",
-            "While we wait, <d030>How about you try to get all the <cy>Coins</c>?",
+            "<cy>Excellent boy!</c> You completed <co>the main story!</c>",
+            "Amazing work! Thanks to you those aliens left our world.",
+            "<cc>For now</c><d010>.<d010>.<d010>.",
+            "Well, while everything is back to normal.",
+            "How about you go collect the <cy>coins you missed</c>?",
             "Maybe discover some more <cr>secrets</c><d010>.<d010>.<d010>.",
             "Or challenge yourself with the <co>extra levels!</c>",
             "Up to you, <d030>we shall meet again.",
             "<cg>Thank you for playing!</c>"
         ],
         "sprites": [
+            55,
             56,
             53,
+            56,
             56,
             56,
             53,
@@ -201,7 +205,7 @@
         "dialogs": [
             "Oh, you got it?",
             "That's better! I can see you now!",
-            "So, your name is <cy>{PLAYER}</c>.",
+            "So, your name is <cy><username></c>.",
             "Let's see how you manage to answer my riddles<d010>.<d010>.<d010>."
         ],
         "sprites": [
@@ -216,12 +220,12 @@
         "dialogs": [
             "<d010>.<d010>.<d010>.",
             "So<d010>.<d010>.<d010>.",
-            "You have collected every element, huh?",
+            "You have collected all the elements, huh?",
             "Great job<d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
             "I have something to tell you.",
             "Come meet me at my cave.",
-            "Let's have a quick discussion."
+            "I need your help, <cy><username></c>."
         ],
         "sprites": [
             15,
@@ -247,10 +251,10 @@
             "I wish I could go find her, but I am bounded to this place.",
             "You, however<d010>.<d010>.<d010>. <d020>You are not confined.",
             "So, could you help me look for her?",
-            "You have proven yourself worthy by beating Astral<d010>.<d010>.<d010>.",
+            "You have proven yourself worthy by beating Astral.",
             "So this task will be a piece of cake.",
-            "The gate will now open.",
-            "Go out there<d010>.<d010>.<d010>. and Good luck."
+            "I will now open the door at the corner of this room.",
+            "Go in<d010>.<d010>.<d010>. and good luck."
         ],
         "sprites": [
             16,
@@ -279,7 +283,7 @@
             "From what I remember<d010>.<d010>.<d010>.",
             "I heard things about a castle<d010>.<d010>.<d010>.",
             "Maybe try searching over there?",
-            "Go on with your trip, [PLAYER]."
+            "Go on with your trip, <cy><username></c>."
         ],
         "sprites": [
             15,
@@ -321,11 +325,11 @@
             "Anything new?",
             "She's not there? Damn it.",
             "Well, I appreciate your efforts on this<d010>.<d010>.<d010>.",
-            "It reminds me of someone I once knew<d010>.<d010>.<d010>.",
+            "You remind me of someone<d010>.<d010>.<d010>.",
             "Someone also dear to me, like my precious <cy>Betsy</c><d010>.<d010>.<d010>.",
-            "Someone I also trusted with everything<d010>.<d010>.<d010>.",
+            "Someone I trusted everything<d010>.<d010>.<d010>.",
             "<cr>My brother<d010>.<d010>.<d010>.</c>",
-            "He's the one that gave me to her<d010>.<d010>.<d010>.",
+            "He's the one that gifted my precious<d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
             "Hmm<d010>.<d010>.<d010>.",
             "Where to go next<d010>.<d010>.<d010>.",
@@ -333,7 +337,7 @@
             "Maybe those damn <co>Space Invaders</c> took her.",
             "Which means<d010>.<d010>.<d010>.",
             "You need to look further than the mountain top.",
-            "You need to go<d010>.<d010>.<d010>. to Space.",
+            "You need to go<d010>.<d010>.<d010>. <s020><cb>to Space!</c></s>",
             "And I know just the route for you to get there.",
             "It might be the next stop for you.",
             "Just beware, that road is not for the weak.",
@@ -365,16 +369,16 @@
     "ogre-fourth-clear": {
         "name": "Ogre",
         "dialogs": [
-            "I don't know how I still can talk<d010>.<d010>.<d010>.",
-            "With you from up there<d010>.<d010>.<d010>.",
-            "Regardles<d010>.<d010>.<d010>. Welcome to space.",
+            "I don't know how I still can talk with you when you're up there<d010>.<d010>.<d010>.",
+            "Eh, whatever<d010>.<d010>.<d010>.",
+            "Welcome to space!",
             "The final destination.",
             "What's that? The Invaders left?",
             "And left a mess?",
             "Be careful up there<d010>.<d010>.<d010>.",
             "She might be somewhere in there<d010>.<d010>.<d010>.",
             "We may meet again, my precious<d010>.<d010>.<d010>.",
-            "One last roadblock, player.",
+            "One last roadblock, <cy><username></c>.",
             "Good luck."
         ],
         "sprites": [
@@ -397,7 +401,7 @@
             "<cy>Betsy</c><d010>.<d010>.<d010>.",
             "Finally in my hands again<d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
-            "Player<d010>.<d010>.<d010>.",
+            "<cy><username></c><d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
             "Thank you.",
             "I am no longer lonely anymore.",
@@ -409,8 +413,8 @@
             "Perhaps, one day we could meet again.",
             "I truly miss him.",
             "<d010>.<d010>.<d010>.",
-            "There's nothing more from me, Player.",
-            "Hope you enjoyed your side trip<d010>.<d010>.<d010>.",
+            "There's nothing more from me, <cy><username></c>.",
+            "Hope you enjoyed this small adventure<d010>.<d010>.<d010>.",
             "<co>Thank you.</c>"
         ],
         "sprites": [

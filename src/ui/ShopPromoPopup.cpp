@@ -1,4 +1,5 @@
-#include "PromoPopup.hpp"
+#include "ShopPromoPopup.hpp"
+#include "../utils/Utils.hpp"
 
 bool PromoPopup::init()
 {
@@ -6,7 +7,7 @@ bool PromoPopup::init()
         return false;
 
     auto contentSize = m_mainLayer->getContentSize();
-    auto spanish = GameManager::sharedState()->getGameVariable("0201");
+    auto spanish = Odyssey::isSpanish();
 
     //  Popup textarea background
     auto m_background = CCScale9Sprite::create("square02b_001.png", {0, 0, 80, 80});
@@ -16,8 +17,13 @@ bool PromoPopup::init()
     m_background->setOpacity(120);
     m_mainLayer->addChild(m_background);
 
-    //  Text area that displays the message
-    m_textArea = TextArea::create(spanish ? "Puedes ver una animacion hecha por\n<co>MasterTheCube5</c>\nPara tener orbes extra " : "You can watch an animation made by\n<co>MasterTheCube5</c>\nTo get an extra orbs.", "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
+    //  Content
+    std::string content = Odyssey::createText(
+        "You can watch an animation made by\n<co>MasterTheCube5</c>\nTo get an extra orbs.",
+        "Puedes ver una animacion hecha por\n<co>MasterTheCube5</c>\nPara tener orbes extra.");
+
+    //  Text Area
+    m_textArea = TextArea::create(content, "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
     m_textArea->setPosition(m_background->getPosition());
     m_textArea->setID("promo-text-area");
     m_mainLayer->addChild(m_textArea);
@@ -43,16 +49,18 @@ bool PromoPopup::init()
     m_button->setID("promo-button");
     buttonMenu->addChild(m_button);
 
+    std::string info = Odyssey::createText(
+        "This is to make it up for some players losing orbs upon game reloading in <cy>Version 1.0</c> of the fangame, it might not give as much but hopefully it can make it up for the issues.",
+        "Esto es para compensar a algunos jugadores que perdieron orbes al recargar el juego en la <cy>Version 1.0</c> del fangame, puede que no de tanto pero esperemos que pueda compensar los problemas.");
+
     //  Info button at the top right corner
-    std::string info = spanish ? "Esto es para compensar a algunos jugadores que perdieron orbes al recargar el juego en la <cy>Version 1.0</c> del fangame, puede que no de tanto pero esperemos que pueda compensar los problemas." : "This is to make it up for some players losing orbs upon game reloading in <cy>Version 1.0</c> of the fangame, it might not give as much but hopefully it can make it up for the issues.";
     auto infoButton = InfoAlertButton::create("Note", info, 1);
     infoButton->setPosition({contentSize.width / 2 - 25, contentSize.height / 2 - 20});
     buttonMenu->addChild(infoButton);
 
     this->setTitle("Bonus Rewards");
-    m_title->setScale(1.0f);
-
     this->setID("promo-popup");
+    m_title->setScale(1.0f);
 
     return true;
 };
@@ -104,8 +112,6 @@ void PromoPopup::onClick(CCObject *sender)
 
 void PromoPopup::onCountdown()
 {
-    auto spanish = GameManager::sharedState()->getGameVariable("0201");
-
     m_button->setSprite(ButtonSprite::create(fmt::format("Wait... ({:02})", m_countdown).c_str(), 160, true, "goldFont.fnt", "GJ_button_05.png", 28.f, .75f));
 
     if (m_countdown > 0)
@@ -130,13 +136,13 @@ void PromoPopup::onCountdown()
 
         //  Recrea el Text Area de nuevo
         m_textArea->removeFromParentAndCleanup(true);
-        m_textArea = TextArea::create(spanish ? "Gracias por su paciencia" : "Thank you for your patience.", "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
+        m_textArea = TextArea::create(Odyssey::createText("Thank you for your patience.", "Gracias por su paciencia."), "bigFont.fnt", 1.f, 760.f, {0.5, 0.5}, 32.f, false);
         m_textArea->setPosition({contentSize.width / 2, contentSize.height / 2 + 40});
         m_textArea->setScale(0.5f);
         m_mainLayer->addChild(m_textArea);
 
         //  Cambia el sprite del boton
-        m_button->setSprite(ButtonSprite::create(spanish ? "Reclamar bonus!" : "Claim Bonus!", 160, true, "goldFont.fnt", "GJ_button_02.png", 28.f, .75f));
+        m_button->setSprite(ButtonSprite::create(Odyssey::createText("Claim Bonus!", "Reclamar Bonus!").c_str(), 160, true, "goldFont.fnt", "GJ_button_02.png", 28.f, .75f));
         m_button->setEnabled(true);
     }
 };

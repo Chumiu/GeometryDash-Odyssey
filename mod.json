@@ -37,12 +37,6 @@
 			"type": "title",
 			"name": "Main Settings"
 		},
-		"spanish-language": {
-			"type": "bool",
-			"name": "Spanish Translation",
-			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos.",
-			"default": false
-		},
 		"hide-custom": {
 			"type": "bool",
 			"name": "Hide Custom Gamemodes",

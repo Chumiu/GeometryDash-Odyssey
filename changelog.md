@@ -1,48 +1,60 @@
 # Changelog
 
-### <cg>v1.1.0-beta.1</c> (Work in Progress)
+### <cg>v1.1.0</c> (Work in Progress)
+
+### <cg>v1.1.0-beta.2</c>
+
+* <cg>Added</c> better UI for the language settings.
+* <cg>Added</c> settings button in the levels menu.
+* <cg>Added</c> new members to the credits.
+* <cy>Fixed</c> typos in a couple comics.
+* <cy>Fixed</c> typos in some character dialogs.
+
+### <cg>v1.1.0-beta.1</c>
 
 * <cp>Ported Mod to Geode v5.0.0</c>
-* <cp>New Side-Quest with the Ogre!</c>
-* <cp>MacOS & iOS support!</c> (Hopefully)
-* New Level "<cg>Eclipse</c>"!
-* New Level "<cg>Jelly Castle</c>"!
-* New Level "<cg>Phone Me First</c>"!
-* New Level "<cg>Wubsplosion</c>"!
-* New Level "<cg>Granite</c>"!
+* <cp>New side-quest with the Ogre!</c>
+* <cp>MacOS and iOS support!</c> (Hopefully)
+* New level "<cg>Eclipse</c>"!
+* New level "<cg>Jelly Castle</c>"!
+* New level "<cg>Phone me First</c>"!
+* New level "<cg>Wubsplosion</c>"!
+* New level "<cg>Granite</c>"!
 * New Achievements!
 * New Icons!
 
-#### **Levels**
+#### Levels
 
+* <co>Most levels have been updated to their Online versions</c>.
 * <co>Cryptofunk</c>: Updated difficulty to Demon.
-* <co>Critical Hit</c>: Last segment nerfed.
+* <co>Boss Rush</c>: Updated difficulty to Insane.
+* <co>Critical Hit</c>: Last segment rebalanced.
 * Some smaller fixes in existing levels.
 
-#### **Misc.**
+#### Miscellaneous
 
 * <c-666666>Some of the code was rewritten to help optimize the mod.</c>
-* <cg>Added</c> method to prevent unlocking vault icons prematurely.
+* <cc>Comics now require internet connection to read them</c>.
+* <cc>Audio Assets now require to be downloaded for each level</c>.
 * <cg>Added</c> keybind settings to move through the comics.
-* <cg>Added</c> online features to download Audio Assets.
-* <cg>Added</c> online feature to read the Comics.
-* <cg>Added</c> contest winners to the credits.
-* <cg>Added</c> method to receive extra orbs.
+* <cg>Added</c> promo to get extra orbs.
+* <cg>Added</c> flags to prevent unlocking vault icons prematurely.
 * <cy>Fixed</c> bug of the shopkeeper items not registering.
-* <cy>Fixed</c> some bugs, added more.
-* <cr>Removed</c> custom currency sprites (many issues).
+* <cy>Fixed</c> some typos and spelling errors.
+* <cy>Fixed</c> some bugs, added more...
+* <cr>Removed</c> custom currency sprites temporally.
 
 ### <cb>v1.0.1</c>
 
 <cr>*We aware on game crashing bugs on android and shop items still showing as not bought, developing a fix as we speak*</c>
 
-#### **Levels**
+#### Levels
 
 * <co>Critical Hit</c>: LDM / ULDM improved, gameplay nerfed
 * <co>Super Ultra</c>: Fixed third secret coin
 * Patched bugs / secret ways in some other levels
 
-#### **Mod**
+#### Miscellaneous
 
 * <cg>Added</c> message if an Incompatible mod is found
 * <cg>Added</c> popup to the fangames, instead of a direct link

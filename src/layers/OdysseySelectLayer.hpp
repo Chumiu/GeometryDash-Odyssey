@@ -1,4 +1,5 @@
 #pragma once
+#include <Geode/ui/GeodeUI.hpp>
 using namespace geode::prelude;
 
 class OdysseySelectLayer : public CCLayer, GJDropDownLayerDelegate
@@ -47,10 +48,14 @@ public:
     void onBack(CCObject *);
     void onLevel(CCObject *);
     void onExtraLevel(CCObject *);
-    void onOgre(CCObject *);
     void onRope(CCObject *);
-    void onSongs(CCObject *);
+    
     void onShop(CCObject *);
+    void onOgre(CCObject *);
+    void onSongs(CCObject *);
+    void onComics(CCObject *);
+    void onSettings(CCObject *);
+    void onLanguage(CCObject *);
 
     void getWizardDialog01();
     void getWizardDialog02();

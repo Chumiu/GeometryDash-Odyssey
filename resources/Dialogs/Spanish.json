@@ -19,8 +19,8 @@
             "<s250>ESPERA!</s>",
             "Un <cg>cliente!</c><d020> No puede ser! <d020>Crei que nadie llegaria aqui jamas!",
             "Mi nombre es <cp>Carp</c>, soy el vendedor de <cl>The Dangerous Zones</c>!",
-            "Porque vivo aqui? <d020>Bueno...",
-            "Digamos que me entere de <cr>algo que no debi</c><d010>.<d010>.<d010>.",
+            "Por que vivo aqui? <d020>Bueno...",
+            "Digamos que me entere de <cr>algo que no debia</c><d010>.<d010>.<d010>.",
             "No revises el historial de busqueda de la computadora de <cy>RubRub</c>...",
             "Como castigo,<d020> me sacaron de la tienda comunitaria y me enviaron aqui.",
             "¡Tengo cosas para vender! <d020>Asi que si necesitas algo puedes obtenerlo aqui!",
@@ -76,7 +76,7 @@
         "name": "Dumbledalf",
         "dialogs": [
             "<s250><co>WOW, <d020>Que destrezas!!!</c></s>",
-            "Tu has jugado estos tipos de <cg>juegos</c> antes, <d020>verdad?",
+            "Tu has jugado esta clase de <cg>juegos</c> antes, <d020>verdad?",
             "Bien, <d020>ahora a viajar a la <cl>siguiente isla</c>, <d020>muchacho.",
             "<cg>La jungla de los ecos</c> nos espera<d010>.<d010>.<d010>."
         ],
@@ -90,17 +90,21 @@
     "main-ending": {
         "name": "Dumbledalf",
         "dialogs": [
-            "Oye <cy>muchacho</c>! Completastes todos los niveles!",
-            "Gran trabajo! <d030>Continuaremos la adventura en una <cg>futura actualizacion</c>.",
-            "Mientras esperamos, <d030>Que tal si consigues todas las <cy>monedas</c>?",
+            "<cy>Increible muchacho!</c> Completaste <co>la historia principal!</c>",
+            "Excelente trabajo! Gracias a ti los invasores han abandonado nuestro mundo.",
+            "<cc>Por ahora</c><d010>.<d010>.<d010>.",
+            "Bueno, ahora que todo volvio a la normalidad.",
+            "Que tal si consigues las <cy>monedas que te faltaron</c>?",
             "Tal vez descubras mas <cr>secretos</c><d010>.<d010>.<d010>.",
             "O ponte a prueba con los <co>niveles extra!</c>",
             "Tu decision, <d030>nos volveremos a encontrar.",
             "<cg>Muchas gracias por jugar!</c>"
         ],
         "sprites": [
+            55,
             56,
             53,
+            56,
             56,
             56,
             53,
@@ -133,7 +137,7 @@
             "Pero no veo nada de valor en ti<d020>.<d020>.<d020>.",
             "Requiero algo<d020>.<d020>.<d020>.",
             "Algo <cy>brillante</c><d020>.<d020>.<d020>.",
-            "Traeme algo <cy>dorado</c><d010>.<d010>.<d010>. <d020>Y te puedo dejar<d010>.<d010>.<d010>.",
+            "Traeme algo <cy>dorado</c><d020>.<d020>.<d020>. <d020>Y te puedo dejar entrar<d020>.<d020>.<d020>.",
             "Ahora <cr>Vete.</c>"
         ],
         "sprites": [
@@ -151,7 +155,7 @@
     "hollow-quota-fail": {
         "name": "????",
         "dialogs": [
-            "No es lo suficiente<d020>.<d020>.",
+            "No es lo suficiente<d020>.<d020>.<d020>.",
             "Requiero <s100><cr>mas</c></s><d020>.<d020>.<d020>.",
             "Una <cg>docena</c> de las <cy>doradas</c><d020>.<d020>.<d020>."
         ],
@@ -201,7 +205,7 @@
         "dialogs": [
             "Oh, ya lo tienes?",
             "Mucho mejor, ahora puedo verte!",
-            "Asi que te llamas [Userplayer]",
+            "Asi que te llamas <cy><username></c>.",
             "Veamos si mis acertijos son de tu talla<d010>.<d010>.<d010>."
         ],
         "sprites": [
@@ -216,12 +220,12 @@
         "dialogs": [
             "<d010>.<d010>.<d010>.",
             "Entonces<d010>.<d010>.<d010>.",
-            "Ya coleccionastes cada elemento, eh?",
+            "Has conseguido todos los elementos, eh?",
             "Buen trabajo<d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
             "Tengo algo que decirte.",
-            "Nos vemos dentro de mi cueva",
-            "Y tengamos una conversasion."
+            "Nos vemos dentro de mi cueva.",
+            "Necesito tu ayuda, <d020><cy><username></c>."
         ],
         "sprites": [
             15,
@@ -239,18 +243,18 @@
         "dialogs": [
             "Nos encontramos de nuevo.",
             "Escuche sobre tu viaje por las islas.",
-            "Y como ya estas libre<d010>.<d010>.<d010>.",
+            "Y como ahora tienes tiempo libre<d010>.<d010>.<d010>.",
             "Necesito que me hagas un favor.",
-            "He perdido algo muy especial para mi",
-            "Algo que no puedo vivir sin ella",
-            "<cy>Betsy</c>",
+            "He perdido algo muy especial para mi.",
+            "Algo que me hace mucha falta<d010>.<d010>.<d010>.",
+            "<cy>Betsy</c>.",
             "Estoy atrapado aqui, y no puedo buscarla.",
             "Pero tu<d010>.<d010>.<d010>. No estas atado a este lugar.",
             "Entonces, me puedes ayudar a buscarla?",
-            "Demostrastes lo que eres capas despues de derrotar a Astral<d010>.<d010>.<d010>.",
+            "Ya mostraste todo de lo que eres capaz tras vencer a Astral.",
             "Asi que esta tarea sera pan comido.",
-            "Las puerta se abrira.",
-            "Ve<d010>.<d010>.<d010>. y buena suerte."
+            "Abrire la puerta de la esquina de esta sala para ti.",
+            "Entra, y ten mucho cuidado<d010>.<d010>.<d010>."
         ],
         "sprites": [
             16,
@@ -272,14 +276,14 @@
     "ogre-first-clear": {
         "name": "Ogre",
         "dialogs": [
-            "Ya la has encontrado?",
+            "La encontraste?",
             "No<d010>.<d010>.<d010>.<d010>?",
             "Ya veo.",
-            "Tal vez, deberias ver por otro lado.",
+            "Tal vez este en otro lugar.",
             "Ahora que lo recuerdo<d010>.<d010>.<d010>.",
             "Escuche algo sobre un castillo<d010>.<d010>.<d010>.",
             "Tal vez deberias buscar por ahi?",
-            "Continua con tu viaje, jugador"
+            "Continua con tu viaje, <cy><username></c>"
         ],
         "sprites": [
             15,
@@ -301,7 +305,7 @@
             "Espera<d010>.<d010>.<d010>.",
             "Recuerdo algo mas<d010>.<d010>.<d010>.",
             "Algo, sobre la cima de un monte<d010>.<d010>.<d010>.",
-            "Debe haber una zona por ahi cerca del castillo",
+            "Debe haber una zona por ahi cerca del castillo.",
             "Ya sabes a donde ir ahora."
         ],
         "sprites": [
@@ -320,20 +324,20 @@
         "dialogs": [
             "Algo nuevo?",
             "Ella no esta ahi? Demonios.",
-            "Bueno, aprecio tus efuerzos en esto<d010>.<d010>.<d010>.",
-            "Me recuerda a alguien que conocia<d010>.<d010>.<d010>.",
+            "Bueno, aprecio tus ezfuerzos en esto<d010>.<d010>.<d010>.",
+            "Me recuerdas mucho a alguien<d010>.<d010>.<d010>.",
             "Alguien querido, igual a mi preciosa <cy>Betsy</c><d010>.<d010>.<d010>.",
-            "Alguien que confiaba con todo<d010>.<d010>.<d010>.",
+            "Alguien a quien confiaba todo<d010>.<d010>.<d010>.",
             "A mi <cr>hermano<d010>.<d010>.<d010>.</c>",
-            "El fue la que me dio mi preciosa<d010>.<d010>.<d010>.",
+            "El fue quien me dio a mi preciosa<d010>.<d010>.<d010>.",
             "...",
             "Hmm<d010>.<d010>.<d010>.",
-            "A donde ir ahora<d010>.<d010>.<d010>.",
+            "Ahora a donde hay que ir?<d010>.<d010>.<d010>.",
             "Ah<d010>.<d010>.<d010>.",
             "Talvez esos <co>Invasores Espaciales</c> se la robaron.",
             "Lo que significa<d010>.<d010>.<d010>.",
             "Que debes ir mas lejos que la cima del monte.",
-            "Tienes que ir<d010>.<d010>.<d010>. <d020>al Espacio",
+            "Tienes que ir<d010>.<d010>.<d010>. <d020><s020><cb>al Espacio!</c></s>",
             "Y yo conozco una ruta que puedas tomar.",
             "Ese sera tu siguiente destino.",
             "Ten cuidado, la ruta no es para los debiles.",
@@ -365,16 +369,16 @@
     "ogre-fourth-clear": {
         "name": "Ogre",
         "dialogs": [
-            "No se como te puedo hablar<d010>.<d010>.<d010>.",
-            "Si estas ahi arriba<d010>.<d010>.<d010>.",
-            "De todas maneras<d010>.<d010>.<d010>. <d020>Bienvenido al espacio.",
+            "Sigo sin saber como puedo hablar contigo si estas alla arriba, pero<d010>.<d010>.<d010>.",
+            "Bueno, da igual<d010>.<d010>.<d010>.",
+            "Bienvenido al espacio!",
             "Tu destino final.",
             "Que dices? <d020>Los invasores se fueron?",
             "Y dejaron un desorden?",
             "Ten cuidado ahi arriba<d010>.<d010>.<d010>.",
             "Ella debe estar cerca, lo presiento<d010>.<d010>.<d010>.",
             "Nos encontraremos de nuevo, mi preciosa<d010>.<d010>.<d010>.",
-            "Un obstauculo mas, jugador.",
+            "Un obstaculo mas, <cy><username></c>.",
             "Buena suerte."
         ],
         "sprites": [
@@ -397,7 +401,7 @@
             "<cy>Betsy</c><d010>.<d010>.<d010>.",
             "Finalmente en mis manos de nuevo<d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
-            "Jugador<d010>.<d010>.<d010>.",
+            "<cy><username></c><d010>.<d010>.<d010>.",
             "<d010>.<d010>.<d010>.",
             "Muchas gracias.",
             "Ahora no me siento solo.",
@@ -409,8 +413,8 @@
             "Tal vez, <d020>nos encontremos de nuevo.",
             "Lo hecho de menos.",
             "<d010>.<d010>.<d010>.",
-            "No hay nada mas de mi, <d020><cy>Jugador.</c>",
-            "Ojala hayas disfrutado de este viaje secundario<d010>.<d010>.<d010>.",
+            "No hay nada mas de mi, <d020><cy><username></c>.",
+            "Ojala hayas disfrutado de esta aventura<d010>.<d010>.<d010>.",
             "<co>Gracias.</c>"
         ],
         "sprites": [

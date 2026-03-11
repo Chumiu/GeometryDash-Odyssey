@@ -5,6 +5,7 @@ namespace Odyssey
 {
     //  Dialogos
     DialogLayer *createDialog(const char *event, int background = 1, bool sameName = true);
+    gd::string createText(const char *english, const char *spanish = "");
 
     //  Nodos para el Level Popup
     CCNode *createDifficultyNode(GJDifficulty, int, bool);
@@ -16,6 +17,9 @@ namespace Odyssey
 
     void verifyVaultHints();
     void hasAllVaultRewards();
+
+    void setSpanish(bool value);
+    bool isSpanish();
 
     //  Enteros
     int getIslandForLevel(int levelID);

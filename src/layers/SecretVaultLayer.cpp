@@ -14,7 +14,7 @@ bool SecretVaultLayer::init()
 
     //  Data
     m_achievementName = "";
-    m_spanish = GameManager::sharedState()->getGameVariable("0201");
+    m_spanish = Odyssey::isSpanish();
 
     //  Background
     auto winSize = CCDirector::sharedDirector()->getWinSize();

@@ -3,10 +3,10 @@
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/InstantMenuItemSprite.hpp"
 #include "../ui/OdysseyLevelPopup.hpp"
+#include "../ui/LanguagePopup.hpp"
+#include "../ui/ComicPopup.hpp"
 #include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
-
-using namespace geode::prelude;
 
 bool OdysseySelectLayer::init(int page)
 {
@@ -106,7 +106,7 @@ bool OdysseySelectLayer::init(int page)
 
     auto buttonMenu = CCMenu::create();
     buttonMenu->setPosition({0, 0});
-    buttonMenu->setZOrder(10);
+    buttonMenu->setZOrder(5);
 
     auto ropeSprite = CCSprite::createWithSpriteFrameName("garageRope_001.png");
     ropeSprite->setScale(1.f);
@@ -119,19 +119,80 @@ bool OdysseySelectLayer::init(int page)
 
     ropeBtn->setPosition({m_winSize.width - 60, m_winSize.height - 25});
     buttonMenu->addChild(ropeBtn);
-
-    auto infoSprite = CCSpriteGrayscale::createWithSpriteFrameName("GJ_musicOnBtn_001.png");
-    infoSprite->setScale(.75f);
-
-    auto infoButton = CCMenuItemSpriteExtra::create(
-        infoSprite,
-        this,
-        menu_selector(OdysseySelectLayer::onSongs));
-    infoButton->setPosition({m_winSize.width - 25, 25});
-
-    buttonMenu->addChild(infoButton);
     addChild(buttonMenu);
 
+    //  Bottom Left Menu
+    auto bottomLeftMenu = CCMenu::create();
+    bottomLeftMenu->setContentSize({40, 120});
+    bottomLeftMenu->setLayout(ColumnLayout::create()
+                                  ->setGap(2.0f)
+                                  ->setAutoScale(false)
+                                  ->setAutoGrowAxis(true)
+                                  ->setGrowCrossAxis(false)
+                                  ->setCrossAxisOverflow(false)
+                                  ->setAxisAlignment(AxisAlignment::Start));
+    bottomLeftMenu->setAnchorPoint({0.5, 0});
+    bottomLeftMenu->setID("bottom-left-menu");
+    bottomLeftMenu->setZOrder(5);
+
+    //  Bottom Right Menu
+    auto bottomRightMenu = CCMenu::create();
+    bottomRightMenu->setContentSize({40, 120});
+    bottomRightMenu->setLayout(ColumnLayout::create()
+                                   ->setGap(2.0f)
+                                   ->setAutoScale(false)
+                                   ->setAutoGrowAxis(true)
+                                   ->setGrowCrossAxis(false)
+                                   ->setCrossAxisOverflow(false)
+                                   ->setAxisAlignment(AxisAlignment::Start));
+    bottomRightMenu->setAnchorPoint({0.5, 0});
+    bottomRightMenu->setID("bottom-right-menu");
+    bottomRightMenu->setZOrder(5);
+
+    addChildAtPosition(bottomLeftMenu, Anchor::BottomLeft, ccp(30, 10), false);
+    addChildAtPosition(bottomRightMenu, Anchor::BottomRight, ccp(-30, 10), false);
+
+    //  Music Button
+    auto musicSpr = CircleButtonSprite::createWithSpriteFrameName("GJ_musicIcon_001.png", 0.9f, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto musicBtn = CCMenuItemSpriteExtra::create(
+        musicSpr,
+        this,
+        menu_selector(OdysseySelectLayer::onSongs));
+
+    //  Settings Button
+    auto settingsSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.1f, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto settingsBtn = CCMenuItemSpriteExtra::create(
+        settingsSpr,
+        this,
+        menu_selector(OdysseySelectLayer::onSettings));
+
+    //  Settings Button
+    auto languageSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_LanguageIcon_001.png"_spr, 1.f, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto languageBtn = CCMenuItemSpriteExtra::create(
+        languageSpr,
+        this,
+        menu_selector(OdysseySelectLayer::onLanguage));
+
+    bottomLeftMenu->addChild(settingsBtn);
+    bottomLeftMenu->addChild(languageBtn);
+    bottomLeftMenu->updateLayout();
+
+    bottomRightMenu->addChild(musicBtn);
+    bottomRightMenu->updateLayout();
+
+    if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
+    {
+        auto comicsSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small);
+        auto comicsBtn = CCMenuItemSpriteExtra::create(
+            comicsSpr,
+            this,
+            menu_selector(OdysseySelectLayer::onComics));
+
+        bottomRightMenu->addChild(comicsBtn);
+        bottomRightMenu->updateLayout();
+    }
+
+    //  Island Node
     m_islandNode = CCNode::create();
 
     if (page == 2)
@@ -423,7 +484,7 @@ void OdysseySelectLayer::getOgreDialog()
     m_ogreWillTalk = false;
     auto dialog = Odyssey::createDialog(dialogEvents[m_ogreDialog].c_str(), 3);
     GameManager::sharedState()->setUGV(fmt::format("{}", m_ogreDialog + 280).c_str(), true);
-    this->addChild(dialog, 3);
+    this->addChild(dialog, 10);
 };
 
 void OdysseySelectLayer::unlockOgreChest()
@@ -453,21 +514,21 @@ void OdysseySelectLayer::getWizardDialog01()
 {
     auto dialog = Odyssey::createDialog("wizard-introduction", 4);
     GameManager::sharedState()->setUGV("203", true);
-    this->addChild(dialog, 3);
+    this->addChild(dialog, 10);
 };
 
 void OdysseySelectLayer::getWizardDialog02()
 {
     auto dialog = Odyssey::createDialog("first-island-clear", 4);
     GameManager::sharedState()->setUGV("207", true);
-    this->addChild(dialog, 3);
+    this->addChild(dialog, 10);
 };
 
 void OdysseySelectLayer::getWizardDialog03()
 {
     auto dialog = Odyssey::createDialog("main-ending", 4);
     GameManager::sharedState()->setUGV("208", true);
-    this->addChild(dialog, 3);
+    this->addChild(dialog, 10);
 };
 
 void OdysseySelectLayer::keyBackClicked()
@@ -1152,10 +1213,12 @@ void OdysseySelectLayer::onLevel(CCObject *sender)
     if (m_animating)
         return;
 
-    log::info("Tag: {}", sender->getTag());
-
     if (sender->getTag() != 1 && !isLevelComplete(sender->getTag() - 1) && !Mod::get()->getSettingValue<bool>("bypass-levels"))
+    {
+        auto dialog = Odyssey::createDialog("main-level-locked", 4);
+        this->addChild(dialog, 10);
         return;
+    }
 
     auto popup = OdysseyLevelPopup::create(sender->getTag() + 7000);
     popup->show();
@@ -1169,7 +1232,7 @@ void OdysseySelectLayer::onOgre(CCObject *)
     {
         log::info("LOCKED OGRE");
         auto dialog = Odyssey::createDialog("ogre-locked", 4, true);
-        this->addChild(dialog, 3);
+        this->addChild(dialog, 10);
         return;
     }
 
@@ -1177,7 +1240,7 @@ void OdysseySelectLayer::onOgre(CCObject *)
     if (!GameManager::sharedState()->getUGV("288"))
     {
         auto dialog = Odyssey::createDialog("ogre-meeting", 3, true);
-        this->addChild(dialog, 3);
+        this->addChild(dialog, 10);
         GameManager::sharedState()->setUGV("288", true);
         return;
     }
@@ -1207,12 +1270,12 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
         if (sender->getTag() > 600)
         {
             auto dialog = Odyssey::createDialog("ogre-level-locked", 3);
-            this->addChild(dialog, 200);
+            this->addChild(dialog, 10);
             return;
         }
 
         auto dialog = Odyssey::createDialog("extra-level-locked", 4);
-        this->addChild(dialog, 3);
+        this->addChild(dialog, 10);
     }
 }
 
@@ -1236,6 +1299,25 @@ void OdysseySelectLayer::onShop(CCObject *)
     auto shop = GJShopLayer::scene(static_cast<ShopType>(6));
 
     CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInT::create(.63f, shop));
+}
+
+void OdysseySelectLayer::onSettings(CCObject *)
+{
+    geode::openSettingsPopup(Mod::get());
+}
+
+void OdysseySelectLayer::onComics(CCObject *)
+{
+    auto comicPopup = ComicPopup::create();
+    comicPopup->show();
+}
+
+void OdysseySelectLayer::onLanguage(CCObject *)
+{
+    auto popup = LanguagePopup::create();
+    popup->m_scene = this;
+    popup->setZOrder(104);
+    popup->show();
 }
 
 OdysseySelectLayer *OdysseySelectLayer::create(int page)

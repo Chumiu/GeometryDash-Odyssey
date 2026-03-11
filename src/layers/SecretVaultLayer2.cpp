@@ -1,7 +1,6 @@
 #include "SecretVaultLayer2.hpp"
-#include "../utils/Dialogs.hpp"
-#include "../utils/Utils.hpp"
 #include "OdysseySelectLayer.hpp"
+#include "../utils/Utils.hpp"
 
 bool SecretVaultLayer2::init()
 {
@@ -9,7 +8,7 @@ bool SecretVaultLayer2::init()
         return false;
 
     //  Flag that saves whenever the Vault should be in Spanish or not.
-    m_spanish = GameManager::sharedState()->getGameVariable("0201");
+    m_spanish = Odyssey::isSpanish();
 
     //  Title
     auto title = CCLabelBMFont::create("The Ogre", "goldFont.fnt");

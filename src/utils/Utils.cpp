@@ -1,5 +1,4 @@
 #include "Utils.hpp"
-#include "Dialogs.hpp"
 
 //  Adds corners to the "Level Popups"
 void Odyssey::addCorners(CCLayer *layer, const char *cornerSprite, float offset)
@@ -33,6 +32,14 @@ void Odyssey::addCorners(CCLayer *layer, const char *cornerSprite, float offset)
     layer->addChild(m_cornerTL);
     layer->addChild(m_cornerTR);
 };
+
+void Odyssey::setSpanish(bool value){
+    GameManager::sharedState()->setGameVariable("0201", value);
+}
+
+bool Odyssey::isSpanish(){
+    return GameManager::sharedState()->getGameVariable("0201");
+}
 
 //  Adds a node that's the progress bar of a Level
 CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
@@ -112,7 +119,7 @@ CCNode *Odyssey::createDifficultyNode(GJDifficulty diff, int stars, bool isCompl
 DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool sameName)
 {
     //  Based on language, the file name is assignated.
-    auto spanish = GameManager::sharedState()->getGameVariable("0201");
+    auto spanish = Odyssey::isSpanish();
     auto fileName = spanish ? "Spanish.json" : "English.json";
 
     //  Obtains the info from the selected Language File
@@ -168,6 +175,12 @@ DialogLayer *Odyssey::createDialog(const char *eventName, int background, bool s
     dialogLayer->setZOrder(10);
     return dialogLayer;
 };
+
+//  Creates text that can be translated by the "Language" settings
+gd::string Odyssey::createText(const char *english, const char *spanish)
+{
+    return (Odyssey::isSpanish()) ? spanish : english;
+}
 
 //  Adds the audio assets to the Music Download Manager
 void Odyssey::insertAssetsToMap(bool isSong, std::vector<int> IDs)

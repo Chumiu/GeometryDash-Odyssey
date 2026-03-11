@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJShopLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../ui/PromoPopup.hpp"
+#include "../ui/ShopPromoPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -28,7 +28,10 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 			this,
 			menu_selector(OdysseyShopLayer::onPlayVideo));
 
-		std::string info = GameManager::sharedState()->getGameVariable("0201") ? "Revisa tus <cy>Iconos</c>. A veces los iconos que ya has desbloqueado apareceran aqui como no comprados" : "Be aware to check your <cy>Icon kit</c>, icons you already unlocked might show here as not bought.";
+		std::string info = Odyssey::createText(
+			"Be aware to check your <cy>Icon kit</c>, icons you already unlocked might show here as not bought.",
+			"Revisa tus <cy>Iconos</c>. A veces los iconos que ya has desbloqueado apareceran aqui como no comprados");
+
 		auto infoButton = InfoAlertButton::create("Warning", info, 1);
 		infoButton->setPosition({30, 30});
 		extraMenu->addChild(infoButton);

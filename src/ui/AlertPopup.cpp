@@ -9,7 +9,7 @@ bool AlertPopup::init(gd::string title, gd::string description)
     auto m_background = CCScale9Sprite::create("square02b_001.png", {0, 0, 80, 80});
 
     m_background->setPosition({contentSize.width / 2.f, contentSize.height / 2.f + 2.f});
-    m_background->setContentSize({280, 120});
+    m_background->setContentSize({300, 120});
     m_background->setColor({133, 68, 41});
     m_mainLayer->addChild(m_background);
 
@@ -22,8 +22,8 @@ bool AlertPopup::init(gd::string title, gd::string description)
     m_closeBtn->setPosition({contentSize.width / 2, 23.f});
 
     this->setTitle(title);
-    this->m_reverseKeyBack = true;
     this->m_noElasticity = true;
+    this->m_reverseKeyBack = true;
     return true;
 };
 
@@ -40,6 +40,7 @@ void AlertPopup::onClose(CCObject *)
         GameManager::sharedState()->setUGV("201", true);
     if (m_translationWarning)
         GameManager::sharedState()->setUGV("202", true);
+
     removeFromParentAndCleanup(true);
 };
 

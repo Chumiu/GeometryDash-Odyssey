@@ -1,6 +1,7 @@
 #include "DeveloperLayer.hpp"
 #include "ComicLayer.hpp"
 #include "../ui/OdysseyLevelPopup.hpp"
+#include "../ui/LanguagePopup.hpp"
 #include "../ui/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
@@ -156,6 +157,36 @@ bool DeveloperLayer::init()
         comic->setTag(ii + 1);
         comicsMenu->addChild(comic);
         comicsMenu->updateLayout();
+    };
+
+    //  Popups
+    auto popupsMenu = CCMenu::create();
+    popupsMenu->setID("popups-menu"_spr);
+    popupsMenu->setContentSize({500.0f, 30.0f});
+    popupsMenu->setLayout(RowLayout::create()
+                              ->setGap(8.0f)
+                              ->setAutoScale(false)
+                              ->setGrowCrossAxis(true)
+                              ->setCrossAxisOverflow(false)
+                              ->setCrossAxisLineAlignment(AxisAlignment::Even));
+    addChildAtPosition(popupsMenu, Anchor::Center, ccp(0, -130), false);
+
+    std::vector<gd::string> popups = {
+        "Savefile Notice",
+        "Translation Notice",
+        "Ogre Chest",
+        "Language Select"};
+
+    for (auto ii = 0; ii < popups.size(); ii++)
+    {
+        auto popup = CCMenuItemSpriteExtra::create(
+            ButtonSprite::create(popups[ii].c_str(), 100, true, "goldFont.fnt", "GJ_button_04.png", 22.5f, 0.4f),
+            this,
+            menu_selector(DeveloperLayer::onPopup));
+
+        popup->setTag(ii);
+        popupsMenu->addChild(popup);
+        popupsMenu->updateLayout();
     };
 
     //  Calls the functions to update each
@@ -371,24 +402,34 @@ void DeveloperLayer::onPopup(CCObject *sender)
 {
     auto tag = sender->getTag();
 
-    if (tag == 1)
+    if (tag == 0)
     {
-        auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
+        auto title = Odyssey::createText("Savefile Notice", "Aviso de Save-file");
+        auto desc = Odyssey::createText(
+            "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.",
+            "<cr>Odyssey</c> guarda los datos en\nun <cy>savefile</c> aparte. Tus datos\nse <cg>restauran</c> cuando \n<cb>deshabilites</c> el Mod.");
+
+        auto popup = AlertPopup::create(title, desc);
         popup->setWarning(true, false);
         popup->m_scene = this;
         popup->show();
     }
 
-    if (tag == 2)
+    if (tag == 1)
     {
-        auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+        auto title = Odyssey::createText("Language Notice", "Aviso de Traduccion");
+        auto desc = Odyssey::createText(
+            "Due to character limitations,\nthere will be <cr>writing errors</c>\nin the <cy>Spanish</c> translation.",
+            "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
+
+        auto popup = AlertPopup::create(title, desc);
         popup->setWarning(false, true);
         popup->m_scene = this;
         popup->setZOrder(104);
         popup->show();
     }
 
-    if (tag == 3)
+    if (tag == 2)
     {
         CCArray *rewardsArray = CCArray::create();
 
@@ -403,6 +444,13 @@ void DeveloperLayer::onPopup(CCObject *sender)
         cocos2d::CCDirector::sharedDirector()->getRunningScene()->addChild(layer);
         layer->showCollectReward(rewardItems);
         layer->setZOrder(500);
+    }
+
+    if(tag == 3){
+        auto popup = LanguagePopup::create();
+        popup->m_scene = this;
+        popup->setZOrder(104);
+        popup->show();
     }
 };
 
