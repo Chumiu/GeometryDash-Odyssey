@@ -4,63 +4,63 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>ship_175_001.png</key>
+			<key>player_501_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-10.5}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{86,31}</string>
+				<string>{69,61}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{73,65}</string>
 				<key>textureRect</key>
-				<string>{{0,35},{86,31}}</string>
+				<string>{{0,66},{69,61}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
-			<key>ship_175_2_001.png</key>
+			<key>player_501_2_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{6,-10}</string>
+				<string>{0,3}</string>
 				<key>spriteSize</key>
-				<string>{70,28}</string>
+				<string>{63,49}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{73,65}</string>
 				<key>textureRect</key>
-				<string>{{0,73},{70,28}}</string>
+				<string>{{74,0},{63,49}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
-			<key>ship_175_extra_001.png</key>
+			<key>player_501_extra_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{-3,0.5}</string>
+				<string>{0,25}</string>
 				<key>spriteSize</key>
-				<string>{76,5}</string>
+				<string>{55,5}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{73,65}</string>
 				<key>textureRect</key>
-				<string>{{0,67},{76,5}}</string>
+				<string>{{70,66},{55,5}}</string>
 				<key>textureRotated</key>
-				<false/>
+				<true/>
 			</dict>
-			<key>ship_175_glow_001.png</key>
+			<key>player_501_glow_001.png</key>
 			<dict>
 				<key>aliases</key>
 				<array/>
 				<key>spriteOffset</key>
-				<string>{0,-10}</string>
+				<string>{0,0}</string>
 				<key>spriteSize</key>
-				<string>{88,34}</string>
+				<string>{73,65}</string>
 				<key>spriteSourceSize</key>
-				<string>{120,120}</string>
+				<string>{73,65}</string>
 				<key>textureRect</key>
-				<string>{{0,0},{88,34}}</string>
+				<string>{{0,0},{73,65}}</string>
 				<key>textureRotated</key>
 				<false/>
 			</dict>
@@ -74,11 +74,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/ship_175-hd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/player_501-hd.png</string>
 			<key>size</key>
-			<string>{88,101}</string>
+			<string>{123,127}</string>
 			<key>textureFileName</key>
-			<string>teamtcm.geometry-dash-odyssey/ship_175-hd.png</string>
+			<string>teamtcm.geometry-dash-odyssey/player_501-hd.png</string>
 		</dict>
 	</dict>
 </plist>
