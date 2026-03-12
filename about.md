@@ -44,16 +44,16 @@ To report bugs, crashes or issues with the mod, feel free to open a Github Issue
 
 ### <cr>Management</c>
 
-- [SwitchStepGDYT](<user:10158911>)
-- [ZapManiac](<user:1605650>)
-- [MathisCreator](<user:9250716>)
-- [Sear15](<user:28639090>)
+- **SwitchStepGDYT**
+- **ZapManiac**
+- **MathisCreator**
+- **Sear15**
 
 ### <co>Mod Developers</c>
 
-- [ML500](user:2102)
-- [Chumiu](user:25521533)
-- [Cypher](user:6332919)
+- **ML500**
+- **Chumiu**
+- **Cypher**
 
 ### <cy>Level Creators</c>
 

@@ -18,8 +18,7 @@
 	"description": "A fanmade spin-off!",
 	"early-load": true,
 	"dependencies": {
-		"geode.node-ids": "1.22.0",
-		"alphalaneous.happy_textures": "2.1.0"
+		"geode.node-ids": "1.22.0"
 	},
 	"incompatibilities": {
 		"capeling.geometry-dash-lunar": "*",
@@ -150,6 +149,7 @@
 	},
 	"tags": [
 		"content",
+		"gameplay",
 		"online"
 	]
 }

@@ -371,7 +371,7 @@ bool IconUtils::isIconSecret(int id, IconType type)
         return true;
     if ((id >= 150 && id <= 154) && type == IconType::Ufo)
         return true;
-    if ((id >= 99) && type == IconType::Wave)
+    if ((id >= 99 && id <= 100) && type == IconType::Wave)
         return true;
     if ((id >= 9) && type == IconType::Jetpack)
         return true;
