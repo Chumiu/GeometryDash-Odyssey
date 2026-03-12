@@ -190,6 +190,7 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
     else
     {
             FMODAudioEngine::sharedEngine()->playEffect("playSound_01.ogg");
+            button->setEnabled(false);
 
             auto level = GameLevelManager::get()->getMainLevel(m_levelID, true);
             level->m_levelString = LocalLevelManager::get()->getMainLevelString(m_levelID);

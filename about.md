@@ -1,61 +1,61 @@
 # Geometry Dash: <cr>O</c><co>d</c><cy>y</c><cg>s</c><cj>s</c><cb>e</c><cp>y</c>
 
-Geometry Dash: Odyssey is a fanmade spin-off made by Team TCM that includes it's own story mode, official levels, unique gamemodes, new icons, achievements and more!
+**Geometry Dash: Odyssey** is a fanmade spin-off made by TeamTCM that includes it's own storyline, official levels, custom gamemodes, icons, vaults, achievements and more!
 
-This mod uses it's own save file, your save data will not be modified. You will go back to your actual save data when the mod is turned off. Regardless, be aware to save your data beforehand.
+<c-666666>This mod uses it's own save file, so your save data will not be modified. You will go back to your actual data when the mod is disabled. Regardless, be aware to back-up your data before playing this fangame.</c>
 
 ---
 
-### **Features**
+## <cr>Features:</c>
 
-- Storymode told via it's comics and unique characters!
+- Main storymode that is told via comics and characters!
+- Side-story featuring five more bonus levels!
 - Brand new official levels!
 - Many icons to unlock!
 - Spanish translation!
 - Secret vaults!
 - Easter eggs!
-- New shop!
-And More!
+- New shop
+
+And more!
 
 ---
 
-### **<cr>WARNING:</c>**
+## <co>WARNING:</c>
 
-The mod will <cr>HEAVILY BREAK</c> with the following mods:
+The mod is currently incompatible with the following mods:
 
-- **Geometry Dash Time Reborn**
-- **Geometry Dash Lunar**
-- **More Icons (Android Only)**
-- **Overcharged Main Menu**
-- **GDUtils**
-- **Globed**
+<mod:capeling.geometry-dash-lunar>
+<mod:chumiiu.geometry_dash_time_reborn>
+<mod:itzkiba.better_progression>
+<mod:dankmeme.globed2>
 
-It is also recommended to disable mods that change the look of the Main Menu (such as overcharged) or modify the official levels (such as other fangames), because they would become unstable with Odyssey.
+It's also recommended to disable mods that changes the main menu or modify the official levels (such as other fangames), because they would become unstable with Odyssey.
 
 ---
 
-### **Bug Reporting**
+## Bug Reporting
 
-To report bugs, crashes or issues with other mods, you're free to contact us through [TCM Team's Discord](https://discord.gg/PNPrR4DEbw) or by creating a GitHub Issue.
+To report bugs, crashes or issues with the mod, feel free to open a Github Issue or contact us through [TCM Team's Discord](https://discord.gg/PNPrR4DEbw).
 
 ---
 
-### **Credits**
+## Credits
 
-#### <cy>Management</c>
+### <cr>Management</c>
 
-- SwitchStepGDYT
-- ZapManiac
-- MathisCreator
-- Sear15
+- [SwitchStepGDYT](<user:10158911>)
+- [ZapManiac](<user:1605650>)
+- [MathisCreator](<user:9250716>)
+- [Sear15](<user:28639090>)
 
-#### <cb>Mod Developers</c>
+### <co>Mod Developers</c>
 
-- ML500
-- Chumiu
-- Cypher
+- [ML500](user:2102)
+- [Chumiu](user:25521533)
+- [Cypher](user:6332919)
 
-### <cg>Level Creators</c>
+### <cy>Level Creators</c>
 
 - MathisCreator
 - SwitchstepGDYT
@@ -73,7 +73,17 @@ To report bugs, crashes or issues with other mods, you're free to contact us thr
 - TheBreadCat24
 - ReyBenGDYT
 
-### <cp>Artists</c>
+### <cg>Contest Winners</c>
+
+- ElDanielYT
+- Lojickal
+- ExMarker
+- AzCl
+- Emilixito
+- Zaxvort
+- StudioBois
+
+### <cj>Artists</c>
 
 - Danky99
 - ReyBenGDYT
@@ -85,3 +95,17 @@ To report bugs, crashes or issues with other mods, you're free to contact us thr
 - AngelozDD
 - MasterTheCube5
 - SweeSwag
+
+### <cb>Playtesters</c>
+
+- Andrexel
+- cyanflower
+- DAPixelhero
+- DolphinOfficial
+- dreen
+- Emmmanuel2014
+- hsibz
+- MichTopGDMT
+- ObsidianAJ
+- TochyGMD
+- ZerkGMD

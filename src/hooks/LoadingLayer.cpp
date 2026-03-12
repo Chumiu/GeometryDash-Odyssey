@@ -104,11 +104,13 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
                 "Explorers, the failed promise...",
                 "Adding more wanted posters\non the shop",
                 "Why the vaults talk about\nthis random gal?",
+                "I wonder what game theory\nthinks about this",
                 "Pray for the programmers...",
                 "If something breaks,\nblame it on Chumiu",
                 "This mod is dedicated to MDK :)",
                 "Some vault codes are based on\nMDK's lore in his website",
-                "Mathi Approved"};
+                "Mathi Approved",
+            };
 
         int rand = (std::rand() % messages.size());
         return messages[rand];
@@ -122,7 +124,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 #endif
 
 #if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS) || defined(GEODE_IS_ANDROID)
-		auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
+        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
 #endif
 
         auto unzipDir = geode::Mod::get()->getResourcesDir().string();
@@ -180,8 +182,10 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(495, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
         IconUtils::addCredits(std::make_pair(496, UnlockType::Cube), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(497, UnlockType::Cube), (int)Artist::Angelo); // Angelo
+
         for (int i = 498; i < 503; i++)
             IconUtils::addCredits(std::make_pair(i, UnlockType::Cube), (int)Artist::Danky);
+
         IconUtils::addCredits(std::make_pair(503, UnlockType::Cube), (int)Artist::Minox);  // MinoX
         IconUtils::addCredits(std::make_pair(504, UnlockType::Cube), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(505, UnlockType::Cube), (int)Artist::Danky);  // Danky
@@ -232,6 +236,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(152, UnlockType::Bird), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(153, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(154, UnlockType::Bird), (int)Artist::Danky);  // Danky
+        IconUtils::addCredits(std::make_pair(155, UnlockType::Bird), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(156, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(157, UnlockType::Bird), (int)Artist::Cyan);   // Cyan
         IconUtils::addCredits(std::make_pair(158, UnlockType::Bird), (int)Artist::Angelo); // Angelo
@@ -264,43 +269,15 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         if (auto orbs = Mod::get()->getSavedValue<int>("Orbs"))
             GSM->setStat("14", orbs);
 
+        for (auto ii = 1; ii <= 21; ii++)
+        {
+            if (Mod::get()->getSavedValue<int>(fmt::format("store-item-{:02}", ii)) > 0)
+            {
+                auto var = CCString::createWithFormat("%i", Mod::get()->getSavedValue<int>(fmt::format("store-item-{:02}", ii)));
+                GSM->m_purchasedItems->setObject(var, fmt::format("{}", ii));
+            }
+        }
+
         Odyssey::verifyVaultHints();
     }
-
-    /*
-    void applyPatches()
-    {
-#ifdef GEODE_IS_WINDOWS
-        // Cubos
-        Odyssey::patch(0x17EC03, {0xB8, 0x02, 0x02});
-        // Naves
-        Odyssey::patch(0x17EC09, {0xB8, 0xB1});
-        // Balls
-        Odyssey::patch(0x17EC0F, {0xB8, 0x7E});
-        // Ufos
-        Odyssey::patch(0x17EC15, {0xB8, 0x9A});
-        // Wave
-        Odyssey::patch(0x17EC1B, {0xB8, 0x64});
-        // Swings
-        Odyssey::patch(0x17EC2D, {0xB8, 0x2F});
-#endif
-
-#ifdef GEODE_IS_ANDROID
-        // pendiente
-
-        // Cubos
-        // Odyssey::patch(0x5E0F1C, {0x40, 0x40});
-        // Naves
-        // Odyssey::patch(0x17EC09, {0xB8, 0xB1});
-        // Balls
-        // Odyssey::patch(0x17EC0F, {0xB8, 0x7E});
-        // Ufos
-        // Odyssey::patch(0x17EC15, {0xB8, 0x9A});
-        // Wave
-        // Odyssey::patch(0x17EC1B, {0xB8, 0x64});
-        // Swings
-        // Odyssey::patch(0x17EC2D, {0xB8, 0x2F});
-#endif
-    }
-    */
 };

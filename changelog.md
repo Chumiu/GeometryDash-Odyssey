@@ -4,11 +4,14 @@
 
 ### <cg>v1.1.0-beta.2</c>
 
-* <cg>Added</c> better UI for the language settings.
+* <cg>Added</c> better interface for the language settings.
+* <cg>Added</c> option to delete your fangame save data.
 * <cg>Added</c> settings button in the levels menu.
 * <cg>Added</c> new members to the credits.
-* <cy>Fixed</c> typos in a couple comics.
+* <cy>Fixed</c> crash when tapping the play button multiple times.
+* <cy>Fixed</c> issue where shop items don't register as bought.
 * <cy>Fixed</c> typos in some character dialogs.
+* <cy>Fixed</c> typos in a couple comics.
 
 ### <cg>v1.1.0-beta.1</c>
 

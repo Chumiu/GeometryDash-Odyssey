@@ -3,10 +3,7 @@
 #include <Geode/modify/SongsLayer.hpp>
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/PurchaseItemPopup.hpp>
-
 #include "utils/Utils.hpp"
-#include "utils/IconUtils.hpp"
 
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
@@ -142,22 +139,3 @@ class $modify(SongsLayer)
 	}
 };
 
-class $modify(PurchaseItemPopup)
-{
-	void onPurchase(CCObject *sender)
-	{
-		PurchaseItemPopup::onPurchase(sender);
-		// log::info("Purchased! {}", "\n");
-		// log::info("Type: {} ID: {}", m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
-
-		if (m_storeItem->m_unlockType.value() == 12)
-		{
-			if (m_storeItem->m_typeID.value() == 1)
-				GameManager::sharedState()->setUGV("237", true);
-			if (m_storeItem->m_typeID.value() == 2)
-				GameManager::sharedState()->setUGV("238", true);
-		}
-
-		IconUtils::unlockReward(m_storeItem->m_typeID.value(), static_cast<UnlockType>(m_storeItem->m_unlockType.value()));
-	}
-};
