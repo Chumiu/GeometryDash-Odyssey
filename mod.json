@@ -26,7 +26,15 @@
 		"itzkiba.better_progression": "*",
 		"gdutilsdevs.gdutils": "*",
 		"dankmeme.globed2": "*",
-		"ninxout.redash": "*"
+		"bitz.hard_mode": "*",
+		"ninxout.redash": "*",
+		"alphalaneous.alphas_geode_utils": {
+			"version": "*",
+			"platforms": [
+				"android",
+				"ios"
+			]
+		}
 	},
 	"links": {
 		"community": "https://discord.gg/PNPrR4DEbw"
@@ -149,6 +157,8 @@
 	},
 	"tags": [
 		"content",
+		"universal",
+		"interface",
 		"gameplay",
 		"online"
 	]

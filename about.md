@@ -27,10 +27,11 @@ The mod is currently incompatible with the following mods:
 
 <mod:capeling.geometry-dash-lunar>
 <mod:chumiiu.geometry_dash_time_reborn>
+<mod:bitz.hard_mode>
 <mod:itzkiba.better_progression>
 <mod:dankmeme.globed2>
 
-It's also recommended to disable mods that changes the main menu or modify the official levels (such as other fangames), because they would become unstable with Odyssey.
+It's recommended to disable other mods (not shown in this list) that changes the main menu or modify the official levels (such as other fangames), because they would become unstable with Odyssey.
 
 ---
 

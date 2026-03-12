@@ -19,15 +19,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (!MenuLayer::init())
             return false;
 
-        //  Shows the language setting at the start
-        if (!Mod::get()->setSavedValue("show-language-setting", true))
-        {
-            auto popup = LanguagePopup::create();
-            popup->m_scene = this;
-            popup->setZOrder(104);
-            popup->show();
-        };
-
         //  Reemplaza el titulo
         auto gameTitle = static_cast<CCSprite *>(this->getChildByID("main-title"));
         if (gameTitle)
@@ -93,6 +84,32 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (dailyCButton)
             dailyCButton->setVisible(false);
 
+        //  If the mod has found that there's account stats in here, disable it.
+        if (Mod::get()->getSavedValue<bool>("disable-fangame"))
+        {
+            auto desc = Odyssey::createText("A mod is currently <cr>conflicting with the savefile system</c> of the Fangame, please disable it and report the issues in Github.",
+                                            "Un mod esta en <cr>conflicto con el sistema de saves del fangame</c>, deshabilitalo y reporta los problemas en Github");
+
+            auto alert = FLAlertLayer::create(
+                "WARNING",
+                desc.c_str(),
+                "Ok");
+            alert->m_scene = this;
+            alert->setZOrder(100);
+            alert->show();
+
+            return true;
+        };
+
+        //  Shows the language setting at the start
+        if (!Mod::get()->setSavedValue("show-language-setting", true))
+        {
+            auto popup = LanguagePopup::create();
+            popup->m_scene = this;
+            popup->setZOrder(104);
+            popup->show();
+        };
+
         return true;
     }
 
@@ -122,6 +139,23 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onPlay(CCObject *)
     {
+        if (Mod::get()->getSavedValue<bool>("disable-fangame"))
+        {
+            auto desc = Odyssey::createText(
+                "A mod is currently <cr>conflicting with the savefile system</c> of the Fangame, please disable it and report the issues in Github.",
+                "Un mod esta en <cr>conflicto con el sistema de saves del fangame</c>, deshabilitalo y reporta los problemas en Github");
+
+            auto alert = FLAlertLayer::create(
+                "WARNING",
+                desc.c_str(),
+                "Ok");
+
+            alert->m_scene = this;
+            alert->setZOrder(100);
+            alert->show();
+            return;
+        };
+
         auto levelscene = OdysseySelectLayer::scene(0);
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, levelscene));
     }

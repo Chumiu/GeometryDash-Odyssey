@@ -3,6 +3,8 @@
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../utils/IconUtils.hpp"
 
+using namespace geode::prelude;
+
 class $modify(GDOGarageLayer, GJGarageLayer)
 {
     struct Fields

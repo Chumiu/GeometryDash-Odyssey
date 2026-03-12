@@ -3,7 +3,7 @@
 
 using namespace geode::prelude;
 
-class $modify(GDO_GManager, GManager)
+class $modify(OdysseyGManager, GManager)
 {
 	void setup()
 	{

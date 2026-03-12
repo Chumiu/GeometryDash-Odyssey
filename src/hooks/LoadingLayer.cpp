@@ -33,19 +33,24 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         Mod::get()->setSavedValue<bool>("developer-version", true);
 #endif
 
-        auto GM = GameManager::sharedState();
         auto SFC = CCSpriteFrameCache::get();
         auto searchPathRoot = dirs::getModRuntimeDir() / Mod::get()->getID() / "resources";
-
         CCFileUtils::sharedFileUtils()->addSearchPath(searchPathRoot.string().c_str());
         SFC->addSpriteFramesWithFile("GJO_GameSheet01.plist"_spr);
 
+        //  Loads the assets
+        OdysseyLoadingLayer::addCustomIconCredits();
+        OdysseyLoadingLayer::addOdysseyAssets();
+        OdysseyLoadingLayer::loadStats();
+
+        //  Adds the version of the fangame at the bottom left
         auto version = CCLabelBMFont::create(fmt::format("{}", Mod::get()->getVersion().toVString(true)).c_str(), "goldFont.fnt");
         version->setPosition({5, 5});
         version->setAnchorPoint({0, 0});
-        version->setScale(0.5f);
+        version->setScale(0.75f);
         this->addChild(version);
 
+        //  Modifies the sprites
         auto mainTitle = static_cast<CCSprite *>(this->getChildByID("gd-logo"));
         if (mainTitle)
         {
@@ -59,34 +64,6 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
             auto teamLogo = CCSprite::createWithSpriteFrameName("GDO_TeamLogo_001.png"_spr);
             robtopLogo->setDisplayFrame(teamLogo->displayFrame());
         };
-
-        //  Loads the assets
-        OdysseyLoadingLayer::addCustomIconCredits();
-        OdysseyLoadingLayer::addOdysseyAssets();
-        OdysseyLoadingLayer::loadStats();
-
-        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
-        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
-
-        //  La bandera de "Aceptar los ToS" del juego
-        if (!GM->getUGV("30"))
-            GM->setUGV("30", true);
-
-        //  La bandera de primer dialogo del Shopkeeper (500 Orbes)
-        if (!GM->getUGV("17"))
-            GM->setUGV("17", true);
-
-        GameManager::sharedState()->setIntGameVariable("1001", 0);
-
-        //  Para verificar si los niveles extra tienen progreso
-        auto extraLevel1 = GameLevelManager::sharedState()->getMainLevel(7501, false);
-        auto extraLevel2 = GameLevelManager::sharedState()->getMainLevel(7502, false);
-
-        if ((extraLevel1->m_normalPercent > 0 || extraLevel1->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("237"))
-            GameManager::sharedState()->setUGV("237", true);
-
-        if ((extraLevel2->m_normalPercent > 0 || extraLevel2->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("238"))
-            GameManager::sharedState()->setUGV("238", true);
 
         return true;
     }
@@ -118,16 +95,8 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
     void addOdysseyAssets()
     {
-//  Fetches the textures from the Assets.zip (Which only contains the dialogue sprites)
-#ifdef GEODE_IS_WINDOWS
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
-#endif
-
-#if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS) || defined(GEODE_IS_ANDROID)
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
-#endif
-
-        auto unzipDir = geode::Mod::get()->getResourcesDir().string();
+        auto zipFilePath = Mod::get()->getResourcesDir() / "Assets.zip";
+        auto unzipDir = geode::Mod::get()->getResourcesDir();
         auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 
         CCFileUtils::get()->addTexturePack(CCTexturePack{
@@ -264,11 +233,45 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
     void loadStats()
     {
+        auto GM = GameManager::sharedState();
         auto GSM = GameStatsManager::sharedState();
 
+        //  If there's account data found, disables the rest of this function.
+        if (GJAccountManager::sharedState()->m_accountID != 0)
+        {
+            log::error("Account of data found, disabling the loading stats of the fangame to risk modified savefiles");
+            Mod::get()->setSavedValue<bool>("disable-fangame", true);
+            return;
+        }
+
+        //  Just as a safeguard.
+        Mod::get()->setSavedValue<bool>("disable-fangame", false);
+
+        //  The flag of the "Accepting TOS" of the game.
+        if (!GM->getUGV("30"))
+            GM->setUGV("30", true);
+
+        //  The flag of the first shopkeeper dialog (Collecting 500 orbs).
+        if (!GM->getUGV("17"))
+            GM->setUGV("17", true);
+
+        GameManager::sharedState()->setIntGameVariable("1001", 0);
+
+        //  Verifies if the extra levels has any progress.
+        auto extraLevel1 = GameLevelManager::sharedState()->getMainLevel(7501, false);
+        auto extraLevel2 = GameLevelManager::sharedState()->getMainLevel(7502, false);
+
+        if ((extraLevel1->m_normalPercent > 0 || extraLevel1->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("237"))
+            GameManager::sharedState()->setUGV("237", true);
+
+        if ((extraLevel2->m_normalPercent > 0 || extraLevel2->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("238"))
+            GameManager::sharedState()->setUGV("238", true);
+
+        //  Hands the orbs.
         if (auto orbs = Mod::get()->getSavedValue<int>("Orbs"))
             GSM->setStat("14", orbs);
 
+        //  To ensure that the shop items are shown as bought.
         for (auto ii = 1; ii <= 21; ii++)
         {
             if (Mod::get()->getSavedValue<int>(fmt::format("store-item-{:02}", ii)) > 0)
