@@ -1,6 +1,6 @@
 # Geometry Dash: Odyssey (Fangame)
 
-**Geometry Dash Odyssey** is a fan-recreated "spin-off" of the game Geometry Dash, developed by a group of avid fans of the game, TeamTCM. It features it's own story-mode, fanmade official levels, custom vaults, icons and achievements. The storyline is heavily inspired by the "World of Wubstep", made by the music artist (MDK)[https://morgandavidking.com/lore/].
+**Geometry Dash Odyssey** is a fan-recreated "spin-off" of the game Geometry Dash, developed by a group of avid fans of the game, TeamTCM. It features it's own story-mode, fanmade official levels, custom vaults, icons and achievements. The storyline is heavily inspired by the "World of Wubstep", made by the music artist [MDK](https://morgandavidking.com/lore/).
 
 The mod uses it's own separate save-file, so the player's data remains unaffected while the mod is on. Once they disable the mod in Geode, they go back to their actual stats.
 

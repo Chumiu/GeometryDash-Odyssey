@@ -106,13 +106,15 @@ const std::vector<std::vector<gd::string>> creditsTestersOne = {
     {"Emmmanuel2014", "5911554", "42", "15", "3", "3"},
     {"hsibz", "6169431", "456", "93", "83", "83"},
     {"MichTopGDMT", "8983710", "22", "3", "12", "3"},
-
 };
 
 const std::vector<std::vector<gd::string>> creditsTestersTwo = {
     {"ObsidianAJ", "11368602", "48", "6", "3", "44"},
     {"TochyGMD", "26108122", "98", "12", "12", "3"},
     {"ZerkGMD", "27986840", "37", "12", "15", "12"},
+    {"MinoX28", "13284787", "283", "94", "12", "12"},
+    {"Statronic", "19130132", "19", "6", "3", "1"},
+    {"OccularPixel", "26757914", "351", "4", "3", "3"},
 };
 
 const std::vector<std::vector<gd::string>> creditsSpecials = {
