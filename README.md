@@ -1,30 +1,41 @@
-# Geometry Dash: Odyssey (Fanmade)
+# Geometry Dash: Odyssey (Fangame)
 
-**Geometry Dash Odyssey** is a fan-recreated "spin-off" of Geometry Dash, developed by a group of avid fans of the game, Team TCM. It features it's own story-mode, 10+ exclusive levels, custom game-modes, vaults, icons and achievements. The storyline is heavily inspired by the "World of Wubstep" made by the artist (MDK)[https://morgandavidking.com/lore/]
+**Geometry Dash Odyssey** is a fan-recreated "spin-off" of the game Geometry Dash, developed by a group of avid fans of the game, TeamTCM. It features it's own story-mode, fanmade official levels, custom vaults, icons and achievements. The storyline is heavily inspired by the "World of Wubstep", made by the music artist (MDK)[https://morgandavidking.com/lore/].
 
-The mod uses it's own separate save-file, so the player's data will not be modified. Once they disable the mod in Geode, they will go back to their actual save.
+The mod uses it's own separate save-file, so the player's data remains unaffected while the mod is on. Once they disable the mod in Geode, they go back to their actual stats.
 
-## Development status: Active
+---
 
-The mod is undergoing through development for the next major update, which includes four new extra levels, icons and more. As well as a massive optimization on the mod's file size.
+## <cr>Features:</c>
 
-### To-do List:
+- Main storymode that is told via comics and characters!
+- Side-story featuring five more bonus levels!
+- Brand new official levels!
+- Many icons to unlock!
+- Spanish translation!
+- Secret vaults!
+- Easter eggs!
+- New shop
 
-- [x] New extra levels:
-  - [x] Eclipse
-  - [x] Jelly Castle
-  - [x] Phone Me first
-  - [x] Wubsplosion
-  - [x] Granite
-- [x] Audio asset system
-- [x] Optimized comics
-- [x] New Achievements
-- [x] New Icons
-- [ ] Updating the levels
+And more!
+
+---
+
+## Development Status: Near it's end.
+
+The mod is about to release it's next and last major update, which includes a side-quest by one of the vaultkeepers, five new extra levels and a few more icons and achievements. This update will also come with a huge revamp on the fangame's code, and with methods to solve the long-dreaded issue of being the heaviest geode mod.
+
+This update also marks the port of the fangame to Geode v5.0.0 as well that it will also come with a huge revamp: a lot of optimization, code improvements, levels updated and bugfixes.
+
+This means no more major content will be added on this fangame, as the whole team will now focus on developing the [Sequel of the Fangame](https://www.youtube.com/watch?v=34nKnuK5hB4) where the story continues.
+
+---
 
 ## Bug Reporting:
 
-To report bugs, crashes or issues with other mods, you're free to contact us through [TCM Team's Discord](https://discord.gg/PNPrR4DEbw) or by creating a GitHub Issue.
+To report bugs, crashes or issues about the fangame, you're free to contact us through the [TeamTCM's Public Discord](https://discord.gg/PNPrR4DEbw) or by creating a GitHub Issue stating the problems and the mods you were using.
+
+---
 
 ## Credits:
 

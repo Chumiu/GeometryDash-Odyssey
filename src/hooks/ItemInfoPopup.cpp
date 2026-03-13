@@ -26,7 +26,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             m_mainLayer->addChild(odysseyLabel);
         }
 
-        log::info("{}", type);
+        //  log::info("{}", type);
 
         if (type >= 900)
         {

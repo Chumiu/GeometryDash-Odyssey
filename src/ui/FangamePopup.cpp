@@ -63,7 +63,7 @@ void FangamePopup::loadImage()
             {
                 auto data = res.data();
 
-                m_sprite = LazySprite::create({217.5f, 144.f});
+                m_sprite = LazySprite::create({217.5f, 144.f}, false);
                 m_sprite->loadFromData(const_cast<uint8_t *>(data.data()), data.size(), LazySprite::Format::kFmtPng);
 
                 onImageSuccess();

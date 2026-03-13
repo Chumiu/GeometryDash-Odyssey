@@ -1,9 +1,8 @@
 # Changelog
 
-### <cg>v1.1.0</c> (Work in Progress)
-
 ### <cg>v1.1.0-beta.2</c>
 
+* <cc>Optimized some textures to reduce Nod size</c>
 * <cg>Added</c> better interface for the language settings.
 * <cg>Added</c> option to delete your fangame save data.
 * <cg>Added</c> settings button in the levels menu.
@@ -11,7 +10,13 @@
 * <cy>Fixed</c> crash when tapping the play button multiple times.
 * <cy>Fixed</c> issue where shop items don't register as bought.
 * <cy>Fixed</c> typos in some character dialogs.
+* <cy>Fixed</c> sprite errors on a few icons.
 * <cy>Fixed</c> typos in a couple comics.
+
+#### Levels
+
+* <cc>Updated the remaining levels to their Online Versions</c>
+* <co>Eclipse</c>: Fixed deco error when porting the coins.
 
 ### <cg>v1.1.0-beta.1</c>
 

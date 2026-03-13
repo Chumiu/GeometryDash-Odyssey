@@ -24,6 +24,12 @@ protected:
     CCSprite *m_bg_2 = nullptr;
     CCSprite *m_bg_3 = nullptr;
 
+    CCSprite *m_background_2A = nullptr;
+    CCSprite *m_background_2B = nullptr;
+
+    CCSprite *m_background_3A = nullptr;
+    CCSprite *m_background_3B = nullptr;
+
     CCSprite *m_keeper = nullptr;
     CCSprite *keeper_body = nullptr;
     CCSprite *keeper_eyes = nullptr;

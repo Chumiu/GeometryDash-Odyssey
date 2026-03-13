@@ -27,32 +27,33 @@ bool SecretVaultLayer2::init()
     addChild(background, -5);
 
     auto bgDeco = CCSprite::createWithSpriteFrameName("OgreBG_2_001.png"_spr);
+    bgDeco->setScaleX((winSize.width) / bgDeco->getTextureRect().size.width);
+    bgDeco->setScaleY((winSize.height) / bgDeco->getTextureRect().size.height);
     bgDeco->setPosition({0, 0});
     bgDeco->setAnchorPoint({0, 0});
     bgDeco->setColor({0, 50, 0});
     bgDeco->setOpacity(180);
-    bgDeco->setScaleX((winSize.width) / bgDeco->getTextureRect().size.width);
-    bgDeco->setScaleY((winSize.height) / bgDeco->getTextureRect().size.height);
     bgDeco->setBlendFunc({GL_SRC_ALPHA, GL_ONE});
+    addChild(bgDeco, -3);
 
     auto bgDeco1A = CCSprite::createWithSpriteFrameName("OgreBG_3_001.png"_spr);
-    bgDeco1A->setPosition({0, 0});
+    bgDeco1A->setScaleX((winSize.width / 3) / bgDeco1A->getTextureRect().size.width);
+    bgDeco1A->setScaleY((winSize.height) / bgDeco1A->getTextureRect().size.height);
     bgDeco1A->setAnchorPoint({0, 0});
     bgDeco1A->setColor({0, 0, 0});
-    bgDeco1A->setScaleY((winSize.height) / bgDeco1A->getTextureRect().size.height);
+    bgDeco1A->setZOrder(-1);
+    addChildAtPosition(bgDeco1A, Anchor::BottomLeft, ccp(0, 0), false);
     //  bgDeco1A->setBlendFunc({GL_SRC_ALPHA, GL_ONE});
 
     auto bgDeco1B = CCSprite::createWithSpriteFrameName("OgreBG_3_001.png"_spr);
-    bgDeco1B->setPosition({winSize.width, 0});
+    bgDeco1B->setScaleX((winSize.width / 3) / bgDeco1B->getTextureRect().size.width);
+    bgDeco1B->setScaleY((winSize.height) / bgDeco1B->getTextureRect().size.height);
     bgDeco1B->setAnchorPoint({1, 0});
     bgDeco1B->setColor({0, 0, 0});
+    bgDeco1B->setZOrder(-1);
     bgDeco1B->setFlipX(true);
-    bgDeco1B->setScaleY((winSize.height) / bgDeco1B->getTextureRect().size.height);
+    addChildAtPosition(bgDeco1B, Anchor::BottomRight, ccp(0, 0), false);
     //  bgDeco1B->setBlendFunc({GL_SRC_ALPHA, GL_ONE});
-
-    addChild(bgDeco, -3);
-    addChild(bgDeco1A, -1);
-    addChild(bgDeco1B, -1);
 
     //  Fireflies particles
     auto bg_particle_01 = GameToolbox::particleFromString("30a-1a5a1a5a90a180a50a25a300a150a0a0a0a0a0a0a8a4a0a0a1a0a1a0a0a0a1a0a0a0a0a0a1a0a1a0a0a0a1a0a0.3a0.15a0.3a0.15a0a0a0a0a0a0a0a2a1a0a0a0a159a0a0a0a0a0a0a1a0a0a0a0a0a0a0", NULL, false);
@@ -143,7 +144,6 @@ bool SecretVaultLayer2::init()
 
     auto m_doorSpr = CCSprite::createWithSpriteFrameName("OgrePathDoor_001.png"_spr);
     m_doorSpr->setAnchorPoint({.5f, .5f});
-    m_doorSpr->setScale(.7f);
 
     m_doorBtn = CCMenuItemSpriteExtra::create(
         doorSpr,

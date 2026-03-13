@@ -21,16 +21,24 @@ bool LanguagePopup::init()
     m_mainLayer->addChildAtPosition(menu, Anchor::BottomLeft, ccp(0, 0), false);
 
     //  English Sprites
+    auto englishSpr = CCSprite::createWithSpriteFrameName("LanguageIcon_English_001.png"_spr);
+    englishSpr->setScale(1.333f);
+
+    //  English Flag
     m_englishBtn = CCMenuItemSpriteExtra::create(
-        CCSprite::createWithSpriteFrameName("LanguageIcon_English_001.png"_spr),
+        englishSpr,
         this,
         menu_selector(LanguagePopup::onUpdate));
     m_englishBtn->m_scaleMultiplier = 1.1;
     m_englishBtn->setTag(0);
 
+    //  English Sprites
+    auto spanishSpr = CCSprite::createWithSpriteFrameName("LanguageIcon_Spanish_001.png"_spr);
+    spanishSpr->setScale(1.333f);
+
     //  Spanish Sprites
     m_spanishBtn = CCMenuItemSpriteExtra::create(
-        CCSprite::createWithSpriteFrameName("LanguageIcon_Spanish_001.png"_spr),
+        spanishSpr,
         this,
         menu_selector(LanguagePopup::onUpdate));
     m_spanishBtn->m_scaleMultiplier = 1.1;

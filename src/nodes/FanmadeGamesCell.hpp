@@ -18,7 +18,7 @@ private:
         menu->setPosition({0, 0});
 
         auto sprite = CCSprite::create(spriteName);
-        sprite->setScale(0.95f);
+        sprite->setScale(1.333f);
 
         auto btn = CCMenuItemSpriteExtra::create(
             sprite,
