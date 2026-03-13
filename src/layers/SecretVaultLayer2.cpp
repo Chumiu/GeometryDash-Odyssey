@@ -124,7 +124,7 @@ bool SecretVaultLayer2::init()
     }
 
     // puerta
-    auto doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    auto doorSpr = CCSprite::createWithSpriteFrameName("OgrePathDoor_001.png"_spr);
     // doorSpr->setColor({0, 255, 0});
     doorSpr->setAnchorPoint({.5f, .5f});
     doorSpr->setScale(.7f);
@@ -141,7 +141,7 @@ bool SecretVaultLayer2::init()
     doorMenu->addChild(doorBtn);
     //  addChild(doorMenu);
 
-    auto m_doorSpr = CCSprite::createWithSpriteFrameName("GDO_VaultDoor_001.png"_spr);
+    auto m_doorSpr = CCSprite::createWithSpriteFrameName("OgrePathDoor_001.png"_spr);
     m_doorSpr->setAnchorPoint({.5f, .5f});
     m_doorSpr->setScale(.7f);
 

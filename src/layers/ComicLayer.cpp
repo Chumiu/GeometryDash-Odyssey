@@ -220,7 +220,7 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
         auto node = CCNode::create();
         auto menu = CCMenu::create();
 
-        auto sprite = CrossButtonSprite::createWithSpriteFrameName("GDO_CreditsIcon_001.png"_spr, 1.5f);
+        auto sprite = CrossButtonSprite::createWithSpriteFrameName("CreditsLabel_001.png"_spr, 1.5f);
         sprite->setScale(1.5f);
 
         auto button = CCMenuItemSpriteExtra::create(

@@ -74,7 +74,7 @@ void EndCreditsLayer::createEndCredits()
     m_textArea->setScale(0.75f);
     m_textArea->setOpacity(0);
 
-    auto m_sprite = CCSprite::createWithSpriteFrameName("GDO_MainLogo_001.png"_spr);
+    auto m_sprite = CCSprite::createWithSpriteFrameName("MainLogo_001.png"_spr);
     m_sprite->setPosition(ccp(m_textArea->getPositionX(), m_textArea->getPositionY()));
     m_sprite->setOpacity(0);
 

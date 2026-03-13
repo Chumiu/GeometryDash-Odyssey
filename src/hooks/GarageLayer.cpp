@@ -35,7 +35,7 @@ class $modify(GDOGarageLayer, GJGarageLayer)
 #ifndef GEODE_IS_IOS
 
         //  Si la opcion de "Esconder gamemodes custom" esta deshabilitado, agrega los botones de los gamemodes personalizados
-        if (!GameManager::sharedState()->getGameVariable("0202"))
+        if (!Mod::get()->getSettingValue<bool>("hide-custom"))
         {
             //  Agregar los botones de gamemodes nuevos al menu de categorias
             if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))
@@ -52,10 +52,10 @@ class $modify(GDOGarageLayer, GJGarageLayer)
                     const char *buttonName[4] = {"Boat", "Drone", "Slider", "Minecart"};
                     //  log::debug("gamemode: {}", buttonName[ii]);
 
-                    auto sprOff = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Unselected);
+                    auto sprOff = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("CustomIcon_{}_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Unselected);
                     sprOff->setScale(.9f);
 
-                    auto sprOn = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("GDO_{}Icon_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Selected);
+                    auto sprOn = IconSelectButtonSprite::createWithSpriteFrameName(fmt::format("CustomIcon_{}_001.png"_spr, buttonName[ii]).c_str(), 1.5, IconSelectBaseColor::Selected);
                     sprOn->setScale(.9f);
 
                     auto toggler = CCMenuItemToggler::create(sprOff, sprOn, this, menu_selector(GJGarageLayer::onSelectTab));

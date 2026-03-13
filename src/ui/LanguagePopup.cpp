@@ -22,7 +22,7 @@ bool LanguagePopup::init()
 
     //  English Sprites
     m_englishBtn = CCMenuItemSpriteExtra::create(
-        CCSprite::createWithSpriteFrameName("GDO_EnglishBtn_001.png"_spr),
+        CCSprite::createWithSpriteFrameName("LanguageIcon_English_001.png"_spr),
         this,
         menu_selector(LanguagePopup::onUpdate));
     m_englishBtn->m_scaleMultiplier = 1.1;
@@ -30,7 +30,7 @@ bool LanguagePopup::init()
 
     //  Spanish Sprites
     m_spanishBtn = CCMenuItemSpriteExtra::create(
-        CCSprite::createWithSpriteFrameName("GDO_SpanishBtn_001.png"_spr),
+        CCSprite::createWithSpriteFrameName("LanguageIcon_Spanish_001.png"_spr),
         this,
         menu_selector(LanguagePopup::onUpdate));
     m_spanishBtn->m_scaleMultiplier = 1.1;

@@ -27,7 +27,6 @@ class $modify(OdysseyGameManager, GameManager)
 
     int countForType(IconType icon)
     {
-        //  auto hide = GameManager::sharedState()->getGameVariable("0202");
         switch (icon)
         {
         case IconType::Cube:

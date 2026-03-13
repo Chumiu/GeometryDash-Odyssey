@@ -30,7 +30,7 @@ bool OdysseySelectLayer::init(int page)
     ccColor3B bgColor = {26, 12, 43};
 
     // islas
-    const char *islandTexture = "GDO_MainIsland_01_001.png"_spr;
+    const char *islandTexture = "MainIsland_01_001.png"_spr;
     CCPoint islandPosition = {m_winSize.width / 2, m_winSize.height / 2 - 20};
     ccColor3B islandColor = {255, 255, 255};
     float islandScale = 1.8f;
@@ -49,9 +49,7 @@ bool OdysseySelectLayer::init(int page)
     case 1:
         bgID = 32;
         bgColor = {31, 0, 63};
-        islandTexture = "GDO_MainIsland_02_001.png"_spr;
-        if (isLevelComplete(9))
-            islandTexture = "GDO_MainIsland_02_002.png"_spr;
+        islandTexture = "MainIsland_02_001.png"_spr;
         // islandColor = {5, 5, 5};
         islandScale = 1.333f;
         m_levelAmount = 5;
@@ -61,7 +59,7 @@ bool OdysseySelectLayer::init(int page)
     case 2:
         bgID = 15;
         bgColor = {53, 7, 0};
-        islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
+        islandTexture = "BonusIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
         islandScale = 1.333f;
         break;
@@ -70,7 +68,7 @@ bool OdysseySelectLayer::init(int page)
         bgID = 8;
         bgColor = {0, 30, 0};
         gradientColorTop = {0, 60, 0, 30};
-        islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
+        islandTexture = "BonusIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
         islandScale = .75f;
         break;
@@ -160,14 +158,14 @@ bool OdysseySelectLayer::init(int page)
         menu_selector(OdysseySelectLayer::onSongs));
 
     //  Settings Button
-    auto settingsSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.1f, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto settingsSpr = CircleButtonSprite::createWithSpriteFrameName("SettingsIcon_001.png"_spr, 1.1f, CircleBaseColor::Green, CircleBaseSize::Small);
     auto settingsBtn = CCMenuItemSpriteExtra::create(
         settingsSpr,
         this,
         menu_selector(OdysseySelectLayer::onSettings));
 
     //  Settings Button
-    auto languageSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_LanguageIcon_001.png"_spr, 1.f, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto languageSpr = CircleButtonSprite::createWithSpriteFrameName("LanguageIcon_001.png"_spr, 1.f, CircleBaseColor::Green, CircleBaseSize::Small);
     auto languageBtn = CCMenuItemSpriteExtra::create(
         languageSpr,
         this,
@@ -182,7 +180,7 @@ bool OdysseySelectLayer::init(int page)
 
     if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
     {
-        auto comicsSpr = CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small);
+        auto comicsSpr = CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small);
         auto comicsBtn = CCMenuItemSpriteExtra::create(
             comicsSpr,
             this,
@@ -217,7 +215,7 @@ bool OdysseySelectLayer::init(int page)
         firstIsland->m_scaleMultiplier = 1.1f;
         firstIsland->setTag(501);
 
-        auto secondSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_02_001.png"_spr);
+        auto secondSprite = CCSprite::createWithSpriteFrameName("BonusIsland_02_001.png"_spr);
         secondSprite->setScale(islandScale);
 
         auto secondIsland = CCMenuItemSpriteExtra::create(
@@ -270,7 +268,7 @@ bool OdysseySelectLayer::init(int page)
         {
             auto pos = m_islandPositions[i];
 
-            auto smallIsland = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str());
+            auto smallIsland = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, i + 1).c_str());
             smallIsland->setScale(1.f);
 
             auto smallIslandBtn = CCMenuItemSpriteExtra::create(
@@ -320,7 +318,7 @@ bool OdysseySelectLayer::init(int page)
     m_islandNode->runAction(CCRepeatForever::create(CCSequence::createWithTwoActions(moveUp, moveDown)));
 
     //  Titulo de la Isla
-    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("GDO_IslandTitle_{:02}_001.png"_spr, pageID).c_str());
+    auto islandTitle = CCSprite::createWithSpriteFrameName(fmt::format("IslandTitle_{:02}_001.png"_spr, pageID).c_str());
     islandTitle->setScale(.75f);
     islandTitle->setPosition({m_winSize.width / 2, m_winSize.height - 30});
     addChild(islandTitle);
@@ -675,10 +673,10 @@ void OdysseySelectLayer::addLevelButtons()
     {
         for (int ii = 0; ii < m_levelAmount; ii++)
         {
-            auto levelSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_locked_001.png"_spr);
+            auto levelSprite = CCSprite::createWithSpriteFrameName("LevelBtn_01_Locked_001.png"_spr);
 
             if (m_currentPage == 1 && ii == 4)
-                levelSprite = CCSpriteGrayscale::createWithSpriteFrameName("worldLevelBtn_002.png"_spr);
+                levelSprite = CCSpriteGrayscale::createWithSpriteFrameName("LevelBtn_02_001.png"_spr);
 
             auto levelButton = CCMenuItemSpriteExtra::create(levelSprite, this, menu_selector(OdysseySelectLayer::onLevel));
 
@@ -694,7 +692,7 @@ void OdysseySelectLayer::addLevelButtons()
 
     if (m_currentPage == 0)
     {
-        auto shopSprite = CCSprite::createWithSpriteFrameName("GDO_shopButton.png"_spr);
+        auto shopSprite = CCSprite::createWithSpriteFrameName("ShopButton_001.png"_spr);
         shopSprite->setScale(0.9f);
 
         m_shopButton = CCMenuItemSpriteExtra::create(shopSprite, this, menu_selector(OdysseySelectLayer::onShop));
@@ -711,9 +709,9 @@ void OdysseySelectLayer::addLevelButtons()
 
     if (m_currentPage == 1)
     {
-        auto volcanoLight = CCSprite::createWithSpriteFrameName("islandExtra_001.png"_spr);
+        auto volcanoLight = CCSprite::createWithSpriteFrameName("MainIsland_LightOff_001.png"_spr);
         if (isLevelComplete(8))
-            CCSprite::createWithSpriteFrameName("islandExtra_2_001.png"_spr);
+            CCSprite::createWithSpriteFrameName("MainIsland_LightOn_001.png"_spr);
 
         volcanoLight->setID("volcano-light-sprite"_spr);
 
@@ -724,7 +722,7 @@ void OdysseySelectLayer::addLevelButtons()
         m_islandNode->addChild(volcanoLight);
 
         //  Button for the Ogre
-        auto ogreSprite = CCSprite::createWithSpriteFrameName("GDO_OgreCave_001.png"_spr);
+        auto ogreSprite = CCSprite::createWithSpriteFrameName("OgreCaveBtn_001.png"_spr);
         auto ogreButton = CCMenuItemSpriteExtra::create(
             ogreSprite,
             this,
@@ -745,7 +743,7 @@ void OdysseySelectLayer::addLevelButtons()
     {
         for (int i = 0; i < 5; i++)
         {
-            std::string extraIslandTexture = fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str();
+            std::string extraIslandTexture = fmt::format("OgrePathIsland_{:02}_001.png"_spr, i + 1).c_str();
 
             auto smallIsland = isLevelComplete(i + 600) ? CCSprite::createWithSpriteFrameName(extraIslandTexture.c_str()) : CCSpriteGrayscale::createWithSpriteFrameName(extraIslandTexture.c_str());
             smallIsland->setScale(1.333f);
@@ -774,7 +772,7 @@ void OdysseySelectLayer::addIslandDots()
 
     for (int ii = 0; ii < getPositionForDots().size(); ii++)
     {
-        auto dot = CCSprite::createWithSpriteFrameName("worldDot_001.png"_spr);
+        auto dot = CCSprite::createWithSpriteFrameName("WorldDot_001.png"_spr);
         dot->setPosition(getPositionForDots()[ii]);
         if (m_currentPage == 3)
             dot->setPosition(dot->getPosition() - m_winSize / 2);
@@ -801,14 +799,16 @@ void OdysseySelectLayer::enableLevelAnimation(CCObject *p0)
 {
     auto btn = static_cast<CCMenuItemSpriteExtra *>(p0);
 
-    btn->setNormalImage(CCSprite::createWithSpriteFrameName("worldLevelBtn_001.png"_spr));
+    btn->setNormalImage(CCSprite::createWithSpriteFrameName("LevelBtn_01_001.png"_spr));
+
     if (btn->getTag() == 9)
-        btn->setNormalImage(CCSprite::createWithSpriteFrameName("worldLevelBtn_002.png"_spr));
+        btn->setNormalImage(CCSprite::createWithSpriteFrameName("LevelBtn_02_001.png"_spr));
 
     if (btn->getTag() > 600)
     {
-        auto islandTexture = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, btn->getTag() - 600 + 3).c_str());
+        auto islandTexture = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, btn->getTag() - 600 + 3).c_str());
         islandTexture->setScale(.75f);
+
         btn->setNormalImage(islandTexture);
         btn->setContentSize(islandTexture->getScaledContentSize());
     }
@@ -847,8 +847,9 @@ void OdysseySelectLayer::enableLevelAnimation(CCObject *p0)
     if (btn->getTag() == 9)
     {
         auto volcanoLight = static_cast<CCSprite *>(btn->getParent()->getParent()->getChildByID("volcano-light-sprite"_spr));
+
         if (volcanoLight)
-            volcanoLight->setDisplayFrame(CCSprite::createWithSpriteFrameName("islandExtra_2_001.png"_spr)->displayFrame());
+            volcanoLight->setDisplayFrame(CCSprite::createWithSpriteFrameName("MainIsland_LightOn_001.png"_spr)->displayFrame());
     }
 }
 
@@ -885,8 +886,9 @@ void OdysseySelectLayer::animateLevelCompletation()
     auto extraLevel4 = GLM->getMainLevel(7604, false);
     auto extraLevel5 = GLM->getMainLevel(7605, false);
 
-    auto buttonSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_001.png"_spr);
+    auto buttonSprite = CCSprite::createWithSpriteFrameName("LevelBtn_01_001.png"_spr);
     int offset = 0;
+
     if (m_currentPage == 1)
         offset = 4;
 
@@ -899,11 +901,11 @@ void OdysseySelectLayer::animateLevelCompletation()
         auto levelButton = static_cast<CCMenuItemSpriteExtra *>(m_levelMenu->getChildByTag(i + offset + 1));
 
         if (m_currentPage == 1 && i == 4)
-            buttonSprite = CCSprite::createWithSpriteFrameName("worldLevelBtn_002.png"_spr);
+            buttonSprite = CCSprite::createWithSpriteFrameName("LevelBtn_02_001.png"_spr);
 
         if (m_currentPage == 3)
         {
-            buttonSprite = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str());
+            buttonSprite = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, i + 1).c_str());
             buttonSprite->setScale(.75f);
         }
 

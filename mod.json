@@ -135,10 +135,10 @@
 	},
 	"resources": {
 		"spritesheets": {
-			"GJO_GameSheet01": [
+			"GDO_GameSheet01": [
 				"resources/OdysseySheet/*.png"
 			],
-			"GJO_SecretSheet": [
+			"GDO_SecretSheet": [
 				"resources/VaultSheet/*.png"
 			]
 		},

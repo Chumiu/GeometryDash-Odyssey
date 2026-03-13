@@ -36,7 +36,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto SFC = CCSpriteFrameCache::get();
         auto searchPathRoot = dirs::getModRuntimeDir() / Mod::get()->getID() / "resources";
         CCFileUtils::sharedFileUtils()->addSearchPath(searchPathRoot.string().c_str());
-        SFC->addSpriteFramesWithFile("GJO_GameSheet01.plist"_spr);
+        SFC->addSpriteFramesWithFile("GDO_GameSheet01.plist"_spr);
 
         //  Loads the assets
         OdysseyLoadingLayer::addCustomIconCredits();
@@ -54,14 +54,14 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         auto mainTitle = static_cast<CCSprite *>(this->getChildByID("gd-logo"));
         if (mainTitle)
         {
-            auto odysseyTitle = CCSprite::createWithSpriteFrameName("GDO_MainLogo_001.png"_spr);
+            auto odysseyTitle = CCSprite::createWithSpriteFrameName("MainLogo_001.png"_spr);
             mainTitle->setDisplayFrame(odysseyTitle->displayFrame());
         }
 
         auto robtopLogo = static_cast<CCSprite *>(this->getChildByID("robtop-logo"));
         if (robtopLogo)
         {
-            auto teamLogo = CCSprite::createWithSpriteFrameName("GDO_TeamLogo_001.png"_spr);
+            auto teamLogo = CCSprite::createWithSpriteFrameName("TeamLogo_Big_001.png"_spr);
             robtopLogo->setDisplayFrame(teamLogo->displayFrame());
         };
 

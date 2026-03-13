@@ -23,7 +23,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         auto gameTitle = static_cast<CCSprite *>(this->getChildByID("main-title"));
         if (gameTitle)
         {
-            auto odysseyTitle = CCSprite::createWithSpriteFrameName("GDO_MainLogo_001.png"_spr);
+            auto odysseyTitle = CCSprite::createWithSpriteFrameName("MainLogo_001.png"_spr);
             gameTitle->setDisplayFrame(odysseyTitle->displayFrame());
             gameTitle->setPositionY(gameTitle->getPositionY() - 15);
         }
@@ -44,7 +44,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
         //  Agregua el boton de MDK
         auto MDKButton = CCMenuItemSpriteExtra::create(
-            CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
+            CircleButtonSprite::createWithSpriteFrameName("ArtistLogo_MDK_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
             this,
             menu_selector(OdysseyMenuLayer::onMDK));
 
@@ -54,7 +54,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::DarkPurple, CircleBaseSize::MediumAlt),
+                CircleButtonSprite::createWithSpriteFrameName("SettingsIcon_001.png"_spr, 1, CircleBaseColor::DarkPurple, CircleBaseSize::MediumAlt),
                 this,
                 menu_selector(OdysseyMenuLayer::onDev));
 
@@ -67,7 +67,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         auto moreGamesButton = static_cast<CCMenuItemSpriteExtra *>(moreGamesMenu->getChildByID("more-games-button"));
         if (moreGamesButton)
         {
-            auto creditsSprite = CrossButtonSprite::createWithSpriteFrameName("GDO_CreditsIcon_001.png"_spr, 1.5f);
+            auto creditsSprite = CrossButtonSprite::createWithSpriteFrameName("CreditsLabel_001.png"_spr, 1.5f);
             creditsSprite->setScale(0.9f);
             moreGamesButton->setTag(1);
 

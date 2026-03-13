@@ -30,7 +30,7 @@ bool PromoPopup::init()
     m_textArea->setScale(0.5f);
 
     //  Cube sprite
-    m_masterSpr = CCSprite::createWithSpriteFrameName("MTC5_01_001.png"_spr);
+    m_masterSpr = CCSprite::createWithSpriteFrameName("MasterTheCube_01_001.png"_spr);
     m_masterSpr->setPosition({contentSize.width / 2, 45});
     m_masterSpr->setID("master-cube-sprite");
     m_mainLayer->addChild(m_masterSpr);
@@ -105,7 +105,8 @@ void PromoPopup::onClick(CCObject *sender)
         "https://youtu.be/34ajXNmtI4U?si=cLptfnth-uhYDq9E",
         "https://youtu.be/aRdpABVEKho?si=2huyHafEWQFz1R58",
         "https://youtu.be/uvN5OGo_fcY?si=piU_ncFAZvQJCUUD",
-        "https://youtu.be/abB1-zyyHSI?si=1XBhha5sC1ho9MqU"};
+        "https://youtu.be/abB1-zyyHSI?si=1XBhha5sC1ho9MqU",
+        "https://youtu.be/pxwycKKARaA?si=60AH9WuwpmV7U-75"};
 
     CCApplication::sharedApplication()->openURL(videoLinks.at(rand() % videoLinks.size()).c_str());
 }
@@ -130,7 +131,7 @@ void PromoPopup::onCountdown()
 
         //  Quita y recrea el sprite de Master de nuevo
         m_masterSpr->removeFromParentAndCleanup(true);
-        m_masterSpr = CCSprite::createWithSpriteFrameName("MTC5_02_001.png"_spr);
+        m_masterSpr = CCSprite::createWithSpriteFrameName("MasterTheCube_02_001.png"_spr);
         m_masterSpr->setPosition({contentSize.width / 2, 45});
         m_mainLayer->addChild(m_masterSpr);
 

@@ -70,7 +70,7 @@ bool OdysseyLevelPopup::init()
     auto isSongDownloaded = MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID));
     auto baseColor_1 = isSongDownloaded ? CircleBaseColor::Green : CircleBaseColor::Cyan;
 
-    auto optionsSprite = CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1.2, baseColor_1, CircleBaseSize::Small);
+    auto optionsSprite = CircleButtonSprite::createWithSpriteFrameName("SettingsIcon_001.png"_spr, 1.2, baseColor_1, CircleBaseSize::Small);
     //  optionsSprite->setScale(.8f);
 
     auto optionsButton = CCMenuItemSpriteExtra::create(
@@ -82,7 +82,7 @@ bool OdysseyLevelPopup::init()
     //  Hint para descargar la cancion
     if (!MusicDownloadManager::sharedState()->isSongDownloaded(Odyssey::getLevelSongID(m_levelID)))
     {
-        auto hint = CCSprite::createWithSpriteFrameName("GDO_AudioHint_001.png"_spr);
+        auto hint = CCSprite::createWithSpriteFrameName("AudioTxt_001.png"_spr);
         hint->setPosition({-40, 30});
         m_mainLayer->addChild(hint);
 
@@ -97,7 +97,7 @@ bool OdysseyLevelPopup::init()
 
     //  Comics Button
     auto comicButton = CCMenuItemSpriteExtra::create(
-        CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, baseColor_2, CircleBaseSize::Small),
+        CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, baseColor_2, CircleBaseSize::Small),
         this,
         menu_selector(OdysseyLevelPopup::onComic));
     comicButton->setPosition({buttonsMenu->getContentWidth() - 8, 8});
@@ -216,7 +216,7 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
         scene->addChild(ComicLayer::create(m_levelID + offset, false));
 
         auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
-        button->setSprite(CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small));
+        button->setSprite(CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small));
 
         GameManager::sharedState()->fadeInMusic(fmt::format("comic_{:02}.mp3"_spr, m_levelID + offset).c_str());
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
