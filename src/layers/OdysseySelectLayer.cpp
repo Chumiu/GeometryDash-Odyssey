@@ -53,7 +53,7 @@ bool OdysseySelectLayer::init(int page)
         if (isLevelComplete(9))
             islandTexture = "GDO_MainIsland_02_002.png"_spr;
         // islandColor = {5, 5, 5};
-        islandScale = .7f;
+        islandScale = 1.333f;
         m_levelAmount = 5;
         gradientColorBottom = {41, 19, 21, 74};
         break;
@@ -63,7 +63,7 @@ bool OdysseySelectLayer::init(int page)
         bgColor = {53, 7, 0};
         islandTexture = "GDO_ExtraIsland_01_001.png"_spr;
         islandPosition = CCPoint{m_winSize.width / 2 - 100, islandPosition.y};
-        islandScale = 1.f;
+        islandScale = 1.333f;
         break;
 
     case 3:
@@ -194,6 +194,7 @@ bool OdysseySelectLayer::init(int page)
 
     //  Island Node
     m_islandNode = CCNode::create();
+    m_islandNode->setContentSize(m_winSize);
 
     if (page == 2)
     {
@@ -270,7 +271,7 @@ bool OdysseySelectLayer::init(int page)
             auto pos = m_islandPositions[i];
 
             auto smallIsland = CCSprite::createWithSpriteFrameName(fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str());
-            smallIsland->setScale(islandScale);
+            smallIsland->setScale(1.f);
 
             auto smallIslandBtn = CCMenuItemSpriteExtra::create(
                 smallIsland,
@@ -282,69 +283,6 @@ bool OdysseySelectLayer::init(int page)
             smallIslandBtn->setTag(601 + i);
             menu->addChild(smallIslandBtn);
         }
-
-        /*
-        //  ECLIPSE ISLAND
-        auto firstSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_04_001.png"_spr);
-        firstSprite->setScale(islandScale);
-
-        auto firstIsland = CCMenuItemSpriteExtra::create(
-            firstSprite,
-            this,
-            menu_selector(OdysseySelectLayer::onExtraLevel));
-
-        firstIsland->setPosition({m_winSize.width / 2 - 170, m_winSize.height / 2});
-        firstIsland->m_scaleMultiplier = 1.1f;
-        firstIsland->setTag(601);
-
-        //  JELLY CASTLE ISLAND
-        auto secondSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_05_001.png"_spr);
-        secondSprite->setScale(islandScale);
-
-        auto secondIsland = CCMenuItemSpriteExtra::create(
-            secondSprite,
-            this,
-            menu_selector(OdysseySelectLayer::onExtraLevel));
-
-        secondIsland->setPosition({m_winSize.width / 2 - 60, m_winSize.height / 2 - 30});
-        secondIsland->m_scaleMultiplier = 1.1f;
-        secondIsland->setTag(602);
-
-        //  PHONE ME FIRST ISLAND
-        auto thirdSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_06_001.png"_spr);
-        thirdSprite->setScale(islandScale);
-
-        auto thirdIsland = CCMenuItemSpriteExtra::create(
-            thirdSprite,
-            this,
-            menu_selector(OdysseySelectLayer::onExtraLevel));
-
-        thirdIsland->setPosition({m_winSize.width / 2 + 60, m_winSize.height / 2 + 30});
-        thirdIsland->m_scaleMultiplier = 1.1f;
-        thirdIsland->setTag(603);
-
-        //  WUBSPLOSION ISLAND
-        auto fourthSprite = CCSprite::createWithSpriteFrameName("GDO_ExtraIsland_07_001.png"_spr);
-        fourthSprite->setScale(islandScale);
-
-        auto fourthIsland = CCMenuItemSpriteExtra::create(
-            fourthSprite,
-            this,
-            menu_selector(OdysseySelectLayer::onExtraLevel));
-
-        fourthIsland->setPosition({m_winSize.width / 2 + 170, m_winSize.height / 2});
-        fourthIsland->m_scaleMultiplier = 1.1f;
-        fourthIsland->setTag(604);
-
-        menu->addChild(firstIsland);
-        menu->addChild(secondIsland);
-        menu->addChild(thirdIsland);
-        menu->addChild(fourthIsland);
-
-
-       //menu->alignItemsHorizontallyWithPadding(10);
-
-        m_islandNode->addChild(menu);*/
 
         auto comingSoonLabel = CCLabelBMFont::create("Work in progress, subject to changes", "bigFont.fnt");
         comingSoonLabel->setPosition({m_winSize.width / 2, 20});
@@ -452,6 +390,7 @@ bool OdysseySelectLayer::init(int page)
             0));
     }
 
+    //  Evento 4: Inicio de la aventura Ogre
     if (GM->getUGV("208") && !GM->getUGV("280"))
     {
         m_ogreWillTalk = true;
@@ -780,30 +719,27 @@ void OdysseySelectLayer::addLevelButtons()
 
         // 284 - 432 160 - 254
 
-        volcanoLight->setScale(.23f);
         volcanoLight->setPosition({m_winSize.width / 2 + 148, m_winSize.height / 2 + 94});
         volcanoLight->setZOrder(-1);
         m_islandNode->addChild(volcanoLight);
 
-        auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
-        hollowSprite->setColor({255, 255, 255});
-        hollowSprite->setOpacity(150);
-
-        auto hollowBtn = InstantMenuItemSprite::create(
-            hollowSprite,
+        //  Button for the Ogre
+        auto ogreSprite = CCSprite::createWithSpriteFrameName("GDO_OgreCave_001.png"_spr);
+        auto ogreButton = CCMenuItemSpriteExtra::create(
+            ogreSprite,
             this,
             menu_selector(OdysseySelectLayer::onOgre));
-
-        hollowBtn->setOpacity(0);
-        hollowBtn->setTag(0);
+        ogreButton->m_scaleMultiplier = 1;
+        ogreButton->m_colorEnabled = true;
+        ogreButton->m_colorDip = 100;
+        ogreSprite->setScale(0.7f);
 
         auto secretMenu = CCMenu::create();
-        secretMenu->setContentSize(hollowSprite->getContentSize());
-        secretMenu->addChild(hollowBtn);
-        secretMenu->setPosition({m_winSize / 2 - ccp(250, 68)});
-        hollowBtn->setPosition(secretMenu->getContentSize() / 2);
         secretMenu->setZOrder(10);
-        m_islandNode->addChild(secretMenu);
+        secretMenu->setContentSize(ogreButton->getContentSize());
+        secretMenu->addChildAtPosition(ogreButton, Anchor::Center, ccp(-255, -71), false);
+
+        m_islandNode->addChildAtPosition(secretMenu, Anchor::Center, ccp(0, 0), false);
     }
     if (m_currentPage == 3)
     {
@@ -812,7 +748,7 @@ void OdysseySelectLayer::addLevelButtons()
             std::string extraIslandTexture = fmt::format("GDO_ExtraIsland_{:02}_001.png"_spr, i + 4).c_str();
 
             auto smallIsland = isLevelComplete(i + 600) ? CCSprite::createWithSpriteFrameName(extraIslandTexture.c_str()) : CCSpriteGrayscale::createWithSpriteFrameName(extraIslandTexture.c_str());
-            smallIsland->setScale(.75f);
+            smallIsland->setScale(1.333f);
 
             auto smallIslandBtn = CCMenuItemSpriteExtra::create(
                 smallIsland,

@@ -75,6 +75,14 @@ void FangamePopup::onImageSuccess()
 {
     fadeLoadingCircle();
     m_sprite->setScale(1.8f);
+
+    //  Resizes the sprite based on the Texture Quality
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityMedium)
+        m_sprite->setScale(0.9f);
+
+    if (CCDirector::sharedDirector()->getLoadedTextureQuality() == TextureQuality::kTextureQualityLow)
+        m_sprite->setScale(0.45f);
+
     m_mainLayer->addChildAtPosition(m_sprite, Anchor::Center, ccp(0, 0), false);
 };
 
@@ -85,6 +93,7 @@ void FangamePopup::onImageFail()
     auto size = this->getContentSize();
     auto label = CCLabelBMFont::create("Error while loading :(", "bigFont.fnt", 0.0f, kCCTextAlignmentCenter);
     label->setScale(0.75f);
+
     m_mainLayer->addChildAtPosition(label, Anchor::Center, ccp(0, 0), false);
 };
 

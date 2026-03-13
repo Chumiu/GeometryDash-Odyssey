@@ -89,7 +89,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
                 if (auto descriptionArea = static_cast<TextArea *>(m_mainLayer->getChildByID("description-area")))
                 {
                     std::string iconName = nameForUnlockType(p0, p1);
-                    std::string descriptionString = fmt::format("A secret is required to unlock this <cg>{}</c>!", iconName);
+                    std::string descriptionString = fmt::format("A <cy>secret</c> is required to <cl>unlock</c> this <cg>{}</c>!", iconName);
                     descriptionArea->setString(descriptionString);
                 }
             }

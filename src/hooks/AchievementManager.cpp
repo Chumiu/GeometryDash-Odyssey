@@ -65,35 +65,33 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.coins08", "Rent's Due", "Collected 40 Secret Coins", "Collect 40 Secret Coins", "bird_157", 1);
 
 		//  Ogre
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret01", "Odyssey, ya see!", "Found the secret!", "It's a secret...", "bird_150", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret02", "Threat from the stars", "Found the secret!", "It's a secret...", "bird_151", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret03", "Finish him!", "Found the secret!", "It's a secret...", "icon_508", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret04", "Funny old man!", "Found the secret!", "It's a secret...", "icon_509", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret05", "Annoying robot", "Found the secret!", "It's a secret...", "ball_123", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret06", "Sightless Kitsune", "Found the secret!", "It's a secret...", "icon_510", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret07", "Seven years...", "Found the secret!", "It's a secret...", "bird_152", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret08", "Global energy", "Found the secret!", "It's a secret...", "bird_153", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret09", "Devil's lair", "Found the secret!", "It's a secret...", "ball_124", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret01", "Odyssey, ya see!", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "bird_150", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret02", "Threat from the stars", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "bird_151", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret03", "Finish him!", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "icon_508", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret04", "Funny old man!", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "icon_509", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret05", "Annoying robot", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "ball_123", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret06", "Sightless Kitsune", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "icon_510", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret07", "Seven years...", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "bird_152", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret08", "Global energy", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "bird_153", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret09", "Devil's lair", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "ball_124", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "icon_515", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Solved the Ogre's riddle!", "Solve the \?\?\?\?'s riddle", "ball_127", 1);
 
 		//  Hollow
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret10", "Rainbow power!", "Found the secret!", "It's a secret...", "ball_125", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret11", "Coming soon", "Found the secret!", "It's a secret...", "jetpack_09", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret12", "Mortal", "Found the secret!", "It's a secret...", "icon_511", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret13", "About her", "Found the secret!", "It's a secret...", "icon_512", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret14", "Knockout!", "Found the secret!", "It's a secret...", "ship_177", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret15", "Coincidence!", "Found the secret!", "It's a secret...", "bird_154", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret16", "Pirate Manners", "Found the secret!", "It's a secret...", "ball_126", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret17", "Don't make no sense", "Found the secret!", "It's a secret...", "icon_513", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret18", "Salvation", "Found the secret!", "It's a secret...", "ship_178", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret10", "Rainbow power!", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "ball_125", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret11", "Coming soon", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "jetpack_09", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret12", "Mortal", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "icon_511", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret13", "About her", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "icon_512", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret14", "Knockout!", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "ship_177", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret15", "Coincidence!", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "bird_154", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret16", "Pirate Manners", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "ball_126", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret17", "Don't make no sense", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "icon_513", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret18", "Salvation", "Solved the Hollow's riddle!", "Solve the \?\?\?\?'s riddle", "ship_178", 1);
 
 		//  Special
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret19", "Comic book fan!", "Found the secret!", "It's a secret...", "dart_99", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret20", "Programmer's secret", "Found the secret!", "It's a secret...", "dart_100", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret21", "Must not be named", "Found the secret!", "It's a secret...", "icon_514", 1);
-
-		//  Update 1.1.0
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret22", "Greek Grindset", "Found the secret!", "It's a secret...", "icon_515", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret23", "Geometry Canvas", "Found the secret!", "It's a secret...", "ball_127", 1);
-		AchievementManager::addAchievement("geometry.ach.odyssey.secret24", "Wanted!", "Found the secret!", "It's a secret...", "ball_128", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret19", "Comic book fan!", "Read all the comics!", "It's a secret...", "dart_99", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret20", "Programmer's secret", "Found the programmer!", "It's a secret...", "dart_100", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret21", "Must not be named", "You released the Hollow...", "It's a secret...", "icon_514", 1);
+		AchievementManager::addAchievement("geometry.ach.odyssey.secret24", "Wanted!", "Caught Danky!", "It's a secret...", "ball_128", 1);
 	}
 };

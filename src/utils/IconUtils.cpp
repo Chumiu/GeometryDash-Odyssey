@@ -363,9 +363,9 @@ bool IconUtils::isIconCustom(int id, IconType type)
 
 bool IconUtils::isIconSecret(int id, IconType type)
 {
-    if ((id >= 511 && id <= 515) && type == IconType::Cube)
+    if ((id >= 508 && id <= 515) && type == IconType::Cube)
         return true;
-    if ((id >= 176 && id <= 177) && type == IconType::Ship)
+    if ((id >= 177 && id <= 178) && type == IconType::Ship)
         return true;
     if ((id >= 123 && id <= 128) && type == IconType::Ball)
         return true;
