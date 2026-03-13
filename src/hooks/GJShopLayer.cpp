@@ -1,7 +1,9 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJShopLayer.hpp>
+#include <Geode/modify/PurchaseItemPopup.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
-#include "../nodes/PromoPopup.hpp"
+#include "../ui/ShopPromoPopup.hpp"
+#include "../utils/IconUtils.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -18,6 +20,7 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 		auto extraMenu = CCMenu::create();
 		extraMenu->setID("shop-tv-menu"_spr);
 		extraMenu->setPosition({0, 0});
+		extraMenu->setZOrder(3);
 
 		auto spriteTV = CCSprite::createWithSpriteFrameName("gj_videoRewardBtn_001.png");
 		spriteTV->setScale(0.9f);
@@ -27,7 +30,10 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 			this,
 			menu_selector(OdysseyShopLayer::onPlayVideo));
 
-		std::string info = GameManager::sharedState()->getGameVariable("0201") ? "Revisa tus <cy>Iconos</c>. A veces los iconos que ya has desbloqueado apareceran aqui como no comprados" : "Be aware to check your <cy>Icon kit</c>, icons you already unlocked might show here as not bought.";
+		std::string info = Odyssey::createText(
+			"Be aware to check your <cy>Icon Kit</c>, since the fangame uses custom icons above the vanilla limit, it's prone to issues.",
+			"Pendiente en revisar tus <cy>Iconos</c>, como el fangame usa iconos custom arriba del limite de los que hay en Vanilla, esta sujeto a problemas");
+
 		auto infoButton = InfoAlertButton::create("Warning", info, 1);
 		infoButton->setPosition({30, 30});
 		extraMenu->addChild(infoButton);
@@ -48,10 +54,10 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 		auto winSize = CCDirector::sharedDirector()->getWinSize();
 		int rand = (std::rand() % 6) + 1;
 
-		auto wantedPoster = CCSprite::createWithSpriteFrameName(fmt::format("GDO_Wanted0{}_001.png"_spr, rand).c_str());
+		auto wantedPoster = CCSprite::createWithSpriteFrameName(fmt::format("ShopDeco_{:02}_001.png"_spr, rand).c_str());
 		wantedPoster->setPosition({(winSize.width / 4) + (std::rand() % 3 * 30), winSize.height / 2 + 70.f});
-		wantedPoster->setID("wanted-poster"_spr);
-		wantedPoster->setScale(0.8f);
+		wantedPoster->setID("shop-decoration"_spr);
+		wantedPoster->setScale(1.333f);
 		wantedPoster->setZOrder(-1);
 		this->addChild(wantedPoster);
 
@@ -104,5 +110,30 @@ class $modify(OdysseyShopLayer, GJShopLayer)
 
 		setKeyboardEnabled(false);
 		setKeypadEnabled(false);
+	}
+};
+
+class $modify(PurchaseItemPopup)
+{
+	void onPurchase(CCObject *sender)
+	{
+		PurchaseItemPopup::onPurchase(sender);
+		auto item = m_storeItem;
+
+		log::debug("Item Purchased -- Index: {} / Type: {} / ID: {}", item->m_index.value(), item->m_unlockType.value(), item->m_typeID.value());
+
+		//	I know this is terrible, but what else can I do?
+		Mod::get()->setSavedValue<int>(fmt::format("store-item-{:02}", item->m_index), item->m_price);
+		Mod::get()->setSavedValue<int>("Orbs", Mod::get()->getSavedValue<int>("Orbs") - item->m_price.value());
+
+		//	"Conclusive Journey" key bought.
+		if (item->m_unlockType.value() == 12 && item->m_typeID.value() == 1)
+			GameManager::sharedState()->setUGV("237", true);
+
+		//	"Burning Sands" key bought.
+		if (item->m_unlockType.value() == 12 && item->m_typeID.value() == 2)
+			GameManager::sharedState()->setUGV("238", true);
+
+		IconUtils::unlockReward(item->m_typeID.value(), static_cast<UnlockType>(item->m_unlockType.value()));
 	}
 };

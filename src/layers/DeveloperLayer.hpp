@@ -1,26 +1,33 @@
 #pragma once
 using namespace geode::prelude;
 
-class DeveloperLayer : public cocos2d::CCLayer
+class DeveloperLayer : public CCLayer
 {
 protected:
     CCSprite *m_background = nullptr;
 
+    CCMenu * m_talkMenu = nullptr;
+    CCMenu * m_levelsMenu = nullptr;
+
     virtual bool init();
     virtual void keyBackClicked();
-    void onBack(cocos2d::CCObject *);
+    void onBack(CCObject *);
 
-    void onCarp02(CCObject *);
-    void onCarp03(CCObject *);
-    void onCarp04(CCObject *);
-    void onStoryDialogNew(CCObject *);
-    void onPopup(CCObject *);
-
-    void onComic(CCObject *);
+    void onTalk(CCObject *);
     void onLevel(CCObject *);
-    void onOgre(CCObject *);
+    void onPopup(CCObject *);
+    void onComic(CCObject *);
+
+    void onTalkNav(CCObject *);
+    void onLevelNav(CCObject *);
+
+    void updateTalk();
+    void updateLevels();
 
 public:
+    unsigned int m_talkPage = 0;
+    unsigned int m_levelPage = 0;
+
     static DeveloperLayer *create();
     CCScene *scene();
 };

@@ -1,6 +1,6 @@
 {
 	"geode": "5.3.0",
-	"version": "v1.1.0-beta.1",
+	"version": "v1.1.0-beta.2",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
@@ -18,8 +18,7 @@
 	"description": "A fanmade spin-off!",
 	"early-load": true,
 	"dependencies": {
-		"geode.node-ids": "1.22.0",
-		"alphalaneous.happy_textures": "2.1.0"
+		"geode.node-ids": "1.22.0"
 	},
 	"incompatibilities": {
 		"capeling.geometry-dash-lunar": "*",
@@ -27,7 +26,15 @@
 		"itzkiba.better_progression": "*",
 		"gdutilsdevs.gdutils": "*",
 		"dankmeme.globed2": "*",
-		"ninxout.redash": "*"
+		"bitz.hard_mode": "*",
+		"ninxout.redash": "*",
+		"alphalaneous.alphas_geode_utils": {
+			"version": "*",
+			"platforms": [
+				"android",
+				"ios"
+			]
+		}
 	},
 	"links": {
 		"community": "https://discord.gg/PNPrR4DEbw"
@@ -37,16 +44,10 @@
 			"type": "title",
 			"name": "Main Settings"
 		},
-		"spanish-language": {
-			"type": "bool",
-			"name": "Spanish Translation",
-			"description": "<cy>ENG</c>: Translates most of the mod in Spanish. Due to character limitations, there will be spelling errors.\n\n<cy>ESP</c>: Traduce mayor parte del dialogo del mod en lenguaje hispano. Dado a las limitaciones de caracteres en el juego, habran errores ortograficos.",
-			"default": false
-		},
 		"hide-custom": {
 			"type": "bool",
 			"name": "Hide Custom Gamemodes",
-			"description": "<cy>ENG</c>: Hides the icon kit buttons for the custom gamemodes (they only have one design, for now...)\n\n<cy>ESP</c>: Oculta los botones de los gamemodes personalizados en el Icon Kit (tienen solamente un icono, por ahora...)",
+			"description": "<cy>**ENGLISH**</c>: Hides the icon kit buttons for the custom gamemodes.\n***\n<cy>**SPANISH**</c>: En el Icon Kit, oculta los botones de los gamemodes personalizados.",
 			"default": false,
 			"platforms": [
 				"mac",
@@ -65,6 +66,7 @@
 		"keybind-comic-next-page": {
 			"type": "keybind",
 			"name": "Next Page (Comics)",
+			"description": "<cy>**ENGLISH**</c>: The keybind to move to the next page in the comics.\n***\n<cy>**SPANISH**</c>: La combinacion de teclas para mover a la pagina siguiente en los comics.",
 			"default": [
 				"Right"
 			],
@@ -76,6 +78,7 @@
 		"keybind-comic-prev-page": {
 			"type": "keybind",
 			"name": "Previous Page (Comics)",
+			"description": "<cy>**ENGLISH**</c>: The keybind to move to the previous page in the comics.\n***\n<cy>**SPANISH**</c>: La combinacion de teclas para mover a la pagina anterior en los comics.",
 			"default": [
 				"Left"
 			],
@@ -91,7 +94,7 @@
 		"dev-mode": {
 			"type": "bool",
 			"name": "Developer Mode",
-			"description": "Enabling developer modes allows you to bypass most restrictions (like access to Online Menu)",
+			"description": "<cy>**ENGLISH**</c>: Enabling this mode allows you to bypass most restrictions (like access to the online menu).\n***\n<cy>**SPANISH**</c>: Habilitando este modo te deja sobrepasar la mayoria de las restricciones (como acceder al menu online).",
 			"default": false,
 			"enable-if": "saved:developer-version",
 			"enable-if-description": "Developer only"
@@ -99,7 +102,7 @@
 		"bypass-levels": {
 			"type": "bool",
 			"name": "Level Bypass",
-			"description": "Unlocks all levels, disabling the progression system",
+			"description": "<cy>**ENGLISH**</c>: Unlocks all levels, completing one like this will break the progression system.\n***\n<cy>**SPANISH**</c>: Desbloquea todos los niveles, completando uno asi rompera el sistema de progreso.",
 			"default": false,
 			"enable-if": "dev-mode && saved:developer-version",
 			"enable-if-description": "Developer only"
@@ -107,7 +110,7 @@
 		"bypass-vaults": {
 			"type": "bool",
 			"name": "Vault Bypass",
-			"description": "Unlocks the vaults (You skip the requirements to open them)",
+			"description": "<cy>**ENGLISH**</c>: Unlocks the vaults, skipping the requirements needed to unlock them.\n***\n<cy>**SPANISH**</c>: Desbloquea los vaults, saltandose los requerimientos necesarios para abrirlos.",
 			"default": false,
 			"enable-if": "dev-mode && saved:developer-version",
 			"enable-if-description": "Developer only"
@@ -115,18 +118,27 @@
 		"empty-levels": {
 			"type": "bool",
 			"name": "Empty all levels",
-			"description": "Turns all levels of the mod as empty templates (Just to test achievements and progression system)",
+			"description": "<cy>**ENGLISH**</c>: Turns all levels of the mod as empty templates, just to test the achievements and progression system.\n***\n<cy>**SPANISH**</c>: Convierte todos los niveles del mod en una base vacia, solo para testear los logros y sistema de progreso.",
 			"default": false,
 			"enable-if": "dev-mode && saved:developer-version",
 			"enable-if-description": "Developer only"
+		},
+		"danger-title": {
+			"type": "title",
+			"name": "Danger Zone",
+			"description": "<cy>**ENGLISH**</c>:\nThe following setting is if you want to <cr>delete your save data</c> of Geometry Dash Odyssey, only confirm if you 100% want a full restart of the fangame.\n***\n<cy>**SPANISH**</c>:\nEl siguiente setting es si deseas <cr>borrar los datos</c> de Geometry Dash Odyssey, solamente confirma si estas 100% en querer un reinicio total del fangame."
+		},
+		"delete-data": {
+			"type": "custom:delete-data-button",
+			"name": "erase data"
 		}
 	},
 	"resources": {
 		"spritesheets": {
-			"GJO_GameSheet01": [
+			"GDO_GameSheet01": [
 				"resources/OdysseySheet/*.png"
 			],
-			"GJO_SecretSheet": [
+			"GDO_SecretSheet": [
 				"resources/VaultSheet/*.png"
 			]
 		},
@@ -145,6 +157,9 @@
 	},
 	"tags": [
 		"content",
+		"universal",
+		"interface",
+		"gameplay",
 		"online"
 	]
 }

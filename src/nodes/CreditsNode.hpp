@@ -1,16 +1,16 @@
 #pragma once
 using namespace geode::prelude;
 
-class CreditsNode : public cocos2d::CCNode
+class CreditsNode : public CCNode
 {
 protected:
     int m_accountID = 0;
     SimplePlayer *m_userIcon = nullptr;
-    cocos2d::CCLabelBMFont *m_userName = nullptr;
-    cocos2d::CCLabelBMFont *m_userReason = nullptr;
+    CCLabelBMFont *m_userName = nullptr;
+    CCLabelBMFont *m_userReason = nullptr;
     CCMenuItemSpriteExtra *m_userButton = nullptr;
 
-    bool init(const char *name, int iconID, int color1, int color2, int color3, bool glow, int accountID)
+    bool init(const char *name, int accountID = 0, int iconID = 1, int color1 = 1, int color2 = 3, int color3 = 0)
     {
         if (!CCNode::init())
             return false;
@@ -45,7 +45,7 @@ protected:
         m_userIcon->setColor(GM->colorForIdx(color1));
         m_userIcon->setSecondColor(GM->colorForIdx(color2));
 
-        if (glow)
+        if (color3)
         {
             m_userIcon->setGlowOutline(GM->colorForIdx(color3));
             m_userIcon->enableCustomGlowColor(GM->colorForIdx(color3));
@@ -55,7 +55,7 @@ protected:
         m_userIcon->setScale(1.2f);
 
         CCMenu *userMenu = CCMenu::create();
-        userMenu->setPosition({0, -31});
+        userMenu->setPosition({0, -27.5});
 
         userMenu->addChild(m_userButton);
         addChild(userMenu);
@@ -68,17 +68,19 @@ protected:
     }
 
 public:
-    static CreditsNode *create(const char *name, int iconID, int color1, int color2, int color3, bool glow, int accountID)
+    static CreditsNode *create(const char *name, int accountID = 0, int iconID = 1, int color1 = 1, int color2 = 3, int color3 = 0)
     {
         auto ret = new CreditsNode();
-        if (ret && ret->init(name, iconID, color1, color2, color3, glow, accountID))
+
+        if (ret && ret->init(name, accountID, iconID, color1, color2, color3))
         {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+
+        delete ret;
         return nullptr;
-    };
+    }
 
     void setUserButtonVisible(bool value)
     {
@@ -90,7 +92,7 @@ public:
         m_userIcon->setVisible(value);
     }
 
-    void onUser(CCObject *sender)
+    void onUser(CCObject *)
     {
         ProfilePage::create(m_accountID, false)->show();
     }

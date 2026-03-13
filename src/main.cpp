@@ -3,10 +3,7 @@
 #include <Geode/modify/SongsLayer.hpp>
 #include <Geode/modify/MusicDownloadManager.hpp>
 #include <Geode/modify/PauseLayer.hpp>
-#include <Geode/modify/PurchaseItemPopup.hpp>
-
 #include "utils/Utils.hpp"
-#include "utils/IconUtils.hpp"
 
 #ifdef DEVELOPER_MODE
 #include <Geode/modify/EditorUI.hpp>
@@ -15,36 +12,15 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded)
-{
-	if (!Odyssey::getEarlyLoadBreakingMods().empty())
-	{
-		auto mod = Loader::get()->getLoadedMod("teamtcm.geometry-dash-odyssey");
-
-		for (Hook *hook : mod->getHooks())
-		{
-			if (hook->getDisplayName() == "MenuLayer::init")
-				continue;
-
-			if (hook->getDisplayName() == "LoadingLayer::init")
-				continue;
-
-			(void)hook->disable();
-		}
-
-		return;
-	}
-};
-
 class $modify(PauseLayer)
 {
 	void onQuit(CCObject *sender)
 	{
 		PauseLayer::onQuit(sender);
-		int page = Odyssey::islandPageForLevelID(PlayLayer::get()->m_level->m_levelID);
+		int page = Odyssey::getIslandForLevel(PlayLayer::get()->m_level->m_levelID);
 
-		auto pageID = (page + 1 < 3) ? page + 1 : 3;
-		GameManager::sharedState()->fadeInMusic(fmt::format("IslandLoop{:02}.mp3"_spr, pageID));
+        std::string song = (page == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, page + 1);
+        GameManager::sharedState()->fadeInMusic(song);
 	}
 };
 
@@ -110,6 +86,7 @@ class $modify(GDO_LocalLevelManager, LocalLevelManager)
 	}
 };
 
+/*
 class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 {
 	gd::string pathForSFXFolder(int sfxID)
@@ -132,6 +109,7 @@ class $modify(GDO_MusicDownloadManager, MusicDownloadManager)
 		return path;
 	}
 };
+*/
 
 class $modify(SongsLayer)
 {
@@ -161,22 +139,3 @@ class $modify(SongsLayer)
 	}
 };
 
-class $modify(PurchaseItemPopup)
-{
-	void onPurchase(CCObject *sender)
-	{
-		PurchaseItemPopup::onPurchase(sender);
-		// log::info("Purchased! {}", "\n");
-		// log::info("Type: {} ID: {}", m_storeItem->m_typeID.value(), m_storeItem->m_unlockType.value());
-
-		if (m_storeItem->m_unlockType.value() == 12)
-		{
-			if (m_storeItem->m_typeID.value() == 1)
-				GameManager::sharedState()->setUGV("237", true);
-			if (m_storeItem->m_typeID.value() == 2)
-				GameManager::sharedState()->setUGV("238", true);
-		}
-
-		IconUtils::unlockReward(m_storeItem->m_typeID.value(), static_cast<UnlockType>(m_storeItem->m_unlockType.value()));
-	}
-};

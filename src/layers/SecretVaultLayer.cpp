@@ -14,13 +14,19 @@ bool SecretVaultLayer::init()
 
     //  Data
     m_achievementName = "";
-    m_spanish = GameManager::sharedState()->getGameVariable("0201");
+    m_spanish = Odyssey::isSpanish();
 
     //  Background
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     m_background = CCSprite::createWithSpriteFrameName("HollowBG_001.png"_spr);
-    m_bg_2 = CCSprite::createWithSpriteFrameName("HollowBG_2_001.png"_spr);
-    m_bg_3 = CCSprite::createWithSpriteFrameName("HollowBG_3_001.png"_spr);
+
+    auto m_background_2A = CCSprite::createWithSpriteFrameName("HollowBG_2_001.png"_spr);
+    auto m_background_2B = CCSprite::createWithSpriteFrameName("HollowBG_2_001.png"_spr);
+    m_background_2B->setFlipX(true);
+
+    auto m_background_3A = CCSprite::createWithSpriteFrameName("HollowBG_3_001.png"_spr);
+    auto m_background_3B = CCSprite::createWithSpriteFrameName("HollowBG_3_001.png"_spr);
+    m_background_3A->setFlipX(true);
 
     m_background->setScaleX((winSize.width) / m_background->getTextureRect().size.width);
     m_background->setScaleY((winSize.height) / m_background->getTextureRect().size.height);
@@ -30,22 +36,41 @@ bool SecretVaultLayer::init()
     m_background->setID("background"_spr);
     addChild(m_background, -4);
 
-    m_bg_2->setScaleX((winSize.width) / m_bg_2->getTextureRect().size.width);
-    m_bg_2->setScaleY((winSize.height) / m_bg_2->getTextureRect().size.height);
-    m_bg_2->setID("background-layer-2"_spr);
-    m_bg_2->setAnchorPoint({0, 0});
-    m_bg_2->setPosition({0, 0});
-    m_bg_2->setColor({0, 0, 0});
-    m_bg_2->setOpacity(90);
-    addChild(m_bg_2, -3);
+    //  Background Layer 2
+    m_background_2A->setScaleX((winSize.width / 2) / m_background_2A->getTextureRect().size.width);
+    m_background_2A->setScaleY((winSize.height) / m_background_2A->getTextureRect().size.height);
+    m_background_2A->setID("background-layer-2A"_spr);
+    m_background_2A->setAnchorPoint({0, 0});
+    m_background_2A->setColor({0, 0, 0});
+    m_background_2A->setOpacity(90);
+    m_background_2A->setZOrder(-3);
+    addChildAtPosition(m_background_2A, Anchor::BottomLeft, ccp(-30, 0), false);
 
-    m_bg_3->setScaleX((winSize.width) / m_bg_3->getTextureRect().size.width);
-    m_bg_3->setScaleY((winSize.height) / m_bg_3->getTextureRect().size.height);
-    m_bg_3->setID("background-layer-3"_spr);
-    m_bg_3->setAnchorPoint({0, 0});
-    m_bg_3->setPosition({0, 0});
-    m_bg_3->setColor({0, 0, 0});
-    addChild(m_bg_3, -2);
+    m_background_2B->setScaleX((winSize.width / 2) / m_background_2B->getTextureRect().size.width);
+    m_background_2B->setScaleY((winSize.height) / m_background_2B->getTextureRect().size.height);
+    m_background_2B->setID("background-layer-2B"_spr);
+    m_background_2B->setAnchorPoint({1, 0});
+    m_background_2B->setColor({0, 0, 0});
+    m_background_2B->setOpacity(90);
+    m_background_2B->setZOrder(-3);
+    addChildAtPosition(m_background_2B, Anchor::BottomRight, ccp(30, 0), false);
+
+    //  Background Layer 3
+    m_background_3A->setScaleX((winSize.width / 2) / m_background_3A->getTextureRect().size.width);
+    m_background_3A->setScaleY((winSize.height) / m_background_3A->getTextureRect().size.height);
+    m_background_3A->setID("background-layer-3A"_spr);
+    m_background_3A->setAnchorPoint({0, 0});
+    m_background_3A->setColor({0, 0, 0});
+    m_background_3A->setZOrder(-2);
+    addChildAtPosition(m_background_3A, Anchor::Bottom, ccp(0, 0), false);
+
+    m_background_3B->setScaleX((winSize.width / 2) / m_background_3B->getTextureRect().size.width);
+    m_background_3B->setScaleY((winSize.height) / m_background_3B->getTextureRect().size.height);
+    m_background_3B->setID("background-layer-3B"_spr);
+    m_background_3B->setAnchorPoint({1, 0});
+    m_background_3B->setColor({0, 0, 0});
+    m_background_3B->setZOrder(-2);
+    addChildAtPosition(m_background_3B, Anchor::Bottom, ccp(0, 0), false);
 
     //  Back Button
     auto menuBack = CCMenu::create();
@@ -129,8 +154,9 @@ bool SecretVaultLayer::init()
         m_title->setColor({255, 255, 255});
         m_textInput->setEnabled(false);
         m_textInput->setString("...");
-        m_bg_2->setVisible(false);
-        m_bg_3->setVisible(false);
+
+        m_background_3A->setVisible(false);
+        m_background_3B->setVisible(false);
 
         setKeyboardEnabled(true);
         setKeypadEnabled(true);

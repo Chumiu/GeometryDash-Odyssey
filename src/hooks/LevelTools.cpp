@@ -1,6 +1,5 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelTools.hpp>
-
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -231,7 +230,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 7006: // Boss Rush
 			level->m_levelName = getAudioTitle(106);
 			level->m_audioTrack = 106;
-			level->m_stars = 8;
+			level->m_stars = 10;
 			level->m_difficulty = GJDifficulty::Harder;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
@@ -241,8 +240,8 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 7007: // Absolute Zero
 			level->m_levelName = getAudioTitle(107);
 			level->m_audioTrack = 107;
-			level->m_stars = 10;
-			level->m_difficulty = GJDifficulty::Harder;
+			level->m_stars = 12;
+			level->m_difficulty = GJDifficulty::Insane;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
 			level->m_coins = 3;
@@ -262,7 +261,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_levelName = getAudioTitle(109);
 			level->m_audioTrack = 109;
 			level->m_stars = 15;
-			level->m_difficulty = GJDifficulty::DemonMedium;
+			level->m_difficulty = GJDifficulty::Demon;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
 			level->m_coins = 3;
@@ -303,7 +302,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 		case 7602: // Jelly Castle
 			level->m_levelName = getAudioTitle(602);
 			level->m_audioTrack = 602;
-			level->m_stars = 8;
+			level->m_stars = 10;
 			level->m_difficulty = GJDifficulty::Harder;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
@@ -314,7 +313,7 @@ class $modify(OdysseyLevelTools, LevelTools)
 			level->m_levelName = getAudioTitle(603);
 			level->m_audioTrack = 603;
 			level->m_stars = 10;
-			level->m_difficulty = GJDifficulty::Insane;
+			level->m_difficulty = GJDifficulty::Harder;
 			level->m_requiredCoins = 0;
 			level->m_timestamp = 0;
 			level->m_coins = 3;

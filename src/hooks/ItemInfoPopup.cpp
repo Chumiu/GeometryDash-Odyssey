@@ -18,7 +18,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             auto winSize = CCDirector::sharedDirector()->getWinSize();
             auto popupSize = m_mainLayer->getChildByID("background")->getContentSize();
 
-            auto odysseyLabel = CCSprite::createWithSpriteFrameName("GDO_OdysseyText_001.png"_spr);
+            auto odysseyLabel = CCSprite::createWithSpriteFrameName("OdysseyLabel_001.png"_spr);
             odysseyLabel->setPosition({winSize.width / 2 - popupSize.width / 2 + 44, winSize.height / 2 + popupSize.height / 2 - 28});
             odysseyLabel->setID("odyssey-label"_spr);
             odysseyLabel->setScale(0.70f);
@@ -26,7 +26,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
             m_mainLayer->addChild(odysseyLabel);
         }
 
-        log::info("{}", type);
+        //  log::info("{}", type);
 
         if (type >= 900)
         {
@@ -89,7 +89,7 @@ class $modify(GDOItemInfoPopup, ItemInfoPopup)
                 if (auto descriptionArea = static_cast<TextArea *>(m_mainLayer->getChildByID("description-area")))
                 {
                     std::string iconName = nameForUnlockType(p0, p1);
-                    std::string descriptionString = fmt::format("A secret is required to unlock this <cg>{}</c>!", iconName);
+                    std::string descriptionString = fmt::format("A <cy>secret</c> is required to <cl>unlock</c> this <cg>{}</c>!", iconName);
                     descriptionArea->setString(descriptionString);
                 }
             }

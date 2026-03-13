@@ -3,11 +3,9 @@ using namespace geode::prelude;
 
 namespace Odyssey
 {
-    inline static std::vector<Mod *> breakingModsList;
-
     //  Dialogos
     DialogLayer *createDialog(const char *event, int background = 1, bool sameName = true);
-    DialogLayer *createDialogResponse(const char *event, int times);
+    gd::string createText(const char *english, const char *spanish = "");
 
     //  Nodos para el Level Popup
     CCNode *createDifficultyNode(GJDifficulty, int, bool);
@@ -20,12 +18,11 @@ namespace Odyssey
     void verifyVaultHints();
     void hasAllVaultRewards();
 
-    //  Enteros
-    int islandPageForLevelID(int);
+    void setSpanish(bool value);
+    bool isSpanish();
 
-    //  Vectores
-    std::vector<Mod *> getEarlyLoadBreakingMods();
-    std::vector<Mod *> getBreakingMods();
+    //  Enteros
+    int getIslandForLevel(int levelID);
 
     int getLevelSongID(int levelID);
     std::pair<gd::string, gd::string> getLevelAudioAssets(int levelID);

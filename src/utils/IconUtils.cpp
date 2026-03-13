@@ -363,15 +363,15 @@ bool IconUtils::isIconCustom(int id, IconType type)
 
 bool IconUtils::isIconSecret(int id, IconType type)
 {
-    if ((id >= 511 && id <= 515) && type == IconType::Cube)
+    if ((id >= 508 && id <= 515) && type == IconType::Cube)
         return true;
-    if ((id >= 176 && id <= 177) && type == IconType::Ship)
+    if ((id >= 177 && id <= 178) && type == IconType::Ship)
         return true;
     if ((id >= 123 && id <= 128) && type == IconType::Ball)
         return true;
     if ((id >= 150 && id <= 154) && type == IconType::Ufo)
         return true;
-    if ((id >= 99) && type == IconType::Wave)
+    if ((id >= 99 && id <= 100) && type == IconType::Wave)
         return true;
     if ((id >= 9) && type == IconType::Jetpack)
         return true;
@@ -491,6 +491,9 @@ std::string IconUtils::getItemKey(int iconID, int type)
 
     switch (typeCast)
     {
+    case UnlockType::Cube:
+        icon = "icon";
+        break;
     case UnlockType::Ship:
         icon = "ship";
         break;

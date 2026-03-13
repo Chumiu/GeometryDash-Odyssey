@@ -3,10 +3,9 @@
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../layers/DeveloperLayer.hpp"
 #include "../layers/FanmadeGamesLayer.hpp"
-#include "../nodes/CreditsPopup.hpp"
-#include "../nodes/CreditsNode.hpp"
-#include "../nodes/ComicPopup.hpp"
-#include "../nodes/AlertPopup.hpp"
+#include "../ui/LanguagePopup.hpp"
+#include "../ui/CreditsPopup.hpp"
+#include "../ui/AlertPopup.hpp"
 #include "../utils/Utils.hpp"
 
 using namespace geode::prelude;
@@ -20,61 +19,11 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (!MenuLayer::init())
             return false;
 
-        if (Mod::get()->getSettingValue<bool>("restart-mod"))
-            OdysseyMenuLayer::Restart();
-
-        //  Incompatibilities fixed in 4.2.0
-        auto breakingMods = Odyssey::getBreakingMods();
-        if (!breakingMods.empty())
-        {
-            if (!shownAlert)
-            {
-                std::string description = "Disable the following Mods to use <cy>Geometry Dash: Odyssey</c>:";
-
-                for (Mod *mod : breakingMods)
-                {
-                    log::debug("{}", mod->getName());
-                    description += "\n- <cr>" + mod->getName() + "</c>";
-                }
-
-                auto popup = FLAlertLayer::create(
-                    "Incompatible Mods",
-                    description,
-                    "OK");
-
-                shownAlert = true;
-                popup->m_scene = this;
-                popup->show();
-            }
-
-            if (!Odyssey::getEarlyLoadBreakingMods().empty() || Loader::get()->isModLoaded("ninxout.redash"))
-                return true;
-        }
-
-        //  Displays a popup for savefile info
-        if (!Mod::get()->setSavedValue("shown-safevile-warning", true) && GameManager::sharedState()->getGameVariable("0201"))
-        {
-            auto popup = AlertPopup::create("Savefile Notice", "<cr>Odyssey</c> stores the data in\na separate <cy>savefile</c>. Your data\nwill be <cg>restored</c> when you\n<cb>turn off</c> the Mod.");
-            popup->setWarning(true, false);
-            popup->m_scene = this;
-            popup->show();
-        };
-
-        //  Displays a popup when the player has Spanish enabled for the first time
-        if (!Mod::get()->setSavedValue("shown-translation-warning", true) && GameManager::sharedState()->getGameVariable("0202"))
-        {
-            auto popup = AlertPopup::create("Language Notice", "Dado a limitaciones de\ncaracteres en el juego, habran\n<cr>errores ortograficos</c>\n(como la falta de acentos)");
-            popup->setWarning(false, true);
-            popup->setZOrder(104);
-            popup->m_scene = this;
-            popup->show();
-        };
-
         //  Reemplaza el titulo
         auto gameTitle = static_cast<CCSprite *>(this->getChildByID("main-title"));
         if (gameTitle)
         {
-            auto odysseyTitle = CCSprite::createWithSpriteFrameName("GDO_MainLogo_001.png"_spr);
+            auto odysseyTitle = CCSprite::createWithSpriteFrameName("MainLogo_001.png"_spr);
             gameTitle->setDisplayFrame(odysseyTitle->displayFrame());
             gameTitle->setPositionY(gameTitle->getPositionY() - 15);
         }
@@ -95,28 +44,17 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
         //  Agregua el boton de MDK
         auto MDKButton = CCMenuItemSpriteExtra::create(
-            CircleButtonSprite::createWithSpriteFrameName("GDO_MDKLogo_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
+            CircleButtonSprite::createWithSpriteFrameName("ArtistLogo_MDK_001.png"_spr, 1.5, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
             this,
             menu_selector(OdysseyMenuLayer::onMDK));
 
         bottomMenu->addChild(MDKButton);
         bottomMenu->updateLayout();
 
-        if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
-        {
-            auto comicButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_ComicIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::MediumAlt),
-                this,
-                menu_selector(OdysseyMenuLayer::onComics));
-
-            bottomMenu->addChild(comicButton);
-            bottomMenu->updateLayout();
-        }
-
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
-                CircleButtonSprite::createWithSpriteFrameName("GDO_SettingsIcon_001.png"_spr, 1, CircleBaseColor::Gray, CircleBaseSize::MediumAlt),
+                CircleButtonSprite::createWithSpriteFrameName("SettingsIcon_001.png"_spr, 1, CircleBaseColor::DarkPurple, CircleBaseSize::MediumAlt),
                 this,
                 menu_selector(OdysseyMenuLayer::onDev));
 
@@ -129,7 +67,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         auto moreGamesButton = static_cast<CCMenuItemSpriteExtra *>(moreGamesMenu->getChildByID("more-games-button"));
         if (moreGamesButton)
         {
-            auto creditsSprite = CrossButtonSprite::createWithSpriteFrameName("GDO_CreditsIcon_001.png"_spr, 1.5f);
+            auto creditsSprite = CrossButtonSprite::createWithSpriteFrameName("CreditsLabel_001.png"_spr, 1.5f);
             creditsSprite->setScale(0.9f);
             moreGamesButton->setTag(1);
 
@@ -145,6 +83,32 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         auto dailyCButton = static_cast<CCMenuItemSpriteExtra *>(rightMenu->getChildByID("daily-chest-button"));
         if (dailyCButton)
             dailyCButton->setVisible(false);
+
+        //  If the mod has found that there's account stats in here, disable it.
+        if (Mod::get()->getSavedValue<bool>("disable-fangame"))
+        {
+            auto desc = Odyssey::createText("A mod is currently <cr>conflicting with the savefile system</c> of the Fangame, please disable it and report the issues in Github.",
+                                            "Un mod esta en <cr>conflicto con el sistema de saves del fangame</c>, deshabilitalo y reporta los problemas en Github");
+
+            auto alert = FLAlertLayer::create(
+                "WARNING",
+                desc.c_str(),
+                "Ok");
+            alert->m_scene = this;
+            alert->setZOrder(100);
+            alert->show();
+
+            return true;
+        };
+
+        //  Shows the language setting at the start
+        if (!Mod::get()->setSavedValue("show-language-setting", true))
+        {
+            auto popup = LanguagePopup::create();
+            popup->m_scene = this;
+            popup->setZOrder(104);
+            popup->show();
+        };
 
         return true;
     }
@@ -175,26 +139,22 @@ class $modify(OdysseyMenuLayer, MenuLayer)
 
     void onPlay(CCObject *)
     {
-        auto breakingMods = Odyssey::getBreakingMods();
-
-        if (!breakingMods.empty())
+        if (Mod::get()->getSavedValue<bool>("disable-fangame"))
         {
-            std::string description = "Disable the following Mods to use <cy>Geometry Dash: Odyssey</c>:";
+            auto desc = Odyssey::createText(
+                "A mod is currently <cr>conflicting with the savefile system</c> of the Fangame, please disable it and report the issues in Github.",
+                "Un mod esta en <cr>conflicto con el sistema de saves del fangame</c>, deshabilitalo y reporta los problemas en Github");
 
-            for (Mod *mod : breakingMods)
-            {
-                log::debug("{}", mod->getName());
-                description += "\n- <cr>" + mod->getName() + "</c>";
-            }
+            auto alert = FLAlertLayer::create(
+                "WARNING",
+                desc.c_str(),
+                "Ok");
 
-            auto popup = FLAlertLayer::create(
-                "Incompatible Mods",
-                description,
-                "OK");
-
-            popup->show();
+            alert->m_scene = this;
+            alert->setZOrder(100);
+            alert->show();
             return;
-        }
+        };
 
         auto levelscene = OdysseySelectLayer::scene(0);
         CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, levelscene));
@@ -221,25 +181,5 @@ class $modify(OdysseyMenuLayer, MenuLayer)
     {
         auto credits = CreditsPopup::create();
         credits->show();
-    }
-
-    void onComics(CCObject *)
-    {
-        auto comicPopup = ComicPopup::create();
-        comicPopup->show();
-    }
-
-    void Restart()
-    {
-        Mod::get()->setSettingValue<bool>("restart-mod", false);
-
-        for (auto ii = 1; ii <= 40; ii++)
-        {
-            auto variable = (ii < 10) ? fmt::format("20{}", ii) : fmt::format("2{}", ii);
-            GameManager::sharedState()->setUGV(variable.c_str(), false);
-            log::debug("Restarting UGV = {}", variable);
-        };
-
-        log::debug("Variables succesfully restarted");
     }
 };

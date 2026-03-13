@@ -2,7 +2,6 @@
 #include <Geode/modify/LoadingLayer.hpp>
 #include <filesystem>
 #include <iostream>
-
 #include "../utils/Utils.hpp"
 #include "../utils/IconUtils.hpp"
 
@@ -25,12 +24,6 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         if (!LoadingLayer::init(reload))
             return false;
 
-        if (!Odyssey::getEarlyLoadBreakingMods().empty())
-            return true;
-
-        if (!Odyssey::getBreakingMods().empty())
-            return true;
-
 //  Solo para el mod en Modo desarrollador
 #ifndef DEVELOPER_MODE
         Mod::get()->setSavedValue<bool>("developer-version", false);
@@ -40,60 +33,37 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         Mod::get()->setSavedValue<bool>("developer-version", true);
 #endif
 
-        auto GM = GameManager::sharedState();
         auto SFC = CCSpriteFrameCache::get();
         auto searchPathRoot = dirs::getModRuntimeDir() / Mod::get()->getID() / "resources";
-
         CCFileUtils::sharedFileUtils()->addSearchPath(searchPathRoot.string().c_str());
-        SFC->addSpriteFramesWithFile("GJO_GameSheet01.plist"_spr);
-
-        auto version = CCLabelBMFont::create(fmt::format("{}", Mod::get()->getVersion().toVString(true)).c_str(), "goldFont.fnt");
-        version->setPosition({5, 5});
-        version->setAnchorPoint({0, 0});
-        version->setScale(0.5f);
-        this->addChild(version);
-
-        auto mainTitle = static_cast<CCSprite *>(this->getChildByID("gd-logo"));
-        if (mainTitle)
-        {
-            auto odysseyTitle = CCSprite::createWithSpriteFrameName("GDO_MainLogo_001.png"_spr);
-            mainTitle->setDisplayFrame(odysseyTitle->displayFrame());
-        }
-
-        auto robtopLogo = static_cast<CCSprite *>(this->getChildByID("robtop-logo"));
-        if (robtopLogo)
-        {
-            auto teamLogo = CCSprite::createWithSpriteFrameName("GDO_TeamLogo_001.png"_spr);
-            robtopLogo->setDisplayFrame(teamLogo->displayFrame());
-        };
+        SFC->addSpriteFramesWithFile("GDO_GameSheet01.plist"_spr);
 
         //  Loads the assets
         OdysseyLoadingLayer::addCustomIconCredits();
         OdysseyLoadingLayer::addOdysseyAssets();
         OdysseyLoadingLayer::loadStats();
 
-        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
-        //  OdysseyLoadingLayer::addOdysseyAudioAssets();
+        //  Adds the version of the fangame at the bottom left
+        auto version = CCLabelBMFont::create(fmt::format("{}", Mod::get()->getVersion().toVString(true)).c_str(), "goldFont.fnt");
+        version->setPosition({5, 5});
+        version->setAnchorPoint({0, 0});
+        version->setScale(0.75f);
+        this->addChild(version);
 
-        //  La bandera de "Aceptar los ToS" del juego
-        if (!GM->getUGV("30"))
-            GM->setUGV("30", true);
+        //  Modifies the sprites
+        auto mainTitle = static_cast<CCSprite *>(this->getChildByID("gd-logo"));
+        if (mainTitle)
+        {
+            auto odysseyTitle = CCSprite::createWithSpriteFrameName("MainLogo_001.png"_spr);
+            mainTitle->setDisplayFrame(odysseyTitle->displayFrame());
+        }
 
-        //  La bandera de primer dialogo del Shopkeeper (500 Orbes)
-        if (!GM->getUGV("17"))
-            GM->setUGV("17", true);
-
-        GameManager::sharedState()->setIntGameVariable("1001", 0);
-
-        //  Para verificar si los niveles extra tienen progreso
-        auto extraLevel1 = GameLevelManager::sharedState()->getMainLevel(7501, false);
-        auto extraLevel2 = GameLevelManager::sharedState()->getMainLevel(7502, false);
-
-        if ((extraLevel1->m_normalPercent > 0 || extraLevel1->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("237"))
-            GameManager::sharedState()->setUGV("237", true);
-
-        if ((extraLevel2->m_normalPercent > 0 || extraLevel2->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("238"))
-            GameManager::sharedState()->setUGV("238", true);
+        auto robtopLogo = static_cast<CCSprite *>(this->getChildByID("robtop-logo"));
+        if (robtopLogo)
+        {
+            auto teamLogo = CCSprite::createWithSpriteFrameName("TeamLogo_Big_001.png"_spr);
+            robtopLogo->setDisplayFrame(teamLogo->displayFrame());
+        };
 
         return true;
     }
@@ -111,11 +81,13 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
                 "Explorers, the failed promise...",
                 "Adding more wanted posters\non the shop",
                 "Why the vaults talk about\nthis random gal?",
+                "I wonder what game theory\nthinks about this",
                 "Pray for the programmers...",
                 "If something breaks,\nblame it on Chumiu",
                 "This mod is dedicated to MDK :)",
                 "Some vault codes are based on\nMDK's lore in his website",
-                "Mathi Approved"};
+                "Mathi Approved",
+            };
 
         int rand = (std::rand() % messages.size());
         return messages[rand];
@@ -123,16 +95,8 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
     void addOdysseyAssets()
     {
-//  Fetches the textures from the Assets.zip (Which only contains the dialogue sprites)
-#ifdef GEODE_IS_WINDOWS
-        auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "\\" + "Assets.zip";
-#endif
-
-#if defined(GEODE_IS_MACOS) || defined(GEODE_IS_IOS) || defined(GEODE_IS_ANDROID)
-		auto zipFilePath = geode::Mod::get()->getResourcesDir().string() + "/" + "Assets.zip";
-#endif
-
-        auto unzipDir = geode::Mod::get()->getResourcesDir().string();
+        auto zipFilePath = Mod::get()->getResourcesDir() / "Assets.zip";
+        auto unzipDir = geode::Mod::get()->getResourcesDir();
         auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
 
         CCFileUtils::get()->addTexturePack(CCTexturePack{
@@ -187,8 +151,10 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(495, UnlockType::Cube), (int)Artist::Cyan);   // Cyan
         IconUtils::addCredits(std::make_pair(496, UnlockType::Cube), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(497, UnlockType::Cube), (int)Artist::Angelo); // Angelo
+
         for (int i = 498; i < 503; i++)
             IconUtils::addCredits(std::make_pair(i, UnlockType::Cube), (int)Artist::Danky);
+
         IconUtils::addCredits(std::make_pair(503, UnlockType::Cube), (int)Artist::Minox);  // MinoX
         IconUtils::addCredits(std::make_pair(504, UnlockType::Cube), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(505, UnlockType::Cube), (int)Artist::Danky);  // Danky
@@ -239,6 +205,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
         IconUtils::addCredits(std::make_pair(152, UnlockType::Bird), (int)Artist::ML500);  // ML5
         IconUtils::addCredits(std::make_pair(153, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(154, UnlockType::Bird), (int)Artist::Danky);  // Danky
+        IconUtils::addCredits(std::make_pair(155, UnlockType::Bird), (int)Artist::Danky);  // Danky
         IconUtils::addCredits(std::make_pair(156, UnlockType::Bird), (int)Artist::Angelo); // Angelo
         IconUtils::addCredits(std::make_pair(157, UnlockType::Bird), (int)Artist::Cyan);   // Cyan
         IconUtils::addCredits(std::make_pair(158, UnlockType::Bird), (int)Artist::Angelo); // Angelo
@@ -266,48 +233,54 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 
     void loadStats()
     {
+        auto GM = GameManager::sharedState();
         auto GSM = GameStatsManager::sharedState();
 
+        //  If there's account data found, disables the rest of this function.
+        if (GJAccountManager::sharedState()->m_accountID != 0)
+        {
+            log::error("Account of data found, disabling the loading stats of the fangame to risk modified savefiles");
+            Mod::get()->setSavedValue<bool>("disable-fangame", true);
+            return;
+        }
+
+        //  Just as a safeguard.
+        Mod::get()->setSavedValue<bool>("disable-fangame", false);
+
+        //  The flag of the "Accepting TOS" of the game.
+        if (!GM->getUGV("30"))
+            GM->setUGV("30", true);
+
+        //  The flag of the first shopkeeper dialog (Collecting 500 orbs).
+        if (!GM->getUGV("17"))
+            GM->setUGV("17", true);
+
+        GameManager::sharedState()->setIntGameVariable("1001", 0);
+
+        //  Verifies if the extra levels has any progress.
+        auto extraLevel1 = GameLevelManager::sharedState()->getMainLevel(7501, false);
+        auto extraLevel2 = GameLevelManager::sharedState()->getMainLevel(7502, false);
+
+        if ((extraLevel1->m_normalPercent > 0 || extraLevel1->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("237"))
+            GameManager::sharedState()->setUGV("237", true);
+
+        if ((extraLevel2->m_normalPercent > 0 || extraLevel2->m_practicePercent > 0) && !GameManager::sharedState()->getUGV("238"))
+            GameManager::sharedState()->setUGV("238", true);
+
+        //  Hands the orbs.
         if (auto orbs = Mod::get()->getSavedValue<int>("Orbs"))
             GSM->setStat("14", orbs);
 
+        //  To ensure that the shop items are shown as bought.
+        for (auto ii = 1; ii <= 21; ii++)
+        {
+            if (Mod::get()->getSavedValue<int>(fmt::format("store-item-{:02}", ii)) > 0)
+            {
+                auto var = CCString::createWithFormat("%i", Mod::get()->getSavedValue<int>(fmt::format("store-item-{:02}", ii)));
+                GSM->m_purchasedItems->setObject(var, fmt::format("{}", ii));
+            }
+        }
+
         Odyssey::verifyVaultHints();
     }
-
-    /*
-    void applyPatches()
-    {
-#ifdef GEODE_IS_WINDOWS
-        // Cubos
-        Odyssey::patch(0x17EC03, {0xB8, 0x02, 0x02});
-        // Naves
-        Odyssey::patch(0x17EC09, {0xB8, 0xB1});
-        // Balls
-        Odyssey::patch(0x17EC0F, {0xB8, 0x7E});
-        // Ufos
-        Odyssey::patch(0x17EC15, {0xB8, 0x9A});
-        // Wave
-        Odyssey::patch(0x17EC1B, {0xB8, 0x64});
-        // Swings
-        Odyssey::patch(0x17EC2D, {0xB8, 0x2F});
-#endif
-
-#ifdef GEODE_IS_ANDROID
-        // pendiente
-
-        // Cubos
-        // Odyssey::patch(0x5E0F1C, {0x40, 0x40});
-        // Naves
-        // Odyssey::patch(0x17EC09, {0xB8, 0xB1});
-        // Balls
-        // Odyssey::patch(0x17EC0F, {0xB8, 0x7E});
-        // Ufos
-        // Odyssey::patch(0x17EC15, {0xB8, 0x9A});
-        // Wave
-        // Odyssey::patch(0x17EC1B, {0xB8, 0x64});
-        // Swings
-        // Odyssey::patch(0x17EC2D, {0xB8, 0x2F});
-#endif
-    }
-    */
 };
