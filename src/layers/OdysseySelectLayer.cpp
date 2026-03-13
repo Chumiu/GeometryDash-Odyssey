@@ -269,7 +269,7 @@ bool OdysseySelectLayer::init(int page)
             auto pos = m_islandPositions[i];
 
             auto smallIsland = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, i + 1).c_str());
-            smallIsland->setScale(1.f);
+            smallIsland->setScale(1.333f);
 
             auto smallIslandBtn = CCMenuItemSpriteExtra::create(
                 smallIsland,
@@ -772,10 +772,12 @@ void OdysseySelectLayer::addIslandDots()
 
     for (int ii = 0; ii < getPositionForDots().size(); ii++)
     {
-        auto dot = CCSprite::createWithSpriteFrameName("WorldDot_001.png"_spr);
+        auto dot = CCSprite::createWithSpriteFrameName("LevelPathDot_001.png"_spr);
+
         dot->setPosition(getPositionForDots()[ii]);
         if (m_currentPage == 3)
             dot->setPosition(dot->getPosition() - m_winSize / 2);
+
         m_dotNode->addChild(dot);
     }
 
@@ -806,8 +808,8 @@ void OdysseySelectLayer::enableLevelAnimation(CCObject *p0)
 
     if (btn->getTag() > 600)
     {
-        auto islandTexture = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, btn->getTag() - 600 + 3).c_str());
-        islandTexture->setScale(.75f);
+        auto islandTexture = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, btn->getTag() - 600).c_str());
+        islandTexture->setScale(1.333f);
 
         btn->setNormalImage(islandTexture);
         btn->setContentSize(islandTexture->getScaledContentSize());
@@ -906,7 +908,7 @@ void OdysseySelectLayer::animateLevelCompletation()
         if (m_currentPage == 3)
         {
             buttonSprite = CCSprite::createWithSpriteFrameName(fmt::format("OgrePathIsland_{:02}_001.png"_spr, i + 1).c_str());
-            buttonSprite->setScale(.75f);
+            buttonSprite->setScale(1.333f);
         }
 
         // log::info("{}", i + offset + 240);

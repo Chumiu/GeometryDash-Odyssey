@@ -128,7 +128,7 @@ bool SecretVaultLayer2::init()
     auto doorSpr = CCSprite::createWithSpriteFrameName("OgrePathDoor_001.png"_spr);
     // doorSpr->setColor({0, 255, 0});
     doorSpr->setAnchorPoint({.5f, .5f});
-    doorSpr->setScale(.7f);
+    doorSpr->setScale(1.f);
 
     auto doorBtn = CCMenuItemSpriteExtra::create(doorSpr, this, menu_selector(SecretVaultLayer2::onExtraLevels));
 
@@ -172,7 +172,7 @@ bool SecretVaultLayer2::init()
         this->runAction(CCSequence::create(
             CCDelayTime::create(0.5f),
             CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::getOgreDialog)),
-            CCDelayTime::create(3.0f),
+            CCDelayTime::create(6.0f),
             CCCallFunc::create(this, callfunc_selector(SecretVaultLayer2::enableGate)),
             0));
     }
