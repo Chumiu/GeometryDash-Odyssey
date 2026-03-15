@@ -19,7 +19,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         if (!MenuLayer::init())
             return false;
 
-        //  Reemplaza el titulo
+        //  Replaces the title
         auto gameTitle = static_cast<CCSprite *>(this->getChildByID("main-title"));
         if (gameTitle)
         {
@@ -28,18 +28,18 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             gameTitle->setPositionY(gameTitle->getPositionY() - 15);
         }
 
-        //  Reemplazar el boton para acceder al Menu Online
+        //  Replaces the button to access the online menu with just a more fangames menu
         auto mainMenu = static_cast<CCMenu *>(this->getChildByID("main-menu"));
         auto creatorButton = static_cast<CCMenuItemSpriteExtra *>(mainMenu->getChildByID("editor-button"));
         if (creatorButton)
         {
             auto mgSprite = CCSprite::createWithSpriteFrameName("GJ_moreGamesBtn_001.png");
 
-            //  Esto cambiara mas tarde
+            //  This might change later
             creatorButton->setNormalImage(mgSprite);
         }
 
-        //  Boton para acceder a los comics mas facil
+        //  Bottom Menu just to add the rest of the buttons
         auto bottomMenu = static_cast<CCMenu *>(this->getChildByID("bottom-menu"));
 
         //  Agregua el boton de MDK
@@ -51,6 +51,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
         bottomMenu->addChild(MDKButton);
         bottomMenu->updateLayout();
 
+        //  If the build is in developer mode, adds the developer button
         if (Mod::get()->getSettingValue<bool>("dev-mode"))
         {
             auto devButton = CCMenuItemSpriteExtra::create(
@@ -62,7 +63,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             bottomMenu->updateLayout();
         }
 
-        //  Boton de more games es reemplazado por Creditos
+        //  More games button is replaced with the credits button
         auto moreGamesMenu = static_cast<CCMenu *>(this->getChildByID("more-games-menu"));
         auto moreGamesButton = static_cast<CCMenuItemSpriteExtra *>(moreGamesMenu->getChildByID("more-games-button"));
         if (moreGamesButton)
@@ -71,7 +72,6 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             creditsSprite->setScale(0.9f);
             moreGamesButton->setTag(1);
 
-            //  Esto cambiara mas tarde
             moreGamesButton->setNormalImage(creditsSprite);
         }
 
@@ -94,6 +94,7 @@ class $modify(OdysseyMenuLayer, MenuLayer)
                 "WARNING",
                 desc.c_str(),
                 "Ok");
+
             alert->m_scene = this;
             alert->setZOrder(100);
             alert->show();

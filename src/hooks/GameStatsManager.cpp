@@ -115,8 +115,8 @@ class $modify(OdysseyGameStatsManager, GameStatsManager)
 
             addStoreItem(13, 121, 5, 100, newShop); // BOLA
             addStoreItem(14, 122, 5, 100, newShop); // BOLA
-            addStoreItem(15, 174, 4, 150, newShop); // NAVE
-            addStoreItem(16, 175, 4, 150, newShop); // NAVE
+            addStoreItem(15, 175, 4, 150, newShop); // NAVE
+            addStoreItem(16, 176, 4, 150, newShop); // NAVE
 
             addStoreItem(17, 158, 6, 150, newShop); // UFO
             addStoreItem(18, 159, 6, 150, newShop); // UFO
