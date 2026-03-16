@@ -16,7 +16,9 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
 
         if (level == 7004 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level04b") && !GameManager::sharedState()->getUGV("216"))
         {
-            auto layer = ComicLayer::create(6, true);
+            auto layer = ComicLayer::create(6);
+            layer->m_redirectToMap = true;
+
             auto scene = CCScene::create();
             scene->addChild(layer);
 
@@ -28,7 +30,9 @@ class $modify(GDO_EndLevelLayer, EndLevelLayer)
 
         if (level == 7009 && AchievementManager::sharedState()->isAchievementEarned("geometry.ach.level09b") && !GameManager::sharedState()->getUGV("222"))
         {
-            auto layer = ComicLayer::create(12, true);
+            auto layer = ComicLayer::create(12);
+            layer->m_redirectToMap = true;
+
             auto scene = CCScene::create();
             scene->addChild(layer);
 

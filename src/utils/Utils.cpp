@@ -41,6 +41,26 @@ bool Odyssey::isSpanish(){
     return GameManager::sharedState()->getGameVariable("0201");
 }
 
+//  Function that just returns the comic number the player is allowed to read
+int Odyssey::getMaxComic(){
+    auto GSM = GameStatsManager::sharedState();
+    int maxValue = 2;
+
+    for(auto ii = 1; ii <= 9; ii++){
+        log::debug("* Has completed level {}? = {}", ii, GSM->hasCompletedMainLevel(7000 + ii));
+
+        if(!GSM->hasCompletedMainLevel(7000 + ii)) break;
+
+        maxValue++;
+
+        if(ii == 4) maxValue = 7;
+        if(ii == 9) maxValue = 12;
+    }
+
+    log::debug("* Returning value is: {}", maxValue);
+    return maxValue;
+};
+
 //  Adds a node that's the progress bar of a Level
 CCNode *Odyssey::createProgressBar(int percentage, bool isPractice)
 {

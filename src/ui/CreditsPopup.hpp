@@ -115,10 +115,14 @@ const std::vector<std::vector<gd::string>> creditsTestersTwo = {
     {"MinoX28", "13284787", "283", "94", "12", "12"},
     {"Statronic", "19130132", "19", "6", "3", "1"},
     {"OccularPixel", "26757914", "351", "4", "3", "3"},
+    {"RJ04", "25359829", "27", "93", "11", "11"},
+    {"idkguyGD", "27015597", "12", "90", "70", "3"},
+    {"Robertjrtineo1", "21054982", "1", "0", "3", "3"}
 };
 
 const std::vector<std::vector<gd::string>> creditsSpecials = {
     {"RobTop", "71", "275", "6", "3", "1"},
+    {"Colon", "106255", "60", "18", "10", "10"},
     {"EVW", "710192", "28", "12", "9", "9"},
     {"im fernando", "5398449", "56", "35", "3", "3"},
     {"StivenelXD", "167848", "50", "12", "3", "3"},
@@ -127,4 +131,6 @@ const std::vector<std::vector<gd::string>> creditsSpecials = {
     {"Mxst0", "24326682", "296", "89", "2", "44"},
     {"Bluespace", "10206148", "37", "3", "6", "6"},
     {"DaPixelHero", "1826718", "72", "5", "9", "9"},
+    {"RetroAdvance64", "617383", "298", "94", "14", "14"},
+    {"StudioBois", "17028382", "263", "4", "2", "2"},
 };

@@ -1,5 +1,4 @@
 #include "OdysseySelectLayer.hpp"
-#include "ComicLayer.hpp"
 #include "SecretVaultLayer2.hpp"
 #include "../nodes/InstantMenuItemSprite.hpp"
 #include "../ui/OdysseyLevelPopup.hpp"
@@ -65,7 +64,7 @@ bool OdysseySelectLayer::init(int page)
         break;
 
     case 3:
-        bgID = 8;
+        bgID = 57;
         bgColor = {0, 30, 0};
         gradientColorTop = {0, 60, 0, 30};
         islandTexture = "BonusIsland_01_001.png"_spr;
@@ -171,24 +170,20 @@ bool OdysseySelectLayer::init(int page)
         this,
         menu_selector(OdysseySelectLayer::onLanguage));
 
+    //  Comics Button
+    auto comicsSpr = CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small);
+    auto comicsBtn = CCMenuItemSpriteExtra::create(
+        comicsSpr,
+        this,
+        menu_selector(OdysseySelectLayer::onComics));
+
     bottomLeftMenu->addChild(settingsBtn);
     bottomLeftMenu->addChild(languageBtn);
     bottomLeftMenu->updateLayout();
 
     bottomRightMenu->addChild(musicBtn);
+    bottomRightMenu->addChild(comicsBtn);
     bottomRightMenu->updateLayout();
-
-    if (GameManager::sharedState()->getUGV("208") || GameManager::sharedState()->getUGV("222"))
-    {
-        auto comicsSpr = CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small);
-        auto comicsBtn = CCMenuItemSpriteExtra::create(
-            comicsSpr,
-            this,
-            menu_selector(OdysseySelectLayer::onComics));
-
-        bottomRightMenu->addChild(comicsBtn);
-        bottomRightMenu->updateLayout();
-    }
 
     //  Island Node
     m_islandNode = CCNode::create();
@@ -1250,7 +1245,7 @@ void OdysseySelectLayer::onSettings(CCObject *)
 
 void OdysseySelectLayer::onComics(CCObject *)
 {
-    auto comicPopup = ComicPopup::create();
+    auto comicPopup = ComicPopup::create(m_currentPage);
     comicPopup->show();
 }
 

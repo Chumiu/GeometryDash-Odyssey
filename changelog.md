@@ -1,6 +1,19 @@
 # Changelog
 
-### <cg>v1.1.0-beta.2</c>
+### <cg>v1.1.0-beta.3</c>
+
+* <co>Changed</c> comics button to be permanent.
+* <co>Changed</c> rewards from Hellfire (swapped).
+* <cg>Added</c> new members to the credits.
+* <cy>Fixed</c> music bug when returning from a comic.
+* <cy>Fixed</c> error on a code from The Hollow.
+* <cy>Fixed</c> couple typos in dialogs.
+
+#### Levels
+
+* <cc>There were still levels left to update, now we good.</c>
+
+### <cb>v1.1.0-beta.2</c>
 
 * <cc>Optimized some textures to reduce Nod size</c>
 * <cg>Added</c> better interface for the language settings.
@@ -18,7 +31,7 @@
 * <cc>Updated the remaining levels to their Online Versions</c>
 * <co>Eclipse</c>: Fixed deco error when porting the coins.
 
-### <cg>v1.1.0-beta.1</c>
+### <cb>v1.1.0-beta.1</c>
 
 * <cp>Ported Mod to Geode v5.0.0</c>
 * <cp>New side-quest with the Ogre!</c>

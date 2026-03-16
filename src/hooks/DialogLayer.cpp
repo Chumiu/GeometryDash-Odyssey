@@ -11,7 +11,9 @@ class $modify(OdysseyDialogLayer, DialogLayer)
         //  Evento 1: Al interactuar con el viejo por primera vez
         if(GameManager::sharedState()->getUGV("203") && !GameManager::sharedState()->getUGV("211"))
         {
-            auto layer = ComicLayer::create(1, true);
+            auto layer = ComicLayer::create(1);
+            layer->m_redirectToMap = true;
+
             auto scene = CCScene::create();
             scene->addChild(layer);
 

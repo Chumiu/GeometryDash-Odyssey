@@ -8,42 +8,45 @@
 const int HOLLOW_COIN_QUOTA = 12;
 const int COMICS_AMOUNT = 12;
 
-bool ComicLayer::init(int issueNumber, bool redirectToMap)
+bool ComicLayer::init(int issueNumber)
 {
     if (!CCLayer::init())
         return false;
 
-    m_background = CCSprite::create("GJ_gradientBG.png");
-    m_winSize = CCDirector::sharedDirector()->getWinSize();
+    //  The number of the comic
     m_comicNumber = issueNumber;
-    m_RedirectToMap = redirectToMap;
 
-    auto spanishText = Odyssey::isSpanish();
-    auto size = m_background->getContentSize();
-
-    m_background->setScaleX((m_winSize.width) / size.width);
-    m_background->setScaleY((m_winSize.height) / size.height);
+    //  Background
+    m_background = CCSprite::create("GJ_gradientBG.png");
+    auto winSize = CCDirector::sharedDirector()->getWinSize();
+    auto bgSize = m_background->getContentSize();
+    m_background->setScaleX((winSize.width) / bgSize.width);
+    m_background->setScaleY((winSize.height) / bgSize.height);
     m_background->setAnchorPoint({0, 0});
-
-    m_background->setColor({120, 120, 120});
-    m_background->setID("background"_spr);
     addChild(m_background, -2);
 
     auto arr = CCArray::create();
     auto dotMenu = CCMenu::create();
 
     //	Calls the function that creates the comic (by adding it to the BoomScrollLayer array)
-    loadComic(arr, issueNumber);
+    loadComic(arr);
 
+    //  Scroll Layer for the comics
     m_scrollLayer = BoomScrollLayer::create(arr, 0, false, nullptr, static_cast<DynamicScrollDelegate *>(this));
     m_scrollLayer->m_extendedLayer->m_delegate = static_cast<BoomScrollLayerDelegate *>(this);
     m_scrollLayer->m_looped = false;
-
     m_scrollLayer->instantMoveToPage(m_currentPage);
     addChild(m_scrollLayer);
 
     static_cast<CCSpriteBatchNode *>(m_scrollLayer->getChildren()->objectAtIndex(1))->setPositionY(-45);
 
+    //  Button Menu
+    auto buttonMenu = CCMenu::create();
+    buttonMenu->setID("button-menu");
+    buttonMenu->setZOrder(5);
+    addChildAtPosition(buttonMenu, Anchor::BottomLeft, ccp(0, 0), false);
+
+    //  Back Button
     auto backBtn = CCMenuItemSpriteExtra::create(
         CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
         this,
@@ -51,77 +54,71 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
 
     backBtn->setID("back-button");
     backBtn->setSizeMult(1.2f);
-    backBtn->setPosition({24, m_winSize.height - 24});
+    buttonMenu->addChildAtPosition(backBtn, Anchor::TopLeft, ccp(24, -24), false);
 
-    auto infoText = spanishText ? "Los comics ahora son manejados como contenido <cg>Online</c> dado a que sus dimensiones eran muy pesadas para el mod. Si no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>." : "The comics are now handled as <cg>Online Content</c> because they were too heavy to handle locally via the Mod. If you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>.";
+    //  Info Button
+    auto infoText = Odyssey::createText(
+        "The comics are now handled as <cg>Online Content</c> because they were too heavy to handle locally via the Mod. If you have issues on reading them, you can view them in the <cy>Showcase Video</c> uploaded on <cr>Switchstep's Youtube</c>.",
+        "Los comics ahora son manejados como contenido <cg>Online</c> dado a que sus dimensiones eran muy pesadas para el mod. Si no puedes leerlos bien, puedes verlos en el <cy>Video Showcase</c> del mod subido en el <cr>Youtube de Switchstep</c>.");
 
-    auto infoBtn = InfoAlertButton::create("Quality Issues", infoText, 1);
-    infoBtn->setPosition({m_winSize.width - 24, 24});
+    auto infoBtn = InfoAlertButton::create("Optimization", infoText, 1);
     infoBtn->setID("comic-info-button");
+    buttonMenu->addChildAtPosition(infoBtn, Anchor::BottomRight, ccp(-24, 24), false);
 
-    auto menuBack = CCMenu::create();
-    menuBack->setPosition({0, 0});
-    menuBack->setID("back-menu");
-    menuBack->addChild(backBtn);
-    menuBack->addChild(infoBtn);
-    menuBack->setZOrder(5);
-    addChild(menuBack);
-
-    //  If the comic issue is 4 (Super Ultra's comic), adds the Hollow's button
-    if (issueNumber == 4)
+    if (m_comicNumber == 4)
     {
-        auto hollowSprite = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
-        hollowSprite->setColor({90, 90, 90});
+        //  Adds a button to access the Hollow
+        auto hollowSpr = CCSprite::createWithSpriteFrameName("HollowSkull_001.png"_spr);
+        hollowSpr->setColor({90, 90, 90});
 
         auto hollowBtn = CCMenuItemSpriteExtra::create(
-            hollowSprite,
+            hollowSpr,
             this,
             menu_selector(ComicLayer::onHollow));
-
-        hollowBtn->setPosition({m_winSize.width - 20, m_winSize.height - 20});
-        hollowBtn->setTag(0);
 
         auto opacity = GameManager::sharedState()->getUGV("205") ? 150 : 0;
         hollowBtn->setID("hollow-button");
         hollowBtn->setOpacity(opacity);
 
-        auto secretMenu = CCMenu::create();
-        secretMenu->addChild(hollowBtn);
-        secretMenu->setPosition({0, 0});
-        addChild(secretMenu);
+        buttonMenu->addChildAtPosition(hollowBtn, Anchor::TopRight, ccp(-20, -20), false);
     };
 
-    auto m_cornerBL = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
-    m_cornerBL->setPosition({-1, -1});
-    m_cornerBL->setAnchorPoint({0, 0});
-    m_cornerBL->setID("corner-bl"_spr);
-    addChild(m_cornerBL, 2);
+    //  Corners of the Layer
+    auto cornerBL = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+    cornerBL->setAnchorPoint({0, 0});
+    cornerBL->setZOrder(2);
+    cornerBL->setID("corner-bl");
 
-    auto m_cornerBR = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
-    m_cornerBR->setPosition({m_winSize.width + 1, -1});
-    m_cornerBR->setAnchorPoint({1, 0});
-    m_cornerBR->setFlipX(true);
-    m_cornerBR->setID("corner-br"_spr);
-    addChild(m_cornerBR, 2);
+    auto cornerBR = CCSprite::createWithSpriteFrameName("GJ_sideArt_001.png");
+    cornerBR->setAnchorPoint({1, 0});
+    cornerBR->setFlipX(true);
+    cornerBR->setZOrder(2);
+    cornerBR->setID("corner-br");
 
-    //  Navigation menu
+    this->addChildAtPosition(cornerBL, Anchor::BottomLeft, ccp(-1, -1), false);
+    this->addChildAtPosition(cornerBR, Anchor::BottomRight, ccp(1, -1), false);
+
+    //  Navigation Menu
     CCMenu *navMenu = CCMenu::create();
-    navMenu->setPosition({0, 0});
+    this->addChildAtPosition(navMenu, Anchor::BottomLeft, ccp(0, 0), false);
 
     auto leftArrow = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
     auto rightArrow = CCSprite::createWithSpriteFrameName("navArrowBtn_001.png");
     leftArrow->setFlipX(true);
 
-    m_leftBtn = CCMenuItemSpriteExtra::create(leftArrow, this, menu_selector(ComicLayer::onPrev));
-    m_rightBtn = CCMenuItemSpriteExtra::create(rightArrow, this, menu_selector(ComicLayer::onNext));
-
-    m_leftBtn->setPosition({20.f, m_winSize.height / 2});
+    m_leftBtn = CCMenuItemSpriteExtra::create(
+        leftArrow,
+        this,
+        menu_selector(ComicLayer::onPrev));
     m_leftBtn->setVisible(false);
-    m_rightBtn->setPosition({m_winSize.width - 20.f, m_winSize.height / 2});
 
-    navMenu->addChild(m_leftBtn);
-    navMenu->addChild(m_rightBtn);
-    this->addChild(navMenu);
+    m_rightBtn = CCMenuItemSpriteExtra::create(
+        rightArrow,
+        this,
+        menu_selector(ComicLayer::onNext));
+
+    navMenu->addChildAtPosition(m_leftBtn, Anchor::Left, ccp(20, 0), false);
+    navMenu->addChildAtPosition(m_rightBtn, Anchor::Right, ccp(-20, 0), false);
 
     //  Enables the flag that is required to verify if all the comics were read
     GameManager::sharedState()->setUGV(fmt::format("2{:02}", m_comicNumber + 10).c_str(), true);
@@ -166,10 +163,8 @@ bool ComicLayer::init(int issueNumber, bool redirectToMap)
 };
 
 //  Loads the comic (hence the name)
-void ComicLayer::loadComic(CCArray *array, int comicNumber)
+void ComicLayer::loadComic(CCArray *array)
 {
-    auto spanishText = Odyssey::isSpanish();
-
     std::vector<ccColor3B> colors = {
         {33, 33, 33},
         {63, 6, 155},
@@ -200,20 +195,21 @@ void ComicLayer::loadComic(CCArray *array, int comicNumber)
         6  // 12th
     };
 
-    m_background->setColor(colors[comicNumber - 1]);
-    m_totalPages = totalPages[comicNumber - 1];
+    //  Sets the color of the background
+    m_background->setColor(colors[m_comicNumber - 1]);
+    m_totalPages = totalPages[m_comicNumber - 1];
 
     //  Calls the function that gives the node of the comic page (which is handled online)
     for (int ii = 0; ii < m_totalPages; ii++)
     {
-        auto languageRef = spanishText ? "SPA" : "ENG";
-        auto spriteName = fmt::format("Comic_{}_{:02}_{:02}.png", languageRef, comicNumber, ii + 1);
+        auto languageRef = Odyssey::isSpanish() ? "SPA" : "ENG";
+        auto spriteName = fmt::format("Comic_{}_{:02}_{:02}.png", languageRef, m_comicNumber, ii + 1);
         auto node = ComicNode::create(spriteName.c_str());
         array->addObject(node);
     };
 
     //  If it's the last comic, adds the button for the ending credits
-    if (comicNumber == 12)
+    if (m_comicNumber == 12)
     {
         m_totalPages++;
 
@@ -296,13 +292,13 @@ void ComicLayer::verifySecretAchievement()
         comicProgress += GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str());
         //  log::debug("Comic {}, UGV {}, Value {}", ii, fmt::format("2{}", ii + 10).c_str(), GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str()));
     };
-    //  log::debug("Comic progress: {}", comicProgress);
 
     auto percent = (comicProgress * 100) / COMICS_AMOUNT;
     log::debug("Comics achievement progress: {}", percent);
     GameManager::sharedState()->reportAchievementWithID("geometry.ach.odyssey.secret19", percent, false);
 };
 
+//  When the scroll layer... moved
 void ComicLayer::scrollLayerMoved(CCPoint point)
 {
     float transitionPoint = -point.x / CCDirector::sharedDirector()->getWinSize().width;
@@ -320,7 +316,8 @@ void ComicLayer::scrollLayerMoved(CCPoint point)
 
 void ComicLayer::keyBackClicked()
 {
-    if (m_RedirectToMap)
+    //  If it's a redirect, just moves to the select layer
+    if (m_redirectToMap)
     {
         auto layer = OdysseySelectLayer::create(0);
         auto scene = CCScene::create();
@@ -330,13 +327,12 @@ void ComicLayer::keyBackClicked()
         return;
     }
 
-    if (!m_fromPopup)
+    //  If it's not a redirect, just pops the scene
+    if (m_mapIndex != -1)
     {
-        auto musicLoop = m_comicNumber < 6 ? "IslandLoop01.mp3"_spr : "IslandLoop02.mp3"_spr;
-        GameManager::sharedState()->fadeInMusic(musicLoop);
-    }
-    else
-    {
+        std::string song = (m_mapIndex == 3) ? "SecretLoop02.mp3"_spr : fmt::format("IslandLoop{:02}.mp3"_spr, m_mapIndex + 1);
+        GameManager::sharedState()->fadeInMusic(song);
+    } else {
         GameManager::sharedState()->fadeInMenuMusic();
     }
 
@@ -372,11 +368,11 @@ void ComicLayer::onBack(CCObject *)
     keyBackClicked();
 };
 
-ComicLayer *ComicLayer::create(int issueNumber, bool redirectToMap)
+ComicLayer *ComicLayer::create(int issueNumber)
 {
     auto ret = new ComicLayer();
 
-    if (ret->init(issueNumber, redirectToMap))
+    if (ret->init(issueNumber))
     {
         ret->autorelease();
         return ret;
@@ -386,9 +382,9 @@ ComicLayer *ComicLayer::create(int issueNumber, bool redirectToMap)
     return nullptr;
 };
 
-CCScene *ComicLayer::scene(int issueNumber, bool redirectToMap)
+CCScene *ComicLayer::scene(int issueNumber)
 {
-    auto layer = ComicLayer::create(issueNumber, redirectToMap);
+    auto layer = ComicLayer::create(issueNumber);
     auto scene = CCScene::create();
     scene->addChild(layer);
     return scene;
