@@ -212,8 +212,11 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
     {
         auto offset = Odyssey::getIslandForLevel(m_levelID) - 7000 + 1;
 
+        auto layer = ComicLayer::create(m_levelID + offset);
+        layer->m_mapIndex = Odyssey::getIslandForLevel(m_levelID);
+
         auto scene = CCScene::create();
-        scene->addChild(ComicLayer::create(m_levelID + offset, false));
+        scene->addChild(layer);
 
         auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
         button->setSprite(CircleButtonSprite::createWithSpriteFrameName("ComicsIcon_001.png"_spr, 1, CircleBaseColor::Green, CircleBaseSize::Small));
@@ -244,46 +247,6 @@ void OdysseyLevelPopup::onPlay(CCObject *sender)
             credits->show();
         }
     }
-
-    /*
-    void OdysseyLevelPopup::onAudio(CCObject *sender)
-    {
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
-        auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
-        button->runAction(CCFadeTo::create(0.5, 0));
-
-        if (m_audioWidget)
-        {
-            m_audioWidget->runAction(CCEaseSineOut::create(CCMoveTo::create(0.5, {winSize.width / 2, 30})));
-
-            if (auto arrowButton = this->getChildByIDRecursive("hide-song-button"))
-            {
-                arrowButton->setVisible(true);
-                arrowButton->runAction(CCFadeTo::create(0.5, 255));
-                arrowButton->runAction(CCEaseSineOut::create(CCMoveTo::create(0.5, {arrowButton->getPositionX(), 40})));
-            }
-        }
-    };
-
-    void OdysseyLevelPopup::onHideAudio(CCObject *sender)
-    {
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
-        auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
-        button->setPosition(button->getPositionX(), 0);
-        button->setVisible(false);
-        button->setOpacity(0);
-
-        if (m_audioWidget)
-        {
-            m_audioWidget->runAction(CCEaseSineIn::create(CCMoveTo::create(0.5, {winSize.width / 2, -30})));
-
-            if (auto downloadAudioBtn = this->getChildByIDRecursive("download-audio-btn"))
-            {
-                downloadAudioBtn->runAction(CCFadeTo::create(0.5, 255));
-            }
-        }
-    };
-    */
 
     OdysseyLevelPopup *OdysseyLevelPopup::create(int levelID)
     {

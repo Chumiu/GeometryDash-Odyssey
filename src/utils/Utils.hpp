@@ -21,7 +21,11 @@ namespace Odyssey
     void setSpanish(bool value);
     bool isSpanish();
 
-    //  Enteros
+    //  Progress Functions
+    int getMaxComic();
+    int getMainGameProgress();
+    int getFullGameProgress();
+
     int getIslandForLevel(int levelID);
 
     int getLevelSongID(int levelID);

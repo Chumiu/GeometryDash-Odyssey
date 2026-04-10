@@ -96,12 +96,14 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
     void addOdysseyAssets()
     {
         auto zipFilePath = Mod::get()->getResourcesDir() / "Assets.zip";
-        auto unzipDir = geode::Mod::get()->getResourcesDir();
-        auto result = geode::utils::file::Unzip::intoDir(zipFilePath, unzipDir);
+        auto unzipDir = Mod::get()->getResourcesDir();
+        auto result = utils::file::Unzip::intoDir(zipFilePath, unzipDir, true);
 
+        //  Loads the sheets as a texture pack
         CCFileUtils::get()->addTexturePack(CCTexturePack{
             .m_id = Mod::get()->getID(),
-            .m_paths = {geode::Mod::get()->getResourcesDir().string()}});
+            .m_paths = {string::pathToString(Mod::get()->getResourcesDir())}});
+        log::info("Odyssey Textures loaded");
 
         log::debug("Loading Assets...");
         auto SFC = CCSpriteFrameCache::get();
@@ -126,14 +128,14 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
             SFC->addSpriteFramesWithFile(fmt::format("swing_{}.plist", ii).c_str());
 
         SFC->addSpriteFramesWithFile("jetpack_09.plist");
-        log::debug("Icons succesfully loaded into SpriteFrameCache");
 
         //  Custom Modes
         SFC->addSpriteFramesWithFile("boat_01.plist");
         SFC->addSpriteFramesWithFile("drone_01.plist");
         SFC->addSpriteFramesWithFile("slider_01.plist");
         SFC->addSpriteFramesWithFile("minecart_01.plist");
-        SFC->addSpriteFramesWithFile("test.plist");
+
+        log::info("Odyssey Icons Loaded");
     }
 
     void addCustomIconCredits()

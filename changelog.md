@@ -1,56 +1,48 @@
 # Changelog
 
-### <cg>v1.1.0-beta.2</c>
+### <cg>v1.1.0</c> (Latest)
 
-* <cc>Optimized some textures to reduce Nod size</c>
+#### TL;DR
+
+* <cp>Ported Mod to Geode v5.0.0</c>
+* <cp>New post-game quest with the Ogre!</c>
+* <cp>MacOS and iOS support!</c> <c-666666>(Hopefully)</c>
+* Five new levels to play!
+* New Achievements!
+* New Features!
+* New Secrets!
+* New Icons!
+
+#### Long-version
+
+* <cc>Parts of the code re-written to help optimize the mod</c>.
+* <cc>Reduced size of some textures to optimize the mod.</c>.
+* <cc>Comics now require internet connection to read them</c>.
+* <cc>Audio assets now require to be dowbloaded for each level</c>.
 * <cg>Added</c> better interface for the language settings.
 * <cg>Added</c> option to delete your fangame save data.
 * <cg>Added</c> settings button in the levels menu.
 * <cg>Added</c> new members to the credits.
 * <cy>Fixed</c> crash when tapping the play button multiple times.
-* <cy>Fixed</c> issue where shop items don't register as bought.
-* <cy>Fixed</c> typos in some character dialogs.
+* <cy>Fixed</c> bug of the shopkeeper items not registering as bought.
+* <cy>Fixed</c> some typos and spelling errors.
 * <cy>Fixed</c> sprite errors on a few icons.
-* <cy>Fixed</c> typos in a couple comics.
+* <cr>Removed</c> custom currency sprites.
+* Some more bugfixes and last minute additions. <c-666666>(Help me)</c>
 
 #### Levels
 
-* <cc>Updated the remaining levels to their Online Versions</c>
-* <co>Eclipse</c>: Fixed deco error when porting the coins.
-
-### <cg>v1.1.0-beta.1</c>
-
-* <cp>Ported Mod to Geode v5.0.0</c>
-* <cp>New side-quest with the Ogre!</c>
-* <cp>MacOS and iOS support!</c> (Hopefully)
 * New level "<cg>Eclipse</c>"!
 * New level "<cg>Jelly Castle</c>"!
 * New level "<cg>Phone me First</c>"!
 * New level "<cg>Wubsplosion</c>"!
 * New level "<cg>Granite</c>"!
-* New Achievements!
-* New Icons!
-
-#### Levels
-
 * <co>Most levels have been updated to their Online versions</c>.
 * <co>Cryptofunk</c>: Updated difficulty to Demon.
+* <co>Hellfire</c>: Icon rewards have been swapped.
 * <co>Boss Rush</c>: Updated difficulty to Insane.
 * <co>Critical Hit</c>: Last segment rebalanced.
 * Some smaller fixes in existing levels.
-
-#### Miscellaneous
-
-* <c-666666>Some of the code was rewritten to help optimize the mod.</c>
-* <cc>Comics now require internet connection to read them</c>.
-* <cc>Audio Assets now require to be downloaded for each level</c>.
-* <cg>Added</c> keybind settings to move through the comics.
-* <cg>Added</c> promo to get extra orbs.
-* <cg>Added</c> flags to prevent unlocking vault icons prematurely.
-* <cy>Fixed</c> bug of the shopkeeper items not registering.
-* <cy>Fixed</c> some typos and spelling errors.
-* <cy>Fixed</c> some bugs, added more...
-* <cr>Removed</c> custom currency sprites temporally.
 
 ### <cb>v1.0.1</c>
 

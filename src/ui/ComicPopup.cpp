@@ -1,12 +1,18 @@
 #include "ComicPopup.hpp"
 #include "../layers/ComicLayer.hpp"
+#include "../utils/Utils.hpp"
 
-bool ComicPopup::init()
+bool ComicPopup::init(int mapIndex)
 {
     if (!Popup::init(400.f, 200.f))
         return false;
 
     auto contentSize = m_mainLayer->getContentSize();
+
+    m_mapIndex = mapIndex;
+    log::debug("Initialized Popup with MapIndex = {}", mapIndex);
+
+    Odyssey::getMaxComic();
 
     //  Fondo del Popup
     auto m_background = CCScale9Sprite::create("square02b_001.png", {0, 0, 80, 80});
@@ -27,19 +33,35 @@ bool ComicPopup::init()
                               ->setCrossAxisOverflow(false)
                               ->setCrossAxisLineAlignment(AxisAlignment::Even));
 
-    //  Botones de los comics
-    for (auto ii = 0; ii < 12; ii++)
+    //  Comic Buttons
+    auto maxComic = Odyssey::getMaxComic();
+
+    for (auto ii = 1; ii <= 12; ii++)
     {
-        auto seen = GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 11).c_str());
-        auto texture = seen ? "GJ_button_01.png" : "GJ_button_04.png";
+        //  If the index is higher than the max comic (Story-progression)
+        if (ii > maxComic)
+        {
+            auto lockedButton = CCMenuItemSpriteExtra::create(
+                ButtonSprite::create("???", 50, true, "goldFont.fnt", "GJ_button_05.png", 25.f, 0.6f),
+                this,
+                nullptr);
+            lockedButton->setID(fmt::format("locked-comic-{:02}", ii));
+            buttonMenu->addChild(lockedButton);
+            continue;
+        }
+
+        //  If the comic is unlocked, just displays a detail if the player has seen it
+        auto seen = GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str());
+        auto texture = seen ? "GJ_button_02.png" : "GJ_button_01.png";
 
         auto comicButton = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create(fmt::format("#{:02}", ii + 1).c_str(), 50, true, "goldFont.fnt", texture, 25.f, 0.6f),
+            ButtonSprite::create(fmt::format("#{:02}", ii).c_str(), 50, true, "goldFont.fnt", texture, 25.f, 0.6f),
             this,
             menu_selector(ComicPopup::onComic));
 
+        comicButton->setID(fmt::format("comic-{:02}", ii));
+        comicButton->setTag(ii);
         buttonMenu->addChild(comicButton);
-        comicButton->setTag(ii + 1);
     };
     buttonMenu->updateLayout();
     m_mainLayer->addChild(buttonMenu);
@@ -53,15 +75,15 @@ bool ComicPopup::init()
 
     this->setTitle("Comics");
     m_title->setScale(1.0f);
-    
+
     this->setID("comic-popup"_spr);
     return true;
 };
 
 void ComicPopup::onComic(CCObject *sender)
 {
-    auto comic = ComicLayer::create(sender->getTag(), false);
-    comic->m_fromPopup = true;
+    auto comic = ComicLayer::create(sender->getTag());
+    comic->m_mapIndex = m_mapIndex;
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
     button->setSprite(ButtonSprite::create(fmt::format("#{:02}", sender->getTag()).c_str(), 50, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.6f));
@@ -73,11 +95,11 @@ void ComicPopup::onComic(CCObject *sender)
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
 };
 
-ComicPopup *ComicPopup::create()
+ComicPopup *ComicPopup::create(int mapIndex)
 {
     auto ret = new ComicPopup();
 
-    if (ret->init())
+    if (ret->init(mapIndex))
     {
         ret->autorelease();
         return ret;

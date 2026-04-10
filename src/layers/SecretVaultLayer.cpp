@@ -348,7 +348,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
 
     log::debug("Gargan: {}", m_garganIDX);
 
-    if (std::string_view(lower) == std::string_view("gargan") && GM->getUGV("232") && GM->getUGV("233"))
+    if (utils::string::equalsIgnoreCase(lower, "gargan") && GM->getUGV("232") && GM->getUGV("233"))
     {
         messages = {
             "What do you mean?",
@@ -444,11 +444,11 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     }
 
-    if (std::string_view(lower) != std::string_view("gargan") && m_garganIDX > 0)
+    if (!utils::string::equalsIgnoreCase(lower, "gargan") && m_garganIDX > 0)
         m_garganIDX = -1;
 
     //  List of codes
-    if (std::string_view(lower) == std::string_view("color") && !AM->isAchievementEarned("geometry.ach.odyssey.secret10") && GM->getUGV("310"))
+    if (utils::string::equalsIgnoreCase(lower, "color") && !AM->isAchievementEarned("geometry.ach.odyssey.secret10") && GM->getUGV("310"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_004.mp3"_spr, language));
         response = m_spanish ? "Esto es monocromatico, cierto?" : "This is monochromatic, is it?";
@@ -458,20 +458,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    /*
-    if (std::string_view(lower) == std::string_view("fracture") && !GameManager::sharedState()->getUGV("236"))
-    {
-        FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_010.mp3"_spr, language));
-        response = m_spanish ? "Abraza el caos" : "Embrace the chaos";
-        GameManager::sharedState()->setUGV("236", true);
-
-        addLevelAnimation();
-        updateMessage(response, MessageType::CorrectAnswer);
-        return;
-    };
-    */
-
-    if (std::string_view(lower) == std::string_view("explorers") && !AM->isAchievementEarned("geometry.ach.odyssey.secret11") && GM->getUGV("311"))
+    if (utils::string::equalsIgnoreCase(lower, "explorers") && !AM->isAchievementEarned("geometry.ach.odyssey.secret11") && GM->getUGV("311"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_014.mp3"_spr, language));
         response = m_spanish ? "Tal vez en la proxima actualizacion" : "Maybe in the next update...";
@@ -481,17 +468,17 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("player") && !AM->isAchievementEarned("geometry.ach.odyssey.secret12") && GM->getUGV("312"))
+    if (utils::string::equalsIgnoreCase(lower, GameManager::get()->m_playerName) && !AM->isAchievementEarned("geometry.ach.odyssey.secret12") && GM->getUGV("312"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_018.mp3"_spr, language));
-        response = m_spanish ? "Fuistes tu?" : "...was it you?",
+        response = m_spanish ? "Fuiste tu???" : "...was it you???",
 
         m_achievementName = "geometry.ach.odyssey.secret12";
         updateMessage(response, MessageType::CorrectAnswer);
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("mono") && !AM->isAchievementEarned("geometry.ach.odyssey.secret13") && GM->getUGV("313"))
+    if (utils::string::equalsIgnoreCase(lower, "mono") && !AM->isAchievementEarned("geometry.ach.odyssey.secret13") && GM->getUGV("313"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_022.mp3"_spr, language));
         response = m_spanish ? "Hay algo en ella se siente extrano..." : "Something about her feels off...",
@@ -501,7 +488,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("nock em") && !AM->isAchievementEarned("geometry.ach.odyssey.secret14") && GM->getUGV("314"))
+    if (utils::string::equalsIgnoreCase(lower, "nock em") && !AM->isAchievementEarned("geometry.ach.odyssey.secret14") && GM->getUGV("314"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_025.mp3"_spr, language));
         response = m_spanish ? "Knock em out" : "Knock em out";
@@ -511,7 +498,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("machina") && !AM->isAchievementEarned("geometry.ach.odyssey.secret15") && GM->getUGV("315"))
+    if (utils::string::equalsIgnoreCase(lower, "machina") && !AM->isAchievementEarned("geometry.ach.odyssey.secret15") && GM->getUGV("315"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_028.mp3"_spr, language));
         response = m_spanish ? "Que casualidad..." : "How sudden...";
@@ -521,7 +508,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("the seven seas") && !AM->isAchievementEarned("geometry.ach.odyssey.secret16") && GM->getUGV("316"))
+    if (utils::string::equalsIgnoreCase(lower, "the seven seas") && !AM->isAchievementEarned("geometry.ach.odyssey.secret16") && GM->getUGV("316"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_031.mp3"_spr, language));
         response = m_spanish ? "Guianos, capitan." : "Guide us, captain.";
@@ -531,7 +518,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("smooth jazz") && !AM->isAchievementEarned("geometry.ach.odyssey.secret17") && GM->getUGV("317"))
+    if (utils::string::equalsIgnoreCase(lower, "smooth jazz") && !AM->isAchievementEarned("geometry.ach.odyssey.secret17") && GM->getUGV("317"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_034.mp3"_spr, language));
         response = "Blergh";
@@ -541,7 +528,7 @@ void SecretVaultLayer::onSubmit(CCObject *)
         return;
     };
 
-    if (std::string_view(lower) == std::string_view("angel") && !AM->isAchievementEarned("geometry.ach.odyssey.secret18") && GM->getUGV("318"))
+    if (utils::string::equalsIgnoreCase(lower, "angel") && !AM->isAchievementEarned("geometry.ach.odyssey.secret18") && GM->getUGV("318"))
     {
         FMODAudioEngine::sharedEngine()->playEffect(fmt::format("hollow_{}_037.mp3"_spr, language));
         response = m_spanish ? "Los sagrados..." : "The holy...";
@@ -727,57 +714,6 @@ std::string SecretVaultLayer::getThreadMessage(int ID, int index)
         FMODAudioEngine::sharedEngine()->playEffect(voiceFiles[index]);
         return messages[index];
     }
-
-    /*
-    //  Fracture
-    if (ID == 12 && !GameManager::sharedState()->getUGV("236"))
-    {
-        messages = {
-            "Sometimes, breaking isn't the end, but the start...",
-            "Dive into the glitchy abyss I have for you",
-            "It's called Fracture",
-            "Hold on tight",
-            "The beats here might just split reality",
-        };
-
-        voiceFiles = {
-            "hollow_ENG_005.mp3"_spr,
-            "hollow_ENG_006.mp3"_spr,
-            "hollow_ENG_007.mp3"_spr,
-            "hollow_ENG_008.mp3"_spr,
-            "hollow_ENG_009.mp3"_spr,
-        };
-
-        if (m_spanish)
-        {
-            messages = {
-                "A veces, romper no es el final, sino el comienzo...",
-                "Sumérgete en esta prueba que tengo para ti",
-                "Se llama Fracture",
-                "Aguanta fuerte",
-                "Los ritmos aqui podrian partir la realidad",
-            };
-
-            voiceFiles = {
-                "hollow_SPA_005.mp3"_spr,
-                "hollow_SPA_006.mp3"_spr,
-                "hollow_SPA_007.mp3"_spr,
-                "hollow_SPA_008.mp3"_spr,
-                "hollow_SPA_009.mp3"_spr,
-            };
-        }
-
-        if (index >= messages.size())
-        {
-            m_messageID = 0;
-            m_messageIDX = 0;
-            return "";
-        }
-
-        FMODAudioEngine::sharedEngine()->playEffect(voiceFiles[index]);
-        return messages[index];
-    }
-    */
 
     //  Explorers
     if (ID == 13 && !AM->isAchievementEarned("geometry.ach.odyssey.secret11"))

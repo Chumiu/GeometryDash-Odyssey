@@ -12,6 +12,7 @@ class $modify(GDO_OptionsLayer, OptionsLayer)
 	{
 		OptionsLayer::customSetup();
 
+        //  Hides the vault button
 		if (auto button = this->getChildByIDRecursive("vault-button"))
 			button->setVisible(false);
 	}

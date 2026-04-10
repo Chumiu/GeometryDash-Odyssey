@@ -65,26 +65,23 @@ bool LanguagePopup::init()
 
 void LanguagePopup::toggle()
 {
-    if (m_toggled)
-    {
-        m_spanishBtn->setColor({255, 255, 255});
-        m_englishBtn->setColor({100, 100, 100});
-        this->setTitle("Elije un Lenguaje:");
-    }
-    else
-    {
-        m_spanishBtn->setColor({100, 100, 100});
-        m_englishBtn->setColor({255, 255, 255});
-        this->setTitle("Select a Language:");
-    }
+    Odyssey::setSpanish(m_toggled);
 
+    //  Updates the flag based on what setting is enabled
+    ccColor3B enabled = {255, 255, 255};
+    ccColor3B disabled = {100, 100, 100};
+    m_spanishBtn->setColor(m_toggled ? enabled : disabled);
+    m_englishBtn->setColor(m_toggled ? disabled : enabled);
+
+    //  Updates the text of the popup
+    auto title = Odyssey::createText("Select a Language:", "Elige un Lenguaje:");
     auto desc = Odyssey::createText(
         "Most features of the mod have a <cy>spanish translation available</c> (such as story dialogs and comics), but some features from the base game don't.",
         "La mayoria del contenido del mod tienen una <cy>traduccion disponible</c> (como los dialogos de la historia y los comics), pero algunas partes del juego base no la tienen.");
-    m_infoButton->m_description = desc;
-    m_title->setScale(0.70f);
 
-    Odyssey::setSpanish(m_toggled);
+    this->setTitle(title);
+    m_title->setScale(0.70f);
+    m_infoButton->m_description = desc;
 };
 
 void LanguagePopup::onUpdate(CCObject *sender)

@@ -136,6 +136,7 @@ CCLayer *CreditsPopup::createCredits(int listIDX, const char *reason)
 
     //  For the User Data list
     std::vector<std::vector<gd::string>> userList;
+    bool specialLayer = false;
     auto userScale = 1.0f;
 
     //  Based on the index, its assigned what List to fetch data
@@ -176,6 +177,7 @@ CCLayer *CreditsPopup::createCredits(int listIDX, const char *reason)
 
     default:
         userList = creditsSpecials;
+        specialLayer = true;
         userScale = 0.85f;
     }
 
@@ -202,17 +204,34 @@ CCLayer *CreditsPopup::createCredits(int listIDX, const char *reason)
         user->setID(fmt::format("{}-icon", userName));
         user->setScale(userScale);
 
-        //  First Row
-        if (ii < 5)
-            firstRowArray->addObject(user);
+        if (specialLayer)
+        {
+            //  First Row
+            if (ii < 3)
+                firstRowArray->addObject(user);
 
-        //  Second Row
-        else if (ii >= 5 && ii < 10)
-            secondRowArray->addObject(user);
+            //  Second Row
+            else if (ii >= 3 && ii < 7)
+                secondRowArray->addObject(user);
 
-        //  Third Row
+            //  Third Row
+            else
+                thirdRowArray->addObject(user);
+        }
         else
-            thirdRowArray->addObject(user);
+        {
+            //  First Row
+            if (ii < 5)
+                firstRowArray->addObject(user);
+
+            //  Second Row
+            else if (ii >= 5 && ii < 10)
+                secondRowArray->addObject(user);
+
+            //  Third Row
+            else
+                thirdRowArray->addObject(user);
+        }
 
         //  Adds the User
         layer->addChild(user, 4);

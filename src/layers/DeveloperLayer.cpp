@@ -315,8 +315,7 @@ void DeveloperLayer::onLevel(CCObject *sender)
 //  Opens the specified Comic
 void DeveloperLayer::onComic(CCObject *sender)
 {
-    auto comic = ComicLayer::create(sender->getTag(), false);
-    comic->m_fromPopup = true;
+    auto comic = ComicLayer::create(sender->getTag());
 
     auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
     button->setSprite(ButtonSprite::create(fmt::format("#{:02}", sender->getTag()).c_str(), 40, true, "goldFont.fnt", "GJ_button_01.png", 22.5f, 0.4f));

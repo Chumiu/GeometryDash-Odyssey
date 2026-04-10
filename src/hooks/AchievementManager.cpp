@@ -21,8 +21,8 @@ class $modify(OdysseyAchievementManager, AchievementManager)
 		AchievementManager::addAchievement("geometry.ach.level04b", "Cryptofunk!", "Completed \"Cryptofunk\" in normal mode", "Complete \"Cryptofunk\" in normal mode", "icon_492", 1);
 
 		//	Second island
-		AchievementManager::addAchievement("geometry.ach.level05a", "Jungle Japes", "Completed \"Hellfire\" in practice mode", "Complete \"Hellfire\" in practice mode", "icon_493", 1);
-		AchievementManager::addAchievement("geometry.ach.level05b", "Hellfire!", "Completed \"Hellfire\" in normal mode", "Complete \"Hellfire\" in normal mode", "ship_170", 1);
+		AchievementManager::addAchievement("geometry.ach.level05a", "Jungle Japes", "Completed \"Hellfire\" in practice mode", "Complete \"Hellfire\" in practice mode", "ship_170", 1);
+		AchievementManager::addAchievement("geometry.ach.level05b", "Hellfire!", "Completed \"Hellfire\" in normal mode", "Complete \"Hellfire\" in normal mode", "icon_493", 1);
 
 		AchievementManager::addAchievement("geometry.ach.level06a", "All Bosses (No Damage)", "Completed \"Boss Rush\" in practice mode", "Complete \"Boss Rush\" in practice mode", "icon_494", 1);
 		AchievementManager::addAchievement("geometry.ach.level06b", "Boss Rush!", "Completed \"Boss Rush\" in normal mode", "Complete \"Boss Rush\" in normal mode", "ship_171", 1);

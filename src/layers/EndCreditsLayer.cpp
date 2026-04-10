@@ -70,7 +70,7 @@ void EndCreditsLayer::createEndCredits()
     m_mainCreditsLayer = CCLayer::create();
 
     //  First Page
-    auto m_textArea = TextArea::create("A <co>TCM Team</c> Productions", "bigFont.fnt", 1.f, 1000.f, {0.5, 0.5}, 40.f, false);
+    auto m_textArea = TextArea::create("A <co>TCM Team</c> Production", "bigFont.fnt", 1.f, 1000.f, {0.5, 0.5}, 40.f, false);
     m_textArea->setScale(0.75f);
     m_textArea->setOpacity(0);
 
@@ -191,7 +191,7 @@ CCLayer *EndCreditsLayer::createCredits(int listIDX, const char *reason)
 
     case 5:
         userList = creditsTesters;
-        // layer->setContentHeight(m_winSize.height * 0.8);
+        layer->setContentHeight(m_winSize.height * 1.2);
         break;
 
     default:
@@ -212,6 +212,7 @@ CCLayer *EndCreditsLayer::createCredits(int listIDX, const char *reason)
     CCArray *firstRowArray = CCArray::create();
     CCArray *secondRowArray = CCArray::create();
     CCArray *thirdRowArray = CCArray::create();
+    CCArray *fourthRowArray = CCArray::create();
 
     //  Adds the Users
     for (auto ii = 0; ii < userList.size(); ii++)
@@ -234,11 +235,11 @@ CCLayer *EndCreditsLayer::createCredits(int listIDX, const char *reason)
         if (specialLayer)
         {
             //  First Row
-            if (ii < 1)
+            if (ii < 3)
                 firstRowArray->addObject(user);
 
             //  Second Row
-            else if (ii >= 1 && ii < 5)
+            else if (ii >= 3 && ii < 7)
                 secondRowArray->addObject(user);
 
             //  Third Row
@@ -256,8 +257,12 @@ CCLayer *EndCreditsLayer::createCredits(int listIDX, const char *reason)
                 secondRowArray->addObject(user);
 
             //  Third Row
-            else
+            else if (ii >= 10 && ii < 15)
                 thirdRowArray->addObject(user);
+
+            //  Fourth Row
+            else
+                fourthRowArray->addObject(user);
         }
 
         //  Adds the User
@@ -277,11 +282,18 @@ CCLayer *EndCreditsLayer::createCredits(int listIDX, const char *reason)
         GameToolbox::alignItemsHorisontally(firstRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 + 35 + offset), false);
         GameToolbox::alignItemsHorisontally(secondRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 - 35 + offset), false);
     }
-    else
+    else if (!fourthRowArray->count())
     {
         GameToolbox::alignItemsHorisontally(firstRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 + 70 + offset), false);
         GameToolbox::alignItemsHorisontally(secondRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 + offset), false);
         GameToolbox::alignItemsHorisontally(thirdRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 - 70 + offset), false);
+    }
+    else
+    {
+        GameToolbox::alignItemsHorisontally(firstRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 + 105 + offset), false);
+        GameToolbox::alignItemsHorisontally(secondRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 + 35 + offset), false);
+        GameToolbox::alignItemsHorisontally(thirdRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 - 35 + offset), false);
+        GameToolbox::alignItemsHorisontally(fourthRowArray, 90.f, ccp(contentSize.width / 2, contentSize.height / 2 - 105 + offset), false);
     }
 
     //  Returns the layer
