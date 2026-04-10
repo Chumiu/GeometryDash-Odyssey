@@ -65,8 +65,11 @@ public:
     void getComic12();
     void getOgreDialog();
     void unlockOgreChest();
+	void getFullCompletion();
 
 public:
+	bool m_notify = false;
+
     static OdysseySelectLayer *create(int);
     static CCScene *scene(int);
 };

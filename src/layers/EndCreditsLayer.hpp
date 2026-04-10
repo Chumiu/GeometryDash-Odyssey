@@ -26,7 +26,7 @@ public:
 
 const std::vector<std::vector<gd::string>> creditsManagers = {
     {"SwitchstepGDYT", "10158911", "106", "18", "12", "9"},
-    {"ZapManiac", "1605650", "80", "6", "0", "8"},
+    {"ZapManiac", "1605650", "80", "6", "0", "3"},
     {"MathisCreator", "9250716", "143", "6", "3", "1"},
     {"Sear15", "28639090", "371", "8", "12", "12"},
 };
@@ -39,7 +39,7 @@ const std::vector<std::vector<gd::string>> creditsModders = {
 
 const std::vector<std::vector<gd::string>> creditsCreatorsOne = {
     {"SwitchstepGDYT", "10158911", "106", "18", "12", "9"},
-    {"ZapManiac", "1605650", "80", "6", "0", "8"},
+    {"ZapManiac", "1605650", "80", "6", "0", "3"},
     {"MathisCreator", "9250716", "143", "6", "3", "1"},
     {"Sear15", "28639090", "371", "8", "12", "12"},
     {"Jinta22", "4257871", "231", "18", "9", "3"},
@@ -47,7 +47,7 @@ const std::vector<std::vector<gd::string>> creditsCreatorsOne = {
     {"Danky99", "14178231", "11", "9", "11", "3"},
     {"MasterTheCube5", "13319860", "107", "6", "10", "11"},
     {"GenaMorphosis", "10026833", "467", "6", "83", "40"},
-    {"NotKaizer", "10075800", "135", "41", "11", "12"},
+    {"NotKaizer", "10075800", "135", "41", "11", "11"},
     {"DogneR", "22859812", "12", "33", "2", "2"},
     {"JoshuaGD23", "14831460", "459", "12", "12", "12"},
     {"Bonntu", "23438222", "35", "12", "17", "70"},
@@ -95,13 +95,13 @@ const std::vector<std::vector<gd::string>> creditsTesters = {
     {"Robertjrtineo1", "21054982", "1", "0", "3", "3"},
     {"Statronic", "19130132", "19", "6", "3", "1"},
     {"TochyGMD", "26108122", "98", "12", "12", "3"},
-    {"ZerkGMD", "27986840", "37", "12", "15", "12"},
+    {"ZerkGMD", "27986840", "37", "12", "15", "98"},
 };
 
 const std::vector<std::vector<gd::string>> creditsSpecials = {
     {"RobTop", "71", "275", "6", "3", "1"},
     {"Colon", "106255", "60", "18", "10", "10"},
-    {"EVW", "710192", "28", "12", "9", "9"},
+    {"EVW", "710192", "28", "12", "9", "12"},
     {"im fernando", "5398449", "56", "35", "3", "3"},
     {"StivenelXD", "167848", "50", "12", "3", "3"},
     {"Capeling", "18226543", "70", "41", "12", "12"},

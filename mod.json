@@ -1,20 +1,20 @@
 {
-	"geode": "5.3.0",
-	"version": "v1.1.0-beta.3",
+	"geode": "5.5.3",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
 		"ios": "2.2081",
 		"android": "2.2081"
 	},
+	"id": "teamtcm.geometry-dash-odyssey",
+	"name": "Geometry Dash: Odyssey",
+	"version": "v1.1.0",
 	"developers": [
 		"Team TCM",
 		"Chumiiu",
 		"Cypher",
 		"ML500"
 	],
-	"id": "teamtcm.geometry-dash-odyssey",
-	"name": "Geometry Dash: Odyssey",
 	"description": "A fanmade spin-off!",
 	"early-load": true,
 	"dependencies": {
@@ -35,9 +35,6 @@
 				"ios"
 			]
 		}
-	},
-	"links": {
-		"community": "https://discord.gg/PNPrR4DEbw"
 	},
 	"settings": {
 		"options-title": {
@@ -87,42 +84,6 @@
 				"win"
 			]
 		},
-		"dev-title": {
-			"type": "title",
-			"name": "Development Options"
-		},
-		"dev-mode": {
-			"type": "bool",
-			"name": "Developer Mode",
-			"description": "<cy>**ENGLISH**</c>: Enabling this mode allows you to bypass most restrictions (like access to the online menu).\n***\n<cy>**SPANISH**</c>: Habilitando este modo te deja sobrepasar la mayoria de las restricciones (como acceder al menu online).",
-			"default": false,
-			"enable-if": "saved:developer-version",
-			"enable-if-description": "Developer only"
-		},
-		"bypass-levels": {
-			"type": "bool",
-			"name": "Level Bypass",
-			"description": "<cy>**ENGLISH**</c>: Unlocks all levels, completing one like this will break the progression system.\n***\n<cy>**SPANISH**</c>: Desbloquea todos los niveles, completando uno asi rompera el sistema de progreso.",
-			"default": false,
-			"enable-if": "dev-mode && saved:developer-version",
-			"enable-if-description": "Developer only"
-		},
-		"bypass-vaults": {
-			"type": "bool",
-			"name": "Vault Bypass",
-			"description": "<cy>**ENGLISH**</c>: Unlocks the vaults, skipping the requirements needed to unlock them.\n***\n<cy>**SPANISH**</c>: Desbloquea los vaults, saltandose los requerimientos necesarios para abrirlos.",
-			"default": false,
-			"enable-if": "dev-mode && saved:developer-version",
-			"enable-if-description": "Developer only"
-		},
-		"empty-levels": {
-			"type": "bool",
-			"name": "Empty all levels",
-			"description": "<cy>**ENGLISH**</c>: Turns all levels of the mod as empty templates, just to test the achievements and progression system.\n***\n<cy>**SPANISH**</c>: Convierte todos los niveles del mod en una base vacia, solo para testear los logros y sistema de progreso.",
-			"default": false,
-			"enable-if": "dev-mode && saved:developer-version",
-			"enable-if-description": "Developer only"
-		},
 		"danger-title": {
 			"type": "title",
 			"name": "Danger Zone",
@@ -154,6 +115,9 @@
 		"sprites": [
 			"resources/*.png"
 		]
+	},
+	"links": {
+		"community": "https://discord.gg/PNPrR4DEbw"
 	},
 	"tags": [
 		"content",

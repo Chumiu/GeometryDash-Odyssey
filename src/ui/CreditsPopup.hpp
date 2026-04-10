@@ -45,7 +45,7 @@ public:
 
 const std::vector<std::vector<gd::string>> creditsManagers = {
     {"SwitchstepGDYT", "10158911", "106", "18", "12", "9"},
-    {"ZapManiac", "1605650", "80", "6", "0", "8"},
+    {"ZapManiac", "1605650", "80", "6", "0", "3"},
     {"MathisCreator", "9250716", "143", "6", "3", "1"},
     {"Sear15", "28639090", "371", "8", "12", "12"},
 };
@@ -58,7 +58,7 @@ const std::vector<std::vector<gd::string>> creditsModders = {
 
 const std::vector<std::vector<gd::string>> creditsCreatorsOne = {
     {"SwitchstepGDYT", "10158911", "106", "18", "12", "9"},
-    {"ZapManiac", "1605650", "80", "6", "0", "8"},
+    {"ZapManiac", "1605650", "80", "6", "0", "3"},
     {"MathisCreator", "9250716", "143", "6", "3", "1"},
     {"Sear15", "28639090", "371", "8", "12", "12"},
     {"Jinta22", "4257871", "231", "18", "9", "3"},
@@ -111,7 +111,7 @@ const std::vector<std::vector<gd::string>> creditsTestersOne = {
 const std::vector<std::vector<gd::string>> creditsTestersTwo = {
     {"ObsidianAJ", "11368602", "48", "6", "3", "44"},
     {"TochyGMD", "26108122", "98", "12", "12", "3"},
-    {"ZerkGMD", "27986840", "37", "12", "15", "12"},
+    {"ZerkGMD", "27986840", "37", "12", "15", "98"},
     {"MinoX28", "13284787", "283", "94", "12", "12"},
     {"Statronic", "19130132", "19", "6", "3", "1"},
     {"OccularPixel", "26757914", "351", "4", "3", "3"},
@@ -123,7 +123,7 @@ const std::vector<std::vector<gd::string>> creditsTestersTwo = {
 const std::vector<std::vector<gd::string>> creditsSpecials = {
     {"RobTop", "71", "275", "6", "3", "1"},
     {"Colon", "106255", "60", "18", "10", "10"},
-    {"EVW", "710192", "28", "12", "9", "9"},
+    {"EVW", "710192", "28", "12", "9", "12"},
     {"im fernando", "5398449", "56", "35", "3", "3"},
     {"StivenelXD", "167848", "50", "12", "3", "3"},
     {"Capeling", "18226543", "70", "41", "12", "12"},

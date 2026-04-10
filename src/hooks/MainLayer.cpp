@@ -157,8 +157,12 @@ class $modify(OdysseyMenuLayer, MenuLayer)
             return;
         };
 
-        auto levelscene = OdysseySelectLayer::scene(0);
-        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, levelscene));
+		auto scene = CCScene::create();
+		auto layer = OdysseySelectLayer::create(0);
+		layer->m_notify = true;
+
+		scene->addChild(layer);
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
     }
 
     void onCreator(CCObject *sender)

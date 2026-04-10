@@ -27,6 +27,7 @@ class $modify(OdysseyLoadingLayer, LoadingLayer)
 //  Solo para el mod en Modo desarrollador
 #ifndef DEVELOPER_MODE
         Mod::get()->setSavedValue<bool>("developer-version", false);
+		Mod::get()->setSavedSetting<bool>("dev-mode", false);
 #endif
 
 #ifdef DEVELOPER_MODE
