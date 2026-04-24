@@ -21,15 +21,15 @@
 		"geode.node-ids": "1.22.0"
 	},
 	"incompatibilities": {
-		"capeling.geometry-dash-lunar": "*",
-		"chumiiu.geometry_dash_time_reborn": "*",
-		"itzkiba.better_progression": "*",
-		"gdutilsdevs.gdutils": "*",
-		"dankmeme.globed2": "*",
-		"bitz.hard_mode": "*",
-		"ninxout.redash": "*",
+		"capeling.geometry-dash-lunar": ">=1.0.0",
+		"chumiiu.geometry_dash_time_reborn": ">=1.0.0",
+		"itzkiba.better_progression": ">=1.0.0",
+		"gdutilsdevs.gdutils": ">=1.0.0",
+		"dankmeme.globed2": ">=1.0.0",
+		"bitz.hard_mode": ">=1.0.0",
+		"ninxout.redash": ">=1.0.0",
 		"alphalaneous.alphas_geode_utils": {
-			"version": "*",
+			"version": ">=1.0.0",
 			"platforms": [
 				"android",
 				"ios"
