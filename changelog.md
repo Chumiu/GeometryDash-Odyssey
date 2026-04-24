@@ -18,7 +18,7 @@
 * <cc>Parts of the code re-written to help optimize the mod</c>.
 * <cc>Reduced size of some textures to optimize the mod.</c>.
 * <cc>Comics now require internet connection to read them</c>.
-* <cc>Audio assets now require to be dowbloaded for each level</c>.
+* <cc>Audio assets now require to be downloaded for each level</c>.
 * <cg>Added</c> better interface for the language settings.
 * <cg>Added</c> option to delete your fangame save data.
 * <cg>Added</c> settings button in the levels menu.
