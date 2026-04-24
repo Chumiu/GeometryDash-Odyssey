@@ -717,41 +717,41 @@ std::vector<CCPoint> OdysseySelectLayer::getPositionForDots()
 	case 3:
 		return {
 			// camino 1
-			{141, 98},
-			{152, 107},
-			{156, 122},
-			{152, 137},
-			{146, 152},
-			{142, 167},
-			{146, 181},
-			{156, 192},
+			{-141, -80}, // -141 -80  | 282  178
+			{-131, -71},
+			{-126, -56},
+			{-130, -41},
+			{-136, -26},
+			{-140, -11},
+			{-142, 3},
+			{-126, 14},
 			// camino 2
-			{232, 192},
-			{243, 181},
-			{247, 167},
-			{242, 152},
-			{237, 137},
-			{232, 122},
-			{236, 107},
-			{247, 98},
+			{-50, 14},
+			{-39, 3},
+			{-35, -11},
+			{-40, -26},
+			{-45, -41},
+			{-50, -56},
+			{-46, -71},
+			{-35, -80},
 			// camino 3
-			{321, 98},
-			{332, 107},
-			{336, 122},
-			{332, 137},
-			{326, 152},
-			{322, 167},
-			{326, 181},
-			{336, 192},
+			{39, -80},
+			{50, -71},
+			{54, -56},
+			{50, -41},
+			{54, -26},
+			{40, -11},
+			{44, 3},
+			{54, 14},
 			// camino 4
-			{412, 192},
-			{423, 181},
-			{427, 167},
-			{422, 152},
-			{417, 137},
-			{412, 122},
-			{416, 107},
-			{427, 98},
+			{130, 14},
+			{141, 3},
+			{145, -11},
+			{140, 152},
+			{135, 137},
+			{130, 122},
+			{134, 107},
+			{145, -80},
 		};
 	}
 	return arr;
@@ -874,8 +874,6 @@ void OdysseySelectLayer::addIslandDots()
 		auto dot = CCSprite::createWithSpriteFrameName("LevelPathDot_001.png"_spr);
 
 		dot->setPosition(getPositionForDots()[ii]);
-		if (m_currentPage == 3)
-			dot->setPosition(dot->getPosition() - m_winSize / 2);
 
 		m_dotNode->addChild(dot);
 	}
@@ -1154,7 +1152,7 @@ void OdysseySelectLayer::animateLevelCompletation()
 		}
 	}
 
-	log::info("Next level: {}", nextLevel);
+	//log::info("Next level: {}", nextLevel);
 
 	if (!isLevelComplete(nextLevel - 1))
 	{
@@ -1164,7 +1162,7 @@ void OdysseySelectLayer::animateLevelCompletation()
 			shouldAnimate = true;
 	}
 
-	log::info("Page: {}", m_currentPage);
+	//log::info("Page: {}", m_currentPage);
 
 	for (int ii = 0; ii < m_dotNode->getChildrenCount(); ii++)
 	{
@@ -1299,7 +1297,7 @@ void OdysseySelectLayer::onExtraLevel(CCObject *sender)
 	auto extra01_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 1) || GM->getUGV("237");
 	auto extra02_unlocked = GSM->isItemUnlocked(UnlockType::GJItem, 2) || GM->getUGV("238");
 
-	log::info("Tag: {}", sender->getTag());
+	//log::info("Tag: {}", sender->getTag());
 
 	if ((extra01_unlocked && sender->getTag() == 501) || (extra02_unlocked && sender->getTag() == 502) || (sender->getTag() > 600 && isLevelComplete(sender->getTag() - 1)) || Mod::get()->getSettingValue<bool>("bypass-levels"))
 	{
