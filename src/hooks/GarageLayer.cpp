@@ -3,8 +3,6 @@
 #include <Geode/modify/GJGarageLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../utils/IconUtils.hpp"
-#include "Geode/loader/Log.hpp"
-#include "Geode/platform/windows.hpp"
 
 using namespace geode::prelude;
 
