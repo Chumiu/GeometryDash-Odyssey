@@ -54,8 +54,8 @@ bool ComicPopup::init(int mapIndex)
 
         //  If the comic is unlocked, just displays a detail if the player has seen it
         auto seen = GameManager::get()->getUGV(fmt::format("2{}", ii + 10).c_str());
-        log::info("Check seen: 2{} {}",  ii + 10, seen);
-        auto texture = seen ? "GJ_button_02.png" : "GJ_button_01.png";
+        //log::info("Check seen: 2{} {}",  ii + 10, seen);
+        auto texture = seen ? "GJ_button_01.png" : "GJ_button_02.png";
 
         auto comicButton = CCMenuItemSpriteExtra::create(
             ButtonSprite::create(fmt::format("#{:02}", ii).c_str(), 50, true, "goldFont.fnt", texture, 25.f, 0.6f),
@@ -94,7 +94,7 @@ void ComicPopup::onComic(CCObject *sender)
     auto scene = CCScene::create();
     scene->addChild(comic);
 
-    GameManager::get()->setUGV(fmt::format("2{}", sender->getTag() + 10).c_str(), false);
+    GameManager::get()->setUGV(fmt::format("2{}", sender->getTag() + 10).c_str(), true);
 
     GameManager::sharedState()->fadeInMusic(fmt::format("comic_{:02}.mp3"_spr, sender->getTag()).c_str());
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));
