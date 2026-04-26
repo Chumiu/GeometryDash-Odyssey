@@ -130,10 +130,17 @@ class $modify(OdysseyGameManager, GameManager)
         {
             const char *gamemode[4] = {"boat", "drone", "slider", "minecart"};
 
-            return fmt::format("{}_{:02}", iconType - 900, iconID);
+            return fmt::format("icons/{}_{:02}", gamemode[iconType - 901], iconID);
         }
 
         auto ret = GameManager::sheetNameForIcon(iconID, iconType);
         return ret;
     };
+
+    CCTexture2D* loadIcon(int id, int type, int requestID) {
+        if (type>=900) type=1;
+
+        CCTexture2D* ret = GameManager::loadIcon(id, type, requestID);
+        return ret;
+    }
 };

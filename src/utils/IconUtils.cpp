@@ -1,4 +1,8 @@
 #include "IconUtils.hpp"
+#include "Geode/cocos/sprite_nodes/CCSpriteFrameCache.h"
+#include "Geode/loader/Log.hpp"
+#include <Geode/binding/GameManager.hpp>
+#include <fmt/format.h>
 
 std::vector<std::string> IconUtils::getPlayerFrames(int iconID, IconType type)
 {
@@ -63,6 +67,65 @@ std::vector<std::string> IconUtils::getPlayerFrames(int iconID, IconType type)
 
     return {frame1, frame2, frameExtra, frameGlow, frameDome};
 }
+
+gd::string IconUtils::getSheetName(int id, IconType type) {
+
+    if (isIconCustom(id, type)) {
+        std::string iconName;
+        switch (type)
+        {
+        case IconType::Ship:
+            iconName = "ship";
+            break;
+        case IconType::Ball:
+            iconName = "player_ball";
+            break;
+        case IconType::Ufo:
+            iconName = "bird";
+            break;
+        case IconType::Wave:
+            iconName = "dart";
+            break;
+        case IconType::Robot:
+            iconName = "robot";
+            break;
+        case IconType::Spider:
+            iconName = "spider";
+            break;
+        case IconType::Swing:
+            iconName = "swing";
+            break;
+        case IconType::Jetpack:
+            iconName = "jetpack";
+            break;
+        default:
+            iconName = "player";
+            break;
+        }
+
+        int typeNumber = static_cast<int>(type);
+
+        switch (typeNumber)
+        {
+        case 900:
+            iconName = "boat";
+            break;
+        case 901:
+            iconName = "drone";
+            break;
+        case 902:
+            iconName = "slider";
+            break;
+        case 903:
+            iconName = "minecart";
+            break;
+        }
+        return fmt::format("{}_{:02}"_spr, iconName, id);
+    }
+    else return GameManager::get()->sheetNameForIcon(id, static_cast<int>(type));
+}
+
+bool test = false;
 
 void IconUtils::updateIcon(CCNode *player, int iconID, IconType type, bool isPlayerObject)
 {
@@ -132,9 +195,27 @@ void IconUtils::updateIcon(CCNode *player, int iconID, IconType type, bool isPla
     }
     */
 
+    //primero intentará encontrar la textura, si no cargará el plist
+    if (!frameDict->objectForKey(frame1Texture)) {
+        std::string sheetName = fmt::format("{}.plist",getSheetName(iconID, type));
+        CCSpriteFrameCache::get()->addSpriteFramesWithFile(sheetName.c_str());
+    }
+        
+    if (!test) {
+        for (auto [v1, v2] : frameDict->asExt()) {
+            log::info("{}", v1);
+        }
+        test=true;
+    }
+
+
     if (frameDict->objectForKey(frame1Texture))
     {
         firstLayer->setDisplayFrame(frameCache->spriteFrameByName(frame1Texture.c_str()));
+    }
+    else {
+        std::string sheetName = fmt::format("{}.plist",getSheetName(iconID, type));
+        log::error("Failed to load the sprite for the sheet {}", sheetName);
     }
 
     if (frameDict->objectForKey(frame2Texture))

@@ -1,7 +1,10 @@
 #include <Geode/Geode.hpp>
+#include <Geode/binding/CCMenuItemToggler.hpp>
 #include <Geode/modify/GJGarageLayer.hpp>
 #include "../layers/OdysseySelectLayer.hpp"
 #include "../utils/IconUtils.hpp"
+#include "Geode/loader/Log.hpp"
+#include "Geode/platform/windows.hpp"
 
 using namespace geode::prelude;
 
@@ -38,13 +41,15 @@ class $modify(GDOGarageLayer, GJGarageLayer)
         if (!Mod::get()->getSettingValue<bool>("hide-custom"))
         {
             //  Agregar los botones de gamemodes nuevos al menu de categorias
+            int jetpackIndex = 0;
             if (auto categoryMenu = static_cast<CCMenu *>(getChildByID("category-menu")))
             {
-                //  Quita temporalmente los botones de efecto y trail
                 auto trailButton = categoryMenu->getChildByID("trail-button");
+                int btnIndex = categoryMenu->getChildren()->indexOfObject(trailButton);
+
                 auto effectButton = categoryMenu->getChildByID("death-effect-button");
-                effectButton->removeFromParentAndCleanup(false);
-                trailButton->removeFromParentAndCleanup(false);
+                //effectButton->removeFromParentAndCleanup(false);
+                //trailButton->removeFromParentAndCleanup(false);
 
                 //  Agrega los botones de los gamemodes custom
                 for (int ii = 0; ii < 4; ii++)
@@ -63,11 +68,14 @@ class $modify(GDOGarageLayer, GJGarageLayer)
                     toggler->setTag(900 + ii);
                     toggler->setEnabled(true);
 
-                    categoryMenu->addChild(toggler);
+
+                    toggler->setParent(categoryMenu);
+                    categoryMenu->getChildren()->insertObject(toggler, btnIndex);
+                    
                 }
 
-                categoryMenu->addChild(trailButton);
-                categoryMenu->addChild(effectButton);
+                //categoryMenu->addChild(trailButton);
+                //categoryMenu->addChild(effectButton);
                 categoryMenu->updateLayout();
             }
         }
@@ -149,8 +157,8 @@ class $modify(GDOGarageLayer, GJGarageLayer)
         {
             bool isSelected = m_selectedIconType == m_iconType && m_iconID == sender->getTag();
             bool isUnlocked = GameManager::get()->isIconUnlocked(sender->getTag(), m_selectedIconType);
-            log::info("Unlocked: {} {}", isUnlocked, iconID);
-            log::info("Selected: {}", isSelected);
+            //log::info("Unlocked: {} {}", isUnlocked, iconID);
+            //log::info("Selected: {}", isSelected);
 
             if (isSelected || (!isUnlocked && !isSelected))
             {
@@ -180,15 +188,20 @@ class $modify(GDOGarageLayer, GJGarageLayer)
 
         if (arr)
         {
-            for (auto child : CCArrayExt<CCMenuItemToggler *>(arr))
+            for (auto child : CCArrayExt<CCNode*>(arr))
             {
-                child->toggle(false);
-                child->setEnabled(true);
-                if (child->getTag() == tag)
+                auto toggler = typeinfo_cast<CCMenuItemToggler*>(child);
+                if (toggler) 
                 {
-                    child->toggle(true);
-                    child->setEnabled(false);
+                    toggler->toggle(false);
+                    toggler->setEnabled(true);
+                    if (toggler->getTag() == tag)
+                    {
+                        toggler->toggle(true);
+                        toggler->setEnabled(false);
+                    }    
                 }
+                
             }
         }
     }

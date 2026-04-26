@@ -1,6 +1,8 @@
 #include "ComicPopup.hpp"
 #include "../layers/ComicLayer.hpp"
 #include "../utils/Utils.hpp"
+#include "Geode/loader/Log.hpp"
+#include <Geode/binding/GameManager.hpp>
 
 bool ComicPopup::init(int mapIndex)
 {
@@ -51,7 +53,8 @@ bool ComicPopup::init(int mapIndex)
         }
 
         //  If the comic is unlocked, just displays a detail if the player has seen it
-        auto seen = GameManager::sharedState()->getUGV(fmt::format("2{}", ii + 10).c_str());
+        auto seen = GameManager::get()->getUGV(fmt::format("2{}", ii + 10).c_str());
+        log::info("Check seen: 2{} {}",  ii + 10, seen);
         auto texture = seen ? "GJ_button_02.png" : "GJ_button_01.png";
 
         auto comicButton = CCMenuItemSpriteExtra::create(
@@ -85,11 +88,13 @@ void ComicPopup::onComic(CCObject *sender)
     auto comic = ComicLayer::create(sender->getTag());
     comic->m_mapIndex = m_mapIndex;
 
-    auto button = static_cast<CCMenuItemSpriteExtra *>(sender);
+    auto button = static_cast<CCMenuItemSpriteExtra*>(sender);
     button->setSprite(ButtonSprite::create(fmt::format("#{:02}", sender->getTag()).c_str(), 50, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.6f));
 
     auto scene = CCScene::create();
     scene->addChild(comic);
+
+    GameManager::get()->setUGV(fmt::format("2{}", sender->getTag() + 10).c_str(), false);
 
     GameManager::sharedState()->fadeInMusic(fmt::format("comic_{:02}.mp3"_spr, sender->getTag()).c_str());
     CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, scene));

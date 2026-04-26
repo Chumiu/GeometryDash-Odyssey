@@ -23,10 +23,12 @@
 * <cg>Added</c> option to delete your fangame save data.
 * <cg>Added</c> settings button in the levels menu.
 * <cg>Added</c> new members to the credits.
+* <cg>Added</c> low graphics to all the new icons and Carp's shop
 * <cy>Fixed</c> crash when tapping the play button multiple times.
 * <cy>Fixed</c> bug of the shopkeeper items not registering as bought.
 * <cy>Fixed</c> some typos and spelling errors.
 * <cy>Fixed</c> sprite errors on a few icons.
+* <cy>Fixed</c> incompatibility with the mod Icon Search by km7dev.
 * <cr>Removed</c> custom currency sprites.
 * Some more bugfixes and last minute additions. <c-666666>(Help me)</c>
 
