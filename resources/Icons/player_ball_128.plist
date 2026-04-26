@@ -74,11 +74,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>icons/player_ball_128.png</string>
+			<string>teamtcm.geometry-dash-odyssey/player_ball_128.png</string>
 			<key>size</key>
 			<string>{73,101}</string>
 			<key>textureFileName</key>
-			<string>icons/player_ball_128.png</string>
+			<string>teamtcm.geometry-dash-odyssey/player_ball_128.png</string>
 		</dict>
 	</dict>
 </plist>

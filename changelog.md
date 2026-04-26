@@ -1,6 +1,11 @@
 # Changelog
 
-### <cg>v1.1.1</c> (Latest)
+### <cg>v1.1.2</c> (Latest)
+
+* <cy>Fixed</c> low graphics on icons not working
+*Check the v1.1.0 changelog (below) for the rest of the changes*
+
+### <cg>v1.1.1</c>
 
 * <cg>Added</c> low graphics to all the new icons and Carp's shop.
 * <cy>Fixed</c> incompatibility with the mod Icon Search by km7dev.

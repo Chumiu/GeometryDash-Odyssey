@@ -89,11 +89,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>icons/bird_151.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_151.png</string>
 			<key>size</key>
 			<string>{65,54}</string>
 			<key>textureFileName</key>
-			<string>icons/bird_151.png</string>
+			<string>teamtcm.geometry-dash-odyssey/bird_151.png</string>
 		</dict>
 	</dict>
 </plist>

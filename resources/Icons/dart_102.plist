@@ -59,11 +59,11 @@
 			<key>premultiplyAlpha</key>
 			<false/>
 			<key>realTextureFileName</key>
-			<string>icons/dart_102.png</string>
+			<string>teamtcm.geometry-dash-odyssey/dart_102.png</string>
 			<key>size</key>
 			<string>{53,49}</string>
 			<key>textureFileName</key>
-			<string>icons/dart_102.png</string>
+			<string>teamtcm.geometry-dash-odyssey/dart_102.png</string>
 		</dict>
 	</dict>
 </plist>
